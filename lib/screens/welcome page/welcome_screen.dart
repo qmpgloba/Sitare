@@ -6,10 +6,12 @@ import 'package:sitare/screens/welcome%20page/widgets/mobile_number_textfeild_wi
 import 'package:sitare/screens/widgets/show_dialog_widget.dart';
 import 'package:sitare/screens/widgets/title_text_widget.dart';
 
+// ignore: must_be_immutable
 class WelcomeScreen extends StatelessWidget {
   WelcomeScreen({super.key});
   final TextEditingController mobileNumberController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  String countyCode = '91';
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.sizeOf(context);
@@ -30,7 +32,11 @@ class WelcomeScreen extends StatelessWidget {
                     height: size.width * .2,
                   ),
                   MobileNumberTextFeildWidget(
-                      mobileNumberController: mobileNumberController),
+                    mobileNumberController: mobileNumberController,
+                    onCountryChanged: (country) {
+                      countyCode = country.dialCode;
+                    },
+                  ),
                   SizedBox(
                     height: size.width / 14,
                   ),
@@ -43,17 +49,19 @@ class WelcomeScreen extends StatelessWidget {
                               whiteColor, 'Close');
                         } else {
                           if (_formKey.currentState!.validate()) {
+                            var phoneNumber =
+                                '+' + countyCode + mobileNumberController.text;
+                            print(phoneNumber);
                             bool mobileNumberExists =
-                                await checkPhoneNumberExistence(
-                                    mobileNumberController.text);
+                                await checkPhoneNumberExistence(phoneNumber);
                             if (mobileNumberExists) {
-                              var result = await phoneAuthentication(
-                                  mobileNumberController.text);
+                              var result =
+                                  await phoneAuthentication(phoneNumber);
                               if (result == null) {
                                 // showSnackbar(
                                 //     context, 'OTP sent Succesfully', greenColor);
                                 Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) => const OTPScreen(),
+                                  builder: (context) =>  OTPScreen(),
                                 ));
                               } else {
                                 showAlertBox(
@@ -66,8 +74,7 @@ class WelcomeScreen extends StatelessWidget {
                                   whiteColor,
                                   'Retry');
                             }
-                          } else {
-                          }
+                          } else {}
                         }
 
                         // Navigator.of(context).push(MaterialPageRoute(

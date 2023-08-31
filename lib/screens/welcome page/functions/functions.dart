@@ -7,7 +7,7 @@ String verifyId = '';
 Future<String?> phoneAuthentication(String number) async {
   try {
     await _auth.verifyPhoneNumber(
-      phoneNumber: '+91' + number,
+      phoneNumber: number,
       verificationCompleted: (PhoneAuthCredential credential) async {
         await _auth.signInWithCredential(credential);
       },
@@ -16,6 +16,7 @@ Future<String?> phoneAuthentication(String number) async {
       },
       codeSent: (verificationId, forceResendingToken) {
         verifyId = verificationId;
+        print('heyyyy $verifyId');
       },
       codeAutoRetrievalTimeout: (verificationId) {},
     );
@@ -38,19 +39,19 @@ Future<bool> checkPhoneNumberExistence(String mobileNumber) async {
 
   try {
     final querySnapshot = await FirebaseFirestore.instance
-      .collection('users')
-      .where('phone_number', isEqualTo: phoneNumber)
-      .get();
+        .collection('users')
+        .where('phone_number', isEqualTo: phoneNumber)
+        .get();
 
-  if (querySnapshot.docs.isNotEmpty) {
-    // Phone number exists in Firestore
-    return true;
-  } else {
-    // Phone number does not exist in Firestore
-    return false;
-  }
-  // ignore: unused_catch_clause
-  }on FirebaseException catch (e) {
+    if (querySnapshot.docs.isNotEmpty) {
+      // Phone number exists in Firestore
+      return true;
+    } else {
+      // Phone number does not exist in Firestore
+      return false;
+    }
+    // ignore: unused_catch_clause
+  } on FirebaseException catch (e) {
     return false;
   }
 }
