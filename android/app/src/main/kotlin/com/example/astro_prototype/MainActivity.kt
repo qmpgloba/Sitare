@@ -1,4 +1,4 @@
-package com.example.astro_prototype
+package com.sitare
 
 import io.flutter.embedding.android.FlutterActivity
 
