@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1090327514590",
+    "project_id": "sitare-afebd",
+    "storage_bucket": "sitare-afebd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1090327514590:android:3dcf510d13a18af23d214f",
+        "android_client_info": {
+          "package_name": "com.sitare"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1090327514590-kil87jd4sf1ff3p3e5hj6f7jl3be4997.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCBjBLFzYkOjPFylT4Tc4XX_teTPJweU0A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1090327514590-kil87jd4sf1ff3p3e5hj6f7jl3be4997.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
