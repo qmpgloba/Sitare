@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 import 'constants/ui_constants.dart';
+import 'screens/filter_section_screen.dart';
 import 'screens/home_page_screen.dart';
 
 Future<void> main() async {
@@ -24,7 +25,7 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: PRIMARY_COLOR,
         useMaterial3: true,
       ),
-      home: MyHomePage(),
+      home: FilterSectionSheet(),
     );
   }
 }

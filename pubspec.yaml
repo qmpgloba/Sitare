@@ -44,6 +44,7 @@ dependencies:
   intl: ^0.18.1
   intl_phone_field: ^3.2.0
   date_picker_timeline: ^1.2.5
+  amazon_like_filter: ^1.0.0
 
 
 
