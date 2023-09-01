@@ -21,12 +21,12 @@ class AstrologerProfileDetailsWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       child: Padding(
-        padding: EdgeInsets.all(size.width / 20),
+        padding: const EdgeInsets.symmetric(vertical: 5),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(
-              width: size.width/2,
+              width: size.width/2.2,
               child:   Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
