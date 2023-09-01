@@ -26,6 +26,9 @@ class _MyHomePageState extends State<MyHomePage> {
   TextEditingController problemController = TextEditingController();
   TextEditingController mobileNumberController = TextEditingController();
   TimeOfDay time = TimeOfDay.now();
+  String countrycode = "91";
+  bool tobDone = false;
+  bool dobDone = false;
   bool timeChanged = false;
   List<String> optionalField = [];
   final _key = GlobalKey<FormState>();
@@ -43,7 +46,8 @@ class _MyHomePageState extends State<MyHomePage> {
       "TOB": tobController.text.toString(),
       "marital_status": martialController.text.toString(),
       "problem": problemController.text.toString(),
-      "phone_number": mobileNumberController.text.toString()
+      "phone_number":
+          "+" + countrycode + mobileNumberController.text.toString(),
     };
 
     for (int i = 0; i < length; i++) {
@@ -54,6 +58,23 @@ class _MyHomePageState extends State<MyHomePage> {
     print("DONE");
   }
 
+  Future<void> _showDatePicker() async {
+    final DateTime? pickedDate = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(1900),
+      lastDate: DateTime.now(),
+    );
+
+    if (pickedDate != null) {
+      setState(() {
+        dobController.text =
+            "${pickedDate.day.toString().padLeft(2, '0')}/${pickedDate.month.toString().padLeft(2, '0')}/${pickedDate.year}";
+        dobDone = true;
+      });
+    }
+  }
+
   Future<void> _showTimePicker() async {
     final TimeOfDay? pickedTime = await showTimePicker(
       context: context,
@@ -62,8 +83,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
     if (pickedTime != null && pickedTime != time) {
       setState(() {
-        time = pickedTime;
-        timeChanged = true;
+        tobController.text = time.format(context);
+        tobDone = true;
       });
     }
   }
@@ -122,7 +143,14 @@ class _MyHomePageState extends State<MyHomePage> {
                     },
                   ),
                   MobileNumberTextFeildWidget(
-                      mobileNumberController: mobileNumberController),
+                    mobileNumberController: mobileNumberController,
+                    onCountryChanged: (v) {
+                      setState(() {
+                        countrycode = v.dialCode;
+                      });
+                      print(countrycode);
+                    },
+                  ),
                   _genderDropDown(
                     label: "Gender",
                     onChanged: (v) {
@@ -133,7 +161,37 @@ class _MyHomePageState extends State<MyHomePage> {
                       print(genderController.text);
                     },
                   ),
-                  dateofBirth(),
+                  SizedBox(height: 25),
+                  InkWell(
+                    onTap: () {
+                      _showDatePicker();
+                    },
+                    child: Container(
+                      child: Padding(
+                        padding: EdgeInsets.only(left: size.width * 0.02),
+                        child: Row(
+                          children: [
+                            Text(
+                              "Date of Birth: ${dobController.text} ",
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w500,
+                                color: FONT_COLOR,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      height: size.height * 0.06,
+                      width: size.width,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5),
+                        border: Border.all(
+                          color: FONT_COLOR,
+                        ),
+                      ),
+                    ),
+                  ),
                   CustomTextField(
                     size: size,
                     controller: pobController,
@@ -157,7 +215,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         child: Row(
                           children: [
                             Text(
-                              "Time of Birth: ${time.format(context)}",
+                              "Time of Birth: ${tobController.text}",
                               style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w500,
@@ -276,7 +334,9 @@ class _MyHomePageState extends State<MyHomePage> {
           children: [
             InkWell(
               onTap: () {
-                print(mobileNumberController.text);
+                print(
+                  "+" + countrycode + mobileNumberController.text.toString(),
+                );
               },
               child: Row(
                 children: [
@@ -300,10 +360,12 @@ class _MyHomePageState extends State<MyHomePage> {
                 _key.currentState!.validate();
                 if (_key.currentState!.validate() &&
                     _gender != null &&
-                    mobileNumberController.text.isNotEmpty) {
+                    mobileNumberController.text.isNotEmpty &&
+                    dobDone &&
+                    tobDone) {
                   _key.currentState!.save();
                   print("CDIFNDFIN");
-                  // create();
+                  create();
                 } else {
                   showDialog(
                     context: context,
@@ -374,7 +436,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   value: _gender,
                   underline: SizedBox(),
                   hint: Padding(
-                    padding: EdgeInsets.only(left: size.width * 0.03),
+                    padding: EdgeInsets.only(left: size.width * 0.02),
                     child: Text(
                       label,
                       style: TextStyle(
@@ -387,9 +449,12 @@ class _MyHomePageState extends State<MyHomePage> {
                   items: GENDERS.map((String value) {
                     return DropdownMenuItem<String>(
                       value: value,
-                      child: Text(
-                        value,
-                        style: TextStyle(color: FONT_COLOR),
+                      child: Padding(
+                        padding: EdgeInsets.only(left: size.width * 0.02),
+                        child: Text(
+                          value,
+                          style: TextStyle(color: FONT_COLOR),
+                        ),
                       ),
                     );
                   }).toList(),
@@ -437,7 +502,6 @@ class _MyHomePageState extends State<MyHomePage> {
             }
           }
         },
-        onChanged: (v) {},
       ),
     );
   }
