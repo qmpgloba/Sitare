@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:sitare/screens/create%20account%20page/cerate_account_screen.dart';
+import 'package:sitare/screens/order%20history%20screen/order_history_screen.dart';
 import 'package:sitare/screens/profile%20screen/profile_screen.dart';
 
 import 'constants/ui_constants.dart';
@@ -23,7 +24,7 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: PRIMARY_COLOR,
         useMaterial3: true,
       ),
-      home: ProfileScreen(),
+      home: OrderHistoryScreen(),
     );
   }
 }

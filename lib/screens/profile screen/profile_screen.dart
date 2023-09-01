@@ -137,10 +137,10 @@ class ProfileScreen extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             // crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              ContactIconWidget(
+                              ContactIconWidgetWithText(
                                   icon: Icons.chat_outlined, text: 'Chat'),
-                                  ContactIconWidget(icon: Icons.call_outlined, text: 'Call'),
-                                  ContactIconWidget(icon: Icons.video_call_outlined, text: 'Video')
+                                  ContactIconWidgetWithText(icon: Icons.call_outlined, text: 'Call'),
+                                  ContactIconWidgetWithText(icon: Icons.video_call_outlined, text: 'Video')
                             ],
                           ),
                         ),

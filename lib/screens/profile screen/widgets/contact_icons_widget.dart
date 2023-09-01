@@ -3,8 +3,8 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:sitare/constants/ui_constants.dart';
 
-class ContactIconWidget extends StatelessWidget {
-  const ContactIconWidget({
+class ContactIconWidgetWithText extends StatelessWidget {
+  const ContactIconWidgetWithText({
     super.key,
     required this.icon,
     required this.text,
