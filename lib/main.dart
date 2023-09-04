@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:sitare/screens/create%20account%20page/cerate_account_screen.dart';
 import 'package:sitare/screens/order%20history%20screen/order_history_screen.dart';
 import 'package:sitare/screens/profile%20screen/profile_screen.dart';
+import 'package:sitare/screens/talk%20to%20experts%20screen/talk_to_experts_screen.dart';
 
 import 'constants/ui_constants.dart';
 
@@ -24,7 +25,7 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: PRIMARY_COLOR,
         useMaterial3: true,
       ),
-      home: OrderHistoryScreen(),
+      home: TalkToExpertsScreen(),
     );
   }
 }
