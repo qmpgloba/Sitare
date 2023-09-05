@@ -77,7 +77,7 @@ class _FilterSectionSheetState extends State<FilterSectionSheet> {
               child: ElevatedButton(
                 onPressed: () {
                   showModalBottomSheet(
-                    backgroundColor: FONT_COLOR,
+                    backgroundColor: Colors.white,
                     isScrollControlled: true,
                     context: context,
                     builder: (BuildContext context) {
@@ -128,7 +128,8 @@ class _FilterSectionSheetState extends State<FilterSectionSheet> {
                                     ),
                                   ),
                                   Row(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Expanded(
                                         child: Stack(
@@ -140,13 +141,14 @@ class _FilterSectionSheetState extends State<FilterSectionSheet> {
                                             ListView.builder(
                                               shrinkWrap: true,
                                               itemCount: filterOptions.length,
-                                              itemBuilder: (BuildContext context,
-                                                  int index) {
+                                              itemBuilder:
+                                                  (BuildContext context,
+                                                      int index) {
                                                 return Container(
-                                                  color:
-                                                      selectedFilterIndex == index
-                                                          ? Colors.white
-                                                          : FONT_COLOR,
+                                                  color: selectedFilterIndex ==
+                                                          index
+                                                      ? Colors.white
+                                                      : FONT_COLOR,
                                                   child: ListTile(
                                                     // tileColor:
                                                     //     selectedFilterIndex == index
@@ -159,14 +161,16 @@ class _FilterSectionSheetState extends State<FilterSectionSheet> {
                                                               selectedFilterIndex ==
                                                                       index
                                                                   ? Colors.red
-                                                                  : Colors.black),
+                                                                  : Colors
+                                                                      .black),
                                                     ),
                                                     onTap: () {
                                                       setState(() {
                                                         selectedFilterIndex =
                                                             index;
                                                       });
-                                                      print(filterOptions[index]);
+                                                      print(
+                                                          filterOptions[index]);
                                                     },
                                                   ),
                                                 );
@@ -181,9 +185,10 @@ class _FilterSectionSheetState extends State<FilterSectionSheet> {
                                         width: size.width * 0.7,
                                         child: ListView.builder(
                                           shrinkWrap: true,
-                                          itemCount: getSelectedOptions().length,
-                                          itemBuilder:
-                                              (BuildContext context, int index) {
+                                          itemCount:
+                                              getSelectedOptions().length,
+                                          itemBuilder: (BuildContext context,
+                                              int index) {
                                             return ListTile(
                                               title: Row(
                                                 children: [
@@ -213,18 +218,17 @@ class _FilterSectionSheetState extends State<FilterSectionSheet> {
                                   Material(
                                     elevation: 50,
                                     child: Container(
-                                
                                       height: size.width * 0.17,
                                       decoration: const BoxDecoration(
-                                              color: Colors.white,
-                                        borderRadius:
-                                            BorderRadius.all(Radius.circular(50)),
-                                        // boxShadow: [
-                                        //   BoxShadow(
-                                        //       color: Colors.amber,
-                                        //       blurRadius: 25.0,
-                                        //       offset: Offset(0, 25))
-                                        // ],
+                                        color: Colors.white,
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(50)),
+                                        boxShadow: [
+                                          BoxShadow(
+                                              color: Colors.amber,
+                                              //blurRadius: 25.0,
+                                              offset: Offset(0, 25))
+                                        ],
                                       ),
                                       child: Column(
                                         mainAxisAlignment:
@@ -247,9 +251,10 @@ class _FilterSectionSheetState extends State<FilterSectionSheet> {
                                                           BorderRadius.circular(
                                                               3)),
                                                   child: const Padding(
-                                                    padding: EdgeInsets.symmetric(
-                                                        horizontal: 5,
-                                                        vertical: 2),
+                                                    padding:
+                                                        EdgeInsets.symmetric(
+                                                            horizontal: 5,
+                                                            vertical: 2),
                                                     child: AutoSizeText(
                                                       'RESET',
                                                       maxLines: 1,
@@ -276,9 +281,10 @@ class _FilterSectionSheetState extends State<FilterSectionSheet> {
                                                           BorderRadius.circular(
                                                               3)),
                                                   child: const Padding(
-                                                    padding: EdgeInsets.symmetric(
-                                                        horizontal: 5,
-                                                        vertical: 2),
+                                                    padding:
+                                                        EdgeInsets.symmetric(
+                                                            horizontal: 5,
+                                                            vertical: 2),
                                                     child: Center(
                                                       child: AutoSizeText(
                                                         'APPLY',
@@ -287,7 +293,8 @@ class _FilterSectionSheetState extends State<FilterSectionSheet> {
                                                             fontSize: 14,
                                                             color: Colors.white,
                                                             fontWeight:
-                                                                FontWeight.bold),
+                                                                FontWeight
+                                                                    .bold),
                                                       ),
                                                     ),
                                                   ),
