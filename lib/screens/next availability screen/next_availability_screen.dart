@@ -41,6 +41,8 @@ class _NextAvailabilityScreenState extends State<NextAvailabilityScreen> {
               child: Padding(
                 padding: EdgeInsets.all(size.width * .03),
                 child: TabBar(
+
+                  dividerColor: Colors.transparent,
                   isScrollable: true,
                   physics: const BouncingScrollPhysics(),
                   labelColor: Colors.black,

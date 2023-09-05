@@ -22,6 +22,9 @@ class MyApp extends StatelessWidget {
     return  MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+        tabBarTheme: TabBarTheme(
+          
+        ),
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         scaffoldBackgroundColor: PRIMARY_COLOR,
        
