@@ -7,6 +7,7 @@ import 'package:sitare/screens/profile%20screen/profile_screen.dart';
 import 'package:sitare/screens/talk%20to%20experts%20screen/talk_to_experts_screen.dart';
 
 import 'constants/ui_constants.dart';
+import 'screens/home screen combined/home_screen.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,15 +23,13 @@ class MyApp extends StatelessWidget {
     return  MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        tabBarTheme: TabBarTheme(
-          
-        ),
+        
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         scaffoldBackgroundColor: PRIMARY_COLOR,
        
         useMaterial3: true,
       ),
-      home: NextAvailabilityScreen(),
+      home: HomeScreenStackWidget(),
     );
   }
 }
