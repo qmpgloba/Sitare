@@ -106,7 +106,7 @@ class _HomeScreenState extends State<HomeScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding:  EdgeInsets.only(left:size.width/16),
+            padding:  EdgeInsets.only(left:size.width/15),
             child: const Text(
               "Hi Guru, Welcome",
               style: TextStyle(color: Colors.white),

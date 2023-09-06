@@ -1,5 +1,6 @@
 import 'package:astro_prototype/screens/home_screen.dart';
 import 'package:astro_prototype/screens/login_email_screen.dart';
+import 'package:astro_prototype/screens/wallet_recharge_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
@@ -25,7 +26,7 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: PRIMARY_COLOR,
         useMaterial3: true,
       ),
-      home: HomeScreen(),
+      home: WalletRechargeScreen(),
     );
   }
 }
