@@ -7,7 +7,6 @@ import 'package:sitare/screens/profile%20screen/profile_screen.dart';
 import 'package:sitare/screens/talk%20to%20experts%20screen/talk_to_experts_screen.dart';
 
 import 'constants/ui_constants.dart';
-import 'screens/home screen combined/home_screen.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
