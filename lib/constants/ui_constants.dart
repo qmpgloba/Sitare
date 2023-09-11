@@ -9,3 +9,5 @@ const redColor = Colors.red;
 const whiteColor = Colors.white;
 const greenColor = Colors.green;
 const blackColor = Colors.black;
+// ignore: constant_identifier_names
+const BOX_COLOR = Color(0xffe1ddf6);

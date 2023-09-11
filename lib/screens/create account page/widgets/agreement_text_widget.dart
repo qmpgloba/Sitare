@@ -1,7 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:sitare/constants/ui_constants.dart';
-import 'package:sitare/screens/home%20screen/home_screen.dart';
 
 class AgreementTextWidget extends StatelessWidget {
   const AgreementTextWidget({
@@ -28,9 +27,9 @@ class AgreementTextWidget extends StatelessWidget {
             ),
             recognizer: TapGestureRecognizer()
               ..onTap = () {
-                Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => HomeScreen(),
-                ));
+                // Navigator.of(context).push(MaterialPageRoute(
+                //   builder: (context) => const HomeScreen(),
+                // ));
               },
           ),
           TextSpan(text: ' & ', style: TextStyle(fontSize: size.width * .03)),

@@ -24,7 +24,6 @@ class TextfeildWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(password);
     return TextFormField(
       keyboardType: keyboardType,
       controller: nameTextController,

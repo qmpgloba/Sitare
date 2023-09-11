@@ -79,6 +79,7 @@ class CreateAccountScreen extends StatelessWidget {
                           } else {
                             // showToast(signUpSuccess, redColor);
                             // showSnackbar(context, signUpSuccess, redColor);
+                            // ignore: use_build_context_synchronously
                             showAlertBox(
                                 context, result, whiteColor, 'Retry');
                           }

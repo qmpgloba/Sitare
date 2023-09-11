@@ -1,10 +1,13 @@
-
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
 class UserDetailsDrawerHeader extends StatelessWidget {
   const UserDetailsDrawerHeader({
     super.key,
-    required this.size, required this.fullName, required this.email, required this.phoneNumber,
+    required this.size,
+    required this.fullName,
+    required this.email,
+    required this.phoneNumber,
   });
 
   final Size size;
@@ -16,25 +19,40 @@ class UserDetailsDrawerHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return DrawerHeader(
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        CircleAvatar(
-          radius: size.width * .1,
+        const CircleAvatar(
+          radius: 30,
           backgroundColor: Colors.grey,
         ),
-        Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(fullName),
-            Text(email),
-            Text(phoneNumber),
-          ],
+        SizedBox(
+          width: size.width*.25,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              AutoSizeText(
+                fullName,
+                maxLines: 1,
+                maxFontSize: 14,
+              ),
+              AutoSizeText(
+                email,
+                maxLines: 1,
+                maxFontSize: 14,
+              ),
+              AutoSizeText(
+                phoneNumber,
+                maxLines: 1,
+                maxFontSize: 14,
+              ),
+            ],
+          ),
         ),
-        IconButton(onPressed: () {
-          
-        }, icon: Icon(Icons.arrow_forward_ios_outlined))
+        IconButton(
+            onPressed: () {},
+            icon: const Icon(Icons.arrow_forward_ios_outlined))
       ],
     ));
   }

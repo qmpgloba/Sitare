@@ -48,7 +48,6 @@ class OrderHistoryProfileTile extends StatelessWidget {
                       color: Colors.amber,
                     ),
                     onRatingUpdate: (rating) {
-                      print(rating);
                     },
                   ),
                   const AutoSizeText(

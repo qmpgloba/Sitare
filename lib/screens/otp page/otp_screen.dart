@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:otp_text_field/otp_text_field.dart';
 import 'package:otp_text_field/style.dart';
 import 'package:sitare/constants/ui_constants.dart';
-import 'package:sitare/screens/home%20screen/home_screen.dart';
 import 'package:sitare/screens/welcome%20page/functions/functions.dart';
 import 'package:sitare/screens/widgets/show_dialog_widget.dart';
 import 'package:sitare/screens/widgets/title_text_widget.dart';
@@ -42,9 +41,9 @@ class OTPScreen extends StatelessWidget {
                   
                   try {
                     await verifyOTP(pin).then((value) {
-                      Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const HomeScreen(),
-                      ));
+                      // Navigator.of(context).push(MaterialPageRoute(
+                      //   builder: (context) => const HomeScreen(),
+                      // ));
                     });
                   // ignore: unused_catch_clause
                   } on FirebaseAuthException catch (e) {

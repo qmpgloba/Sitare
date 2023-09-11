@@ -6,7 +6,7 @@ import 'widgets/profile_details_widget.dart';
 import 'widgets/tab_widget.dart';
 
 class NextAvailabilityScreen extends StatefulWidget {
-  NextAvailabilityScreen({super.key});
+  const NextAvailabilityScreen({super.key});
 
   @override
   State<NextAvailabilityScreen> createState() => _NextAvailabilityScreenState();
@@ -108,8 +108,8 @@ class _NextAvailabilityScreenState extends State<NextAvailabilityScreen> {
                       },
                     ),
                   ),
-                  Text('data'),
-                  Text('data'),
+                  const Text('data'),
+                  const Text('data'),
                 ],
               ),
             ),
