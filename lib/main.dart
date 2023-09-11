@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:sitare/screens/create%20account%20page/cerate_account_screen.dart';
 import 'package:sitare/screens/next%20availability%20screen/next_availability_screen.dart';
 import 'package:sitare/screens/order%20history%20screen/order_history_screen.dart';
+import 'package:sitare/screens/payment%20information%20screen/payment_information_screen.dart';
 import 'package:sitare/screens/profile%20screen/profile_screen.dart';
 import 'package:sitare/screens/talk%20to%20experts%20screen/talk_to_experts_screen.dart';
 
@@ -22,15 +23,13 @@ class MyApp extends StatelessWidget {
     return  MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        tabBarTheme: TabBarTheme(
-          
-        ),
+        
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         scaffoldBackgroundColor: PRIMARY_COLOR,
        
         useMaterial3: true,
       ),
-      home: NextAvailabilityScreen(),
+      home: PaymentScreen(),
     );
   }
 }

@@ -8,3 +8,4 @@ const greyColor = Colors.grey;
 const redColor = Colors.red;
 const whiteColor = Colors.white;
 const greenColor = Colors.green;
+const blackColor = Colors.black;
