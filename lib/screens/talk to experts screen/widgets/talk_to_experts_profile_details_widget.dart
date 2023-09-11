@@ -52,7 +52,6 @@ class TalkToExpertsProfileDetailsWidget extends StatelessWidget {
                           color: Colors.amber,
                         ),
                         onRatingUpdate: (rating) {
-                          print(rating);
                         },
                       ),
                       const AutoSizeText(
@@ -96,8 +95,8 @@ class TalkToExpertsProfileDetailsWidget extends StatelessWidget {
                
               ],
             ),
-            SizedBox(height: 10,),
-             LinearProgressIndicator(
+            const SizedBox(height: 10,),
+             const LinearProgressIndicator(
               value: .70,
               color: greenColor,
              )

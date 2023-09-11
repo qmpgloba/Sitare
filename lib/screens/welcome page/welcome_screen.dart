@@ -50,8 +50,7 @@ class WelcomeScreen extends StatelessWidget {
                         } else {
                           if (_formKey.currentState!.validate()) {
                             var phoneNumber =
-                                '+' + countyCode + mobileNumberController.text;
-                            print(phoneNumber);
+                                '+$countyCode${mobileNumberController.text}';
                             bool mobileNumberExists =
                                 await checkPhoneNumberExistence(phoneNumber);
                             if (mobileNumberExists) {
@@ -60,14 +59,17 @@ class WelcomeScreen extends StatelessWidget {
                               if (result == null) {
                                 // showSnackbar(
                                 //     context, 'OTP sent Succesfully', greenColor);
+                                // ignore: use_build_context_synchronously
                                 Navigator.of(context).push(MaterialPageRoute(
                                   builder: (context) =>  OTPScreen(),
                                 ));
                               } else {
+                                // ignore: use_build_context_synchronously
                                 showAlertBox(
                                     context, result, whiteColor, 'close');
                               }
                             } else {
+                              // ignore: use_build_context_synchronously
                               showAlertBox(
                                   context,
                                   'Enter a valid mobile number',

@@ -16,7 +16,6 @@ Future<String?> phoneAuthentication(String number) async {
       },
       codeSent: (verificationId, forceResendingToken) {
         verifyId = verificationId;
-        print('heyyyy $verifyId');
       },
       codeAutoRetrievalTimeout: (verificationId) {},
     );

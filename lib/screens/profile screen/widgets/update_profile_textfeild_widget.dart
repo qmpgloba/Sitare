@@ -28,15 +28,15 @@ class UpdateProfileTextFeildWidgets extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           SizedBox(
-              width: size.width / 4.5,
+              width: size.width *.25,
               child: AutoSizeText(
                 feildName,
                 maxLines: 1,
-                maxFontSize: 14,
+                maxFontSize: 16,
                 style: const TextStyle(color: blackColor),
               )), const SizedBox(width: 10,),
           SizedBox(
-            width: size.width / 2.8,
+            width: size.width *.55,
             height: 35,
             child: TextFormField(
               keyboardType: keyboardType,

@@ -5,6 +5,7 @@ import 'package:sitare/constants/ui_constants.dart';
 import 'widgets/talk_to_experts_profile_details_widget.dart';
 
 
+// ignore: must_be_immutable
 class TalkToExpertsScreen extends StatelessWidget {
   TalkToExpertsScreen({super.key});
   num walletAmmount = 200;

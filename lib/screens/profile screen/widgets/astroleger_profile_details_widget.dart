@@ -34,20 +34,20 @@ class AstrologerProfileDetailsWidget extends StatelessWidget {
                     name,
                     // maxLines: 1,
                     maxFontSize: 16,
-                    style: TextStyle(
+                    style: const TextStyle(
                         fontWeight: FontWeight.bold, fontSize: 16),
                   ),
                   AutoSizeText(
                     department,
                     // maxLines: 1,
                     maxFontSize: 14,
-                    style: TextStyle(
+                    style: const TextStyle(
                         fontSize: 14, fontWeight: FontWeight.bold),
                   ),
                   AutoSizeText(languages,
                       // maxLines: 1,
                       maxFontSize: 14,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 14,
                       )),
                 ],
@@ -72,7 +72,6 @@ class AstrologerProfileDetailsWidget extends StatelessWidget {
                       color: Colors.amber,
                     ),
                     onRatingUpdate: (rating) {
-                      print(rating);
                     },
                   ),
                    AutoSizeText('Exp $yearsOfExperience years | ₹ $rupees/min',maxLines: 1,maxFontSize: 12,)

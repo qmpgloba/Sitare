@@ -18,9 +18,9 @@ class PaymentDetailsRowWidget extends StatelessWidget {
       children: [
         Text(
           text,
-          style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16),
+          style: const TextStyle(fontWeight: FontWeight.bold,fontSize: 16),
         ),
-        Text('₹$amount', style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16))
+        Text('₹$amount', style: const TextStyle(fontWeight: FontWeight.bold,fontSize: 16))
       ],
     );
   }

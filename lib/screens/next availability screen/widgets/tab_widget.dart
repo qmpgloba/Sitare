@@ -9,7 +9,7 @@ class TabWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Tab(
+    return const Tab(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

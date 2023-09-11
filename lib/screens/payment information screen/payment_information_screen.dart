@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:sitare/constants/ui_constants.dart';
 
 import 'widgets/coupon_code_widget.dart';
-import 'widgets/payment_details_row_widget.dart';
 import 'widgets/payment_details_widget.dart';
 
+// ignore: must_be_immutable
 class PaymentScreen extends StatelessWidget {
   PaymentScreen({super.key});
   double totalAmount = 500.0;
@@ -31,7 +31,7 @@ class PaymentScreen extends StatelessWidget {
         children: [
           PaymentDetailsWidget(size: size, totalAmount: totalAmount, gstAmount: gstAmount, payableAmount: payableAmount),
           CouponCodeWidget(size: size),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
           GestureDetector(
