@@ -43,6 +43,7 @@ dependencies:
   intl_phone_field: ^3.2.0
   firebase_storage: ^11.2.6
   cloud_firestore: ^4.9.1
+  flutter_rating_bar: ^4.0.1
 
 dev_dependencies:
   flutter_test:
