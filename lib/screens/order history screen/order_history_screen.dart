@@ -1,8 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:sitare/constants/ui_constants.dart';
-import 'package:sitare/screens/profile%20screen/widgets/contact_icons_widget.dart';
 
 import 'widgets/contact_icon_widget.dart';
 import 'widgets/order_history_profile_widget.dart';
