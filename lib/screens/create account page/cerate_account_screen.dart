@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sitare/constants/ui_constants.dart';
 import 'package:sitare/screens/create%20account%20page/functions/functions.dart';
+import 'package:sitare/screens/enter%20details%20screen/enter_details_screen.dart';
 import 'package:sitare/screens/welcome%20page/welcome_screen.dart';
 import 'package:sitare/screens/widgets/auto_size_text_widget.dart';
 import 'package:sitare/screens/widgets/show_dialog_widget.dart';
@@ -76,6 +77,7 @@ class CreateAccountScreen extends StatelessWidget {
                               password: passwordTextController.text.trim());
                           if (result == null) {
                             //Navigate the screen
+                            Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => EnterDetailsScreen(),), (route) => false);
                           } else {
                             // showToast(signUpSuccess, redColor);
                             // showSnackbar(context, signUpSuccess, redColor);

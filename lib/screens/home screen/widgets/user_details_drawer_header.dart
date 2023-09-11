@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:sitare/screens/profile%20screen/profile_screen.dart';
 
 class UserDetailsDrawerHeader extends StatelessWidget {
   const UserDetailsDrawerHeader({
@@ -51,7 +52,9 @@ class UserDetailsDrawerHeader extends StatelessWidget {
           ),
         ),
         IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).push(MaterialPageRoute(builder: (context) => ProfileScreen(),));
+            },
             icon: const Icon(Icons.arrow_forward_ios_outlined))
       ],
     ));
