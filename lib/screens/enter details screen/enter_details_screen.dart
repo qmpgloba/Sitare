@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:sitare/constants/app_constants.dart';
 import 'package:sitare/constants/ui_constants.dart';
+import 'package:sitare/screens/home%20screen/home_screen.dart';
 import 'package:sitare/screens/welcome%20page/widgets/mobile_number_textfeild_widget.dart';
 import 'package:sitare/widget/custom_textfield.dart';
 
@@ -324,28 +325,28 @@ class _EnterDetailsScreenState extends State<EnterDetailsScreen> {
             top: size.height * 0.02,
             bottom: size.height * 0.02),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            InkWell(
-              onTap: () {
-              },
-              child: const Row(
-                children: [
-                  Text(
-                    "SKIP FOR NOW",
-                    style: TextStyle(
-                        color: FONT_COLOR, fontWeight: FontWeight.w500),
-                  ),
-                  SizedBox(
-                    width: 20,
-                  ),
-                  Icon(
-                    Icons.arrow_forward,
-                    color: FONT_COLOR,
-                  )
-                ],
-              ),
-            ),
+            // InkWell(
+            //   onTap: () {
+            //   },
+            //   child: const Row(
+            //     children: [
+            //       Text(
+            //         "SKIP FOR NOW",
+            //         style: TextStyle(
+            //             color: FONT_COLOR, fontWeight: FontWeight.w500),
+            //       ),
+            //       SizedBox(
+            //         width: 20,
+            //       ),
+            //       Icon(
+            //         Icons.arrow_forward,
+            //         color: FONT_COLOR,
+            //       )
+            //     ],
+            //   ),
+            // ),
             InkWell(
               onTap: () {
                 _key.currentState!.validate();
@@ -356,6 +357,7 @@ class _EnterDetailsScreenState extends State<EnterDetailsScreen> {
                     tobDone) {
                   _key.currentState!.save();
                   create();
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => HomeScreen(),));
                 } else {
                   showDialog(
                     context: context,

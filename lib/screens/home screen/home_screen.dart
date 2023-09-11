@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:sitare/constants/ui_constants.dart';
 import 'package:sitare/screens/home%20screen/widgets/list_items_drawer.dart';
 import 'package:sitare/screens/home%20screen/widgets/user_details_drawer_header.dart';
+import 'package:sitare/screens/talk%20to%20experts%20screen/talk_to_experts_screen.dart';
+import 'package:sitare/screens/wallet%20recharge%20screen/wallet_recharge_screen.dart';
 import 'package:sitare/widget/buynow_homescreen_widget.dart';
 import 'package:sitare/widget/connect_with_experts_widget.dart';
 import 'package:sitare/widget/get_detail_report_widget.dart';
@@ -128,15 +130,20 @@ class _HomeScreenState extends State<HomeScreen> {
                     maxLines: 1,
                     style: TextStyle(fontSize: 16),
                   ),
-                  Container(
-                    decoration: BoxDecoration(
-                        color: redColor,
-                        borderRadius: BorderRadius.circular(5)),
-                    child: const Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 5,vertical: 2),
-                      child: AutoSizeText(
-                        'RECHARGE',maxLines: 1,
-                        style: TextStyle(fontSize: 14),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).push(MaterialPageRoute(builder: (context) => WalletRechargeScreen(),));
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                          color: redColor,
+                          borderRadius: BorderRadius.circular(5)),
+                      child: const Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 5,vertical: 2),
+                        child: AutoSizeText(
+                          'RECHARGE',maxLines: 1,
+                          style: TextStyle(fontSize: 14),
+                        ),
                       ),
                     ),
                   )
@@ -266,7 +273,11 @@ class _HomeScreenState extends State<HomeScreen> {
                         children: [
                           Column(
                             children: [
-                              ConnectWithExpertsHomeScreenWidget(size: size),
+                              GestureDetector(
+                                onTap: () {
+                                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => TalkToExpertsScreen(),));
+                                },
+                                child: ConnectWithExpertsHomeScreenWidget(size: size)),
                               const SizedBox(
                                 height: 15,
                               ),
