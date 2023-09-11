@@ -1,10 +1,9 @@
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:sitare/constants/ui_constants.dart';
 
-class ContactIconWidgetWithText extends StatelessWidget {
-  const ContactIconWidgetWithText({
+class ContactIconsTalkToExpertsScreen extends StatelessWidget {
+  const ContactIconsTalkToExpertsScreen({
     super.key,
     required this.icon,
     required this.text,
@@ -14,8 +13,7 @@ class ContactIconWidgetWithText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
+    return Row(
       children: [
         CircleAvatar(
           radius: 13,
@@ -24,11 +22,15 @@ class ContactIconWidgetWithText extends StatelessWidget {
             size: 13,
           ),
         ),
+        const SizedBox(
+          width: 5,
+        ),
         AutoSizeText(
-          text,style: const TextStyle(fontSize: 10,color: whiteColor),
-          minFontSize: 8,
+          text,
+          style: const TextStyle(fontSize: 12),
+          maxFontSize: 12,
           maxLines: 1,
-        )
+        ),
       ],
     );
   }
