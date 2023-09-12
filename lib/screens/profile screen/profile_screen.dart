@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:sitare/constants/ui_constants.dart';
 import 'package:sitare/screens/profile%20screen/widgets/astroleger_profile_details_widget.dart';
 import 'package:sitare/screens/profile%20screen/widgets/contact_icons_widget.dart';
-import 'package:sitare/screens/update%20profile%20screen/update_profile_screen.dart';
 
 import 'widgets/next_availability_widget.dart';
 
