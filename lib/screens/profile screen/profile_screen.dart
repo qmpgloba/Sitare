@@ -50,16 +50,7 @@ class ProfileScreen extends StatelessWidget {
                 ))
           ],
         ),
-        drawer: Drawer(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              TextButton(onPressed: () {
-                Navigator.of(context).push(MaterialPageRoute(builder: (context) => const UpdateProfileScreen(),));
-              }, child: const Text('Update Profile',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18),))
-            ],
-          )
-        ),
+        
         body: Padding(
           padding: EdgeInsets.all(size.width / 16),
           child: Column(

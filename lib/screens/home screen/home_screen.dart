@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:sitare/constants/ui_constants.dart';
 import 'package:sitare/screens/home%20screen/widgets/list_items_drawer.dart';
 import 'package:sitare/screens/home%20screen/widgets/user_details_drawer_header.dart';
+import 'package:sitare/screens/order%20history%20screen/order_history_screen.dart';
 import 'package:sitare/screens/talk%20to%20experts%20screen/talk_to_experts_screen.dart';
 import 'package:sitare/screens/wallet%20recharge%20screen/wallet_recharge_screen.dart';
 import 'package:sitare/widget/buynow_homescreen_widget.dart';
@@ -151,7 +152,11 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
             const Divider(),
-            const ListItemsDrawer(icon: Icons.list, text: 'Order History'),
+            GestureDetector(
+              onTap: () {
+                Navigator.of(context).push(MaterialPageRoute(builder: (context) => OrderHistoryScreen(),));
+              },
+              child: const ListItemsDrawer(icon: Icons.list, text: 'Order History')),
             const Divider(),
             const ListItemsDrawer(
                 icon: Icons.wechat_outlined, text: 'Customer Support'),

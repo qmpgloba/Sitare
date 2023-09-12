@@ -1,6 +1,8 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:sitare/constants/ui_constants.dart';
 import 'package:sitare/screens/profile%20screen/profile_screen.dart';
+import 'package:sitare/screens/update%20profile%20screen/update_profile_screen.dart';
 
 class UserDetailsDrawerHeader extends StatelessWidget {
   const UserDetailsDrawerHeader({
@@ -23,9 +25,29 @@ class UserDetailsDrawerHeader extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        const CircleAvatar(
-          radius: 30,
-          backgroundColor: Colors.grey,
+        Stack(
+          children: [
+            const CircleAvatar(
+              radius: 32,
+              backgroundColor: redColor,
+            ),
+           Positioned(
+            // height: 25,
+            // width: 20,
+            bottom: 0,
+            right: 0,
+            child: GestureDetector(
+              onTap:() {
+                 Navigator.of(context).push(MaterialPageRoute(builder: (context) => UpdateProfileScreen(),));
+              },
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  color: whiteColor.withOpacity(0.4)
+                ),
+                child: Icon(Icons.edit,size: 30,)),
+            )),
+          ],
         ),
         SizedBox(
           width: size.width*.25,
