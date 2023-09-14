@@ -357,7 +357,7 @@ class _EnterDetailsScreenState extends State<EnterDetailsScreen> {
                     tobDone) {
                   _key.currentState!.save();
                   create();
-                  Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => HomeScreen(),));
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const HomeScreen(),));
                 } else {
                   showDialog(
                     context: context,

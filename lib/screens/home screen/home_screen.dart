@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:kommunicate_flutter/kommunicate_flutter.dart';
 import 'package:sitare/constants/ui_constants.dart';
 import 'package:sitare/screens/home%20screen/widgets/list_items_drawer.dart';
 import 'package:sitare/screens/home%20screen/widgets/user_details_drawer_header.dart';
@@ -16,7 +17,6 @@ import 'package:sitare/widget/icon_widget.dart';
 import 'package:sitare/widget/live_text_widget_carousel.dart';
 import 'package:sitare/widget/profile_widget_carousel.dart';
 import 'package:sitare/widget/shop_sitare_container_widget.dart';
-
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -106,7 +106,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ],
       ),
-     drawer: Drawer(
+      drawer: Drawer(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -122,7 +122,10 @@ class _HomeScreenState extends State<HomeScreen> {
             const Divider(),
             ListTile(
               leading: const Icon(Icons.account_balance_wallet_outlined),
-              title: const AutoSizeText('Wallet',maxLines: 1,),
+              title: const AutoSizeText(
+                'Wallet',
+                maxLines: 1,
+              ),
               trailing: Wrap(
                 spacing: 5,
                 children: [
@@ -133,16 +136,20 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      Navigator.of(context).push(MaterialPageRoute(builder: (context) => WalletRechargeScreen(),));
+                      Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => WalletRechargeScreen(),
+                      ));
                     },
                     child: Container(
                       decoration: BoxDecoration(
                           color: redColor,
                           borderRadius: BorderRadius.circular(5)),
                       child: const Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 5,vertical: 2),
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 5, vertical: 2),
                         child: AutoSizeText(
-                          'RECHARGE',maxLines: 1,
+                          'RECHARGE',
+                          maxLines: 1,
                           style: TextStyle(fontSize: 14),
                         ),
                       ),
@@ -153,13 +160,30 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             const Divider(),
             GestureDetector(
-              onTap: () {
-                Navigator.of(context).push(MaterialPageRoute(builder: (context) => OrderHistoryScreen(),));
-              },
-              child: const ListItemsDrawer(icon: Icons.list, text: 'Order History')),
+                onTap: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => OrderHistoryScreen(),
+                  ));
+                },
+                child: const ListItemsDrawer(
+                    icon: Icons.list, text: 'Order History')),
             const Divider(),
-            const ListItemsDrawer(
-                icon: Icons.wechat_outlined, text: 'Customer Support'),
+            GestureDetector(
+              onTap: () {
+                dynamic conversationObject = {
+                  'appId': '92f796d009e254c06686a249bd1b465b',
+                };
+                KommunicateFlutterPlugin.buildConversation(conversationObject)
+                    .then((clientConversationId) {
+                  print("Conversation builder success : " +
+                      clientConversationId.toString());
+                }).catchError((error) {
+                  print("Conversation builder error : " + error.toString());
+                });
+              },
+              child: const ListItemsDrawer(
+                  icon: Icons.wechat_outlined, text: 'Customer Support'),
+            ),
             const Divider(),
             const ListItemsDrawer(
                 icon: Icons.settings_outlined, text: 'Settings'),
@@ -167,10 +191,9 @@ class _HomeScreenState extends State<HomeScreen> {
             const ListItemsDrawer(icon: Icons.share_outlined, text: 'Share'),
             const Spacer(),
             Padding(
-              padding:  EdgeInsets.all(size.width/16),
+              padding: EdgeInsets.all(size.width / 16),
               child: const Text('Version 1.0'),
             ),
-            
           ],
         ),
       ),
@@ -179,7 +202,7 @@ class _HomeScreenState extends State<HomeScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding:  EdgeInsets.only(left:size.width/15),
+            padding: EdgeInsets.only(left: size.width / 15),
             child: const Text(
               "Hi Guru, Welcome",
               style: TextStyle(color: Colors.white),
@@ -279,10 +302,15 @@ class _HomeScreenState extends State<HomeScreen> {
                           Column(
                             children: [
                               GestureDetector(
-                                onTap: () {
-                                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => TalkToExpertsScreen(),));
-                                },
-                                child: ConnectWithExpertsHomeScreenWidget(size: size)),
+                                  onTap: () {
+                                    Navigator.of(context)
+                                        .push(MaterialPageRoute(
+                                      builder: (context) =>
+                                          TalkToExpertsScreen(),
+                                    ));
+                                  },
+                                  child: ConnectWithExpertsHomeScreenWidget(
+                                      size: size)),
                               const SizedBox(
                                 height: 15,
                               ),
