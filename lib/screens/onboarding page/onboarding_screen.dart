@@ -1,90 +1,57 @@
-
 import 'package:flutter/material.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 import 'package:sitare/constants/ui_constants.dart';
+import 'package:sitare/screens/login%20email%20screen/login_email_screen.dart';
+import 'package:sitare/screens/onboarding%20page/widgets/onboarding_widget.dart';
 
-class OnboardingScreen extends StatelessWidget {
+class OnBoardingScreen extends StatelessWidget {
+  OnBoardingScreen({super.key});
+
   final List<Widget> pages = [
-    SizedBox(
-      child: Padding(
-        padding: const EdgeInsets.all(20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          // mainAxisAlignment: \,
-          children: [
-            SizedBox(height: 30,),
-            Text('SITARE',style: TextStyle(fontSize: 22,fontWeight: FontWeight.bold),),
-            
-            Expanded(child: Container(child: Center(child: Text('Live the life you were born to live.',style: TextStyle(fontSize: 30),))))
-          ],
-        ),
-      ),
-    ),
-     SizedBox(
-      child: Padding(
-        padding: const EdgeInsets.all(20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          // mainAxisAlignment: \,
-          children: [
-            SizedBox(height: 30,),
-            Text('SITARE',style: TextStyle(fontSize: 22,fontWeight: FontWeight.bold),),
-            
-            Expanded(child: Container(child: Center(child: Text('Live the life you were born to live.',style: TextStyle(fontSize: 30),))))
-          ],
-        ),
-      ),
-    ),
-     SizedBox(
-      child: Padding(
-        padding: const EdgeInsets.all(20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          // mainAxisAlignment: \,
-          children: [
-            SizedBox(height: 30,),
-            Text('SITARE',style: TextStyle(fontSize: 22,fontWeight: FontWeight.bold),),
-            
-            Expanded(child: Container(child: Center(child: Text('Live the life you were born to live.',style: TextStyle(fontSize: 30),))))
-          ],
-        ),
-      ),
-    ),
-    // PageViewModel(
-    //   title: "Easy to Use",
-    //   body: "Simple and intuitive interface.",
-    //   image: Image.asset("assets/onboarding2.png"),
-    // ),
-    // PageViewModel(
-    //   title: "Get Started",
-    //   body: "Start using the app now!",
-    //   image: Image.asset("assets/onboarding3.png"),
-    // ),
+    const OnBoardingPageWidget(
+        text: 'Live the life you were born to live.',
+        color: redColor,
+        isVisible: true),
+    const OnBoardingPageWidget(
+        text: 'Your path is illuminated by stars. We are here to guide you!',
+        color: PRIMARY_COLOR,
+        isVisible: false),
   ];
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: IntroductionScreen(
-          rawPages: pages,
-          onDone: () {
-            // Handle the "Done" button press (e.g., navigate to the main screen)
-          },
-          onSkip: () {
-            // Handle the "Skip" button press (e.g., navigate to the main screen)
-          },
-          showSkipButton: true,
-          skip: const Text("Skip",style: TextStyle(color: blackColor),),
-          next: const Icon(Icons.arrow_forward,color: blackColor,),
-          done: const Text("Done",style: TextStyle(color: blackColor)),
-          dotsDecorator: DotsDecorator(
-            size: Size(10.0, 10.0),
-            color: blackColor,
-            activeSize: Size(22.0, 10.0),
-            activeShape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(25.0)),
-            ),
+    return SafeArea(
+      child: IntroductionScreen(
+        rawPages: pages,
+        onDone: () {
+          Navigator.of(context).pushAndRemoveUntil(
+              MaterialPageRoute(
+                builder: (context) => LoginEmailScreen(),
+              ),
+              (route) => false);
+        },
+        showBottomPart: true,
+        next: const Icon(
+          Icons.arrow_forward,
+          color: whiteColor,
+        ),
+        // overrideDone: GestureDetector(
+        //   onTap: () {},
+        //   child:  TextButton.icon(onPressed: () {
+        //     Navigator.of(context).pushAndRemoveUntil(
+        //       MaterialPageRoute(
+        //         builder: (context) => LoginEmailScreen(),
+        //       ),
+        //       (route) => false);
+        //   }, icon: Icon(Icons.arrow_forward), label: Text('Get started'))
+        // ),
+        done: const Text("Get started", style: TextStyle(color: whiteColor)),
+        dotsDecorator: const DotsDecorator(
+          size: Size(10.0, 10.0),
+          color: whiteColor,
+          activeSize: Size(22.0, 10.0),
+          activeShape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(25.0)),
           ),
         ),
       ),
