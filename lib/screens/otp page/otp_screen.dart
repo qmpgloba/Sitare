@@ -26,6 +26,13 @@ class OTPScreen extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+               const Text(
+                  'SITARE',
+                  style: TextStyle(
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold,
+                      color: whiteColor),
+                ), SizedBox(height: size.width*.05),
               const TitleText(title: 'ENTER VERIFICATION CODE'),
               SizedBox(
                 height: size.width * .15,

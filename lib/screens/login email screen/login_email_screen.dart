@@ -50,13 +50,21 @@ class _LoginEmailScreenState extends State<LoginEmailScreen> {
           ),
           child: Column(
             children: [
-              const SizedBox(height: 90),
+               SizedBox(height: size.width*.3),
+              const Text(
+                  'SITARE',
+                  style: TextStyle(
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold,
+                      color: whiteColor),
+                ),
+                 SizedBox(height: size.width*.05),
               const Center(
                 child: Text(
                   "LOGIN",
                   style: TextStyle(
                       color: FONT_COLOR,
-                      fontSize: 20,
+                      fontSize: 18,
                       fontWeight: FontWeight.w700),
                 ),
               ),

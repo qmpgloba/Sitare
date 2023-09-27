@@ -35,16 +35,7 @@ class OnBoardingScreen extends StatelessWidget {
           Icons.arrow_forward,
           color: whiteColor,
         ),
-        // overrideDone: GestureDetector(
-        //   onTap: () {},
-        //   child:  TextButton.icon(onPressed: () {
-        //     Navigator.of(context).pushAndRemoveUntil(
-        //       MaterialPageRoute(
-        //         builder: (context) => LoginEmailScreen(),
-        //       ),
-        //       (route) => false);
-        //   }, icon: Icon(Icons.arrow_forward), label: Text('Get started'))
-        // ),
+        
         done: const Text("Get started", style: TextStyle(color: whiteColor)),
         dotsDecorator: const DotsDecorator(
           size: Size(10.0, 10.0),

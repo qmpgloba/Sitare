@@ -106,13 +106,19 @@ class _EnterDetailsScreenState extends State<EnterDetailsScreen> {
               ),
               child: Column(
                 children: [
-                  const SizedBox(height: 50),
+                   const Text(
+                  'SITARE',
+                  style: TextStyle(
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold,
+                      color: whiteColor),
+                ), SizedBox(height: size.width*.05),
                   const Center(
                     child: Text(
                       "ENTER DETAILS",
                       style: TextStyle(
                           color: FONT_COLOR,
-                          fontSize: 20,
+                          fontSize: 18,
                           fontWeight: FontWeight.w700),
                     ),
                   ),

@@ -27,6 +27,13 @@ class WelcomeScreen extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  const Text(
+                  'SITARE',
+                  style: TextStyle(
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold,
+                      color: whiteColor),
+                ), SizedBox(height: size.width*.05),
                   const TitleText(title: 'WELCOME'),
                   SizedBox(
                     height: size.width * .2,
