@@ -35,7 +35,7 @@ class IconContainerWidget extends StatelessWidget {
             width: 80,
             child: Text(
               label,
-              style: const TextStyle(color: Colors.black, fontSize: 13),
+              style: const TextStyle(color: Colors.black, fontSize: 12),
               textAlign: TextAlign.center,
             ),
           ),
