@@ -77,7 +77,7 @@ class CreateAccountScreen extends StatelessWidget {
                               password: passwordTextController.text.trim());
                           if (result == null) {
                             //Navigate the screen
-                            Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => EnterDetailsScreen(),), (route) => false);
+                            Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => const EnterDetailsScreen(),), (route) => false);
                           } else {
                             // showToast(signUpSuccess, redColor);
                             // showSnackbar(context, signUpSuccess, redColor);
