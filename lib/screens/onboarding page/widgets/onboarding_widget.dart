@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sitare/constants/ui_constants.dart';
-import 'package:sitare/screens/login%20email%20screen/login_email_screen.dart';
+import 'package:sitare/screens/create%20account%20page/cerate_account_screen.dart';
+import 'package:sitare/screens/welcome%20page/welcome_screen.dart';
 
 class OnBoardingPageWidget extends StatelessWidget {
   const OnBoardingPageWidget({
@@ -43,11 +44,11 @@ class OnBoardingPageWidget extends StatelessWidget {
                       onPressed: () {
                         Navigator.of(context).pushAndRemoveUntil(
                             MaterialPageRoute(
-                              builder: (context) => LoginEmailScreen(),
+                              builder: (context) =>CreateAccountScreen(),
                             ),
                             (route) => false);
                       },
-                      child: Text('Skip',style: TextStyle(color: whiteColor),)),
+                      child: const Text('Skip',style: TextStyle(color: whiteColor),)),
                 )
               ],
             ),

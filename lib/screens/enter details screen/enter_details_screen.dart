@@ -6,7 +6,6 @@ import 'package:sitare/screens/home%20screen/home_screen.dart';
 import 'package:sitare/screens/welcome%20page/widgets/mobile_number_textfeild_widget.dart';
 import 'package:sitare/widget/custom_textfield.dart';
 
-
 class EnterDetailsScreen extends StatefulWidget {
   const EnterDetailsScreen({super.key});
 
@@ -46,8 +45,7 @@ class _EnterDetailsScreenState extends State<EnterDetailsScreen> {
       "TOB": tobController.text.toString(),
       "marital_status": martialController.text.toString(),
       "problem": problemController.text.toString(),
-      "phone_number":
-          "+$countrycode${mobileNumberController.text}",
+      "phone_number": "+$countrycode${mobileNumberController.text}",
     };
 
     for (int i = 0; i < length; i++) {
@@ -106,13 +104,14 @@ class _EnterDetailsScreenState extends State<EnterDetailsScreen> {
               ),
               child: Column(
                 children: [
-                   const Text(
-                  'SITARE',
-                  style: TextStyle(
-                      fontSize: 30,
-                      fontWeight: FontWeight.bold,
-                      color: whiteColor),
-                ), SizedBox(height: size.width*.05),
+                  const Text(
+                    'SITARE',
+                    style: TextStyle(
+                        fontSize: 30,
+                        fontWeight: FontWeight.bold,
+                        color: whiteColor),
+                  ),
+                  SizedBox(height: size.width * .05),
                   const Center(
                     child: Text(
                       "ENTER DETAILS",
@@ -330,29 +329,11 @@ class _EnterDetailsScreenState extends State<EnterDetailsScreen> {
             right: size.width * 0.08,
             top: size.height * 0.02,
             bottom: size.height * 0.02),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.end,
+        child: Wrap(
+          // mainAxisAlignment: MainAxisAlignment.end,
+          alignment: WrapAlignment.center,
+          // crossAxisAlignment: WrapCrossAlignment.center,
           children: [
-            // InkWell(
-            //   onTap: () {
-            //   },
-            //   child: const Row(
-            //     children: [
-            //       Text(
-            //         "SKIP FOR NOW",
-            //         style: TextStyle(
-            //             color: FONT_COLOR, fontWeight: FontWeight.w500),
-            //       ),
-            //       SizedBox(
-            //         width: 20,
-            //       ),
-            //       Icon(
-            //         Icons.arrow_forward,
-            //         color: FONT_COLOR,
-            //       )
-            //     ],
-            //   ),
-            // ),
             InkWell(
               onTap: () {
                 _key.currentState!.validate();
@@ -363,7 +344,9 @@ class _EnterDetailsScreenState extends State<EnterDetailsScreen> {
                     tobDone) {
                   _key.currentState!.save();
                   create();
-                  Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const HomeScreen(),));
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(
+                    builder: (context) => const HomeScreen(),
+                  ));
                 } else {
                   showDialog(
                     context: context,
@@ -385,23 +368,36 @@ class _EnterDetailsScreenState extends State<EnterDetailsScreen> {
                   );
                 }
               },
-              child: const Row(
-                children: [
-                  Text(
-                    "PROCEED",
-                    style: TextStyle(
-                        color: FONT_COLOR, fontWeight: FontWeight.w500),
-                  ),
-                  SizedBox(
-                    width: 20,
-                  ),
-                  Icon(
-                    Icons.arrow_forward,
-                    color: FONT_COLOR,
-                  )
-                ],
+              child: Text(
+                "SUBMIT",
+                style: TextStyle(
+                    color: FONT_COLOR, fontWeight: FontWeight.w500),
               ),
             ),
+            SizedBox(height: 30,),
+            Center(
+              child: InkWell(
+                onTap: () {
+                  Navigator.of(context).pushAndRemoveUntil(
+                      MaterialPageRoute(
+                        builder: (context) => HomeScreen(),
+                      ),
+                      (route) => false);
+                },
+                child: Row(
+                  children: [
+                    Text(
+                      "SKIP FOR NOW",
+                      style: TextStyle(
+                        fontSize: 14,
+                          color: FONT_COLOR, fontWeight: FontWeight.w500),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            // Spacer(),
+            
           ],
         ),
       ),
@@ -424,15 +420,15 @@ class _EnterDetailsScreenState extends State<EnterDetailsScreen> {
                 decoration: BoxDecoration(
                   color: PRIMARY_COLOR,
                   borderRadius: BorderRadius.circular(5),
-                  border: Border.all(
-                    color: FONT_COLOR,
-                  ),
+                  // border: Border.all(
+                  //   color: FONT_COLOR,
+                  // ),
                 ),
                 height: size.height * 0.06,
                 child: DropdownButton<String>(
                   dropdownColor: PRIMARY_COLOR,
                   value: _gender,
-                  underline: const SizedBox(),
+                  // underline: const SizedBox(),
                   hint: Padding(
                     padding: EdgeInsets.only(left: size.width * 0.02),
                     child: Text(
@@ -471,16 +467,19 @@ class _EnterDetailsScreenState extends State<EnterDetailsScreen> {
     // ignore: avoid_unnecessary_containers
     return Container(
       // width: 160
+      
       child: TextFormField(
         controller: dobController,
         style: const TextStyle(
           color: FONT_COLOR,
         ),
+        
         decoration: const InputDecoration(
           hintText: "DD/MM/YYYY",
           hintStyle: TextStyle(
             color: FONT_COLOR,
             fontWeight: FontWeight.w700,
+            
           ),
           label: Text(
             "Date of Birth",

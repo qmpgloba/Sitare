@@ -29,7 +29,15 @@ class MobileNumberTextFeildWidget extends StatelessWidget {
         hintText: 'Mobile Number',
         hintStyle: TextStyle(color: FONT_COLOR),
         counterText: '',
+        
       ),
+      // validator: (value) {
+      //   if(value!.isValidNumber()){
+
+      //   }else{
+      //     return 'Please enter valid number';
+      //   }
+      // },
     );
   }
 }

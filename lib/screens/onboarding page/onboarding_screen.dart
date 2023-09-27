@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 import 'package:sitare/constants/ui_constants.dart';
-import 'package:sitare/screens/login%20email%20screen/login_email_screen.dart';
+import 'package:sitare/screens/create%20account%20page/cerate_account_screen.dart';
 import 'package:sitare/screens/onboarding%20page/widgets/onboarding_widget.dart';
+import 'package:sitare/screens/welcome%20page/welcome_screen.dart';
 
 class OnBoardingScreen extends StatelessWidget {
   OnBoardingScreen({super.key});
@@ -26,7 +27,7 @@ class OnBoardingScreen extends StatelessWidget {
         onDone: () {
           Navigator.of(context).pushAndRemoveUntil(
               MaterialPageRoute(
-                builder: (context) => LoginEmailScreen(),
+                builder: (context) => CreateAccountScreen(),
               ),
               (route) => false);
         },

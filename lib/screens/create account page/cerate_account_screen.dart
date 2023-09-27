@@ -1,8 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:sitare/constants/ui_constants.dart';
+import 'package:sitare/model/user_model.dart';
 import 'package:sitare/screens/create%20account%20page/functions/functions.dart';
 import 'package:sitare/screens/enter%20details%20screen/enter_details_screen.dart';
 import 'package:sitare/screens/welcome%20page/welcome_screen.dart';
+import 'package:sitare/screens/welcome%20page/widgets/mobile_number_textfeild_widget.dart';
 import 'package:sitare/screens/widgets/auto_size_text_widget.dart';
 import 'package:sitare/screens/widgets/show_dialog_widget.dart';
 import 'package:sitare/screens/widgets/title_text_widget.dart';
@@ -13,9 +16,13 @@ import 'widgets/textfeild_widget.dart';
 class CreateAccountScreen extends StatelessWidget {
   CreateAccountScreen({super.key});
   final TextEditingController emailTextController = TextEditingController();
-  final TextEditingController passwordTextController = TextEditingController();
-  final TextEditingController confirmPasswordTextController =
+  // final TextEditingController passwordTextController = TextEditingController();
+  // final TextEditingController confirmPasswordTextController =
+  //     TextEditingController();
+  final TextEditingController nameTextController = TextEditingController();
+  final TextEditingController phoneNumberTextController =
       TextEditingController();
+  String countyCode = '91';
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
@@ -34,15 +41,26 @@ class CreateAccountScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const Text(
-                  'SITARE',
-                  style: TextStyle(
-                      fontSize: 30,
-                      fontWeight: FontWeight.bold,
-                      color: whiteColor),
-                ), SizedBox(height: size.width*.05),
+                    'SITARE',
+                    style: TextStyle(
+                        fontSize: 30,
+                        fontWeight: FontWeight.bold,
+                        color: whiteColor),
+                  ),
+                  SizedBox(height: size.width * .05),
                   const TitleText(title: 'CREATE ACCOUNT'),
                   SizedBox(
                     height: size.width * .18,
+                  ),
+                  TextfeildWidget(
+                    nameTextController: nameTextController,
+                    keyboardType: TextInputType.text,
+                    text: 'name',
+                    obscureText: false,
+                    // validate: validatePassword,
+                  ),
+                  SizedBox(
+                    height: size.width * .07,
                   ),
                   TextfeildWidget(
                     nameTextController: emailTextController,
@@ -54,23 +72,19 @@ class CreateAccountScreen extends StatelessWidget {
                   SizedBox(
                     height: size.width * .07,
                   ),
-                  TextfeildWidget(
-                    nameTextController: passwordTextController,
-                    keyboardType: TextInputType.text,
-                    text: 'Password',
-                    obscureText: true,
-                    // validate: validatePassword,
+                  MobileNumberTextFeildWidget(
+                    mobileNumberController: phoneNumberTextController,
+                    onCountryChanged: (country) {
+                      countyCode = country.dialCode;
+                    },
                   ),
-                  SizedBox(
-                    height: size.width * .07,
-                  ),
-                  TextfeildWidget(
-                    nameTextController: confirmPasswordTextController,
-                    keyboardType: TextInputType.text,
-                    text: 'Confirm Password',
-                    obscureText: true,
-                    password: passwordTextController,
-                  ),
+                  // TextfeildWidget(
+                  //   nameTextController: phoneNumberTextController,
+                  //   keyboardType: TextInputType.phone,
+                  //   text: 'Phone Number',
+                  //   obscureText: false,
+                  //   // password: passwordTextController,
+                  // ),
                   SizedBox(
                     height: size.width * .15,
                   ),
@@ -79,20 +93,37 @@ class CreateAccountScreen extends StatelessWidget {
                     child: ElevatedButton(
                       onPressed: () async {
                         if (_formKey.currentState!.validate()) {
-                          var result = await signUpWithEmail(
-                              email: emailTextController.text.trim(),
-                              password: passwordTextController.text.trim());
-                          if (result == null) {
-                            //Navigate the screen
-                            Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => const EnterDetailsScreen(),), (route) => false);
+                          UserModel _user = UserModel(
+                              name: nameTextController.text,
+                              email: emailTextController.text,
+                              phoneNumber: phoneNumberTextController.text);
+                          bool signedUp = await createUser(_user);
+                          if (signedUp) {
+                            Navigator.of(context).pushAndRemoveUntil(
+                                MaterialPageRoute(
+                                  builder: (context) => EnterDetailsScreen(),
+                                ),
+                                (route) => false);
                           } else {
-                            // showToast(signUpSuccess, redColor);
-                            // showSnackbar(context, signUpSuccess, redColor);
-                            // ignore: use_build_context_synchronously
-                            showAlertBox(
-                                context, result, whiteColor, 'Retry');
+                            print('failed');
+                            // showAboutDialog(context: context)
                           }
                         }
+                        // if (_formKey.currentState!.validate()) {
+                        //   var result = await signUpWithEmail(
+                        //       email: emailTextController.text.trim(),
+                        //       password: passwordTextController.text.trim());
+                        //   if (result == null) {
+                        //     //Navigate the screen
+                        //     Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => const EnterDetailsScreen(),), (route) => false);
+                        //   } else {
+                        //     // showToast(signUpSuccess, redColor);
+                        //     // showSnackbar(context, signUpSuccess, redColor);
+                        //     // ignore: use_build_context_synchronously
+                        //     showAlertBox(
+                        //         context, result, whiteColor, 'Retry');
+                        //   }
+                        // }
                       },
                       style: ButtonStyle(
                         shape: MaterialStateProperty.all<OutlinedBorder>(
@@ -144,5 +175,19 @@ class CreateAccountScreen extends StatelessWidget {
         ),
       )),
     );
+  }
+}
+
+createUser(UserModel user) async {
+  final db = FirebaseFirestore.instance;
+
+  try {
+    await db.collection('users').add(
+          user.toJson(),
+        );
+        return true;
+    // ignore: empty_catches
+  } catch (e) {
+    return false;
   }
 }
