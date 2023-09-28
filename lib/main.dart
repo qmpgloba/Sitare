@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:sitare/screens/auth%20wrapper/auth_wrapper.dart';
 import 'package:sitare/screens/navigation_screen.dart';
 import 'package:sitare/screens/onboarding%20page/onboarding_screen.dart';
 
@@ -26,7 +27,7 @@ class MyApp extends StatelessWidget {
        fontFamily: 'Muli',
         useMaterial3: true,
       ),
-      home: OnBoardingScreen()
+      home: AuthWrapper()
     );
   }
 }

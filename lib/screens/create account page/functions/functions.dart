@@ -47,7 +47,7 @@ Future<String?> signUpWithEmail({
     if (value!.isEmpty) {
       return 'Please enter your password';
     } else if (value.length < 6 && value.isNotEmpty) {
-      return 'Minimum 6 characters requiered';
+      return 'Minimum 6 characters required';
     } else if(value != password){
       return 'Please enter same password';
     }else{

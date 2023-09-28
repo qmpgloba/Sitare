@@ -10,17 +10,18 @@ import 'package:sitare/screens/widgets/title_text_widget.dart';
 
 import 'widgets/agreement_text_widget.dart';
 import 'widgets/textfeild_widget.dart';
-
+final TextEditingController emailTextController = TextEditingController();
+ final TextEditingController nameTextController = TextEditingController();
+  final TextEditingController phoneNumberTextController =
+      TextEditingController();
 // ignore: must_be_immutable
 class CreateAccountScreen extends StatelessWidget {
   CreateAccountScreen({super.key});
-  final TextEditingController emailTextController = TextEditingController();
+  // final TextEditingController emailTextController = TextEditingController();
   // final TextEditingController passwordTextController = TextEditingController();
   // final TextEditingController confirmPasswordTextController =
   //     TextEditingController();
-  final TextEditingController nameTextController = TextEditingController();
-  final TextEditingController phoneNumberTextController =
-      TextEditingController();
+ 
   String countyCode = '91';
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();

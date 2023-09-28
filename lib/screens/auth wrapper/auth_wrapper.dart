@@ -1,17 +1,20 @@
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:sitare/screens/create%20account%20page/functions/functions.dart';
 import 'package:sitare/screens/home%20screen/home_screen.dart';
 import 'package:sitare/screens/onboarding%20page/onboarding_screen.dart';
 
 class AuthWrapper extends StatelessWidget {
-  const AuthWrapper({super.key});
+   AuthWrapper({super.key});
+   final user = FirebaseAuth.instance.currentUser;
+   
 
   @override
   Widget build(BuildContext context) {
     // final firebaseUser = context.watch<User?>();
+    print(user);
 
-    if(currentUser != null){
+    if(user != null){
       return const HomeScreen();
     }else{
       return    OnBoardingScreen();
