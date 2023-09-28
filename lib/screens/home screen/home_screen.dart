@@ -2,14 +2,17 @@ import 'dart:async';
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:kommunicate_flutter/kommunicate_flutter.dart';
 import 'package:sitare/constants/ui_constants.dart';
 import 'package:sitare/screens/home%20screen/widgets/list_items_drawer.dart';
 import 'package:sitare/screens/home%20screen/widgets/user_details_drawer_header.dart';
+import 'package:sitare/screens/login%20email%20screen/login_email_screen.dart';
 import 'package:sitare/screens/order%20history%20screen/order_history_screen.dart';
 import 'package:sitare/screens/talk%20to%20experts%20screen/talk_to_experts_screen.dart';
 import 'package:sitare/screens/wallet%20recharge%20screen/wallet_recharge_screen.dart';
+import 'package:sitare/screens/welcome%20page/welcome_screen.dart';
 import 'package:sitare/widget/buynow_homescreen_widget.dart';
 import 'package:sitare/widget/connect_with_experts_widget.dart';
 import 'package:sitare/widget/get_detail_report_widget.dart';
@@ -189,6 +192,19 @@ class _HomeScreenState extends State<HomeScreen> {
                 icon: Icons.settings_outlined, text: 'Settings'),
             const Divider(),
             const ListItemsDrawer(icon: Icons.share_outlined, text: 'Share'),
+            GestureDetector(
+              onTap: () async{
+                await FirebaseAuth.instance.signOut().then((value) {
+                          Navigator.pushAndRemoveUntil(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>  WelcomeScreen(),
+                              ),
+                              (route) => false);
+                        });
+                
+              },
+              child: const ListItemsDrawer(icon: Icons.logout, text: 'Logout')),
             const Spacer(),
             Padding(
               padding: EdgeInsets.all(size.width / 16),

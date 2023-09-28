@@ -23,10 +23,14 @@ class CustomTextField extends StatelessWidget {
     return TextFormField(
       controller: controller,
       obscureText: obscureText,
+      
       style: const TextStyle(
         color: FONT_COLOR,
       ),
       decoration: InputDecoration(
+        // border: UnderlineInputBorder(
+        //   borderSide: BorderSide(color: whiteColor,wi)
+        // ),
         hintText: hintname,
         hintStyle: const TextStyle(
           color: FONT_COLOR,

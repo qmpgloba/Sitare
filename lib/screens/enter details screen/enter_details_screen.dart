@@ -283,8 +283,9 @@ class _EnterDetailsScreenState extends State<EnterDetailsScreen> {
                               color: FONT_COLOR,
                             ),
                             enabledBorder: const OutlineInputBorder(
-                              borderSide:
-                                  BorderSide(color: FONT_COLOR, width: 1),
+                              borderSide: BorderSide(
+                                color: whiteColor,
+                              ),
                             ),
                             suffixIcon: index == 0
                                 ? InkWell(
@@ -368,36 +369,38 @@ class _EnterDetailsScreenState extends State<EnterDetailsScreen> {
                   );
                 }
               },
-              child: Text(
+              child: const Text(
                 "SUBMIT",
-                style: TextStyle(
-                    color: FONT_COLOR, fontWeight: FontWeight.w500),
+                style:
+                    TextStyle(color: FONT_COLOR, fontWeight: FontWeight.w500),
               ),
             ),
-            SizedBox(height: 30,),
+            const SizedBox(
+              height: 30,
+            ),
             Center(
               child: InkWell(
                 onTap: () {
                   Navigator.of(context).pushAndRemoveUntil(
                       MaterialPageRoute(
-                        builder: (context) => HomeScreen(),
+                        builder: (context) => const HomeScreen(),
                       ),
                       (route) => false);
                 },
-                child: Row(
+                child: const Row(
                   children: [
                     Text(
                       "SKIP FOR NOW",
                       style: TextStyle(
-                        fontSize: 14,
-                          color: FONT_COLOR, fontWeight: FontWeight.w500),
+                          fontSize: 14,
+                          color: FONT_COLOR,
+                          fontWeight: FontWeight.w500),
                     ),
                   ],
                 ),
               ),
             ),
             // Spacer(),
-            
           ],
         ),
       ),
@@ -467,19 +470,17 @@ class _EnterDetailsScreenState extends State<EnterDetailsScreen> {
     // ignore: avoid_unnecessary_containers
     return Container(
       // width: 160
-      
+
       child: TextFormField(
         controller: dobController,
         style: const TextStyle(
           color: FONT_COLOR,
         ),
-        
         decoration: const InputDecoration(
           hintText: "DD/MM/YYYY",
           hintStyle: TextStyle(
             color: FONT_COLOR,
             fontWeight: FontWeight.w700,
-            
           ),
           label: Text(
             "Date of Birth",

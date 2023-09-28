@@ -6,7 +6,9 @@ String verifyId = '';
 
 Future<String?> phoneAuthentication(String number) async {
   try {
+    print(number);
     await _auth.verifyPhoneNumber(
+      
       phoneNumber: number,
       verificationCompleted: (PhoneAuthCredential credential) async {
         await _auth.signInWithCredential(credential);
@@ -39,7 +41,7 @@ Future<bool> checkPhoneNumberExistence(String mobileNumber) async {
   try {
     final querySnapshot = await FirebaseFirestore.instance
         .collection('users')
-        .where('phone_number', isEqualTo: phoneNumber)
+        .where('phone number', isEqualTo: phoneNumber)
         .get();
 
     if (querySnapshot.docs.isNotEmpty) {

@@ -2,17 +2,16 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:sitare/constants/ui_constants.dart';
 import 'package:sitare/model/user_model.dart';
-import 'package:sitare/screens/create%20account%20page/functions/functions.dart';
 import 'package:sitare/screens/enter%20details%20screen/enter_details_screen.dart';
 import 'package:sitare/screens/welcome%20page/welcome_screen.dart';
 import 'package:sitare/screens/welcome%20page/widgets/mobile_number_textfeild_widget.dart';
 import 'package:sitare/screens/widgets/auto_size_text_widget.dart';
-import 'package:sitare/screens/widgets/show_dialog_widget.dart';
 import 'package:sitare/screens/widgets/title_text_widget.dart';
 
 import 'widgets/agreement_text_widget.dart';
 import 'widgets/textfeild_widget.dart';
 
+// ignore: must_be_immutable
 class CreateAccountScreen extends StatelessWidget {
   CreateAccountScreen({super.key});
   final TextEditingController emailTextController = TextEditingController();
@@ -96,7 +95,7 @@ class CreateAccountScreen extends StatelessWidget {
                           UserModel _user = UserModel(
                               name: nameTextController.text,
                               email: emailTextController.text,
-                              phoneNumber: phoneNumberTextController.text);
+                              phoneNumber: "+91"+phoneNumberTextController.text);
                           bool signedUp = await createUser(_user);
                           if (signedUp) {
                             Navigator.of(context).pushAndRemoveUntil(

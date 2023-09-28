@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sitare/constants/ui_constants.dart';
 import 'package:sitare/screens/create%20account%20page/cerate_account_screen.dart';
-import 'package:sitare/screens/welcome%20page/welcome_screen.dart';
 
 class OnBoardingPageWidget extends StatelessWidget {
   const OnBoardingPageWidget({

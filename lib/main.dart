@@ -1,7 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_onboarding_slider/flutter_onboarding_slider.dart';
-import 'package:sitare/screens/login%20email%20screen/login_email_screen.dart';
 import 'package:sitare/screens/navigation_screen.dart';
 import 'package:sitare/screens/onboarding%20page/onboarding_screen.dart';
 
