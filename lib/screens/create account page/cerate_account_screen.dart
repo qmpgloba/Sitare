@@ -93,19 +93,19 @@ class CreateAccountScreen extends StatelessWidget {
                     child: ElevatedButton(
                       onPressed: () async {
                         if (_formKey.currentState!.validate()) {
-                          UserModel _user = UserModel(
+                          UserModel user = UserModel(
                               name: nameTextController.text,
                               email: emailTextController.text,
-                              phoneNumber: "+91"+phoneNumberTextController.text);
-                          bool signedUp = await createUser(_user);
+                              phoneNumber: "+91${phoneNumberTextController.text}");
+                          bool signedUp = await createUser(user);
                           if (signedUp) {
+                            // ignore: use_build_context_synchronously
                             Navigator.of(context).pushAndRemoveUntil(
                                 MaterialPageRoute(
-                                  builder: (context) => EnterDetailsScreen(),
+                                  builder: (context) => const EnterDetailsScreen(),
                                 ),
                                 (route) => false);
                           } else {
-                            print('failed');
                             // showAboutDialog(context: context)
                           }
                         }

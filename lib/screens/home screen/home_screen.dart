@@ -11,7 +11,6 @@ import 'package:sitare/functions/get_user_details.dart';
 import 'package:sitare/screens/create%20account%20page/cerate_account_screen.dart';
 import 'package:sitare/screens/home%20screen/widgets/list_items_drawer.dart';
 import 'package:sitare/screens/home%20screen/widgets/user_details_drawer_header.dart';
-import 'package:sitare/screens/login%20email%20screen/login_email_screen.dart';
 import 'package:sitare/screens/order%20history%20screen/order_history_screen.dart';
 import 'package:sitare/screens/talk%20to%20experts%20screen/talk_to_experts_screen.dart';
 import 'package:sitare/screens/wallet%20recharge%20screen/wallet_recharge_screen.dart';
@@ -79,7 +78,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    String mobile = (FirebaseAuth.instance.currentUser!.phoneNumber!)??("+91"+phoneNumberTextController.text);
+    String mobile = (FirebaseAuth.instance.currentUser!.phoneNumber!)??("+91${phoneNumberTextController.text}");
+    // ignore: avoid_print
     print(mobile);
     Size size = MediaQuery.sizeOf(context);
     return FutureBuilder<DocumentSnapshot?>(
@@ -161,7 +161,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           GestureDetector(
                             onTap: () {
                               Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => WalletRechargeScreen(),
+                                builder: (context) => const WalletRechargeScreen(),
                               ));
                             },
                             child: Container(
@@ -200,11 +200,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         KommunicateFlutterPlugin.buildConversation(
                                 conversationObject)
                             .then((clientConversationId) {
-                          print("Conversation builder success : " +
-                              clientConversationId.toString());
                         }).catchError((error) {
-                          print("Conversation builder error : " +
-                              error.toString());
                         });
                       },
                       child: const ListItemsDrawer(
@@ -396,7 +392,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             );
           } else {
-            return Text('data');
+            return const Text('data');
           }
         });
   }

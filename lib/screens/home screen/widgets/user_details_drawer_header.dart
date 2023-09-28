@@ -38,14 +38,14 @@ class UserDetailsDrawerHeader extends StatelessWidget {
             right: 0,
             child: GestureDetector(
               onTap:() {
-                 Navigator.of(context).push(MaterialPageRoute(builder: (context) => UpdateProfileScreen(),));
+                 Navigator.of(context).push(MaterialPageRoute(builder: (context) => const UpdateProfileScreen(),));
               },
               child: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
                   color: whiteColor.withOpacity(0.4)
                 ),
-                child: Icon(Icons.edit,size: 30,)),
+                child: const Icon(Icons.edit,size: 30,)),
             )),
           ],
         ),

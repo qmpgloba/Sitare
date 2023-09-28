@@ -28,9 +28,11 @@ class CustomTextField extends StatelessWidget {
         color: FONT_COLOR,
       ),
       decoration: InputDecoration(
-        // border: UnderlineInputBorder(
-        //   borderSide: BorderSide(color: whiteColor,wi)
-        // ),
+        border: const UnderlineInputBorder(
+          // borderSide: BorderSide(
+            
+          //   color: whiteColor,)
+        ),
         hintText: hintname,
         hintStyle: const TextStyle(
           color: FONT_COLOR,

@@ -6,7 +6,6 @@ String verifyId = '';
 
 Future<String?> phoneAuthentication(String number) async {
   try {
-    print(number);
     await _auth.verifyPhoneNumber(
       
       phoneNumber: number,

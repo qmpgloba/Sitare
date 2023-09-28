@@ -146,6 +146,9 @@ class _EnterDetailsScreenState extends State<EnterDetailsScreen> {
                       return null;
                     },
                   ),
+                  const SizedBox(
+                    height: 5,
+                  ),
                   MobileNumberTextFeildWidget(
                     mobileNumberController: mobileNumberController,
                     onCountryChanged: (v) {
@@ -163,36 +166,32 @@ class _EnterDetailsScreenState extends State<EnterDetailsScreen> {
                       });
                     },
                   ),
-                  const SizedBox(height: 25),
+                  const SizedBox(height: 20),
                   InkWell(
                     onTap: () {
                       _showDatePicker();
                     },
                     child: Container(
-                      height: size.height * 0.06,
-                      width: size.width,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(5),
-                        border: Border.all(
-                          color: FONT_COLOR,
-                        ),
-                      ),
-                      child: Padding(
-                        padding: EdgeInsets.only(left: size.width * 0.02),
-                        child: Row(
-                          children: [
-                            Text(
-                              "Date of Birth: ${dobController.text} ",
-                              style: const TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w500,
-                                color: FONT_COLOR,
-                              ),
+                      decoration: const BoxDecoration(
+                          border: Border(
+                        bottom: BorderSide(color: whiteColor, width: 0.4),
+                      )),
+                      child: Row(
+                        children: [
+                          Text(
+                            "Date of Birth: ${dobController.text} ",
+                            style: const TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w500,
+                              color: FONT_COLOR,
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
                     ),
+                  ),
+                  const SizedBox(
+                    height: 5,
                   ),
                   CustomTextField(
                     size: size,
@@ -211,30 +210,26 @@ class _EnterDetailsScreenState extends State<EnterDetailsScreen> {
                       _showTimePicker();
                     },
                     child: Container(
-                      height: size.height * 0.06,
-                      width: size.width,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(5),
-                        border: Border.all(
-                          color: FONT_COLOR,
-                        ),
-                      ),
-                      child: Padding(
-                        padding: EdgeInsets.only(left: size.width * 0.02),
-                        child: Row(
-                          children: [
-                            Text(
-                              "Time of Birth: ${tobController.text}",
-                              style: const TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w500,
-                                color: FONT_COLOR,
-                              ),
+                      decoration: const BoxDecoration(
+                          border: Border(
+                              bottom:
+                                  BorderSide(color: whiteColor, width: 0.4))),
+                      child: Row(
+                        children: [
+                          Text(
+                            "Time of Birth: ${tobController.text}",
+                            style: const TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w500,
+                              color: FONT_COLOR,
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
                     ),
+                  ),
+                  const SizedBox(
+                    height: 5,
                   ),
                   CustomTextField(
                     size: size,
@@ -396,6 +391,11 @@ class _EnterDetailsScreenState extends State<EnterDetailsScreen> {
                           color: FONT_COLOR,
                           fontWeight: FontWeight.w500),
                     ),
+                    Icon(
+                      Icons.arrow_forward,
+                      color: FONT_COLOR,
+                      size: 20,
+                    )
                   ],
                 ),
               ),
@@ -414,7 +414,7 @@ class _EnterDetailsScreenState extends State<EnterDetailsScreen> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const SizedBox(
-          height: 16,
+          height: 8,
         ),
         Row(
           children: [
@@ -432,15 +432,12 @@ class _EnterDetailsScreenState extends State<EnterDetailsScreen> {
                   dropdownColor: PRIMARY_COLOR,
                   value: _gender,
                   // underline: const SizedBox(),
-                  hint: Padding(
-                    padding: EdgeInsets.only(left: size.width * 0.02),
-                    child: Text(
-                      label,
-                      style: const TextStyle(
-                        // fontSize: 14,
-                        fontWeight: FontWeight.w500,
-                        color: FONT_COLOR,
-                      ),
+                  hint: Text(
+                    label,
+                    style: const TextStyle(
+                      // fontSize: 14,
+                      fontWeight: FontWeight.w500,
+                      color: FONT_COLOR,
                     ),
                   ),
                   items: GENDERS.map((String value) {
@@ -466,42 +463,42 @@ class _EnterDetailsScreenState extends State<EnterDetailsScreen> {
     );
   }
 
-  Container dateofBirth() {
-    // ignore: avoid_unnecessary_containers
-    return Container(
-      // width: 160
+  // Container dateofBirth() {
+  //   // ignore: avoid_unnecessary_containers
+  //   return Container(
+  //     // width: 160
 
-      child: TextFormField(
-        controller: dobController,
-        style: const TextStyle(
-          color: FONT_COLOR,
-        ),
-        decoration: const InputDecoration(
-          hintText: "DD/MM/YYYY",
-          hintStyle: TextStyle(
-            color: FONT_COLOR,
-            fontWeight: FontWeight.w700,
-          ),
-          label: Text(
-            "Date of Birth",
-            style: TextStyle(
-              color: FONT_COLOR,
-              fontWeight: FontWeight.w700,
-            ),
-          ),
-        ),
-        validator: (v) {
-          final RegExp regex = RegExp(
-              r'^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/(19[0-9]{2}|20[0-2][0-9]|2023)$');
+  //     child: TextFormField(
+  //       controller: dobController,
+  //       style: const TextStyle(
+  //         color: FONT_COLOR,
+  //       ),
+  //       decoration: const InputDecoration(
+  //         hintText: "DD/MM/YYYY",
+  //         hintStyle: TextStyle(
+  //           color: FONT_COLOR,
+  //           fontWeight: FontWeight.w700,
+  //         ),
+  //         label: Text(
+  //           "Date of Birth",
+  //           style: TextStyle(
+  //             color: FONT_COLOR,
+  //             fontWeight: FontWeight.w700,
+  //           ),
+  //         ),
+  //       ),
+  //       validator: (v) {
+  //         final RegExp regex = RegExp(
+  //             r'^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/(19[0-9]{2}|20[0-2][0-9]|2023)$');
 
-          if (v != null) {
-            if (!regex.hasMatch(v)) {
-              return "Enter in the format of DD/MM/YYYY";
-            }
-          }
-          return null;
-        },
-      ),
-    );
-  }
+  //         if (v != null) {
+  //           if (!regex.hasMatch(v)) {
+  //             return "Enter in the format of DD/MM/YYYY";
+  //           }
+  //         }
+  //         return null;
+  //       },
+  //     ),
+  //   );
+  // }
 }

@@ -15,7 +15,7 @@ class NextAvailabilityWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.of(context).push(MaterialPageRoute(builder: (context) => NextAvailabilityScreen(),));
+        Navigator.of(context).push(MaterialPageRoute(builder: (context) => const NextAvailabilityScreen(),));
       },
       child: SizedBox(
        width: size.width*.65,

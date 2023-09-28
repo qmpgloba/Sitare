@@ -55,6 +55,7 @@ class OTPScreen extends StatelessWidget {
                     });
                   // ignore: unused_catch_clause
                   } on FirebaseAuthException catch (e) {
+                    // ignore: use_build_context_synchronously
                     showAlertBox(context, 'Invalid OTP', whiteColor, 'Close');
                   }
                   
