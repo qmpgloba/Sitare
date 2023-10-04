@@ -10,9 +10,10 @@ import 'package:sitare/widget/custom_textfield.dart';
 import '../../model/user_model.dart';
 
 class EnterDetailsScreen extends StatefulWidget {
-  EnterDetailsScreen(
-      {super.key, required this.phoneNumber,
-     });
+  EnterDetailsScreen({
+    super.key,
+    required this.phoneNumber,
+  });
   final String phoneNumber;
   // final String name;
   // final String email;
@@ -555,10 +556,11 @@ updateUser(UserModel user, String phoneNumber) async {
   try {
     QuerySnapshot querySnapshot = await db
         .collection('users')
-        .where('phoneNumber', isEqualTo: phoneNumber)
+        .where('phone number', isEqualTo: "+91${phoneNumber}")
         .get();
 
     if (querySnapshot.docs.isNotEmpty) {
+      print("Entery Check:+91${phoneNumber} ");
       DocumentSnapshot documentSnapshot = querySnapshot.docs.first;
       await documentSnapshot.reference.update(user.toJson());
       return true;
