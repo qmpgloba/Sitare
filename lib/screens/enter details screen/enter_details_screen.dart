@@ -41,6 +41,7 @@ class _EnterDetailsScreenState extends State<EnterDetailsScreen> {
   List<String> optionalField = [];
   final _key = GlobalKey<FormState>();
   String? _gender;
+  String? _martialStatus;
   String? name;
   String? phoneNumber;
   String? email;
@@ -102,6 +103,7 @@ class _EnterDetailsScreenState extends State<EnterDetailsScreen> {
       nameController = TextEditingController(text: nameTextController.text);
       mobileNumberController = TextEditingController(text: widget.phoneNumber);
       emailController = TextEditingController(text: emailTextController.text);
+      email = emailTextController.text;
     });
     super.initState();
   }
@@ -260,15 +262,13 @@ class _EnterDetailsScreenState extends State<EnterDetailsScreen> {
                   const SizedBox(
                     height: 5,
                   ),
-                  CustomTextField(
-                    size: size,
-                    controller: martialController,
-                    hintname: "Maritial Status",
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'Please enter your Maritial Status';
-                      }
-                      return null;
+                  _martialDropDown(
+                    label: "Martial Status",
+                    onChanged: (v) {
+                      setState(() {
+                        _martialStatus = v ?? "";
+                        martialController.text = v ?? "";
+                      });
                     },
                   ),
                   CustomTextField(
@@ -381,7 +381,7 @@ class _EnterDetailsScreenState extends State<EnterDetailsScreen> {
                       problem: problemController.text,
                       partnerDetails: optionalField);
                   bool submitSuccess =
-                      await updateUser(user, phoneNumberTextController.text);
+                      await updateUser(user, emailController.text);
                   if (submitSuccess) {
                     // ignore: use_build_context_synchronously
                     Navigator.of(context).pushReplacement(MaterialPageRoute(
@@ -510,6 +510,61 @@ class _EnterDetailsScreenState extends State<EnterDetailsScreen> {
     );
   }
 
+  Column _martialDropDown(
+      {required String label, required Function(String?) onChanged}) {
+    Size size = MediaQuery.sizeOf(context);
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const SizedBox(
+          height: 8,
+        ),
+        Row(
+          children: [
+            Expanded(
+              child: Container(
+                decoration: BoxDecoration(
+                  color: PRIMARY_COLOR,
+                  borderRadius: BorderRadius.circular(5),
+                  // border: Border.all(
+                  //   color: FONT_COLOR,
+                  // ),
+                ),
+                height: size.height * 0.06,
+                child: DropdownButton<String>(
+                  dropdownColor: PRIMARY_COLOR,
+                  value: _martialStatus,
+                  // underline: const SizedBox(),
+                  hint: Text(
+                    label,
+                    style: const TextStyle(
+                      // fontSize: 14,
+                      fontWeight: FontWeight.w500,
+                      color: FONT_COLOR,
+                    ),
+                  ),
+                  items: martialStatus.map((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Padding(
+                        padding: EdgeInsets.only(left: size.width * 0.02),
+                        child: Text(
+                          value,
+                          style: const TextStyle(color: FONT_COLOR),
+                        ),
+                      ),
+                    );
+                  }).toList(),
+                  onChanged: onChanged,
+                  isExpanded: true,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
   // Container dateofBirth() {
   //   // ignore: avoid_unnecessary_containers
   //   return Container(
@@ -550,17 +605,15 @@ class _EnterDetailsScreenState extends State<EnterDetailsScreen> {
   // }
 }
 
-updateUser(UserModel user, String phoneNumber) async {
+updateUser(UserModel user, String email) async {
   final db = FirebaseFirestore.instance;
 
   try {
-    QuerySnapshot querySnapshot = await db
-        .collection('users')
-        .where('phone number', isEqualTo: "+91${phoneNumber}")
-        .get();
+    QuerySnapshot querySnapshot =
+        await db.collection('users').where('email', isEqualTo: email).get();
 
     if (querySnapshot.docs.isNotEmpty) {
-      print("Entery Check:+91${phoneNumber} ");
+      print("Entery Check: ${email} ");
       DocumentSnapshot documentSnapshot = querySnapshot.docs.first;
       await documentSnapshot.reference.update(user.toJson());
       return true;

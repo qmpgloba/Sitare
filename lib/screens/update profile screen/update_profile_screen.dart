@@ -1,20 +1,25 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:sitare/constants/ui_constants.dart';
+import 'package:sitare/functions/get_user_details.dart';
+import 'package:sitare/model/user_model.dart';
+import 'package:sitare/screens/home%20screen/home_screen.dart';
 import 'package:sitare/screens/profile%20screen/widgets/update_profile_textfeild_widget.dart';
 
+import '../create account page/cerate_account_screen.dart';
+
 class UpdateProfileScreen extends StatefulWidget {
-  const UpdateProfileScreen({super.key});
+  const UpdateProfileScreen({super.key, required this.email});
+  final String? email;
 
   @override
   State<UpdateProfileScreen> createState() => _UpdateProfileScreenState();
 }
 
 class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
-
-  
-
   TextEditingController nameTextController = TextEditingController();
 
   TextEditingController emailTextController = TextEditingController();
@@ -25,11 +30,11 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
 
   TextEditingController dateInput = TextEditingController();
   TextEditingController timeInput = TextEditingController();
-  TimeOfDay timeOfDay = TimeOfDay.now();
 
   String? genderDropDownValue;
   String? martialDropDownValue;
- final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  TimeOfDay timeOfDay = TimeOfDay.now();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   var genders = [
     'Male',
@@ -46,14 +51,31 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.sizeOf(context);
-    return Scaffold(
-      backgroundColor: whiteColor,
-      appBar: AppBar(
-        backgroundColor: PRIMARY_COLOR,
-        title: const Text('Update Profile',style: TextStyle(color: whiteColor,fontWeight: FontWeight.bold),),
-        centerTitle: true,
-      ),
-      body: Padding(
+    String? email = FirebaseAuth.instance.currentUser == null
+        ? (widget.email)
+        : (FirebaseAuth.instance.currentUser!.email);
+    return FutureBuilder<DocumentSnapshot?>(
+        future: getUserDataByEmail(email ??= emailTextController.text),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          } else if (snapshot.hasError) {
+            return Text('Error: ${snapshot.error}');
+          } else if (snapshot.hasData && snapshot.data != null) {
+            userData = snapshot.data!.data() as Map<String, dynamic>;
+            controllersIntialization();
+            return Scaffold(
+              backgroundColor: whiteColor,
+              appBar: AppBar(
+                backgroundColor: PRIMARY_COLOR,
+                title: const Text(
+                  'Update Profile',
+                  style:
+                      TextStyle(color: whiteColor, fontWeight: FontWeight.bold),
+                ),
+                centerTitle: true,
+              ),
+              body: Padding(
                 padding: EdgeInsets.all(size.width / 16),
                 child: Form(
                   key: _formKey,
@@ -66,7 +88,9 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                             hintText: 'Full Name',
                             feildName: 'Name',
                             keyboardType: TextInputType.name),
-                            const SizedBox(height: 10,),
+                        const SizedBox(
+                          height: 10,
+                        ),
                         UpdateProfileTextFeildWidgets(
                           size: size,
                           controller: emailTextController,
@@ -74,11 +98,10 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                           feildName: 'Email',
                           keyboardType: TextInputType.emailAddress,
                         ),
-                  
                         Row(
                           children: [
                             SizedBox(
-                                width:size.width *.25,
+                                width: size.width * .25,
                                 child: const Text(
                                   'Gender',
                                   style: TextStyle(color: blackColor),
@@ -87,10 +110,13 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                               width: 10,
                             ),
                             SizedBox(
-                              width: size.width *.55,
+                              width: size.width * .55,
                               height: 50,
                               child: DropdownButtonFormField(
-                                hint: const Text('Gender',),
+                                value: genderDropDownValue,
+                                hint: const Text(
+                                  'Gender',
+                                ),
                                 decoration: const InputDecoration(
                                     border: UnderlineInputBorder()),
                                 // value: 'Male',
@@ -122,18 +148,18 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               SizedBox(
-                                  width: size.width *.25,
+                                  width: size.width * .25,
                                   child: const AutoSizeText(
                                     'Date of Birth',
                                     maxLines: 1,
-                    maxFontSize: 14,
+                                    maxFontSize: 14,
                                     style: TextStyle(color: blackColor),
                                   )),
                               const SizedBox(
                                 width: 10,
                               ),
                               SizedBox(
-                                width: size.width *.55,
+                                width: size.width * .55,
                                 height: 35,
                                 child: TextFormField(
                                   decoration: const InputDecoration(
@@ -148,7 +174,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                                         firstDate: DateTime(1950),
                                         //DateTime.now() - not to allow to choose before today.
                                         lastDate: DateTime(2100));
-                                  
+
                                     if (pickedDate != null) {
                                       //pickedDate output format => 2021-03-10 00:00:00.000
                                       String formattedDate =
@@ -166,34 +192,33 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                             ],
                           ),
                         ),
-                            const SizedBox(height: 10,),
-                  
+                        const SizedBox(
+                          height: 10,
+                        ),
                         UpdateProfileTextFeildWidgets(
                             size: size,
                             controller: placeOfBirthTextController,
                             hintText: 'Place of Birth',
                             feildName: 'Place of Birth',
                             keyboardType: TextInputType.name),
-                            
-                  
                         Padding(
                           padding: const EdgeInsets.symmetric(vertical: 8),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               SizedBox(
-                                  width: size.width *.25,
+                                  width: size.width * .25,
                                   child: const AutoSizeText(
                                     'Time of Birth',
                                     maxLines: 1,
-                    maxFontSize: 14,
+                                    maxFontSize: 14,
                                     style: TextStyle(color: blackColor),
                                   )),
                               const SizedBox(
                                 width: 10,
                               ),
                               SizedBox(
-                                width: size.width *.55,
+                                width: size.width * .55,
                                 height: 35,
                                 child: TextFormField(
                                   decoration: const InputDecoration(
@@ -212,20 +237,21 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                         Row(
                           children: [
                             SizedBox(
-                                width: size.width *.25,
+                                width: size.width * .25,
                                 child: const AutoSizeText(
                                   'Martial Status',
                                   maxLines: 1,
-                    maxFontSize: 14,
+                                  maxFontSize: 14,
                                   style: TextStyle(color: blackColor),
                                 )),
                             const SizedBox(
                               width: 10,
                             ),
                             SizedBox(
-                              width:size.width *.55,
+                              width: size.width * .55,
                               height: 50,
                               child: DropdownButtonFormField(
+                                value: martialDropDownValue,
                                 hint: const AutoSizeText(
                                   'Martial status',
                                   maxLines: 1,
@@ -249,8 +275,9 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                             ),
                           ],
                         ),
-                            const SizedBox(height: 12,),
-                  
+                        const SizedBox(
+                          height: 12,
+                        ),
                         UpdateProfileTextFeildWidgets(
                             size: size,
                             controller: problemTextController,
@@ -261,8 +288,30 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                           height: 10,
                         ),
                         GestureDetector(
-                          onTap: () {
-                            if(_formKey.currentState!.validate()){
+                          onTap: () async {
+                            if (_formKey.currentState!.validate()) {
+                              UserModel user = UserModel(
+                                name: nameTextController.text,
+                                email: emailTextController.text,
+                                phoneNumber: phoneNumberTextController.text,
+                                gender: genderDropDownValue,
+                                dateofBirth: dateInput.text,
+                                placeofBirth: placeOfBirthTextController.text,
+                                timeofBirth: timeInput.text,
+                                maritalStatus: martialDropDownValue,
+                                problem: problemTextController.text,
+                              );
+                              bool updateSuccess = await updateUser(
+                                  user, emailTextController.text);
+                              if (updateSuccess) {
+                                // ignore: use_build_context_synchronously
+                                Navigator.of(context)
+                                    .pushReplacement(MaterialPageRoute(
+                                  builder: (context) => const HomeScreen(),
+                                ));
+                              } else {
+                                // showAboutDialog(context: context)
+                              }
                             }
                           },
                           child: Container(
@@ -271,8 +320,8 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                                 color: redColor,
                                 borderRadius: BorderRadius.circular(3)),
                             child: const Padding(
-                              padding:
-                                  EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 10, vertical: 10),
                               child: AutoSizeText(
                                 'UPDATE',
                                 maxLines: 1,
@@ -290,7 +339,12 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                   ),
                 ),
               ),
-    );
+            );
+          } else {
+            print(emailTextController.text);
+            return Text(email ?? "");
+          }
+        });
   }
 
   Future displayTimePicker(BuildContext context) async {
@@ -301,5 +355,48 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
         timeInput.text = "${time.hour}:${time.minute}";
       });
     }
+  }
+
+  controllersIntialization() {
+    nameTextController = TextEditingController(
+      text: userData!['full name'],
+    );
+    emailTextController = TextEditingController(
+      text: userData!['email'],
+    );
+    placeOfBirthTextController = TextEditingController(
+      text: userData!['placeofBirth'],
+    );
+    problemTextController = TextEditingController(
+      text: userData!['problem'],
+    );
+    dateInput = TextEditingController(
+      text: userData!['dateofBirth'],
+    );
+    timeInput = TextEditingController(
+      text: userData!['timeofBirth'],
+    );
+    genderDropDownValue = userData!['gender'];
+    martialDropDownValue = userData!['maritalStatus'];
+  }
+}
+
+updateUser(UserModel user, String email) async {
+  final db = FirebaseFirestore.instance;
+
+  try {
+    QuerySnapshot querySnapshot =
+        await db.collection('users').where('email', isEqualTo: email).get();
+
+    if (querySnapshot.docs.isNotEmpty) {
+      print("Entery Check: ${email} ");
+      DocumentSnapshot documentSnapshot = querySnapshot.docs.first;
+      await documentSnapshot.reference.update(user.toJson());
+      return true;
+    } else {
+      return false;
+    }
+  } catch (e) {
+    return false;
   }
 }

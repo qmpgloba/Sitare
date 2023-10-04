@@ -28,12 +28,13 @@ class WelcomeScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const Text(
-                  'SITARE',
-                  style: TextStyle(
-                      fontSize: 30,
-                      fontWeight: FontWeight.bold,
-                      color: whiteColor),
-                ), SizedBox(height: size.width*.05),
+                    'SITARE',
+                    style: TextStyle(
+                        fontSize: 30,
+                        fontWeight: FontWeight.bold,
+                        color: whiteColor),
+                  ),
+                  SizedBox(height: size.width * .05),
                   const TitleText(title: 'WELCOME'),
                   SizedBox(
                     height: size.width * .2,
@@ -58,6 +59,7 @@ class WelcomeScreen extends StatelessWidget {
                           if (_formKey.currentState!.validate()) {
                             var phoneNumber =
                                 '+$countyCode${mobileNumberController.text}';
+                            print(phoneNumber);
                             bool mobileNumberExists =
                                 await checkPhoneNumberExistence(phoneNumber);
                             if (mobileNumberExists) {
@@ -68,7 +70,7 @@ class WelcomeScreen extends StatelessWidget {
                                 //     context, 'OTP sent Succesfully', greenColor);
                                 // ignore: use_build_context_synchronously
                                 Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) =>  OTPScreen(),
+                                  builder: (context) => OTPScreen(),
                                 ));
                               } else {
                                 // ignore: use_build_context_synchronously

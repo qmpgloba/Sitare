@@ -31,26 +31,32 @@ class UserDetailsDrawerHeader extends StatelessWidget {
               radius: 32,
               backgroundColor: redColor,
             ),
-           Positioned(
-            // height: 25,
-            // width: 20,
-            bottom: 0,
-            right: 0,
-            child: GestureDetector(
-              onTap:() {
-                 Navigator.of(context).push(MaterialPageRoute(builder: (context) => const UpdateProfileScreen(),));
-              },
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  color: whiteColor.withOpacity(0.4)
-                ),
-                child: const Icon(Icons.edit,size: 30,)),
-            )),
+            Positioned(
+                // height: 25,
+                // width: 20,
+                bottom: 0,
+                right: 0,
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => UpdateProfileScreen(
+                        email: email,
+                      ),
+                    ));
+                  },
+                  child: Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          color: whiteColor.withOpacity(0.4)),
+                      child: const Icon(
+                        Icons.edit,
+                        size: 30,
+                      )),
+                )),
           ],
         ),
         SizedBox(
-          width: size.width*.25,
+          width: size.width * .25,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -75,7 +81,9 @@ class UserDetailsDrawerHeader extends StatelessWidget {
         ),
         IconButton(
             onPressed: () {
-              Navigator.of(context).push(MaterialPageRoute(builder: (context) => ProfileScreen(),));
+              Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => ProfileScreen(),
+              ));
             },
             icon: const Icon(Icons.arrow_forward_ios_outlined))
       ],
