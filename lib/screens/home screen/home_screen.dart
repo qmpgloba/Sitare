@@ -79,13 +79,13 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     // print('FirebaseAuth.instance.currentUser!.phoneNumber');
-    String? mobile = FirebaseAuth.instance.currentUser == null?(phoneNumberTextController.text): (FirebaseAuth.instance.currentUser!.phoneNumber);
+    String? email = FirebaseAuth.instance.currentUser == null?(emailTextController.text): (FirebaseAuth.instance.currentUser!.email);
     // ignore: avoid_print
-    print(mobile);
+    print(email);
     Size size = MediaQuery.sizeOf(context);
     return FutureBuilder<DocumentSnapshot?>(
         future:
-            getUserDataByEmail(mobile??=phoneNumberTextController.text),
+            getUserDataByEmail(email??=emailTextController.text),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
