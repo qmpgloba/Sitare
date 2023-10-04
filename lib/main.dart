@@ -1,6 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:sitare/screens/enter%20details%20screen/enter_details_screen.dart';
 import 'package:sitare/screens/onboarding%20page/onboarding_screen.dart';
 
 import 'constants/ui_constants.dart';

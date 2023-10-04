@@ -74,7 +74,7 @@ class CreateAccountScreen extends StatelessWidget {
                     height: size.width * .07,
                   ),
                   MobileNumberTextFeildWidget(
-                    //  mobileNumberController: phoneNumberTextController,
+                     controller: phoneNumberTextController,
                     onCountryChanged: (country) {
                       countyCode = country.dialCode;
                     },
@@ -98,7 +98,14 @@ class CreateAccountScreen extends StatelessWidget {
                               name: nameTextController.text,
                               email: emailTextController.text,
                               phoneNumber:
-                                  "+91${phoneNumberTextController.text}");
+                                  "+91${phoneNumberTextController.text}",
+                                  dateofBirth: '',
+                                  gender: '',
+                                  maritalStatus: '',
+                                  partnerDetails: [],
+                                  placeofBirth: '',
+                                  problem: '',
+                                  timeofBirth: '');
                           bool signedUp = await createUser(user);
                           if (signedUp) {
                             // ignore: use_build_context_synchronously
@@ -106,8 +113,9 @@ class CreateAccountScreen extends StatelessWidget {
                                 MaterialPageRoute(
                                   builder: (context) => EnterDetailsScreen(
                                     phoneNumber: phoneNumberTextController.text,
-                                    email: emailTextController.text,
-                                    name: nameTextController.text,
+                                    // email: emailTextController.text,
+                                    // name: nameTextController.text,
+
                                   ),
                                 ),
                                 (route) => false);
@@ -193,7 +201,9 @@ createUser(UserModel user) async {
         );
     return true;
     // ignore: empty_catches
-  } catch (e) {
+  }on FirebaseException catch (e) {
+    print(e.message);
+    print(e.toString());
     return false;
   }
 }

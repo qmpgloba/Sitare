@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:sitare/constants/app_constants.dart';
 import 'package:sitare/constants/ui_constants.dart';
+import 'package:sitare/screens/create%20account%20page/cerate_account_screen.dart';
 import 'package:sitare/screens/home%20screen/home_screen.dart';
 import 'package:sitare/screens/welcome%20page/widgets/mobile_number_textfeild_widget.dart';
 import 'package:sitare/widget/custom_textfield.dart';
@@ -10,13 +11,11 @@ import '../../model/user_model.dart';
 
 class EnterDetailsScreen extends StatefulWidget {
   EnterDetailsScreen(
-      {super.key,
-      required this.phoneNumber,
-      required this.name,
-      required this.email});
+      {super.key, required this.phoneNumber,
+     });
   final String phoneNumber;
-  final String name;
-  final String email;
+  // final String name;
+  // final String email;
   @override
   State<EnterDetailsScreen> createState() => _EnterDetailsScreenState();
 }
@@ -44,8 +43,6 @@ class _EnterDetailsScreenState extends State<EnterDetailsScreen> {
   String? name;
   String? phoneNumber;
   String? email;
-  final CollectionReference _user =
-      FirebaseFirestore.instance.collection('users');
 
   // Future<void> create() async {
   //   Map<String, dynamic> addData = {
@@ -101,15 +98,16 @@ class _EnterDetailsScreenState extends State<EnterDetailsScreen> {
   @override
   void initState() {
     setState(() {
-      nameController = TextEditingController(text: widget.name);
+      nameController = TextEditingController(text: nameTextController.text);
       mobileNumberController = TextEditingController(text: widget.phoneNumber);
-      emailController = TextEditingController(text: widget.email);
+      emailController = TextEditingController(text: emailTextController.text);
     });
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    print(widget.phoneNumber);
     Size size = MediaQuery.sizeOf(context);
     return Scaffold(
       body: SingleChildScrollView(
@@ -179,8 +177,8 @@ class _EnterDetailsScreenState extends State<EnterDetailsScreen> {
                     height: 5,
                   ),
                   MobileNumberTextFeildWidget(
-                    mobileNumberController: mobileNumberController,
-                    readOnly: true,
+                    controller: mobileNumberController,
+                    readOnly: false,
                     onCountryChanged: (v) {
                       setState(() {
                         countrycode = v.dialCode;
@@ -373,7 +371,7 @@ class _EnterDetailsScreenState extends State<EnterDetailsScreen> {
                   UserModel user = UserModel(
                       name: nameController.text,
                       email: emailController.text,
-                      phoneNumber: "+91${mobileNumberController.text}",
+                      phoneNumber: phoneNumberTextController.text,
                       gender: genderController.text,
                       dateofBirth: dobController.text,
                       placeofBirth: pobController.text,
@@ -382,7 +380,7 @@ class _EnterDetailsScreenState extends State<EnterDetailsScreen> {
                       problem: problemController.text,
                       partnerDetails: optionalField);
                   bool submitSuccess =
-                      await updateUser(user, widget.phoneNumber);
+                      await updateUser(user, phoneNumberTextController.text);
                   if (submitSuccess) {
                     // ignore: use_build_context_synchronously
                     Navigator.of(context).pushReplacement(MaterialPageRoute(

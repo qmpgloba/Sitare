@@ -39,7 +39,7 @@ class WelcomeScreen extends StatelessWidget {
                     height: size.width * .2,
                   ),
                   MobileNumberTextFeildWidget(
-                    mobileNumberController: mobileNumberController,
+                    controller: mobileNumberController,
                     onCountryChanged: (country) {
                       countyCode = country.dialCode;
                     },

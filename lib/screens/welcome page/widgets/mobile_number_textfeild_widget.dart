@@ -7,14 +7,14 @@ import 'package:sitare/constants/ui_constants.dart';
 class MobileNumberTextFeildWidget extends StatelessWidget {
   const MobileNumberTextFeildWidget({
     super.key,
-    this.mobileNumberController,
+    this.controller,
     this.validator,
     this.onCountryChanged,
     this.intialValue,
     this.onChanged,
     this.readOnly = false,
   });
-  final TextEditingController? mobileNumberController;
+  final TextEditingController? controller;
   final String? Function(String?)? validator;
   final String? Function(PhoneNumber?)? onChanged;
   final void Function(Country)? onCountryChanged;
@@ -25,7 +25,7 @@ class MobileNumberTextFeildWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return IntlPhoneField(
       style: const TextStyle(color: FONT_COLOR),
-      controller: mobileNumberController,
+      controller: controller,
       readOnly: readOnly,
       initialCountryCode: 'IN',
       showDropdownIcon: false,
