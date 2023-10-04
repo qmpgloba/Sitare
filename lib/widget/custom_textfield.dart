@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import '../constants/ui_constants.dart';
 
@@ -6,39 +5,47 @@ class CustomTextField extends StatelessWidget {
   const CustomTextField({
     Key? key,
     required this.size,
-    required this.controller,
+    this.controller,
     required this.hintname,
     this.obscureText = false,
     this.validator,
+    this.intialValue,
+    this.onChanged,
+    this.readOnly = false,
   }) : super(key: key);
 
   final Size size;
-  final TextEditingController controller;
+  final TextEditingController? controller;
   final String hintname;
   final bool obscureText;
+  final bool readOnly;
+  final String? intialValue;
   final String? Function(String?)? validator;
+  final String? Function(String?)? onChanged;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       controller: controller,
+      onChanged: onChanged,
+      readOnly: readOnly,
       obscureText: obscureText,
-      
       style: const TextStyle(
         color: FONT_COLOR,
       ),
       decoration: InputDecoration(
         border: const UnderlineInputBorder(
-          // borderSide: BorderSide(
-            
-          //   color: whiteColor,)
-        ),
+            // borderSide: BorderSide(
+
+            //   color: whiteColor,)
+            ),
         hintText: hintname,
         hintStyle: const TextStyle(
           color: FONT_COLOR,
         ),
       ),
-      validator: validator, 
+      validator: validator,
+      initialValue: intialValue,
     );
   }
 }

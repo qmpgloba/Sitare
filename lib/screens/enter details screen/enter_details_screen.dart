@@ -6,24 +6,33 @@ import 'package:sitare/screens/home%20screen/home_screen.dart';
 import 'package:sitare/screens/welcome%20page/widgets/mobile_number_textfeild_widget.dart';
 import 'package:sitare/widget/custom_textfield.dart';
 
-class EnterDetailsScreen extends StatefulWidget {
-  const EnterDetailsScreen({super.key});
+import '../../model/user_model.dart';
 
+class EnterDetailsScreen extends StatefulWidget {
+  EnterDetailsScreen(
+      {super.key,
+      required this.phoneNumber,
+      required this.name,
+      required this.email});
+  final String phoneNumber;
+  final String name;
+  final String email;
   @override
   State<EnterDetailsScreen> createState() => _EnterDetailsScreenState();
 }
 
 class _EnterDetailsScreenState extends State<EnterDetailsScreen> {
   int length = 1;
-  TextEditingController nameController = TextEditingController();
-  TextEditingController emailController = TextEditingController();
+  late TextEditingController nameController;
+  late TextEditingController emailController;
+  late TextEditingController mobileNumberController;
   TextEditingController genderController = TextEditingController();
   TextEditingController dobController = TextEditingController();
   TextEditingController pobController = TextEditingController();
   TextEditingController tobController = TextEditingController();
   TextEditingController martialController = TextEditingController();
   TextEditingController problemController = TextEditingController();
-  TextEditingController mobileNumberController = TextEditingController();
+
   TimeOfDay time = TimeOfDay.now();
   String countrycode = "91";
   bool tobDone = false;
@@ -32,28 +41,31 @@ class _EnterDetailsScreenState extends State<EnterDetailsScreen> {
   List<String> optionalField = [];
   final _key = GlobalKey<FormState>();
   String? _gender;
+  String? name;
+  String? phoneNumber;
+  String? email;
   final CollectionReference _user =
       FirebaseFirestore.instance.collection('users');
 
-  Future<void> create() async {
-    Map<String, dynamic> addData = {
-      "name": nameController.text.toString(),
-      "email": emailController.text.toString(),
-      "gender": genderController.text.toString(),
-      "DOB": dobController.text.toString(),
-      "POB": pobController.text.toString(),
-      "TOB": tobController.text.toString(),
-      "marital_status": martialController.text.toString(),
-      "problem": problemController.text.toString(),
-      "phone_number": "+$countrycode${mobileNumberController.text}",
-    };
+  // Future<void> create() async {
+  //   Map<String, dynamic> addData = {
+  //     "name": nameController.text.toString(),
+  //     "email": emailController.text.toString(),
+  //     "gender": genderController.text.toString(),
+  //     "DOB": dobController.text.toString(),
+  //     "POB": pobController.text.toString(),
+  //     "TOB": tobController.text.toString(),
+  //     "marital_status": martialController.text.toString(),
+  //     "problem": problemController.text.toString(),
+  //     "phone_number": "+$countrycode${mobileNumberController.text}",
+  //   };
 
-    for (int i = 0; i < length; i++) {
-      addData["PartnerDetails$i"] = optionalField[i].toString();
-    }
+  //   for (int i = 0; i < length; i++) {
+  //     addData["PartnerDetails$i"] = optionalField[i].toString();
+  //   }
 
-    await _user.add(addData);
-  }
+  //   await _user.add(addData);
+  // }
 
   Future<void> _showDatePicker() async {
     final DateTime? pickedDate = await showDatePicker(
@@ -84,6 +96,16 @@ class _EnterDetailsScreenState extends State<EnterDetailsScreen> {
         tobDone = true;
       });
     }
+  }
+
+  @override
+  void initState() {
+    setState(() {
+      nameController = TextEditingController(text: widget.name);
+      mobileNumberController = TextEditingController(text: widget.phoneNumber);
+      emailController = TextEditingController(text: widget.email);
+    });
+    super.initState();
   }
 
   @override
@@ -123,7 +145,13 @@ class _EnterDetailsScreenState extends State<EnterDetailsScreen> {
                   ),
                   CustomTextField(
                     size: size,
+                    readOnly: true,
                     controller: nameController,
+                    onChanged: (value) {
+                      setState(() {
+                        name = value ?? "";
+                      });
+                    },
                     hintname: "Name",
                     validator: (value) {
                       if (value!.isEmpty) {
@@ -134,6 +162,7 @@ class _EnterDetailsScreenState extends State<EnterDetailsScreen> {
                   ),
                   CustomTextField(
                     size: size,
+                    readOnly: true,
                     controller: emailController,
                     hintname: "Email",
                     validator: (value) {
@@ -151,6 +180,7 @@ class _EnterDetailsScreenState extends State<EnterDetailsScreen> {
                   ),
                   MobileNumberTextFeildWidget(
                     mobileNumberController: mobileNumberController,
+                    readOnly: true,
                     onCountryChanged: (v) {
                       setState(() {
                         countrycode = v.dialCode;
@@ -331,7 +361,8 @@ class _EnterDetailsScreenState extends State<EnterDetailsScreen> {
           // crossAxisAlignment: WrapCrossAlignment.center,
           children: [
             InkWell(
-              onTap: () {
+              onTap: () async {
+                print(name);
                 _key.currentState!.validate();
                 if (_key.currentState!.validate() &&
                     _gender != null &&
@@ -339,10 +370,27 @@ class _EnterDetailsScreenState extends State<EnterDetailsScreen> {
                     dobDone &&
                     tobDone) {
                   _key.currentState!.save();
-                  create();
-                  Navigator.of(context).pushReplacement(MaterialPageRoute(
-                    builder: (context) => const HomeScreen(),
-                  ));
+                  UserModel user = UserModel(
+                      name: nameController.text,
+                      email: emailController.text,
+                      phoneNumber: "+91${mobileNumberController.text}",
+                      gender: genderController.text,
+                      dateofBirth: dobController.text,
+                      placeofBirth: pobController.text,
+                      timeofBirth: tobController.text,
+                      maritalStatus: martialController.text,
+                      problem: problemController.text,
+                      partnerDetails: optionalField);
+                  bool submitSuccess =
+                      await updateUser(user, widget.phoneNumber);
+                  if (submitSuccess) {
+                    // ignore: use_build_context_synchronously
+                    Navigator.of(context).pushReplacement(MaterialPageRoute(
+                      builder: (context) => const HomeScreen(),
+                    ));
+                  } else {
+                    // showAboutDialog(context: context)
+                  }
                 } else {
                   showDialog(
                     context: context,
@@ -501,4 +549,25 @@ class _EnterDetailsScreenState extends State<EnterDetailsScreen> {
   //     ),
   //   );
   // }
+}
+
+updateUser(UserModel user, String phoneNumber) async {
+  final db = FirebaseFirestore.instance;
+
+  try {
+    QuerySnapshot querySnapshot = await db
+        .collection('users')
+        .where('phoneNumber', isEqualTo: phoneNumber)
+        .get();
+
+    if (querySnapshot.docs.isNotEmpty) {
+      DocumentSnapshot documentSnapshot = querySnapshot.docs.first;
+      await documentSnapshot.reference.update(user.toJson());
+      return true;
+    } else {
+      return false;
+    }
+  } catch (e) {
+    return false;
+  }
 }

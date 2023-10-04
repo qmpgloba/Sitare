@@ -10,10 +10,11 @@ import 'package:sitare/screens/widgets/title_text_widget.dart';
 
 import 'widgets/agreement_text_widget.dart';
 import 'widgets/textfeild_widget.dart';
+
 final TextEditingController emailTextController = TextEditingController();
- final TextEditingController nameTextController = TextEditingController();
-  final TextEditingController phoneNumberTextController =
-      TextEditingController();
+final TextEditingController nameTextController = TextEditingController();
+final TextEditingController phoneNumberTextController = TextEditingController();
+
 // ignore: must_be_immutable
 class CreateAccountScreen extends StatelessWidget {
   CreateAccountScreen({super.key});
@@ -21,7 +22,7 @@ class CreateAccountScreen extends StatelessWidget {
   // final TextEditingController passwordTextController = TextEditingController();
   // final TextEditingController confirmPasswordTextController =
   //     TextEditingController();
- 
+
   String countyCode = '91';
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
@@ -73,7 +74,7 @@ class CreateAccountScreen extends StatelessWidget {
                     height: size.width * .07,
                   ),
                   MobileNumberTextFeildWidget(
-                    mobileNumberController: phoneNumberTextController,
+                    //  mobileNumberController: phoneNumberTextController,
                     onCountryChanged: (country) {
                       countyCode = country.dialCode;
                     },
@@ -96,17 +97,22 @@ class CreateAccountScreen extends StatelessWidget {
                           UserModel user = UserModel(
                               name: nameTextController.text,
                               email: emailTextController.text,
-                              phoneNumber: "+91${phoneNumberTextController.text}");
+                              phoneNumber:
+                                  "+91${phoneNumberTextController.text}");
                           bool signedUp = await createUser(user);
                           if (signedUp) {
                             // ignore: use_build_context_synchronously
                             Navigator.of(context).pushAndRemoveUntil(
                                 MaterialPageRoute(
-                                  builder: (context) => const EnterDetailsScreen(),
+                                  builder: (context) => EnterDetailsScreen(
+                                    phoneNumber: phoneNumberTextController.text,
+                                    email: emailTextController.text,
+                                    name: nameTextController.text,
+                                  ),
                                 ),
                                 (route) => false);
                           } else {
-                            // showAboutDialog(context: context)
+                            showAboutDialog(context: context);
                           }
                         }
                         // if (_formKey.currentState!.validate()) {
@@ -185,7 +191,7 @@ createUser(UserModel user) async {
     await db.collection('users').add(
           user.toJson(),
         );
-        return true;
+    return true;
     // ignore: empty_catches
   } catch (e) {
     return false;
