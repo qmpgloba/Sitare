@@ -1,6 +1,8 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:sitare/constants/ui_constants.dart';
+import 'package:sitare/functions/astrologers/astrologer_details.dart';
+import 'package:sitare/model/astrologer_model.dart';
 
 import 'widgets/talk_to_experts_profile_details_widget.dart';
 
@@ -80,11 +82,28 @@ class TalkToExpertsScreen extends StatelessWidget {
               ),
             )),
       ),
-      body: ListView.builder(
-          itemBuilder: (context, index) {
-            return TalkToExpertsProfileDetailsWidget(size: size);
+      body: FutureBuilder<List<AstrologerModel>>(
+          future: fetchAstrologerDetailsFromFirestore(),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            } else if (snapshot.hasError) {
+              return Center(
+                child: Text(snapshot.error.toString()),
+              );
+            } else {
+              List<AstrologerModel>? astrologers = snapshot.data;
+
+              return ListView.builder(
+                // scrollDirection: Axis.horizontal,
+                itemCount: astrologers!.length,
+                itemBuilder: (context, index) => TalkToExpertsProfileDetailsWidget(size: size, astrologer: astrologers[index])
+              );
+            }
           },
-          itemCount: 6),
+        )
     );
   }
 }
