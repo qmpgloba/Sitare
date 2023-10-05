@@ -58,11 +58,12 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.sizeOf(context);
-    String? email = FirebaseAuth.instance.currentUser == null
-        ? (widget.email)
-        : (FirebaseAuth.instance.currentUser!.email);
+    String? number = FirebaseAuth.instance.currentUser == null
+        ? (phoneNumberTextController.text)
+        : (FirebaseAuth.instance.currentUser!.phoneNumber);
     return FutureBuilder<DocumentSnapshot?>(
-        future: getUserDataByEmail(email ??= emailTextController.text),
+        future:
+            getUserDataByPhoneNumber(number ??= phoneNumberTextController.text),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
@@ -122,7 +123,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                               width: size.width * .55,
                               height: 50,
                               child: DropdownButtonFormField(
-                                value: genderDropDownValue,
+                                value: genderDropDownValue ?? "Male",
                                 hint: const Text(
                                   'Gender',
                                 ),
@@ -256,7 +257,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                               width: size.width * .55,
                               height: 50,
                               child: DropdownButtonFormField(
-                                value: martialDropDownValue,
+                                value: martialDropDownValue ?? "Single",
                                 hint: const AutoSizeText(
                                   'Martial status',
                                   maxLines: 1,
@@ -294,20 +295,21 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                         ),
                         GestureDetector(
                           onTap: () async {
+                            logger.i(number);
                             if (_formKey.currentState!.validate()) {
                               UserModel user = UserModel(
                                 name: nameTextController.text,
                                 email: emailTextController.text,
-                                phoneNumber: phoneNumberTextController.text,
-                                gender: genderDropDownValue,
+                                phoneNumber: number ?? "",
+                                gender: genderDropDownValue ?? "Male",
                                 dateofBirth: dateInput.text,
                                 placeofBirth: placeOfBirthTextController.text,
                                 timeofBirth: timeInput.text,
-                                maritalStatus: martialDropDownValue,
+                                maritalStatus: martialDropDownValue ?? "Single",
                                 problem: problemTextController.text,
                               );
-                              bool updateSuccess = await updateUser(
-                                  user, emailTextController.text);
+                              bool updateSuccess =
+                                  await updateUser(user, number ?? "");
                               if (updateSuccess) {
                                 // ignore: use_build_context_synchronously
                                 Navigator.of(context)
@@ -347,7 +349,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
             );
           } else {
             print(emailTextController.text);
-            return Text(email ?? "");
+            return Text(number ?? "");
           }
         });
   }
@@ -389,20 +391,22 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
       text: userData!['timeofBirth'],
     );
 
-    genderDropDownValue = userData!['gender'];
-    martialDropDownValue = userData!['maritalStatus'];
+    // genderDropDownValue = userData!['gender'];
+    // martialDropDownValue = userData!['maritalStatus'];
   }
 }
 
-updateUser(UserModel user, String email) async {
+updateUser(UserModel user, String number) async {
   final db = FirebaseFirestore.instance;
 
   try {
-    QuerySnapshot querySnapshot =
-        await db.collection('users').where('email', isEqualTo: email).get();
+    QuerySnapshot querySnapshot = await db
+        .collection('users')
+        .where('phone number', isEqualTo: number)
+        .get();
 
     if (querySnapshot.docs.isNotEmpty) {
-      print("Entery Check: ${email} ");
+      print("Entery Check: ${number} ");
       DocumentSnapshot documentSnapshot = querySnapshot.docs.first;
       await documentSnapshot.reference.update(user.toJson());
       return true;
