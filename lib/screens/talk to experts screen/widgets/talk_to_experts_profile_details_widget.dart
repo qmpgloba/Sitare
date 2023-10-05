@@ -2,6 +2,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:sitare/model/astrologer_model.dart';
 
 import '../../../constants/ui_constants.dart';
 import 'contact_icons_widget.dart';
@@ -9,10 +10,11 @@ import 'contact_icons_widget.dart';
 class TalkToExpertsProfileDetailsWidget extends StatelessWidget {
   const TalkToExpertsProfileDetailsWidget({
     super.key,
-    required this.size,
+    required this.size, required this.astrologer,
   });
 
   final Size size;
+  final AstrologerModel astrologer;
 
   @override
   Widget build(BuildContext context) {
@@ -26,16 +28,16 @@ class TalkToExpertsProfileDetailsWidget extends StatelessWidget {
               children: [
                 CircleAvatar(
                   radius: size.width * .12,
-                  backgroundImage: const NetworkImage(
-                      'https://shreepng.com/img/OutSide/Celebrities/SmritiMandhana/cute%20cricketer%20smriti%20mandhana.png'),
+                  backgroundImage:  NetworkImage(
+                      astrologer.profilePic),
                 ),
                 SizedBox(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const AutoSizeText(
-                        'Smrithi Mandhana',
-                        style: TextStyle(fontSize: 14),
+                       AutoSizeText(
+                        astrologer.fullName,
+                        style: const TextStyle(fontSize: 14),
                         maxFontSize: 16,
                         maxLines: 1,
                       ),
@@ -54,21 +56,21 @@ class TalkToExpertsProfileDetailsWidget extends StatelessWidget {
                         onRatingUpdate: (rating) {
                         },
                       ),
-                      const AutoSizeText(
-                        'Tarot,Numerology',
+                       AutoSizeText(
+                        astrologer.skills.toString(),
                         // maxLines: 1,
                         maxFontSize: 12,
-                        style: TextStyle(
+                        style: const TextStyle(
                             fontSize: 12, fontWeight: FontWeight.bold),
                       ),
-                      const AutoSizeText('English,Hindi,Punjabi',
+                       AutoSizeText(astrologer.languages.toString(),
                           // maxLines: 1,
                           maxFontSize: 12,
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 12,
                           )),
-                      const AutoSizeText(
-                        'Exp 15 years | ₹ 95/min',
+                       AutoSizeText(
+                        'Exp ${astrologer.experienceYears} years | ₹ 95/min',
                         maxLines: 1,
                         maxFontSize: 12,
                       )
