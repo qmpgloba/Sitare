@@ -91,6 +91,7 @@ class _EnterDetailsScreenState extends State<EnterDetailsScreen> {
 
     if (pickedTime != null && pickedTime != time) {
       setState(() {
+        time = pickedTime; // Update the time variable
         tobController.text = time.format(context);
         tobDone = true;
       });

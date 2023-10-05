@@ -8,6 +8,7 @@ import 'package:sitare/functions/get_user_details.dart';
 import 'package:sitare/model/user_model.dart';
 import 'package:sitare/screens/home%20screen/home_screen.dart';
 import 'package:sitare/screens/profile%20screen/widgets/update_profile_textfeild_widget.dart';
+import 'package:sitare/widget/logger_widget.dart';
 
 import '../create account page/cerate_account_screen.dart';
 
@@ -63,6 +64,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
             return Text('Error: ${snapshot.error}');
           } else if (snapshot.hasData && snapshot.data != null) {
             userData = snapshot.data!.data() as Map<String, dynamic>;
+            logger.i("Entering");
             controllersIntialization();
             return Scaffold(
               backgroundColor: whiteColor,
@@ -113,7 +115,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                               width: size.width * .55,
                               height: 50,
                               child: DropdownButtonFormField(
-                                value: genderDropDownValue,
+                                //   value: genderDropDownValue,
                                 hint: const Text(
                                   'Gender',
                                 ),
@@ -130,10 +132,6 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                                     .toList(),
                                 onChanged: (value) {
                                   genderDropDownValue = value;
-                                  // setState(() {
-                                  //   // dropDownValue = value!;
-                                  //   // category = value;
-                                  // });
                                 },
                               ),
                             ),
@@ -376,6 +374,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
     timeInput = TextEditingController(
       text: userData!['timeofBirth'],
     );
+
     genderDropDownValue = userData!['gender'];
     martialDropDownValue = userData!['maritalStatus'];
   }
