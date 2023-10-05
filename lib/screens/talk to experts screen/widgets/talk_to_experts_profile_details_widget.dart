@@ -37,7 +37,7 @@ class TalkToExpertsProfileDetailsWidget extends StatelessWidget {
                     children: [
                        AutoSizeText(
                         astrologer.fullName,
-                        style: const TextStyle(fontSize: 14),
+                        style: const TextStyle(fontSize: 16),
                         maxFontSize: 16,
                         maxLines: 1,
                       ),
@@ -57,22 +57,22 @@ class TalkToExpertsProfileDetailsWidget extends StatelessWidget {
                         },
                       ),
                        AutoSizeText(
-                        astrologer.skills.toString(),
+                        astrologer.skills.take(3).join(','),
                         // maxLines: 1,
-                        maxFontSize: 12,
+                        maxFontSize: 14,
                         style: const TextStyle(
-                            fontSize: 12, fontWeight: FontWeight.bold),
+                            fontSize: 14, fontWeight: FontWeight.bold),
                       ),
-                       AutoSizeText(astrologer.languages.toString(),
+                       AutoSizeText(astrologer.languages.take(3).join(','),
                           // maxLines: 1,
-                          maxFontSize: 12,
+                          maxFontSize: 14,
                           style: const TextStyle(
-                            fontSize: 12,
+                            fontSize: 14,
                           )),
                        AutoSizeText(
                         'Exp ${astrologer.experienceYears} years | ₹ 95/min',
                         maxLines: 1,
-                        maxFontSize: 12,
+                        maxFontSize: 13,
                       )
                     ],
                   ),
