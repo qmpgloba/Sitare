@@ -48,6 +48,12 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
     'Married',
     'Divorced',
   ];
+  @override
+  void initState() {
+    super.initState();
+
+    controllersIntialization();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -65,7 +71,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
           } else if (snapshot.hasData && snapshot.data != null) {
             userData = snapshot.data!.data() as Map<String, dynamic>;
             logger.i("Entering");
-            controllersIntialization();
+
             return Scaffold(
               backgroundColor: whiteColor,
               appBar: AppBar(
@@ -95,6 +101,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                         ),
                         UpdateProfileTextFeildWidgets(
                           size: size,
+                          readOnly: true,
                           controller: emailTextController,
                           hintText: 'Email',
                           feildName: 'Email',
@@ -115,7 +122,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                               width: size.width * .55,
                               height: 50,
                               child: DropdownButtonFormField(
-                                //   value: genderDropDownValue,
+                                value: genderDropDownValue,
                                 hint: const Text(
                                   'Gender',
                                 ),
@@ -346,11 +353,18 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
   }
 
   Future displayTimePicker(BuildContext context) async {
-    var time = await showTimePicker(context: context, initialTime: timeOfDay);
+    var selectedTime = await showTimePicker(
+      context: context,
+      initialTime: timeOfDay,
+    );
 
-    if (time != null) {
+    if (selectedTime != null) {
+      final formattedTime = DateFormat.jm().format(
+        DateTime(2023, 1, 1, selectedTime.hour, selectedTime.minute),
+      );
+
       setState(() {
-        timeInput.text = "${time.hour}:${time.minute}";
+        timeInput.text = formattedTime;
       });
     }
   }
