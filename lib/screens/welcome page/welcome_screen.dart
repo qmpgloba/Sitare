@@ -59,7 +59,6 @@ class WelcomeScreen extends StatelessWidget {
                           if (_formKey.currentState!.validate()) {
                             var phoneNumber =
                                 '+$countyCode${mobileNumberController.text}';
-                            print(phoneNumber);
                             bool mobileNumberExists =
                                 await checkPhoneNumberExistence(phoneNumber);
                             if (mobileNumberExists) {

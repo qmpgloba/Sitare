@@ -1,14 +1,16 @@
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:sitare/model/astrologer_model.dart';
 
 class ProfileWidgetNextAvailabilityScreen extends StatelessWidget {
   const ProfileWidgetNextAvailabilityScreen({
     super.key,
-    required this.size,
+    required this.size, required this.astrologer,
   });
 
   final Size size;
+  final AstrologerModel astrologer;
 
   @override
   Widget build(BuildContext context) {
@@ -20,34 +22,34 @@ class ProfileWidgetNextAvailabilityScreen extends StatelessWidget {
           children: [
             CircleAvatar(
               radius: size.width * .10,
-              backgroundImage: const NetworkImage(
-                  'https://shreepng.com/img/OutSide/Celebrities/SmritiMandhana/cute%20cricketer%20smriti%20mandhana.png'),
+              backgroundImage:  NetworkImage(
+                  astrologer.profilePic),
             ),
             const SizedBox(
               width: 10,
             ),
-            const SizedBox(
+             SizedBox(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   AutoSizeText(
-                    'Smrithi Mandhana',
-                    style: TextStyle(
+                    astrologer.fullName,
+                    style: const TextStyle(
                         fontSize: 16, fontWeight: FontWeight.bold),
                     maxFontSize: 20,
                     maxLines: 1,
                   ),
                   AutoSizeText(
-                    'Tarot,Numerology',
+                    astrologer.skills.take(3).join(', '),
                     // maxLines: 1,
                     maxFontSize: 12,
-                    style: TextStyle(
+                    style: const TextStyle(
                         fontSize: 12, fontWeight: FontWeight.bold),
                   ),
-                  AutoSizeText('English,Hindi,Punjabi',
+                  AutoSizeText(astrologer.languages.take(3).join(', '),
                       // maxLines: 1,
                       maxFontSize: 12,
-                      style: TextStyle(
+                      style: const TextStyle(
                           fontSize: 12, fontWeight: FontWeight.bold)),
                 ],
               ),
