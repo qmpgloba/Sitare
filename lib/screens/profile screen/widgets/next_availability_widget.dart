@@ -1,21 +1,23 @@
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:sitare/model/astrologer_model.dart';
 import 'package:sitare/screens/next%20availability%20screen/next_availability_screen.dart';
 
 class NextAvailabilityWidget extends StatelessWidget {
   const NextAvailabilityWidget({
     super.key,
-    required this.size,
+    required this.size, required this.astrologer,
   });
 
   final Size size;
+  final AstrologerModel astrologer;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.of(context).push(MaterialPageRoute(builder: (context) => const NextAvailabilityScreen(),));
+        Navigator.of(context).push(MaterialPageRoute(builder: (context) =>  NextAvailabilityScreen(astrologer: astrologer),));
       },
       child: SizedBox(
        width: size.width*.65,

@@ -17,7 +17,6 @@ Future<List<AstrologerModel>> fetchAstrologerDetailsFromFirestore() async {
     }
   } catch (e) {
     // Handle errors here
-    print("Error fetching astrologer details: $e");
   }
 
   return astrologersList;

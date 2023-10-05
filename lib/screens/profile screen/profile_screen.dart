@@ -1,6 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:sitare/constants/ui_constants.dart';
+import 'package:sitare/model/astrologer_model.dart';
 import 'package:sitare/screens/profile%20screen/widgets/astroleger_profile_details_widget.dart';
 import 'package:sitare/screens/profile%20screen/widgets/contact_icons_widget.dart';
 
@@ -8,7 +9,9 @@ import 'widgets/next_availability_widget.dart';
 
 // ignore: must_be_immutable
 class ProfileScreen extends StatelessWidget {
-   ProfileScreen({super.key});
+   ProfileScreen({super.key, required this.astrologer});
+
+   final AstrologerModel astrologer;
 
   num walletBalnce = 0;
 
@@ -57,20 +60,20 @@ class ProfileScreen extends StatelessWidget {
               Container(
                 width: size.width,
                 height: size.width * .5,
-                decoration: const BoxDecoration(
+                decoration:  BoxDecoration(
                     image: DecorationImage(
                         image: NetworkImage(
-                          'https://shreepng.com/img/OutSide/Celebrities/SmritiMandhana/Smriti%20Mandhana.png',
+                          astrologer.profilePic,
                         ),
                         fit: BoxFit.contain)),
               ),
               AstrologerProfileDetailsWidget(
                   size: size,
-                  name: 'Smrithi Mandhana',
-                  department: 'Tarot,Numerology',
-                  languages: 'English,Hindi,Punjabi',
+                  name: astrologer.fullName,
+                  department: astrologer.skills.join(', '),
+                  languages: astrologer.languages.join(', '),
                   rating: 5,
-                  yearsOfExperience: 15,
+                  yearsOfExperience: astrologer.experienceYears,
                   rupees: 95),
               const Column(
                 children: [
@@ -94,21 +97,19 @@ class ProfileScreen extends StatelessWidget {
               Expanded(
                 child: Padding(
                   padding: EdgeInsets.all(size.width / 16),
-                  child: const TabBarView(
-                    physics: BouncingScrollPhysics(),
+                  child:  TabBarView(
+                    physics: const BouncingScrollPhysics(),
                     children: [
                       SingleChildScrollView(
-                        physics: BouncingScrollPhysics(),
+                        physics: const BouncingScrollPhysics(),
                         child: Center(
                             child: Text(
-                          """Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum
-                        """,
+                          astrologer.description,
                           textAlign: TextAlign.center,
                         )),
                       ),
-                      Center(child: Text('data')),
-                      Center(child: Text('data')),
+                      const Center(child: Text('data')),
+                      const Center(child: Text('data')),
                     ],
                   ),
                 ),
@@ -123,12 +124,12 @@ class ProfileScreen extends StatelessWidget {
                           height: double.maxFinite,
                           width: size.width * .55,
                           decoration: BoxDecoration(border: Border.all()),
-                          child: const Center(
+                          child:  Center(
                               child: AutoSizeText(
-                            'TALK TO SMRITHI MANDHANA NOW',
+                            'TALK TO ${astrologer.fullName.toUpperCase()} NOW',
                             maxLines: 1,
                             minFontSize: 8,
-                            style: TextStyle(fontWeight: FontWeight.bold),
+                            style: const TextStyle(fontWeight: FontWeight.bold),
                           )),
                         ),
                         Expanded(
@@ -165,7 +166,7 @@ class ProfileScreen extends StatelessWidget {
                   SizedBox(
                     height: size.width / 20,
                   ),
-                  NextAvailabilityWidget(size: size),
+                  NextAvailabilityWidget(size: size, astrologer: astrologer),
                 ],
               )
             ],

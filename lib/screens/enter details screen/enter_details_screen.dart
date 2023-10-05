@@ -10,7 +10,7 @@ import 'package:sitare/widget/custom_textfield.dart';
 import '../../model/user_model.dart';
 
 class EnterDetailsScreen extends StatefulWidget {
-  EnterDetailsScreen({
+  const EnterDetailsScreen({
     super.key,
     required this.phoneNumber,
   });
@@ -111,7 +111,6 @@ class _EnterDetailsScreenState extends State<EnterDetailsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    print(widget.phoneNumber);
     Size size = MediaQuery.sizeOf(context);
     return Scaffold(
       body: SingleChildScrollView(
@@ -149,6 +148,7 @@ class _EnterDetailsScreenState extends State<EnterDetailsScreen> {
                     size: size,
                     readOnly: true,
                     controller: nameController,
+                    // ignore: body_might_complete_normally_nullable
                     onChanged: (value) {
                       setState(() {
                         name = value ?? "";
@@ -362,7 +362,6 @@ class _EnterDetailsScreenState extends State<EnterDetailsScreen> {
           children: [
             InkWell(
               onTap: () async {
-                print(name);
                 _key.currentState!.validate();
                 if (_key.currentState!.validate() &&
                     _gender != null &&
@@ -614,7 +613,6 @@ updateUser(UserModel user, String email) async {
         await db.collection('users').where('email', isEqualTo: email).get();
 
     if (querySnapshot.docs.isNotEmpty) {
-      print("Entery Check: ${email} ");
       DocumentSnapshot documentSnapshot = querySnapshot.docs.first;
       await documentSnapshot.reference.update(user.toJson());
       return true;
