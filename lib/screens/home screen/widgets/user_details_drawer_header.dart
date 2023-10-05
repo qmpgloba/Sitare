@@ -28,7 +28,7 @@ class UserDetailsDrawerHeader extends StatelessWidget {
         Stack(
           children: [
             const CircleAvatar(
-              radius: 32,
+              radius: 30,
               backgroundColor: redColor,
             ),
             Positioned(
@@ -55,16 +55,20 @@ class UserDetailsDrawerHeader extends StatelessWidget {
                 )),
           ],
         ),
-        SizedBox(
-          width: size.width * .25,
+        Container(
+          padding: EdgeInsets.all(size.width / 60),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              AutoSizeText(
-                fullName,
-                maxLines: 1,
-                maxFontSize: 14,
+              Flexible(
+                child: Text(
+                  fullName,
+                  maxLines: 2,
+                  softWrap: true,
+                  style: TextStyle(color: blackColor, fontSize: 13),
+                  // maxFontSize: 14,
+                ),
               ),
               AutoSizeText(
                 email,
