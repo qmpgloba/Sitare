@@ -13,7 +13,7 @@ class TalkToExpertsScreen extends StatelessWidget {
   num walletAmmount = 200;
   int selectedFilterIndex = 0;
   String selectedOption = '';
-  
+
   List<String> getSelectedOptions() {
     switch (selectedFilterIndex) {
       case 0:
@@ -139,7 +139,7 @@ class TalkToExpertsScreen extends StatelessWidget {
     return showModalBottomSheet(
       backgroundColor: Colors.white,
       isScrollControlled: true,
-      constraints: BoxConstraints(maxHeight: size.height*.85),
+      constraints: BoxConstraints(maxHeight: size.height * .85),
       context: context,
       builder: (BuildContext context) {
         return StatefulBuilder(
@@ -215,7 +215,8 @@ class TalkToExpertsScreen extends StatelessWidget {
                                         style: TextStyle(
                                             color: selectedFilterIndex == index
                                                 ? Colors.red
-                                                : Colors.black,fontSize: 15),
+                                                : Colors.black,
+                                            fontSize: 15),
                                       ),
                                       onTap: () {
                                         setState(() {
@@ -231,7 +232,7 @@ class TalkToExpertsScreen extends StatelessWidget {
                         ),
                         Container(
                           color: Colors.white,
-                          height: size.height*.6,
+                          height: size.height * .6,
                           width: size.width * 0.7,
                           child: ListView.builder(
                             shrinkWrap: true,
@@ -250,7 +251,11 @@ class TalkToExpertsScreen extends StatelessWidget {
                                         });
                                       },
                                     ),
-                                    Text(getSelectedOptions()[index],maxLines: 1,style: TextStyle(fontSize: 15),),
+                                    Text(
+                                      getSelectedOptions()[index],
+                                      maxLines: 1,
+                                      style: const TextStyle(fontSize: 15),
+                                    ),
                                   ],
                                 ),
                                 onTap: () {},

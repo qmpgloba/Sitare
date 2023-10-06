@@ -70,8 +70,8 @@ class ProfileScreen extends StatelessWidget {
               AstrologerProfileDetailsWidget(
                   size: size,
                   name: astrologer.fullName,
-                  department: astrologer.skills.take(2).join(',')+"...",
-                  languages: astrologer.languages.take(2).join(',')+"...",
+                  department: "${astrologer.skills.take(2).join(',')}...",
+                  languages: "${astrologer.languages.take(2).join(',')}...",
                   rating: 5,
                   yearsOfExperience: astrologer.experienceYears,
                   rupees: 95,

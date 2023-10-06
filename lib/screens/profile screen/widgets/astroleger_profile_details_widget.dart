@@ -118,7 +118,7 @@ Future<dynamic> commentBottomSheet(Size size, BuildContext context, String text,
           children: [
              Text(
               text,
-              style: TextStyle(fontSize: 18),
+              style: const TextStyle(fontSize: 18),
             ),
             const Divider(
               // height: 3,
@@ -127,7 +127,7 @@ Future<dynamic> commentBottomSheet(Size size, BuildContext context, String text,
             Expanded(
                 child: ListView.separated(
                     itemCount: list.length,
-                    separatorBuilder: (context, index) => Divider(),
+                    separatorBuilder: (context, index) => const Divider(),
                     itemBuilder: (context, index) => Text(list[index],))),
             SizedBox(
               height: size.width / 20,
