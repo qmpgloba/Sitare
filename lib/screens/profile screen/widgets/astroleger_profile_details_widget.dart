@@ -2,7 +2,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:sitare/constants/ui_constants.dart';
 import 'package:sitare/model/astrologer_model.dart';
 
 class AstrologerProfileDetailsWidget extends StatelessWidget {
@@ -119,7 +118,7 @@ Future<dynamic> commentBottomSheet(Size size, BuildContext context, String text,
           children: [
              Text(
               text,
-              style: TextStyle(fontSize: 18),
+              style: const TextStyle(fontSize: 18),
             ),
             const Divider(
               // height: 3,
@@ -128,7 +127,7 @@ Future<dynamic> commentBottomSheet(Size size, BuildContext context, String text,
             Expanded(
                 child: ListView.separated(
                     itemCount: list.length,
-                    separatorBuilder: (context, index) => Divider(),
+                    separatorBuilder: (context, index) => const Divider(),
                     itemBuilder: (context, index) => Text(list[index],))),
             SizedBox(
               height: size.width / 20,
