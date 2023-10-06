@@ -70,11 +70,12 @@ class ProfileScreen extends StatelessWidget {
               AstrologerProfileDetailsWidget(
                   size: size,
                   name: astrologer.fullName,
-                  department: astrologer.skills.join(', '),
-                  languages: astrologer.languages.join(', '),
+                  department: astrologer.skills.take(2).join(',')+"...",
+                  languages: astrologer.languages.take(2).join(',')+"...",
                   rating: 5,
                   yearsOfExperience: astrologer.experienceYears,
-                  rupees: 95),
+                  rupees: 95,
+                  astrologer: astrologer),
               const Column(
                 children: [
                   TabBar(

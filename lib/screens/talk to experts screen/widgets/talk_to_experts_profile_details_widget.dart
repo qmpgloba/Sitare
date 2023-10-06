@@ -62,13 +62,13 @@ class TalkToExpertsProfileDetailsWidget extends StatelessWidget {
                           },
                         ),
                          AutoSizeText(
-                          astrologer.skills.take(3).join(','),
+                          astrologer.skills.take(2).join(','),
                           // maxLines: 1,
                           maxFontSize: 14,
                           style: const TextStyle(
                               fontSize: 14, fontWeight: FontWeight.bold),
                         ),
-                         AutoSizeText(astrologer.languages.take(3).join(','),
+                         AutoSizeText(astrologer.languages.take(2).join(','),
                             // maxLines: 1,
                             maxFontSize: 14,
                             style: const TextStyle(

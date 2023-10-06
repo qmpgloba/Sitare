@@ -2,11 +2,13 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:sitare/constants/ui_constants.dart';
+import 'package:sitare/model/astrologer_model.dart';
 
 class AstrologerProfileDetailsWidget extends StatelessWidget {
   const AstrologerProfileDetailsWidget({
     super.key,
-    required this.size, required this.name, required this.department, required this.languages, required this.rating, required this.yearsOfExperience, required this.rupees,
+    required this.size, required this.name, required this.department, required this.languages, required this.rating, required this.yearsOfExperience, required this.rupees, required this.astrologer,
   });
 
   final Size size;
@@ -16,6 +18,7 @@ class AstrologerProfileDetailsWidget extends StatelessWidget {
   final double rating;
   final int yearsOfExperience;
   final int rupees;
+  final AstrologerModel astrologer;
 
   @override
   Widget build(BuildContext context) {
@@ -37,19 +40,29 @@ class AstrologerProfileDetailsWidget extends StatelessWidget {
                     style: const TextStyle(
                         fontWeight: FontWeight.bold, fontSize: 16),
                   ),
-                  AutoSizeText(
-                    department,
-                    // maxLines: 1,
-                    maxFontSize: 14,
-                    style: const TextStyle(
-                        fontSize: 14, fontWeight: FontWeight.bold),
-                  ),
-                  AutoSizeText(languages,
+                  GestureDetector(
+                    onTap: () {
+                      commentBottomSheet(size, context,'Skills',astrologer.skills);
+                    },
+                    child: AutoSizeText(
+                      department,
                       // maxLines: 1,
                       maxFontSize: 14,
                       style: const TextStyle(
-                        fontSize: 14,
-                      )),
+                          fontSize: 14, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  GestureDetector(
+                     onTap: () {
+                      commentBottomSheet(size, context,'Languages Known',astrologer.languages);
+                    },
+                    child: AutoSizeText(languages,
+                        // maxLines: 1,
+                        maxFontSize: 14,
+                        style: const TextStyle(
+                          fontSize: 14,
+                        )),
+                  ),
                 ],
               ),
             ),const Spacer(),
@@ -83,4 +96,58 @@ class AstrologerProfileDetailsWidget extends StatelessWidget {
       ),
     );
   }
+  
+Future<dynamic> commentBottomSheet(Size size, BuildContext context, String text,List list
+   ) {
+    
+  return showModalBottomSheet(
+    constraints:
+        BoxConstraints.expand(height: size.height * .3, width: size.width),
+    isScrollControlled: true, 
+    context: context,
+    shape: const RoundedRectangleBorder(
+      borderRadius: BorderRadius.only(
+        topLeft: Radius.circular(20),
+        topRight: Radius.circular(20),
+      ),
+    ),
+   
+    builder: (context) {
+      return Padding(
+        padding: EdgeInsets.all(size.width / 16),
+        child: Column(
+          children: [
+             Text(
+              text,
+              style: TextStyle(fontSize: 18),
+            ),
+            const Divider(
+              // height: 3,
+              color: Colors.white,
+            ),
+            Expanded(
+                child: ListView.builder(
+                    itemCount: list.length,
+                    itemBuilder: (context, index) =>Text(list[index]))),
+            SizedBox(
+              height: size.width / 20,
+            ),
+            // SizedBox(
+            //   height: size.width * .12,
+            //   child: TextField(
+            //     controller: commentController,
+            //     decoration: InputDecoration(
+            //         suffixIcon: const Icon(Icons.send),
+            //         hintText: 'Add a comment...',
+            //         border: OutlineInputBorder(
+            //             borderRadius: BorderRadius.circular(10))),
+            //   ),
+            // )
+          ],
+        ),
+      );
+    },
+  );
+}
+
 }
