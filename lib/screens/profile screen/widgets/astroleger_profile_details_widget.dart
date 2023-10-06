@@ -126,9 +126,10 @@ Future<dynamic> commentBottomSheet(Size size, BuildContext context, String text,
               color: Colors.white,
             ),
             Expanded(
-                child: ListView.builder(
+                child: ListView.separated(
                     itemCount: list.length,
-                    itemBuilder: (context, index) =>Text(list[index]))),
+                    separatorBuilder: (context, index) => Divider(),
+                    itemBuilder: (context, index) => Text(list[index],))),
             SizedBox(
               height: size.width / 20,
             ),
