@@ -15,6 +15,7 @@ class ApplyButtonWidget extends StatelessWidget {
       onTap: () {
         Navigator.pop(context);
 print(selectedFilters);
+print(selectedFilters);
       },
       child: Container(
         height: size.width * 0.08,

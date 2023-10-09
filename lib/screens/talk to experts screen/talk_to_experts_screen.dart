@@ -10,6 +10,12 @@ import 'package:sitare/screens/talk%20to%20experts%20screen/widgets/filter%20sec
 
 import 'widgets/talk_to_experts_profile_details_widget.dart';
 
+List selectedSkills = [];
+List selectedExperience = [];
+List selectedLanguages = [];
+List selectedGenders = [];
+List selectedCountries = [];
+
 // ignore: must_be_immutable
 class TalkToExpertsScreen extends StatefulWidget {
   const TalkToExpertsScreen({super.key});
@@ -19,25 +25,32 @@ class TalkToExpertsScreen extends StatefulWidget {
 }
 
 class _TalkToExpertsScreenState extends State<TalkToExpertsScreen> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    selectedSkills.addAll(skillsOptions);
+    selectedLanguages.addAll(languageOptions);
+    selectedExperience.addAll(experienceOptions);
+    selectedCountries.addAll(countryOptions);
+    selectedGenders.addAll(genderOptions);
+  }
+
   num walletAmmount = 200;
 
   int selectedFilterIndex = 0;
 
-  List selectedOptions = [];
-
   List<String> getSelectedOptions() {
     switch (selectedFilterIndex) {
       case 0:
-        return sortbyOptions;
-      case 1:
         return skillsOptions;
-      case 2:
-        return categoryOptions;
-      case 3:
+      case 1:
         return languageOptions;
-      case 4:
+      case 2:
+        return  experienceOptions;
+      case 3:
         return genderOptions;
-      case 5:
+      case 4:
         return countryOptions;
 
       default:
@@ -190,7 +203,7 @@ class _TalkToExpertsScreenState extends State<TalkToExpertsScreen> {
                                         color: selectedFilterIndex == index
                                             ? Colors.red
                                             : const Color.fromRGBO(0, 0, 0, 1),
-                                        fontSize: 15),
+                                        fontSize: 14),
                                   ),
                                   onTap: () {
                                     setState(() {
@@ -212,8 +225,8 @@ class _TalkToExpertsScreenState extends State<TalkToExpertsScreen> {
                         shrinkWrap: true,
                         itemCount: getSelectedOptions().length,
                         itemBuilder: (BuildContext context, int index) {
-                           final option = getSelectedOptions()[index];
-      final isSelected = selectedOptions.contains(option);
+                          final option = getSelectedOptions()[index];
+                          final isSelected = selectedOptions.contains(option);
                           return ListTile(
                             title: Row(
                               mainAxisAlignment: MainAxisAlignment.start,
@@ -227,20 +240,61 @@ class _TalkToExpertsScreenState extends State<TalkToExpertsScreen> {
                                 //     });
                                 //   },
                                 // ),
-                                 Checkbox(
-              value: isSelected,
-              onChanged: (value) {
-                setState(() {
-                  if (value != null) {
-                    if (value) {
-                      selectedOptions.add(option);
-                    } else {
-                      selectedOptions.remove(option);
-                    }
-                  }
-                });
-              },
-            ),
+                                Checkbox(
+                                  value: isSelected,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      if (value != null) {
+                                        if (value) {
+                                          selectedOptions.add(option);
+                                          if (selectedFilterIndex == 0) {
+                                            selectedSkills.add(option);
+                                          } else if (selectedFilterIndex == 1) {
+                                            selectedLanguages.add(option);
+                                          } else if (selectedFilterIndex == 2) {
+                                            selectedExperience.add(option);
+                                          } else if (selectedFilterIndex == 3) {
+                                            selectedGenders.add(option);
+                                          } else if (selectedFilterIndex == 4) {
+                                            selectedCountries.add(option);
+                                          }
+                                        } else {
+                                          
+                                          if (selectedSkills.length != 1 &&
+                                              selectedFilterIndex == 0) {
+                                            selectedOptions.remove(option);
+                                            selectedSkills.remove(option);
+                                          }
+                                          if (selectedLanguages.length != 1 &&
+                                              selectedFilterIndex == 1) {
+                                            selectedOptions.remove(option);
+                                            selectedLanguages.remove(option);
+                                          }
+                                          if (selectedExperience.length != 1 &&
+                                              selectedFilterIndex == 2) {
+                                            selectedOptions.remove(option);
+                                            selectedExperience.remove(option);
+                                          }
+                                          if (selectedGenders.length != 1 &&
+                                              selectedFilterIndex == 3) {
+                                            selectedOptions.remove(option);
+                                            selectedGenders.remove(option);
+                                          }
+                                          if (selectedCountries.length != 1 &&
+                                              selectedFilterIndex == 4) {
+                                            selectedOptions.remove(option);
+                                            selectedCountries.remove(option);
+                                          }
+
+                                          // selectedExperience.remove(option);
+                                          // selectedLanguages.remove(option);
+                                          // // selectedGenders.remove(option);
+                                          // selectedCountries.remove(option);
+                                        }
+                                      }
+                                    });
+                                  },
+                                ),
                                 Text(
                                   getSelectedOptions()[index],
                                   maxLines: 1,
@@ -279,12 +333,19 @@ class _TalkToExpertsScreenState extends State<TalkToExpertsScreen> {
                               onTap: () {
                                 setState(() {
                                   selectedOptions = [];
+                                  selectedExperience = [];
+                                  selectedCountries = [];
+                                  selectedGenders = [];
+                                  selectedLanguages = [];
+                                  selectedSkills = [];
                                 });
                               },
                               child: const ResetButtonWidget(),
                             ),
                             const SizedBox(width: 16),
-                            ApplyButtonWidget(size: size,selectedFilters: selectedOptions),
+                            ApplyButtonWidget(
+                              size: size,selectedFilters: selectedOptions,
+                            ),
                           ],
                         ),
                       ],
