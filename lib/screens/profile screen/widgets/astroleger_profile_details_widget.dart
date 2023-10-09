@@ -41,7 +41,7 @@ class AstrologerProfileDetailsWidget extends StatelessWidget {
                   ),
                   GestureDetector(
                     onTap: () {
-                      commentBottomSheet(size, context,'Skills',astrologer.skills);
+                      showBottomDetails(size, context,'Skills',astrologer.skills);
                     },
                     child: AutoSizeText(
                       department,
@@ -53,7 +53,7 @@ class AstrologerProfileDetailsWidget extends StatelessWidget {
                   ),
                   GestureDetector(
                      onTap: () {
-                      commentBottomSheet(size, context,'Languages Known',astrologer.languages);
+                      showBottomDetails(size, context,'Languages Known',astrologer.languages);
                     },
                     child: AutoSizeText(languages,
                         // maxLines: 1,
@@ -96,7 +96,7 @@ class AstrologerProfileDetailsWidget extends StatelessWidget {
     );
   }
   
-Future<dynamic> commentBottomSheet(Size size, BuildContext context, String text,List list
+Future<dynamic> showBottomDetails(Size size, BuildContext context, String text,List list
    ) {
     
   return showModalBottomSheet(
@@ -132,17 +132,7 @@ Future<dynamic> commentBottomSheet(Size size, BuildContext context, String text,
             SizedBox(
               height: size.width / 20,
             ),
-            // SizedBox(
-            //   height: size.width * .12,
-            //   child: TextField(
-            //     controller: commentController,
-            //     decoration: InputDecoration(
-            //         suffixIcon: const Icon(Icons.send),
-            //         hintText: 'Add a comment...',
-            //         border: OutlineInputBorder(
-            //             borderRadius: BorderRadius.circular(10))),
-            //   ),
-            // )
+           
           ],
         ),
       );
