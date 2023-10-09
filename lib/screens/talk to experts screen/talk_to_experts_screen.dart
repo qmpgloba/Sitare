@@ -23,7 +23,7 @@ class _TalkToExpertsScreenState extends State<TalkToExpertsScreen> {
 
   int selectedFilterIndex = 0;
 
-  String selectedOption = '';
+  List selectedOptions = [];
 
   List<String> getSelectedOptions() {
     switch (selectedFilterIndex) {
@@ -212,19 +212,35 @@ class _TalkToExpertsScreenState extends State<TalkToExpertsScreen> {
                         shrinkWrap: true,
                         itemCount: getSelectedOptions().length,
                         itemBuilder: (BuildContext context, int index) {
+                           final option = getSelectedOptions()[index];
+      final isSelected = selectedOptions.contains(option);
                           return ListTile(
                             title: Row(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
-                                Radio(
-                                  value: getSelectedOptions()[index],
-                                  groupValue: selectedOption,
-                                  onChanged: (value) {
-                                    setState(() {
-                                      selectedOption = value.toString();
-                                    });
-                                  },
-                                ),
+                                // Radio(
+                                //   value: getSelectedOptions()[index],
+                                //   groupValue: selectedOptions,
+                                //   onChanged: (value) {
+                                //     setState(() {
+                                //       selectedOptions.add(value.toString());
+                                //     });
+                                //   },
+                                // ),
+                                 Checkbox(
+              value: isSelected,
+              onChanged: (value) {
+                setState(() {
+                  if (value != null) {
+                    if (value) {
+                      selectedOptions.add(option);
+                    } else {
+                      selectedOptions.remove(option);
+                    }
+                  }
+                });
+              },
+            ),
                                 Text(
                                   getSelectedOptions()[index],
                                   maxLines: 1,
@@ -262,13 +278,13 @@ class _TalkToExpertsScreenState extends State<TalkToExpertsScreen> {
                             GestureDetector(
                               onTap: () {
                                 setState(() {
-                                  selectedOption = '';
+                                  selectedOptions = [];
                                 });
                               },
                               child: const ResetButtonWidget(),
                             ),
                             const SizedBox(width: 16),
-                            ApplyButtonWidget(size: size),
+                            ApplyButtonWidget(size: size,selectedFilters: selectedOptions),
                           ],
                         ),
                       ],
