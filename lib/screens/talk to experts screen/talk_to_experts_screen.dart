@@ -4,29 +4,53 @@ import 'package:sitare/constants/app_constants.dart';
 import 'package:sitare/constants/ui_constants.dart';
 import 'package:sitare/functions/astrologers/astrologer_details.dart';
 import 'package:sitare/model/astrologer_model.dart';
+import 'package:sitare/screens/talk%20to%20experts%20screen/widgets/filter%20section/applybutton_widget.dart';
+import 'package:sitare/screens/talk%20to%20experts%20screen/widgets/filter%20section/filter_section_header_widget.dart';
+import 'package:sitare/screens/talk%20to%20experts%20screen/widgets/filter%20section/reset_button_widget.dart';
 
 import 'widgets/talk_to_experts_profile_details_widget.dart';
 
+List selectedSkills = [];
+List selectedExperience = [];
+List selectedLanguages = [];
+List selectedGenders = [];
+List selectedCountries = [];
+
 // ignore: must_be_immutable
-class TalkToExpertsScreen extends StatelessWidget {
-  TalkToExpertsScreen({super.key});
+class TalkToExpertsScreen extends StatefulWidget {
+  const TalkToExpertsScreen({super.key});
+
+  @override
+  State<TalkToExpertsScreen> createState() => _TalkToExpertsScreenState();
+}
+
+class _TalkToExpertsScreenState extends State<TalkToExpertsScreen> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    selectedSkills.addAll(skillsOptions);
+    selectedLanguages.addAll(languageOptions);
+    selectedExperience.addAll(experienceOptions);
+    selectedCountries.addAll(countryOptions);
+    selectedGenders.addAll(genderOptions);
+  }
+
   num walletAmmount = 200;
+
   int selectedFilterIndex = 0;
-  String selectedOption = '';
 
   List<String> getSelectedOptions() {
     switch (selectedFilterIndex) {
       case 0:
-        return sortbyOptions;
-      case 1:
         return skillsOptions;
-      case 2:
-        return categoryOptions;
-      case 3:
+      case 1:
         return languageOptions;
-      case 4:
+      case 2:
+        return  experienceOptions;
+      case 3:
         return genderOptions;
-      case 5:
+      case 4:
         return countryOptions;
 
       default:
@@ -90,7 +114,7 @@ class TalkToExpertsScreen extends StatelessWidget {
                     GestureDetector(
                       onTap: () {
                         // Navigator.of(context).push(MaterialPageRoute(builder: (context) => FilterSectionSheet(),));
-                        filterSectionBottomSheet(context, size);
+                        filterSectionBottomSheet(size, context);
                       },
                       child: const Icon(
                         Icons.filter_list,
@@ -101,10 +125,13 @@ class TalkToExpertsScreen extends StatelessWidget {
                     const SizedBox(
                       width: 10,
                     ),
-                    const Icon(
-                      Icons.search,
-                      size: 30,
-                      color: greyColor,
+                    GestureDetector(
+                      onTap: () {},
+                      child: const Icon(
+                        Icons.search,
+                        size: 30,
+                        color: greyColor,
+                      ),
                     )
                   ],
                 ),
@@ -135,225 +162,201 @@ class TalkToExpertsScreen extends StatelessWidget {
         ));
   }
 
-  Future<dynamic> filterSectionBottomSheet(BuildContext context, Size size) {
+  Future<dynamic> filterSectionBottomSheet(
+    Size size,
+    BuildContext context,
+  ) {
     return showModalBottomSheet(
-      backgroundColor: Colors.white,
+      constraints:
+          BoxConstraints.expand(height: size.height * .7, width: size.width),
       isScrollControlled: true,
-      constraints: BoxConstraints(maxHeight: size.height * .85),
       context: context,
-      builder: (BuildContext context) {
+      builder: (context) {
         return StatefulBuilder(
-          builder: (BuildContext context, StateSetter setState) {
-            return SingleChildScrollView(
-              child: SizedBox(
-                height: MediaQuery.of(context).size.height * 0.76,
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
+          builder: (context, setState) {
+            return Column(
+              children: [
+                FilterSectionHeader(size: size),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Container(
-                      padding: EdgeInsets.only(
-                        left: size.width * 0.08,
-                        right: size.width * 0.08,
-                        top: size.height * 0.02,
-                        bottom: size.height * 0.02,
-                      ),
-                      color: FONT_COLOR,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.center,
+                    Expanded(
+                      child: Stack(
                         children: [
-                          const Text(
-                            "Filters",
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                          InkWell(
-                            onTap: () {
-                              Navigator.pop(context);
-                            },
-                            child: const Row(
-                              children: [
-                                Text(
-                                  "Clear",
-                                  style: TextStyle(fontSize: 16),
-                                ),
-                                Icon(Icons.close),
-                              ],
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Expanded(
-                          child: Stack(
-                            children: [
-                              Container(
-                                  color: FONT_COLOR,
-                                  width: double.maxFinite,
-                                  height: size.height * 0.6),
-                              ListView.builder(
-                                shrinkWrap: true,
-                                itemCount: filterOptions.length,
-                                itemBuilder: (BuildContext context, int index) {
-                                  return Container(
-                                    color: selectedFilterIndex == index
-                                        ? Colors.white
-                                        : FONT_COLOR,
-                                    child: ListTile(
-                                      // tileColor:
-                                      //     selectedFilterIndex == index
-                                      //         ? Colors.red
-                                      //         : Colors.black,
-                                      title: Text(
-                                        filterOptions[index],
-                                        maxLines: 1,
-                                        style: TextStyle(
-                                            color: selectedFilterIndex == index
-                                                ? Colors.red
-                                                : Colors.black,
-                                            fontSize: 15),
-                                      ),
-                                      onTap: () {
-                                        setState(() {
-                                          selectedFilterIndex = index;
-                                        });
-                                      },
-                                    ),
-                                  );
-                                },
-                              ),
-                            ],
-                          ),
-                        ),
-                        Container(
-                          color: Colors.white,
-                          height: size.height * .6,
-                          width: size.width * 0.7,
-                          child: ListView.builder(
+                          Container(
+                              color: FONT_COLOR,
+                              width: double.maxFinite,
+                              height: size.height * 0.55),
+                          ListView.builder(
                             shrinkWrap: true,
-                            itemCount: getSelectedOptions().length,
+                            itemCount: filterOptions.length,
                             itemBuilder: (BuildContext context, int index) {
-                              return ListTile(
-                                title: Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Radio(
-                                      value: getSelectedOptions()[index],
-                                      groupValue: selectedOption,
-                                      onChanged: (value) {
-                                        setState(() {
-                                          selectedOption = value.toString();
-                                        });
-                                      },
-                                    ),
-                                    Text(
-                                      getSelectedOptions()[index],
-                                      maxLines: 1,
-                                      style: const TextStyle(fontSize: 15),
-                                    ),
-                                  ],
+                              return Container(
+                                color: selectedFilterIndex == index
+                                    ? Colors.white
+                                    : FONT_COLOR,
+                                child: ListTile(
+                                  title: Text(
+                                    filterOptions[index],
+                                    maxLines: 1,
+                                    style: TextStyle(
+                                        color: selectedFilterIndex == index
+                                            ? Colors.red
+                                            : const Color.fromRGBO(0, 0, 0, 1),
+                                        fontSize: 14),
+                                  ),
+                                  onTap: () {
+                                    setState(() {
+                                      selectedFilterIndex = index;
+                                    });
+                                  },
                                 ),
-                                onTap: () {},
                               );
                             },
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                    Material(
-                      elevation: 50,
-                      child: Container(
-                        height: size.width * 0.17,
-                        decoration: const BoxDecoration(
-                          color: Colors.white,
-                          // borderRadius: BorderRadius.all(Radius.circular(50)),
-                          boxShadow: [
-                            BoxShadow(
-                                color: Colors.amber,
-                                //blurRadius: 25.0,
-                                offset: Offset(0, 25))
-                          ],
-                        ),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    Container(
+                      color: Colors.white,
+                      height: size.height * .55,
+                      width: size.width * 0.7,
+                      child: ListView.builder(
+                        shrinkWrap: true,
+                        itemCount: getSelectedOptions().length,
+                        itemBuilder: (BuildContext context, int index) {
+                          final option = getSelectedOptions()[index];
+                          final isSelected = selectedOptions.contains(option);
+                          return ListTile(
+                            title: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
                               children: [
-                                GestureDetector(
-                                  onTap: () {
+                                // Radio(
+                                //   value: getSelectedOptions()[index],
+                                //   groupValue: selectedOptions,
+                                //   onChanged: (value) {
+                                //     setState(() {
+                                //       selectedOptions.add(value.toString());
+                                //     });
+                                //   },
+                                // ),
+                                Checkbox(
+                                  value: isSelected,
+                                  onChanged: (value) {
                                     setState(() {
-                                      selectedOption = '';
+                                      if (value != null) {
+                                        if (value) {
+                                          selectedOptions.add(option);
+                                          if (selectedFilterIndex == 0) {
+                                            selectedSkills.add(option);
+                                          } else if (selectedFilterIndex == 1) {
+                                            selectedLanguages.add(option);
+                                          } else if (selectedFilterIndex == 2) {
+                                            selectedExperience.add(option);
+                                          } else if (selectedFilterIndex == 3) {
+                                            selectedGenders.add(option);
+                                          } else if (selectedFilterIndex == 4) {
+                                            selectedCountries.add(option);
+                                          }
+                                        } else {
+                                          
+                                          if (selectedSkills.length != 1 &&
+                                              selectedFilterIndex == 0) {
+                                            selectedOptions.remove(option);
+                                            selectedSkills.remove(option);
+                                          }
+                                          if (selectedLanguages.length != 1 &&
+                                              selectedFilterIndex == 1) {
+                                            selectedOptions.remove(option);
+                                            selectedLanguages.remove(option);
+                                          }
+                                          if (selectedExperience.length != 1 &&
+                                              selectedFilterIndex == 2) {
+                                            selectedOptions.remove(option);
+                                            selectedExperience.remove(option);
+                                          }
+                                          if (selectedGenders.length != 1 &&
+                                              selectedFilterIndex == 3) {
+                                            selectedOptions.remove(option);
+                                            selectedGenders.remove(option);
+                                          }
+                                          if (selectedCountries.length != 1 &&
+                                              selectedFilterIndex == 4) {
+                                            selectedOptions.remove(option);
+                                            selectedCountries.remove(option);
+                                          }
+
+                                          // selectedExperience.remove(option);
+                                          // selectedLanguages.remove(option);
+                                          // // selectedGenders.remove(option);
+                                          // selectedCountries.remove(option);
+                                        }
+                                      }
                                     });
                                   },
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        borderRadius: BorderRadius.circular(3)),
-                                    child: const Padding(
-                                      padding: EdgeInsets.symmetric(
-                                          horizontal: 5, vertical: 2),
-                                      child: AutoSizeText(
-                                        'RESET',
-                                        maxLines: 1,
-                                        style: TextStyle(
-                                            fontSize: 14,
-                                            color: Colors.red,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                    ),
-                                  ),
                                 ),
-                                const SizedBox(width: 16),
-                                GestureDetector(
-                                  onTap: () {
-                                    Navigator.pop(context);
-                                  },
-                                  child: Container(
-                                    height: size.width * 0.08,
-                                    width: size.width * 0.25,
-                                    decoration: BoxDecoration(
-                                        color: Colors.red,
-                                        borderRadius: BorderRadius.circular(3)),
-                                    child: const Padding(
-                                      padding: EdgeInsets.symmetric(
-                                          horizontal: 5, vertical: 2),
-                                      child: Center(
-                                        child: AutoSizeText(
-                                          'APPLY',
-                                          maxLines: 1,
-                                          style: TextStyle(
-                                              fontSize: 14,
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
+                                Text(
+                                  getSelectedOptions()[index],
+                                  maxLines: 1,
+                                  style: const TextStyle(fontSize: 15),
                                 ),
                               ],
                             ),
-                          ],
-                        ),
+                            onTap: () {},
+                          );
+                        },
                       ),
-                    )
+                    ),
                   ],
                 ),
-              ),
+                Material(
+                  elevation: 50,
+                  child: Container(
+                    height: size.width * 0.15,
+                    decoration: const BoxDecoration(
+                      color: Colors.white,
+                      // borderRadius: BorderRadius.all(Radius.circular(50)),
+                      boxShadow: [
+                        BoxShadow(
+                            color: Colors.amber,
+                            //blurRadius: 25.0,
+                            offset: Offset(0, 25))
+                      ],
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  selectedOptions = [];
+                                  selectedExperience = [];
+                                  selectedCountries = [];
+                                  selectedGenders = [];
+                                  selectedLanguages = [];
+                                  selectedSkills = [];
+                                });
+                              },
+                              child: const ResetButtonWidget(),
+                            ),
+                            const SizedBox(width: 16),
+                            ApplyButtonWidget(
+                              size: size,selectedFilters: selectedOptions,
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                )
+              ],
             );
           },
         );
       },
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(
-          top: Radius.circular(0),
-        ),
-      ),
     );
   }
 }

@@ -62,7 +62,7 @@ class NavigationScreen extends StatelessWidget {
               //   // screen: ProfileScreen(),
               //   text: 'Profile screen',
               // ),
-              NavigationButton(
+              const NavigationButton(
                 screen: TalkToExpertsScreen(),
                 text: 'Talk to experts screen',
               ),
