@@ -10,11 +10,7 @@ import 'package:sitare/screens/talk%20to%20experts%20screen/widgets/filter%20sec
 
 import 'widgets/talk_to_experts_profile_details_widget.dart';
 
-List selectedSkills = [];
-List selectedExperience = [];
-List selectedLanguages = [];
-List selectedGenders = [];
-List selectedCountries = [];
+
 
 // ignore: must_be_immutable
 class TalkToExpertsScreen extends StatefulWidget {
@@ -25,14 +21,16 @@ class TalkToExpertsScreen extends StatefulWidget {
 }
 
 class _TalkToExpertsScreenState extends State<TalkToExpertsScreen> {
+  
   @override
   void initState() {
     super.initState();
-    selectedSkills.addAll(skillsOptions);
-    selectedLanguages.addAll(languageOptions);
-    selectedExperience.addAll(experienceOptions);
-    selectedCountries.addAll(countryOptions);
-    selectedGenders.addAll(genderOptions);
+    // selectedSkills.addAll(skillsOptions);
+    // selectedLanguages.addAll(languageOptions);
+    // selectedExperience.addAll(experienceOptions);
+    // selectedCountries.addAll(countryOptions);
+    // selectedGenders.addAll(genderOptions);
+    
   }
 
   num walletAmmount = 200;
@@ -137,7 +135,7 @@ class _TalkToExpertsScreenState extends State<TalkToExpertsScreen> {
               )),
         ),
         body: FutureBuilder<List<AstrologerModel>>(
-          future: fetchAstrologerDetailsFromFirestore(),
+          future: fetchFilteredAstrologersFromFirestore(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const Center(
@@ -341,9 +339,22 @@ class _TalkToExpertsScreenState extends State<TalkToExpertsScreen> {
                               child: const ResetButtonWidget(),
                             ),
                             const SizedBox(width: 16),
-                            ApplyButtonWidget(
-                              size: size,
-                              selectedFilters: selectedOptions,
+                            GestureDetector(
+                              onTap: () {
+                                // streamFilteredAstrologersFromFirestore();
+                                setState((){fetchFilteredAstrologersFromFirestore();});
+                                Navigator.pop(context);
+                                
+                                Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => const TalkToExpertsScreen(),
+                                    ));
+                              },
+                              child: ApplyButtonWidget(
+                                size: size,
+                                selectedFilters: selectedOptions,
+                              ),
                             ),
                           ],
                         ),

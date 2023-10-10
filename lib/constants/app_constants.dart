@@ -3,7 +3,10 @@ bool checkIfNotEmpty(String? value) {
 }
 
 // ignore: constant_identifier_names
-const List<String> GENDERS = ["Male", "Female", "Other"];
+const List<String> GENDERS = [
+  "Male",
+  "Female",
+];
 
 const List<String> martialStatus = [
   'Single',
@@ -30,11 +33,11 @@ final List<String> sortbyOptions = [
   'Ratings: Low to High',
 ];
 final List<String> experienceOptions = [
-  '<1 Years',
-  '2-3 Years',
-  '3-4 Years',
-  '4-5 Years',
-  '>5 Years'
+   '1',
+  '2',
+  '3',
+  '4',
+  '5'
 ];
 final List<String> skillsOptions = [
   'Vedic',
@@ -105,9 +108,48 @@ List selectedOptions = [
   'India  ',
   'Australia',
   'USA',
-   '<1 Years',
-  '2-3 Years',
-  '3-4 Years',
-  '4-5 Years',
-  '>5 Years'
+  '1',
+  '2',
+  '3',
+  '4',
+  '5'
 ];
+
+List selectedSkills = [
+  'Vedic',
+  "Nadi",
+  "Numerology",
+  "Vastu",
+  "Prashana",
+  'KP',
+  "Lal Kitab",
+  "Western",
+  "Tarot",
+  "Palmistry",
+  'Horary',
+  "Face Reading",
+  "Psychic",
+  "Life Coach",
+  "Cartomancy",
+  'Loshu Grid',
+  "Psychologist",
+];
+List<String> selectedExperience = [
+  '1',
+  '2',
+  '3',
+  '4',
+  '5'
+];
+List selectedLanguages = [
+  'English',
+  "Hindi",
+  "Malayalam",
+  "Kannada",
+  "Tamil",
+];
+List selectedGenders = [
+  "Male",
+  "Female",
+];
+List selectedCountries = [];

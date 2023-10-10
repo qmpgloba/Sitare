@@ -1,38 +1,34 @@
-
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:sitare/functions/astrologers/astrologer_details.dart';
+import 'package:sitare/screens/talk%20to%20experts%20screen/talk_to_experts_screen.dart';
 
 class ApplyButtonWidget extends StatelessWidget {
-   const ApplyButtonWidget({
-    super.key, required this.size, required this.selectedFilters,
+  const ApplyButtonWidget({
+    super.key,
+    required this.size,
+    required this.selectedFilters,
   });
   final Size size;
   final List selectedFilters;
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        Navigator.pop(context);
-      },
-      child: Container(
-        height: size.width * 0.08,
-        width: size.width * 0.25,
-        decoration: BoxDecoration(
-            color: Colors.red,
-            borderRadius: BorderRadius.circular(3)),
-        child: const Padding(
-          padding: EdgeInsets.symmetric(
-              horizontal: 5, vertical: 2),
-          child: Center(
-            child: AutoSizeText(
-              'APPLY',
-              maxLines: 1,
-              style: TextStyle(
-                  fontSize: 14,
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold),
-            ),
+    return Container(
+      height: size.width * 0.08,
+      width: size.width * 0.25,
+      decoration: BoxDecoration(
+          color: Colors.red, borderRadius: BorderRadius.circular(3)),
+      child: const Padding(
+        padding: EdgeInsets.symmetric(horizontal: 5, vertical: 2),
+        child: Center(
+          child: AutoSizeText(
+            'APPLY',
+            maxLines: 1,
+            style: TextStyle(
+                fontSize: 14,
+                color: Colors.white,
+                fontWeight: FontWeight.bold),
           ),
         ),
       ),

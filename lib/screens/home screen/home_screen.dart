@@ -50,6 +50,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
+    
     _timer = Timer.periodic(const Duration(seconds: 5), (timer) {
       if (_currentIndex < sliderOptions.length - 1) {
         _currentIndex++;
