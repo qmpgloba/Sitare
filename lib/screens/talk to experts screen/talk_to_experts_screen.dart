@@ -27,7 +27,6 @@ class TalkToExpertsScreen extends StatefulWidget {
 class _TalkToExpertsScreenState extends State<TalkToExpertsScreen> {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     selectedSkills.addAll(skillsOptions);
     selectedLanguages.addAll(languageOptions);
@@ -47,7 +46,7 @@ class _TalkToExpertsScreenState extends State<TalkToExpertsScreen> {
       case 1:
         return languageOptions;
       case 2:
-        return  experienceOptions;
+        return experienceOptions;
       case 3:
         return genderOptions;
       case 4:
@@ -259,7 +258,6 @@ class _TalkToExpertsScreenState extends State<TalkToExpertsScreen> {
                                             selectedCountries.add(option);
                                           }
                                         } else {
-                                          
                                           if (selectedSkills.length != 1 &&
                                               selectedFilterIndex == 0) {
                                             selectedOptions.remove(option);
@@ -344,7 +342,8 @@ class _TalkToExpertsScreenState extends State<TalkToExpertsScreen> {
                             ),
                             const SizedBox(width: 16),
                             ApplyButtonWidget(
-                              size: size,selectedFilters: selectedOptions,
+                              size: size,
+                              selectedFilters: selectedOptions,
                             ),
                           ],
                         ),

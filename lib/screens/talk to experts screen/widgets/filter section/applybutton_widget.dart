@@ -3,7 +3,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
 class ApplyButtonWidget extends StatelessWidget {
-   ApplyButtonWidget({
+   const ApplyButtonWidget({
     super.key, required this.size, required this.selectedFilters,
   });
   final Size size;
@@ -14,8 +14,6 @@ class ApplyButtonWidget extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         Navigator.pop(context);
-print(selectedFilters);
-print(selectedFilters);
       },
       child: Container(
         height: size.width * 0.08,
