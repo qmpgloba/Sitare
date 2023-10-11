@@ -25,7 +25,7 @@ class _FilterSectionFooterState extends State<FilterSectionFooter> {
         // borderRadius: BorderRadius.all(Radius.circular(50)),
         boxShadow: [
           BoxShadow(
-              color: Colors.amber,
+              color: Colors.white,
               //blurRadius: 25.0,
               offset: Offset(0, 25))
         ],
