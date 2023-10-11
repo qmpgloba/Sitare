@@ -5,7 +5,6 @@ import 'package:sitare/functions/astrologers/astrologer_details.dart';
 import 'package:sitare/screens/talk%20to%20experts%20screen/talk_to_experts_screen.dart';
 import 'package:sitare/screens/talk%20to%20experts%20screen/widgets/filter%20section/applybutton_widget.dart';
 
-import 'reset_button_widget.dart';
 
 class FilterSectionFooter extends StatefulWidget {
   const FilterSectionFooter({

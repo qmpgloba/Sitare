@@ -32,7 +32,6 @@ Future<List<AstrologerModel>> fetchFilteredAstrologersFromFirestore() async {
     Query astrologersQuery = firestore.collection('Astrologerdetails');
 
     if (selectedGenders.length == 1) {
-      print(selectedGenders);
       astrologersQuery =
           astrologersQuery.where('gender', whereIn: selectedGenders);
     }

@@ -4,9 +4,7 @@ import 'package:sitare/constants/app_constants.dart';
 import 'package:sitare/constants/ui_constants.dart';
 import 'package:sitare/functions/astrologers/astrologer_details.dart';
 import 'package:sitare/model/astrologer_model.dart';
-import 'package:sitare/screens/talk%20to%20experts%20screen/widgets/filter%20section/applybutton_widget.dart';
 import 'package:sitare/screens/talk%20to%20experts%20screen/widgets/filter%20section/filter_section_header_widget.dart';
-import 'package:sitare/screens/talk%20to%20experts%20screen/widgets/filter%20section/reset_button_widget.dart';
 
 import 'widgets/filter section/filter_footer_widget.dart';
 import 'widgets/talk_to_experts_profile_details_widget.dart';
