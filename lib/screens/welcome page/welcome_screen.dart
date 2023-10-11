@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:sitare/constants/ui_constants.dart';
+import 'package:sitare/screens/create%20account%20page/cerate_account_screen.dart';
 import 'package:sitare/screens/otp%20page/otp_screen.dart';
 import 'package:sitare/screens/welcome%20page/functions/functions.dart';
 import 'package:sitare/screens/welcome%20page/widgets/mobile_number_textfeild_widget.dart';
+import 'package:sitare/screens/widgets/auto_size_text_widget.dart';
 import 'package:sitare/screens/widgets/show_dialog_widget.dart';
 import 'package:sitare/screens/widgets/title_text_widget.dart';
 
@@ -114,6 +116,19 @@ class WelcomeScreen extends StatelessWidget {
                         ),
                       ),
                     ),
+                  ),
+                  const SizedBox(height: 40,),
+                   InkWell(
+                    onTap: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => CreateAccountScreen(),
+                      ));
+                    },
+                    child: const AutoSizeTextWidget(
+                        text: "Don't have an account? Sign Up",
+                        maxLines: 1,
+                        fontSize: 16,
+                        fontColor: FONT_COLOR),
                   )
                 ],
               ),

@@ -113,7 +113,14 @@ class _HomeScreenState extends State<HomeScreen> {
                       backgroundColor: MaterialStateProperty.all(PRIMARY_COLOR),
                       elevation: MaterialStateProperty.all(0),
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      
+                              Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) =>
+                                    const WalletRechargeScreen(),
+                              ));
+                            
+                    },
                     icon: const Icon(
                       Icons.account_balance_wallet_outlined,
                       color: greyColor,
@@ -147,29 +154,29 @@ class _HomeScreenState extends State<HomeScreen> {
                     const ListItemsDrawer(
                         icon: Icons.home_outlined, text: 'Home'),
                     const Divider(),
-                    ListTile(
-                      leading:
-                          const Icon(Icons.account_balance_wallet_outlined),
-                      title: const AutoSizeText(
-                        'Wallet',
-                        maxLines: 1,
-                      ),
-                      trailing: Wrap(
-                        spacing: 5,
-                        children: [
-                          const AutoSizeText(
-                            '₹200.00',
-                            maxLines: 1,
-                            style: TextStyle(fontSize: 16),
-                          ),
-                          GestureDetector(
-                            onTap: () {
+                    GestureDetector(
+                      onTap: () {
                               Navigator.of(context).push(MaterialPageRoute(
                                 builder: (context) =>
                                     const WalletRechargeScreen(),
                               ));
                             },
-                            child: Container(
+                      child: ListTile(
+                        leading:
+                            const Icon(Icons.account_balance_wallet_outlined),
+                        title: const AutoSizeText(
+                          'Wallet',
+                          maxLines: 1,
+                        ),
+                        trailing: Wrap(
+                          spacing: 5,
+                          children: [
+                            const AutoSizeText(
+                              '₹200.00',
+                              maxLines: 1,
+                              style: TextStyle(fontSize: 16),
+                            ),
+                            Container(
                               decoration: BoxDecoration(
                                   color: redColor,
                                   borderRadius: BorderRadius.circular(5)),
@@ -182,9 +189,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                   style: TextStyle(fontSize: 14),
                                 ),
                               ),
-                            ),
-                          )
-                        ],
+                            )
+                          ],
+                        ),
                       ),
                     ),
                     const Divider(),

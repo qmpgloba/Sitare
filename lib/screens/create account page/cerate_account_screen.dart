@@ -125,21 +125,7 @@ class CreateAccountScreen extends StatelessWidget {
                             showAboutDialog(context: context);
                           }
                         }
-                        // if (_formKey.currentState!.validate()) {
-                        //   var result = await signUpWithEmail(
-                        //       email: emailTextController.text.trim(),
-                        //       password: passwordTextController.text.trim());
-                        //   if (result == null) {
-                        //     //Navigate the screen
-                        //     Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => const EnterDetailsScreen(),), (route) => false);
-                        //   } else {
-                        //     // showToast(signUpSuccess, redColor);
-                        //     // showSnackbar(context, signUpSuccess, redColor);
-                        //     // ignore: use_build_context_synchronously
-                        //     showAlertBox(
-                        //         context, result, whiteColor, 'Retry');
-                        //   }
-                        // }
+                      
                       },
                       style: ButtonStyle(
                         shape: MaterialStateProperty.all<OutlinedBorder>(
