@@ -50,7 +50,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    
+
     _timer = Timer.periodic(const Duration(seconds: 5), (timer) {
       if (_currentIndex < sliderOptions.length - 1) {
         _currentIndex++;
@@ -80,13 +80,15 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     // print('FirebaseAuth.instance.currentUser!.phoneNumber');
-    String? number = FirebaseAuth.instance.currentUser == null?(phoneNumberTextController.text): (FirebaseAuth.instance.currentUser!.phoneNumber);
+    String? number = FirebaseAuth.instance.currentUser == null
+        ? ("+91${phoneNumberTextController.text}")
+        : (FirebaseAuth.instance.currentUser!.phoneNumber);
     // ignore: avoid_print
-    print(number);
+    print("${number}HomeScreen");
     Size size = MediaQuery.sizeOf(context);
     return FutureBuilder<DocumentSnapshot?>(
         future:
-            getUserDataByPhoneNumber(number??=phoneNumberTextController.text),
+            getUserDataByPhoneNumber(number ??= phoneNumberTextController.text),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
@@ -163,7 +165,8 @@ class _HomeScreenState extends State<HomeScreen> {
                           GestureDetector(
                             onTap: () {
                               Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => const WalletRechargeScreen(),
+                                builder: (context) =>
+                                    const WalletRechargeScreen(),
                               ));
                             },
                             child: Container(
@@ -201,9 +204,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         };
                         KommunicateFlutterPlugin.buildConversation(
                                 conversationObject)
-                            .then((clientConversationId) {
-                        }).catchError((error) {
-                        });
+                            .then((clientConversationId) {})
+                            .catchError((error) {});
                       },
                       child: const ListItemsDrawer(
                           icon: Icons.wechat_outlined,
