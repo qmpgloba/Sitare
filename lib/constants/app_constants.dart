@@ -3,7 +3,7 @@ bool checkIfNotEmpty(String? value) {
 }
 
 // ignore: constant_identifier_names
-const List<String> GENDERS = ["Male", "Female", "Other"];
+const List<String> GENDERS = ["Male", "Female"];
 
 const List<String> martialStatus = [
   'Single',

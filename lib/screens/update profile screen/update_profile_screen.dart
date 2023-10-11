@@ -40,7 +40,6 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
   var genders = [
     'Male',
     'Female',
-    'Other',
   ];
 
   var martialStatus = [

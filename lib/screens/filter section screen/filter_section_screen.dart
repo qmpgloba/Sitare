@@ -49,7 +49,6 @@ class _FilterSectionSheetState extends State<FilterSectionSheet> {
   final List<String> genderOptions = [
     'Male',
     'Female',
-    'Others',
   ];
   final List<String> countryOptions = [
     'India  ',
