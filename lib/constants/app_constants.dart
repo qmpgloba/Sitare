@@ -32,13 +32,7 @@ final List<String> sortbyOptions = [
   'Ratings: High to Low',
   'Ratings: Low to High',
 ];
-final List<String> experienceOptions = [
-   '1',
-  '2',
-  '3',
-  '4',
-  '5'
-];
+final List<String> experienceOptions = ['1', '2', '3', '4', '5'];
 final List<String> skillsOptions = [
   'Vedic',
   "Nadi",
@@ -130,13 +124,7 @@ List selectedSkills = [
   'Loshu Grid',
   "Psychologist",
 ];
-List<String> selectedExperience = [
-  '1',
-  '2',
-  '3',
-  '4',
-  '5'
-];
+List<String> selectedExperience = ['1', '2', '3', '4', '5'];
 List selectedLanguages = [
   'English',
   "Hindi",
