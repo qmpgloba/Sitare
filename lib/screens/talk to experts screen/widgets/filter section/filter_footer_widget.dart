@@ -1,14 +1,13 @@
-
 import 'package:flutter/material.dart';
 import 'package:sitare/constants/app_constants.dart';
 import 'package:sitare/functions/astrologers/astrologer_details.dart';
 import 'package:sitare/screens/talk%20to%20experts%20screen/talk_to_experts_screen.dart';
 import 'package:sitare/screens/talk%20to%20experts%20screen/widgets/filter%20section/applybutton_widget.dart';
 
-
 class FilterSectionFooter extends StatefulWidget {
   const FilterSectionFooter({
-    super.key, required this.size,
+    super.key,
+    required this.size,
   });
   final Size size;
 
@@ -20,7 +19,7 @@ class _FilterSectionFooterState extends State<FilterSectionFooter> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: widget.size.width * 0.17,
+      height: widget.size.width * 0.15,
       decoration: const BoxDecoration(
         color: Colors.white,
         // borderRadius: BorderRadius.all(Radius.circular(50)),
@@ -44,21 +43,22 @@ class _FilterSectionFooterState extends State<FilterSectionFooter> {
           //       // selectedGenders = [];
           //       selectedLanguages = [];
           //       selectedSkills = [];
-               
+
           //     });
           //     // Navigator.pop(context);
-             
 
           //   },
           //   child: const ResetButtonWidget(),
           // ),
-          
+
           GestureDetector(
             onTap: () {
               // streamFilteredAstrologersFromFirestore();
-              setState((){fetchFilteredAstrologersFromFirestore();});
+              setState(() {
+                fetchFilteredAstrologersFromFirestore();
+              });
               Navigator.pop(context);
-              
+
               Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
