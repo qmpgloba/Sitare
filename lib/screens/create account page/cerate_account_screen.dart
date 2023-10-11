@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously, duplicate_ignore
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:sitare/constants/ui_constants.dart';
@@ -200,10 +202,8 @@ createUser(UserModel user) async {
           user.toJson(),
         );
     return true;
-    // ignore: empty_catches
+    // ignore: empty_catches, unused_catch_clause
   }on FirebaseException catch (e) {
-    print(e.message);
-    print(e.toString());
     return false;
   }
 }

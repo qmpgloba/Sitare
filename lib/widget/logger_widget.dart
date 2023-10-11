@@ -1,3 +1,5 @@
+// ignore_for_file: override_on_non_overriding_member
+
 import 'package:logger/logger.dart';
 
 final AppLog logger = AppLog();
@@ -43,6 +45,7 @@ class AppLog {
 
   @override
   void v(object) {
+    // ignore: deprecated_member_use
     _logger.v(object);
   }
 

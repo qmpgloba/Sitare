@@ -1,7 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:sitare/constants/ui_constants.dart';
-import 'package:sitare/screens/profile%20screen/profile_screen.dart';
 import 'package:sitare/screens/update%20profile%20screen/update_profile_screen.dart';
 
 class UserDetailsDrawerHeader extends StatelessWidget {
@@ -66,7 +65,7 @@ class UserDetailsDrawerHeader extends StatelessWidget {
                   fullName,
                   maxLines: 2,
                   softWrap: true,
-                  style: TextStyle(color: blackColor, fontSize: 13),
+                  style: const TextStyle(color: blackColor, fontSize: 13),
                   // maxFontSize: 14,
                 ),
               ),
@@ -85,9 +84,7 @@ class UserDetailsDrawerHeader extends StatelessWidget {
         ),
         IconButton(
             onPressed: () {
-              Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => ProfileScreen(),
-              ));
+             
             },
             icon: const Icon(Icons.arrow_forward_ios_outlined))
       ],

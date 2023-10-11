@@ -1,12 +1,14 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:sitare/constants/ui_constants.dart';
+import 'package:sitare/model/astrologer_model.dart';
 
 import 'widgets/profile_details_widget.dart';
 import 'widgets/tab_widget.dart';
 
 class NextAvailabilityScreen extends StatefulWidget {
-  const NextAvailabilityScreen({super.key});
+  const NextAvailabilityScreen({super.key, required this.astrologer});
+   final AstrologerModel astrologer;
 
   @override
   State<NextAvailabilityScreen> createState() => _NextAvailabilityScreenState();
@@ -16,6 +18,7 @@ class _NextAvailabilityScreenState extends State<NextAvailabilityScreen> {
   var time = ['8:30', '9:30', '10:30', '12:30', '3:00', '4:00', '5:00'];
 
   int selected = 0;
+ 
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +36,7 @@ class _NextAvailabilityScreenState extends State<NextAvailabilityScreen> {
         ),
         body: Column(
           children: [
-            ProfileWidgetNextAvailabilityScreen(size: size),
+            ProfileWidgetNextAvailabilityScreen(size: size, astrologer: widget.astrologer),
             Container(
               height: size.width / 5,
               color: const Color.fromARGB(255, 3, 11, 59),

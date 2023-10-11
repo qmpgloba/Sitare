@@ -347,7 +347,6 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
               ),
             );
           } else {
-            print(emailTextController.text);
             return Text(number ?? "");
           }
         });
@@ -405,7 +404,6 @@ updateUser(UserModel user, String number) async {
         .get();
 
     if (querySnapshot.docs.isNotEmpty) {
-      print("Entery Check: ${number} ");
       DocumentSnapshot documentSnapshot = querySnapshot.docs.first;
       await documentSnapshot.reference.update(user.toJson());
       return true;
