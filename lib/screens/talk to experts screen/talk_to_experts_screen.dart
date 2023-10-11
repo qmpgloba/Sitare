@@ -147,9 +147,9 @@ class _TalkToExpertsScreenState extends State<TalkToExpertsScreen> {
             } else {
               List<AstrologerModel>? astrologers = snapshot.data;
 
-              return ListView.builder(
+              return astrologers!.isEmpty ? Center(child: Text('No Astrologers Found')):  ListView.builder(
                   // scrollDirection: Axis.horizontal,
-                  itemCount: astrologers!.length,
+                  itemCount: astrologers.length,
                   itemBuilder: (context, index) =>
                       TalkToExpertsProfileDetailsWidget(
                           size: size, astrologer: astrologers[index]));
