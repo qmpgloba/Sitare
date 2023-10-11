@@ -31,41 +31,32 @@ Future<List<AstrologerModel>> fetchFilteredAstrologersFromFirestore() async {
   try {
     Query astrologersQuery = firestore.collection('Astrologerdetails');
 
-    // Apply filters if selectedGender is not null
-    // if (selectedGenders.isNotEmpty) {
-    //   astrologersQuery = astrologersQuery.where('gender', arrayContainsAny: selectedGenders);
-    // }
-
-    // Apply filters if selectedLanguages is not empty
-
-    
     if (selectedGenders.length == 1) {
-      astrologersQuery = astrologersQuery.where('gender', whereIn: selectedGenders);
+      astrologersQuery =
+          astrologersQuery.where('gender', whereIn: selectedGenders);
     }
-// if (selectedSkills.isNotEmpty) {
-//   astrologersQuery = astrologersQuery.where('skills', arrayContainsAny: selectedSkills);
-// }
-// if (selectedExperience.isNotEmpty) {
-//   astrologersQuery = astrologersQuery.where('experience(in years)', arrayContainsAny: (selectedExperience));
-// }
-// if (selectedLanguages.isNotEmpty) {
-//   astrologersQuery = astrologersQuery.where('languages', arrayContainsAny: selectedLanguages);
-// }
 
-    // astrologersQuery = astrologersQuery.where('skills', arrayContainsAny: selectedSkills);
-    // astrologersQuery = astrologersQuery.where('languages',
-    //     arrayContainsAny: selectedLanguages,);
-      
-   
+    if (selectedExperience.isNotEmpty) {
+      astrologersQuery = astrologersQuery.where('experience(in years)',
+          whereIn: selectedExperience);
+    }
+
+    astrologersQuery = astrologersQuery.where('languages',
+        arrayContainsAny: selectedLanguages);
+        QuerySnapshot astrologers = await astrologersQuery.get();
+
+
+  
+
     
-    QuerySnapshot astrologers = await astrologersQuery.get();
-
     for (var astrologerDoc in astrologers.docs) {
       Map<String, dynamic> data = astrologerDoc.data() as Map<String, dynamic>;
-      print(data);
 
       AstrologerModel astrologer = AstrologerModel.fromJson(data);
-      astrologersList.add(astrologer);
+      // astrologersList.add(astrologer);
+     if (selectedSkills.any((skill) => astrologer.skills.contains(skill))) {
+    astrologersList.add(astrologer);
+  }
     }
   } catch (e) {
     // Handle errors here

@@ -47,8 +47,8 @@ class _TalkToExpertsScreenState extends State<TalkToExpertsScreen> {
         return experienceOptions;
       case 3:
         return genderOptions;
-      case 4:
-        return countryOptions;
+      // case 4:
+      //   return countryOptions;
 
       default:
         return [];
@@ -252,9 +252,10 @@ class _TalkToExpertsScreenState extends State<TalkToExpertsScreen> {
                                             selectedExperience.add(option);
                                           } else if (selectedFilterIndex == 3) {
                                             selectedGenders.add(option);
-                                          } else if (selectedFilterIndex == 4) {
-                                            selectedCountries.add(option);
-                                          }
+                                          } 
+                                          // else if (selectedFilterIndex == 4) {
+                                          //   selectedCountries.add(option);
+                                          // }
                                         } else {
                                           if (selectedSkills.length != 1 &&
                                               selectedFilterIndex == 0) {
@@ -276,11 +277,11 @@ class _TalkToExpertsScreenState extends State<TalkToExpertsScreen> {
                                             selectedOptions.remove(option);
                                             selectedGenders.remove(option);
                                           }
-                                          if (selectedCountries.length != 1 &&
-                                              selectedFilterIndex == 4) {
-                                            selectedOptions.remove(option);
-                                            selectedCountries.remove(option);
-                                          }
+                                          // if (selectedCountries.length != 1 &&
+                                          //     selectedFilterIndex == 4) {
+                                          //   selectedOptions.remove(option);
+                                          //   selectedCountries.remove(option);
+                                          // }
 
                                           // selectedExperience.remove(option);
                                           // selectedLanguages.remove(option);
@@ -330,7 +331,7 @@ class _TalkToExpertsScreenState extends State<TalkToExpertsScreen> {
                                 setState(() {
                                   selectedOptions = [];
                                   selectedExperience = [];
-                                  selectedCountries = [];
+                                  // selectedCountries = [];
                                   selectedGenders = [];
                                   selectedLanguages = [];
                                   selectedSkills = [];

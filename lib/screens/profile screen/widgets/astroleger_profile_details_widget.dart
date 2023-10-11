@@ -15,7 +15,7 @@ class AstrologerProfileDetailsWidget extends StatelessWidget {
   final String department;
   final String languages;
   final double rating;
-  final int yearsOfExperience;
+  final String yearsOfExperience;
   final int rupees;
   final AstrologerModel astrologer;
 

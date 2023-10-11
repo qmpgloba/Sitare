@@ -19,7 +19,7 @@ final List<String> filterOptions = [
   'Language',
   'Experience',
   'Gender',
-  'Country'
+  // 'Country'
 ];
 final List<String> sortbyOptions = [
   'Popularity',
@@ -58,11 +58,7 @@ final List<String> skillsOptions = [
   'Loshu Grid',
   "Psychologist",
 ];
-final List<String> categoryOptions = [
-  'Shoes',
-  'Dress',
-  'Casual',
-];
+
 final List<String> languageOptions = [
   'English',
   "Hindi",
@@ -74,11 +70,11 @@ final List<String> genderOptions = [
   'Male',
   'Female',
 ];
-final List<String> countryOptions = [
-  'India  ',
-  'Australia',
-  'USA',
-];
+// final List<String> countryOptions = [
+//   'India  ',
+//   'Australia',
+//   'USA',
+// ];
 
 List selectedOptions = [
   'Vedic',
@@ -105,9 +101,9 @@ List selectedOptions = [
   "Tamil",
   'Male',
   'Female',
-  'India  ',
-  'Australia',
-  'USA',
+  // 'India  ',
+  // 'Australia',
+  // 'USA',
   '1',
   '2',
   '3',
@@ -152,4 +148,4 @@ List selectedGenders = [
   "Male",
   "Female",
 ];
-List selectedCountries = [];
+// List selectedCountries = [];

@@ -1,7 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:sitare/functions/astrologers/astrologer_details.dart';
-import 'package:sitare/screens/talk%20to%20experts%20screen/talk_to_experts_screen.dart';
 
 class ApplyButtonWidget extends StatelessWidget {
   const ApplyButtonWidget({
