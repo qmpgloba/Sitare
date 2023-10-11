@@ -8,6 +8,7 @@ import 'package:sitare/screens/talk%20to%20experts%20screen/widgets/filter%20sec
 import 'package:sitare/screens/talk%20to%20experts%20screen/widgets/filter%20section/filter_section_header_widget.dart';
 import 'package:sitare/screens/talk%20to%20experts%20screen/widgets/filter%20section/reset_button_widget.dart';
 
+import 'widgets/filter section/filter_footer_widget.dart';
 import 'widgets/talk_to_experts_profile_details_widget.dart';
 
 
@@ -228,15 +229,7 @@ class _TalkToExpertsScreenState extends State<TalkToExpertsScreen> {
                             title: Row(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
-                                // Radio(
-                                //   value: getSelectedOptions()[index],
-                                //   groupValue: selectedOptions,
-                                //   onChanged: (value) {
-                                //     setState(() {
-                                //       selectedOptions.add(value.toString());
-                                //     });
-                                //   },
-                                // ),
+                             
                                 Checkbox(
                                   value: isSelected,
                                   onChanged: (value) {
@@ -277,16 +270,7 @@ class _TalkToExpertsScreenState extends State<TalkToExpertsScreen> {
                                             selectedOptions.remove(option);
                                             selectedGenders.remove(option);
                                           }
-                                          // if (selectedCountries.length != 1 &&
-                                          //     selectedFilterIndex == 4) {
-                                          //   selectedOptions.remove(option);
-                                          //   selectedCountries.remove(option);
-                                          // }
-
-                                          // selectedExperience.remove(option);
-                                          // selectedLanguages.remove(option);
-                                          // // selectedGenders.remove(option);
-                                          // selectedCountries.remove(option);
+                                      
                                         }
                                       }
                                     });
@@ -306,62 +290,9 @@ class _TalkToExpertsScreenState extends State<TalkToExpertsScreen> {
                     ),
                   ],
                 ),
-                Material(
+                 Material(
                   elevation: 50,
-                  child: Container(
-                    height: size.width * 0.15,
-                    decoration: const BoxDecoration(
-                      color: Colors.white,
-                      // borderRadius: BorderRadius.all(Radius.circular(50)),
-                      boxShadow: [
-                        BoxShadow(
-                            color: Colors.amber,
-                            //blurRadius: 25.0,
-                            offset: Offset(0, 25))
-                      ],
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            GestureDetector(
-                              onTap: () {
-                                setState(() {
-                                  selectedOptions = [];
-                                  selectedExperience = [];
-                                  // selectedCountries = [];
-                                  selectedGenders = [];
-                                  selectedLanguages = [];
-                                  selectedSkills = [];
-                                });
-                              },
-                              child: const ResetButtonWidget(),
-                            ),
-                            const SizedBox(width: 16),
-                            GestureDetector(
-                              onTap: () {
-                                // streamFilteredAstrologersFromFirestore();
-                                setState((){fetchFilteredAstrologersFromFirestore();});
-                                Navigator.pop(context);
-                                
-                                Navigator.pushReplacement(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => const TalkToExpertsScreen(),
-                                    ));
-                              },
-                              child: ApplyButtonWidget(
-                                size: size,
-                                selectedFilters: selectedOptions,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
+                  child: FilterSectionFooter(size: size),
                 )
               ],
             );
@@ -370,4 +301,7 @@ class _TalkToExpertsScreenState extends State<TalkToExpertsScreen> {
       },
     );
   }
+ 
+ 
 }
+

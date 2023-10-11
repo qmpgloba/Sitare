@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:sitare/screens/create%20account%20page/cerate_account_screen.dart';
-import 'package:sitare/screens/filter%20section%20screen/filter_section_screen.dart';
 import 'package:sitare/screens/home%20screen/home_screen.dart';
 import 'package:sitare/screens/login%20email%20screen/login_email_screen.dart';
 import 'package:sitare/screens/order%20history%20screen/order_history_screen.dart';
@@ -30,10 +29,10 @@ class NavigationScreen extends StatelessWidget {
                 text: 'Create account screen',
               ),
               //const NavigationButton(screen: EnterDetailsScreen(),text: 'Enter details screen',), //was getting error cause we are passing values from screen to screen
-              const NavigationButton(
-                screen: FilterSectionSheet(),
-                text: 'Filter section',
-              ),
+              // const NavigationButton(
+              //   screen: FilterSectionSheet(),
+              //   text: 'Filter section',
+              // ),
               const NavigationButton(
                 screen: HomeScreen(),
                 text: 'Home screen',

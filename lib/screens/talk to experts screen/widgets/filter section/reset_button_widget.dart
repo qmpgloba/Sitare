@@ -17,7 +17,7 @@ class ResetButtonWidget extends StatelessWidget {
         padding: EdgeInsets.symmetric(
             horizontal: 5, vertical: 2),
         child: AutoSizeText(
-          'RESET',
+          'CLEAR',
           maxLines: 1,
           style: TextStyle(
               fontSize: 14,

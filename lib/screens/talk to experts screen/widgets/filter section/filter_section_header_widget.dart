@@ -30,7 +30,7 @@ class FilterSectionHeader extends StatelessWidget {
                   color: blackColor,
                 ),
                 label: const Text(
-                  'Clear',
+                  'Close',
                   style:
                       TextStyle(fontWeight: FontWeight.bold, color: blackColor),
                 ))

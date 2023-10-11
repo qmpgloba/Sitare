@@ -32,14 +32,12 @@ Future<List<AstrologerModel>> fetchFilteredAstrologersFromFirestore() async {
     Query astrologersQuery = firestore.collection('Astrologerdetails');
 
     if (selectedGenders.length == 1) {
+      print(selectedGenders);
       astrologersQuery =
           astrologersQuery.where('gender', whereIn: selectedGenders);
     }
 
-    if (selectedExperience.isNotEmpty) {
-      astrologersQuery = astrologersQuery.where('experience(in years)',
-          whereIn: selectedExperience);
-    }
+    
 
     astrologersQuery = astrologersQuery.where('languages',
         arrayContainsAny: selectedLanguages);
@@ -55,7 +53,9 @@ Future<List<AstrologerModel>> fetchFilteredAstrologersFromFirestore() async {
       AstrologerModel astrologer = AstrologerModel.fromJson(data);
       // astrologersList.add(astrologer);
      if (selectedSkills.any((skill) => astrologer.skills.contains(skill))) {
-    astrologersList.add(astrologer);
+     if (selectedExperience.isNotEmpty && selectedExperience.contains(astrologer.experienceYears)) {
+          astrologersList.add(astrologer);
+        }
   }
     }
   } catch (e) {
