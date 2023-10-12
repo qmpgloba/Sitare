@@ -50,3 +50,4 @@ updateUser(UserModel user, String email) async {
     return false;
   }
 }
+
