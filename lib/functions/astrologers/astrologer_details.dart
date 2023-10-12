@@ -102,3 +102,15 @@ Future<List<AstrologerModel>> fetchFilteredAstrologersFromFirestore() async {
 
 //     return await query.get();
 //   }
+
+
+
+// List<AstrologerModel> searchFirestoreCollection(
+//     TextEditingController controller,List<AstrologerModel> filteredAstrologers,List<AstrologerModel> astrologers)  {
+//        List<AstrologerModel> astrologersList = [];
+//     filteredAstrologers = astrologers
+//             .where((astrologer) =>
+//                 astrologer.fullName.toLowerCase().contains(controller.text.toLowerCase()))
+//             .toList();
+//    return astrologersList;
+// }
