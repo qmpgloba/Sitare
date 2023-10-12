@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:sitare/screens/auth%20wrapper/auth_wrapper.dart';
+import 'package:sitare/screens/talk%20to%20experts%20screen/talk_to_experts_screen.dart';
 
 import 'constants/ui_constants.dart';
 
@@ -23,6 +24,6 @@ class MyApp extends StatelessWidget {
           fontFamily: 'Muli',
           useMaterial3: true,
         ),
-        home:  AuthWrapper());
+        home:   AuthWrapper());
   }
 }

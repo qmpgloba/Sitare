@@ -10,8 +10,6 @@ import 'package:sitare/screens/wallet%20recharge%20screen/wallet_recharge_screen
 import 'widgets/filter section/filter_footer_widget.dart';
 import 'widgets/talk_to_experts_profile_details_widget.dart';
 
-
-
 // ignore: must_be_immutable
 class TalkToExpertsScreen extends StatefulWidget {
   const TalkToExpertsScreen({super.key});
@@ -21,21 +19,17 @@ class TalkToExpertsScreen extends StatefulWidget {
 }
 
 class _TalkToExpertsScreenState extends State<TalkToExpertsScreen> {
-  
+  final TextEditingController _searchTextController = TextEditingController();
+
   @override
   void initState() {
     super.initState();
-    // selectedSkills.addAll(skillsOptions);
-    // selectedLanguages.addAll(languageOptions);
-    // selectedExperience.addAll(experienceOptions);
-    // selectedCountries.addAll(countryOptions);
-    // selectedGenders.addAll(genderOptions);
-    
   }
 
   num walletAmmount = 200;
 
   int selectedFilterIndex = 0;
+  bool _isVisible = false;
 
   List<String> getSelectedOptions() {
     switch (selectedFilterIndex) {
@@ -67,86 +61,119 @@ class _TalkToExpertsScreenState extends State<TalkToExpertsScreen> {
             style: TextStyle(color: whiteColor, fontWeight: FontWeight.bold),
           ),
           bottom: PreferredSize(
-              preferredSize: Size(size.width, size.width * .1),
-              child: Padding(
-                padding: EdgeInsets.all(size.width / 20),
-                child: Row(
-                  children: [
-                    GestureDetector(
-                      onTap: () {
-                              Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) =>
-                                    const WalletRechargeScreen(),
-                              ));
-                            },
-                      child: const Icon(
-                        Icons.account_balance_wallet_outlined,
-                        color: whiteColor,
-                        size: 25,
-                      ),
-                    ),
-                    const SizedBox(
-                      width: 5,
-                    ),
-                    Text(
-                      '₹$walletAmmount',
-                      style: const TextStyle(color: whiteColor, fontSize: 16),
-                    ),
-                    const SizedBox(
-                      width: 10,
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        
-                              Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) =>
-                                    const WalletRechargeScreen(),
-                              ));
-                            
-                      },
-                      child: Container(
-                        decoration: BoxDecoration(
-                            color: redColor,
-                            borderRadius: BorderRadius.circular(3)),
-                        child: const Padding(
-                          padding:
-                              EdgeInsets.symmetric(horizontal: 5, vertical: 2),
-                          child: AutoSizeText(
-                            'RECHARGE',
-                            maxLines: 1,
-                            style: TextStyle(
-                                fontSize: 14,
-                                color: whiteColor,
-                                fontWeight: FontWeight.bold),
+              preferredSize: _isVisible == true
+                  ? Size(size.width, size.width * .28)
+                  : Size(size.width, size.width * .1),
+              child: Column(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.all(size.width / 20),
+                    child: Row(
+                      children: [
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) =>
+                                  const WalletRechargeScreen(),
+                            ));
+                          },
+                          child: const Icon(
+                            Icons.account_balance_wallet_outlined,
+                            color: whiteColor,
+                            size: 25,
                           ),
+                        ),
+                        const SizedBox(
+                          width: 5,
+                        ),
+                        Text(
+                          '₹$walletAmmount',
+                          style:
+                              const TextStyle(color: whiteColor, fontSize: 16),
+                        ),
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) =>
+                                  const WalletRechargeScreen(),
+                            ));
+                          },
+                          child: Container(
+                            decoration: BoxDecoration(
+                                color: redColor,
+                                borderRadius: BorderRadius.circular(3)),
+                            child: const Padding(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 5, vertical: 2),
+                              child: AutoSizeText(
+                                'RECHARGE',
+                                maxLines: 1,
+                                style: TextStyle(
+                                    fontSize: 14,
+                                    color: whiteColor,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                          ),
+                        ),
+                        const Spacer(),
+                        GestureDetector(
+                          onTap: () {
+                            // Navigator.of(context).push(MaterialPageRoute(builder: (context) => FilterSectionSheet(),));
+                            filterSectionBottomSheet(size, context);
+                          },
+                          child: const Icon(
+                            Icons.filter_list,
+                            size: 30,
+                            color: greyColor,
+                          ),
+                        ),
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              _isVisible = !_isVisible;
+                            });
+                          },
+                          child: const Icon(
+                            Icons.search,
+                            size: 30,
+                            color: greyColor,
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  Visibility(
+                    visible: _isVisible,
+                    child: Container(
+                      color: whiteColor,
+                      width: size.width,
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: size.width / 20, vertical: 5),
+                        child: TextFormField(
+                          keyboardType: TextInputType.name,
+                          controller: _searchTextController,
+                          onChanged: (value) {
+                            setState(() {});
+                          },
+                          style: const TextStyle(color: blackColor),
+                          decoration: InputDecoration(
+                              hintText: 'Search...',
+                              hintStyle: const TextStyle(color: FONT_COLOR),
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(40))),
                         ),
                       ),
                     ),
-                    const Spacer(),
-                    GestureDetector(
-                      onTap: () {
-                        // Navigator.of(context).push(MaterialPageRoute(builder: (context) => FilterSectionSheet(),));
-                        filterSectionBottomSheet(size, context);
-                      },
-                      child: const Icon(
-                        Icons.filter_list,
-                        size: 30,
-                        color: greyColor,
-                      ),
-                    ),
-                    const SizedBox(
-                      width: 10,
-                    ),
-                    GestureDetector(
-                      onTap: () {},
-                      child: const Icon(
-                        Icons.search,
-                        size: 30,
-                        color: greyColor,
-                      ),
-                    )
-                  ],
-                ),
+                  ),
+                ],
               )),
         ),
         body: FutureBuilder<List<AstrologerModel>>(
@@ -162,13 +189,27 @@ class _TalkToExpertsScreenState extends State<TalkToExpertsScreen> {
               );
             } else {
               List<AstrologerModel>? astrologers = snapshot.data;
+              List<AstrologerModel> filteredAstrologers = [];
 
-              return astrologers!.isEmpty ? const Center(child: Text('No Astrologers Found')):  ListView.builder(
-                  // scrollDirection: Axis.horizontal,
-                  itemCount: astrologers.length,
-                  itemBuilder: (context, index) =>
-                      TalkToExpertsProfileDetailsWidget(
-                          size: size, astrologer: astrologers[index]));
+              if (_searchTextController.text.isNotEmpty) {
+                filteredAstrologers = astrologers!
+                    .where((astrologer) => astrologer.fullName
+                        .toLowerCase()
+                        .contains(_searchTextController.text.toLowerCase()))
+                    .toList();
+              } else {
+                filteredAstrologers = astrologers!;
+              }
+
+              return filteredAstrologers.isEmpty
+                  ? const Center(child: Text('No Astrologers Found'))
+                  : ListView.builder(
+                      // scrollDirection: Axis.horizontal,
+                      itemCount: filteredAstrologers.length,
+                      itemBuilder: (context, index) =>
+                          TalkToExpertsProfileDetailsWidget(
+                              size: size,
+                              astrologer: filteredAstrologers[index]));
             }
           },
         ));
@@ -243,7 +284,6 @@ class _TalkToExpertsScreenState extends State<TalkToExpertsScreen> {
                             title: Row(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
-                             
                                 Checkbox(
                                   value: isSelected,
                                   onChanged: (value) {
@@ -259,7 +299,7 @@ class _TalkToExpertsScreenState extends State<TalkToExpertsScreen> {
                                             selectedExperience.add(option);
                                           } else if (selectedFilterIndex == 3) {
                                             selectedGenders.add(option);
-                                          } 
+                                          }
                                           // else if (selectedFilterIndex == 4) {
                                           //   selectedCountries.add(option);
                                           // }
@@ -284,7 +324,6 @@ class _TalkToExpertsScreenState extends State<TalkToExpertsScreen> {
                                             selectedOptions.remove(option);
                                             selectedGenders.remove(option);
                                           }
-                                      
                                         }
                                       }
                                     });
@@ -304,7 +343,7 @@ class _TalkToExpertsScreenState extends State<TalkToExpertsScreen> {
                     ),
                   ],
                 ),
-                 Material(
+                Material(
                   elevation: 50,
                   child: FilterSectionFooter(size: size),
                 )
@@ -315,7 +354,4 @@ class _TalkToExpertsScreenState extends State<TalkToExpertsScreen> {
       },
     );
   }
- 
- 
 }
-
