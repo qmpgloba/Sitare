@@ -1,7 +1,7 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:sitare/constants/app_constants.dart';
 import 'package:sitare/constants/ui_constants.dart';
+import 'package:sitare/functions/user_functions.dart';
 import 'package:sitare/screens/create%20account%20page/cerate_account_screen.dart';
 import 'package:sitare/screens/home%20screen/home_screen.dart';
 import 'package:sitare/screens/welcome%20page/widgets/mobile_number_textfeild_widget.dart';
@@ -15,8 +15,7 @@ class EnterDetailsScreen extends StatefulWidget {
     required this.phoneNumber,
   });
   final String phoneNumber;
-  // final String name;
-  // final String email;
+  
   @override
   State<EnterDetailsScreen> createState() => _EnterDetailsScreenState();
 }
@@ -46,26 +45,7 @@ class _EnterDetailsScreenState extends State<EnterDetailsScreen> {
   String? phoneNumber;
   String? email;
 
-  // Future<void> create() async {
-  //   Map<String, dynamic> addData = {
-  //     "name": nameController.text.toString(),
-  //     "email": emailController.text.toString(),
-  //     "gender": genderController.text.toString(),
-  //     "DOB": dobController.text.toString(),
-  //     "POB": pobController.text.toString(),
-  //     "TOB": tobController.text.toString(),
-  //     "marital_status": martialController.text.toString(),
-  //     "problem": problemController.text.toString(),
-  //     "phone_number": "+$countrycode${mobileNumberController.text}",
-  //   };
-
-  //   for (int i = 0; i < length; i++) {
-  //     addData["PartnerDetails$i"] = optionalField[i].toString();
-  //   }
-
-  //   await _user.add(addData);
-  // }
-
+  
   Future<void> _showDatePicker() async {
     final DateTime? pickedDate = await showDatePicker(
       context: context,
@@ -565,61 +545,6 @@ class _EnterDetailsScreenState extends State<EnterDetailsScreen> {
       ],
     );
   }
-  // Container dateofBirth() {
-  //   // ignore: avoid_unnecessary_containers
-  //   return Container(
-  //     // width: 160
-
-  //     child: TextFormField(
-  //       controller: dobController,
-  //       style: const TextStyle(
-  //         color: FONT_COLOR,
-  //       ),
-  //       decoration: const InputDecoration(
-  //         hintText: "DD/MM/YYYY",
-  //         hintStyle: TextStyle(
-  //           color: FONT_COLOR,
-  //           fontWeight: FontWeight.w700,
-  //         ),
-  //         label: Text(
-  //           "Date of Birth",
-  //           style: TextStyle(
-  //             color: FONT_COLOR,
-  //             fontWeight: FontWeight.w700,
-  //           ),
-  //         ),
-  //       ),
-  //       validator: (v) {
-  //         final RegExp regex = RegExp(
-  //             r'^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/(19[0-9]{2}|20[0-2][0-9]|2023)$');
-
-  //         if (v != null) {
-  //           if (!regex.hasMatch(v)) {
-  //             return "Enter in the format of DD/MM/YYYY";
-  //           }
-  //         }
-  //         return null;
-  //       },
-  //     ),
-  //   );
-  // }
+  
 }
 
-updateUser(UserModel user, String email) async {
-  final db = FirebaseFirestore.instance;
-
-  try {
-    QuerySnapshot querySnapshot =
-        await db.collection('users').where('email', isEqualTo: email).get();
-
-    if (querySnapshot.docs.isNotEmpty) {
-      DocumentSnapshot documentSnapshot = querySnapshot.docs.first;
-      await documentSnapshot.reference.update(user.toJson());
-      return true;
-    } else {
-      return false;
-    }
-  } catch (e) {
-    return false;
-  }
-}

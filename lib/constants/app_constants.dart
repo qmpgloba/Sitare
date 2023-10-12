@@ -64,11 +64,7 @@ final List<String> genderOptions = [
   'Male',
   'Female',
 ];
-// final List<String> countryOptions = [
-//   'India  ',
-//   'Australia',
-//   'USA',
-// ];
+
 
 List selectedOptions = [
   'Vedic',
@@ -95,9 +91,6 @@ List selectedOptions = [
   "Tamil",
   'Male',
   'Female',
-  // 'India  ',
-  // 'Australia',
-  // 'USA',
   '1',
   '2',
   '3',
@@ -136,4 +129,3 @@ List selectedGenders = [
   "Male",
   "Female",
 ];
-// List selectedCountries = [];

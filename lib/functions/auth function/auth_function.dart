@@ -21,6 +21,7 @@ Future<String?> signUpWithEmail({
 
 
 
+
  String? validateEmail(String? value) {
     if (value!.isEmpty) {
       return 'Please enter your Email';

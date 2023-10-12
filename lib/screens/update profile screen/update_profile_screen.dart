@@ -4,7 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:sitare/constants/ui_constants.dart';
-import 'package:sitare/functions/get_user_details.dart';
+import 'package:sitare/functions/user_functions.dart';
 import 'package:sitare/model/user_model.dart';
 import 'package:sitare/screens/home%20screen/home_screen.dart';
 import 'package:sitare/screens/profile%20screen/widgets/update_profile_textfeild_widget.dart';
@@ -58,7 +58,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.sizeOf(context);
     String? number = FirebaseAuth.instance.currentUser == null
-        ? (phoneNumberTextController.text)
+        ? ("+91${phoneNumberTextController.text}")
         : (FirebaseAuth.instance.currentUser!.phoneNumber);
     return FutureBuilder<DocumentSnapshot?>(
         future:

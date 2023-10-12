@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sitare/constants/ui_constants.dart';
-import 'package:sitare/screens/create%20account%20page/functions/functions.dart';
+import 'package:sitare/functions/auth%20function/auth_function.dart';
 
 // ignore: must_be_immutable
 class TextfeildWidget extends StatelessWidget {

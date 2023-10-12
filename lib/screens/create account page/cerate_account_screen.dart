@@ -1,8 +1,8 @@
 // ignore_for_file: use_build_context_synchronously, duplicate_ignore
 
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:sitare/constants/ui_constants.dart';
+import 'package:sitare/functions/user_functions.dart';
 import 'package:sitare/model/user_model.dart';
 import 'package:sitare/screens/enter%20details%20screen/enter_details_screen.dart';
 import 'package:sitare/screens/welcome%20page/welcome_screen.dart';
@@ -20,10 +20,7 @@ final TextEditingController phoneNumberTextController = TextEditingController();
 // ignore: must_be_immutable
 class CreateAccountScreen extends StatelessWidget {
   CreateAccountScreen({super.key});
-  // final TextEditingController emailTextController = TextEditingController();
-  // final TextEditingController passwordTextController = TextEditingController();
-  // final TextEditingController confirmPasswordTextController =
-  //     TextEditingController();
+  
 
   String countyCode = '91';
 
@@ -81,13 +78,7 @@ class CreateAccountScreen extends StatelessWidget {
                       countyCode = country.dialCode;
                     },
                   ),
-                  // TextfeildWidget(
-                  //   nameTextController: phoneNumberTextController,
-                  //   keyboardType: TextInputType.phone,
-                  //   text: 'Phone Number',
-                  //   obscureText: false,
-                  //   // password: passwordTextController,
-                  // ),
+               
                   SizedBox(
                     height: size.width * .15,
                   ),
@@ -115,9 +106,7 @@ class CreateAccountScreen extends StatelessWidget {
                                 MaterialPageRoute(
                                   builder: (context) => EnterDetailsScreen(
                                     phoneNumber: phoneNumberTextController.text,
-                                    // email: emailTextController.text,
-                                    // name: nameTextController.text,
-
+                                   
                                   ),
                                 ),
                                 (route) => false);
@@ -180,16 +169,4 @@ class CreateAccountScreen extends StatelessWidget {
   }
 }
 
-createUser(UserModel user) async {
-  final db = FirebaseFirestore.instance;
 
-  try {
-    await db.collection('users').add(
-          user.toJson(),
-        );
-    return true;
-    // ignore: empty_catches, unused_catch_clause
-  }on FirebaseException catch (e) {
-    return false;
-  }
-}
