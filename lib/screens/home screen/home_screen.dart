@@ -76,7 +76,7 @@ class _HomeScreenState extends State<HomeScreen> {
     Size size = MediaQuery.sizeOf(context);
     return FutureBuilder<DocumentSnapshot?>(
         future:
-            getUserDataByPhoneNumber(number ??= phoneNumberTextController.text),
+            getUserDataByPhoneNumber(number!),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
