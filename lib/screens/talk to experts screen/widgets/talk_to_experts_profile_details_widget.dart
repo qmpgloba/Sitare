@@ -1,4 +1,3 @@
-
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -12,7 +11,8 @@ import 'contact_icons_widget.dart';
 class TalkToExpertsProfileDetailsWidget extends StatelessWidget {
   const TalkToExpertsProfileDetailsWidget({
     super.key,
-    required this.size, required this.astrologer,
+    required this.size,
+    required this.astrologer,
   });
 
   final Size size;
@@ -22,7 +22,9 @@ class TalkToExpertsProfileDetailsWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.of(context).push(MaterialPageRoute(builder: (context) => ProfileScreen(astrologer: astrologer),));
+        Navigator.of(context).push(MaterialPageRoute(
+          builder: (context) => ProfileScreen(astrologer: astrologer),
+        ));
       },
       child: Padding(
         padding: EdgeInsets.all(size.width / 20),
@@ -34,14 +36,13 @@ class TalkToExpertsProfileDetailsWidget extends StatelessWidget {
                 children: [
                   CircleAvatar(
                     radius: size.width * .12,
-                    backgroundImage:  NetworkImage(
-                        astrologer.profilePic),
+                    backgroundImage: NetworkImage(astrologer.profilePic),
                   ),
                   SizedBox(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                         AutoSizeText(
+                        AutoSizeText(
                           astrologer.fullName,
                           style: const TextStyle(fontSize: 16),
                           maxFontSize: 16,
@@ -59,23 +60,22 @@ class TalkToExpertsProfileDetailsWidget extends StatelessWidget {
                             Icons.star,
                             color: Colors.amber,
                           ),
-                          onRatingUpdate: (rating) {
-                          },
+                          onRatingUpdate: (rating) {},
                         ),
-                         AutoSizeText(
+                        AutoSizeText(
                           astrologer.skills.take(2).join(','),
                           // maxLines: 1,
                           maxFontSize: 14,
                           style: const TextStyle(
                               fontSize: 14, fontWeight: FontWeight.bold),
                         ),
-                         AutoSizeText(astrologer.languages.take(2).join(','),
+                        AutoSizeText(astrologer.languages.take(2).join(','),
                             // maxLines: 1,
                             maxFontSize: 14,
                             style: const TextStyle(
                               fontSize: 14,
                             )),
-                         AutoSizeText(
+                        AutoSizeText(
                           'Exp ${astrologer.experienceYears} years | ₹ 95/min',
                           maxLines: 1,
                           maxFontSize: 13,
@@ -105,17 +105,17 @@ class TalkToExpertsProfileDetailsWidget extends StatelessWidget {
                       ),
                     ],
                   ),
-                 
                 ],
               ),
-              const SizedBox(height: 10,),
-               const LinearProgressIndicator(
+              const SizedBox(
+                height: 10,
+              ),
+              const LinearProgressIndicator(
                 value: .70,
                 color: greenColor,
-               )
+              )
             ],
           ),
-    
         ),
       ),
     );
