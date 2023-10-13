@@ -83,7 +83,7 @@ class TalkToExpertsProfileDetailsWidget extends StatelessWidget {
                       ],
                     ),
                   ),
-                   Column(
+                  Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const ContactIconsTalkToExpertsScreen(
@@ -91,8 +91,14 @@ class TalkToExpertsProfileDetailsWidget extends StatelessWidget {
                       const SizedBox(
                         height: 5,
                       ),
-                      const ContactIconsTalkToExpertsScreen(
-                          icon: Icons.call_outlined, text: 'Call'),
+                      GestureDetector(
+                        onTap: () {
+                          // print("ckb");
+                          sendNotification();
+                        },
+                        child: const ContactIconsTalkToExpertsScreen(
+                            icon: Icons.call_outlined, text: 'Call'),
+                      ),
                       const SizedBox(
                         height: 5,
                       ),
