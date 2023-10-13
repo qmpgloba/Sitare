@@ -4,10 +4,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:sitare/constants/ui_constants.dart';
-import 'package:sitare/functions/get_user_details.dart';
+import 'package:sitare/functions/user_functions.dart';
 import 'package:sitare/model/user_model.dart';
 import 'package:sitare/screens/home%20screen/home_screen.dart';
 import 'package:sitare/screens/profile%20screen/widgets/update_profile_textfeild_widget.dart';
+import 'package:sitare/screens/update%20profile%20screen/widgets/update_button_widget.dart';
 import 'package:sitare/widget/logger_widget.dart';
 
 import '../create account page/cerate_account_screen.dart';
@@ -58,7 +59,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.sizeOf(context);
     String? number = FirebaseAuth.instance.currentUser == null
-        ? (phoneNumberTextController.text)
+        ? ("+91${phoneNumberTextController.text}")
         : (FirebaseAuth.instance.currentUser!.phoneNumber);
     return FutureBuilder<DocumentSnapshot?>(
         future:
@@ -320,25 +321,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                               }
                             }
                           },
-                          child: Container(
-                            width: double.maxFinite,
-                            decoration: BoxDecoration(
-                                color: redColor,
-                                borderRadius: BorderRadius.circular(3)),
-                            child: const Padding(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 10, vertical: 10),
-                              child: AutoSizeText(
-                                'UPDATE',
-                                maxLines: 1,
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    fontSize: 14,
-                                    color: whiteColor,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                            ),
-                          ),
+                          child: const UpdateButtonWidget(),
                         ),
                       ],
                     ),
@@ -389,28 +372,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
       text: userData!['timeofBirth'],
     );
 
-    // genderDropDownValue = userData!['gender'];
-    // martialDropDownValue = userData!['maritalStatus'];
   }
 }
 
-updateUser(UserModel user, String number) async {
-  final db = FirebaseFirestore.instance;
 
-  try {
-    QuerySnapshot querySnapshot = await db
-        .collection('users')
-        .where('phone number', isEqualTo: number)
-        .get();
-
-    if (querySnapshot.docs.isNotEmpty) {
-      DocumentSnapshot documentSnapshot = querySnapshot.docs.first;
-      await documentSnapshot.reference.update(user.toJson());
-      return true;
-    } else {
-      return false;
-    }
-  } catch (e) {
-    return false;
-  }
-}

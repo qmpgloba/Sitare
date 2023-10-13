@@ -23,6 +23,6 @@ class MyApp extends StatelessWidget {
           fontFamily: 'Muli',
           useMaterial3: true,
         ),
-        home:  AuthWrapper());
+        home:   AuthWrapper());
   }
 }
