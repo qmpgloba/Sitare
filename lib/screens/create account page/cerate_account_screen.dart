@@ -58,7 +58,7 @@ class CreateAccountScreen extends StatelessWidget {
                   TextfeildWidget(
                     nameTextController: nameTextController,
                     keyboardType: TextInputType.text,
-                    text: 'name',
+                    text: 'Name',
                     obscureText: false,
                     // validate: validatePassword,
                   ),
