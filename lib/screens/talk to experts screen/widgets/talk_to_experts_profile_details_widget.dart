@@ -2,6 +2,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:sitare/functions/contact%20functions/contact_functions.dart';
 import 'package:sitare/model/astrologer_model.dart';
 import 'package:sitare/screens/profile%20screen/profile_screen.dart';
 
@@ -82,21 +83,26 @@ class TalkToExpertsProfileDetailsWidget extends StatelessWidget {
                       ],
                     ),
                   ),
-                  const Column(
+                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      ContactIconsTalkToExpertsScreen(
+                      const ContactIconsTalkToExpertsScreen(
                           icon: Icons.chat_outlined, text: 'Chat'),
-                      SizedBox(
+                      const SizedBox(
                         height: 5,
                       ),
-                      ContactIconsTalkToExpertsScreen(
+                      const ContactIconsTalkToExpertsScreen(
                           icon: Icons.call_outlined, text: 'Call'),
-                      SizedBox(
+                      const SizedBox(
                         height: 5,
                       ),
-                      ContactIconsTalkToExpertsScreen(
-                          icon: Icons.video_call_outlined, text: 'Video'),
+                      GestureDetector(
+                        onTap: () {
+                          launchWhatsAppUri(astrologer.phoneNumber);
+                        },
+                        child: const ContactIconsTalkToExpertsScreen(
+                            icon: Icons.video_call_outlined, text: 'Video'),
+                      ),
                     ],
                   ),
                  
