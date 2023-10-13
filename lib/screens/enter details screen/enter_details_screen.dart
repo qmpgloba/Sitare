@@ -352,7 +352,7 @@ class _EnterDetailsScreenState extends State<EnterDetailsScreen> {
                   UserModel user = UserModel(
                       name: nameController.text,
                       email: emailController.text,
-                      phoneNumber: phoneNumberTextController.text,
+                      phoneNumber: "+91${phoneNumberTextController.text}",
                       gender: genderController.text,
                       dateofBirth: dobController.text,
                       placeofBirth: pobController.text,
@@ -361,7 +361,7 @@ class _EnterDetailsScreenState extends State<EnterDetailsScreen> {
                       problem: problemController.text,
                       partnerDetails: optionalField);
                   bool submitSuccess =
-                      await updateUser(user, emailController.text);
+                      await updateUser(user, "+91${phoneNumberTextController.text}");
                   if (submitSuccess) {
                     // ignore: use_build_context_synchronously
                     Navigator.of(context).pushReplacement(MaterialPageRoute(

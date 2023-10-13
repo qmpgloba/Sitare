@@ -32,12 +32,12 @@ createUser(UserModel user) async {
 
 
 
-updateUser(UserModel user, String email) async {
+updateUser(UserModel user, String phoneNumber) async {
   final db = FirebaseFirestore.instance;
 
   try {
     QuerySnapshot querySnapshot =
-        await db.collection('users').where('email', isEqualTo: email).get();
+        await db.collection('users').where('phone number', isEqualTo: phoneNumber).get();
 
     if (querySnapshot.docs.isNotEmpty) {
       DocumentSnapshot documentSnapshot = querySnapshot.docs.first;
