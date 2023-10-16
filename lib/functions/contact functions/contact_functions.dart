@@ -26,7 +26,7 @@ sendNotification(String? fcmToken) async {
   final Map<String, dynamic> body = {
     "to": fcmToken,
     "notification": {
-      "body": "${userData!['full name']}Want to contact",
+      "body": "${userData!['full name']} wants to contact",
       "OrganizationId": "2",
       "content_available": true,
       "priority": "high",
