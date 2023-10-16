@@ -28,7 +28,7 @@ class AstrologerModel {
   final int foreignCountries;
   final String biggestChallenge;
   final String currentWorkingStatus;
-
+  final String fcmToken;
   AstrologerModel(
       {required this.fullName,
       required this.emailAddress,
@@ -58,7 +58,8 @@ class AstrologerModel {
       required this.learnAboutAstrology,
       required this.foreignCountries,
       required this.biggestChallenge,
-      required this.currentWorkingStatus});
+      required this.currentWorkingStatus,
+      required this.fcmToken});
 
   toJson() {
     return {
@@ -90,41 +91,42 @@ class AstrologerModel {
       "did anyone refer sitare": anyoneReferSitare,
       "Number of foreign countries": foreignCountries,
       "biggest challenge": biggestChallenge,
-      "current working status": currentWorkingStatus
+      "current working status": currentWorkingStatus,
+      "fcmToken": fcmToken
     };
   }
 
   factory AstrologerModel.fromJson(Map<String, dynamic> json) {
     return AstrologerModel(
-      fullName: json['name'],
-      emailAddress: json['email'],
-      phoneNumber: json['phone number'],
-      profilePic: json['profile image'],
-      officeAddress: json['office address'],
-      description: json['personal description'],
-      experienceYears: json['experience(in years)'],
-      contributeHours: json['hours of contribution'],
-      heardAboutSitare: json['Where did you hear about sitare'],
-      gender: json['gender'],
-      martialStatus: json['martial status'],
-      dateOfBirth: json['date of birth'],
-      languages: List<String>.from(json['languages']),
-      skills: List<String>.from(json['skills']),
-      workingOnlinePLatform: json['working on any other online platform'],
-      onBorad: json['onboard you'],
-      qualification: json['highest qualification'],
-      instagramLink: json['instagram profile link'],
-      linkedInLink: json['linkedin profile link'],
-      websiteLink: json['website profile link'],
-      earningExpectation: json['minimum earning expectation'],
-      learnAboutAstrology: json['form where did you learn astrology'],
-      facebookLink: json['facebook profile link'],
-      youtubeLink: json['youtube profile link'],
-      business: json['main source of business'],
-      anyoneReferSitare: json['did anyone refer sitare'],
-      foreignCountries: json['Number of foreign countries'],
-      biggestChallenge: json['biggest challenge'],
-      currentWorkingStatus: json['current working status'],
-    );
+        fullName: json['name'],
+        emailAddress: json['email'],
+        phoneNumber: json['phone number'],
+        profilePic: json['profile image'],
+        officeAddress: json['office address'],
+        description: json['personal description'],
+        experienceYears: json['experience(in years)'],
+        contributeHours: json['hours of contribution'],
+        heardAboutSitare: json['Where did you hear about sitare'],
+        gender: json['gender'],
+        martialStatus: json['martial status'],
+        dateOfBirth: json['date of birth'],
+        languages: List<String>.from(json['languages']),
+        skills: List<String>.from(json['skills']),
+        workingOnlinePLatform: json['working on any other online platform'],
+        onBorad: json['onboard you'],
+        qualification: json['highest qualification'],
+        instagramLink: json['instagram profile link'],
+        linkedInLink: json['linkedin profile link'],
+        websiteLink: json['website profile link'],
+        earningExpectation: json['minimum earning expectation'],
+        learnAboutAstrology: json['form where did you learn astrology'],
+        facebookLink: json['facebook profile link'],
+        youtubeLink: json['youtube profile link'],
+        business: json['main source of business'],
+        anyoneReferSitare: json['did anyone refer sitare'],
+        foreignCountries: json['Number of foreign countries'],
+        biggestChallenge: json['biggest challenge'],
+        currentWorkingStatus: json['current working status'],
+        fcmToken: json['fcmToken']);
   }
 }

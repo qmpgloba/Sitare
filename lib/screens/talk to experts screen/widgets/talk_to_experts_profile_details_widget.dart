@@ -94,7 +94,7 @@ class TalkToExpertsProfileDetailsWidget extends StatelessWidget {
                       GestureDetector(
                         onTap: () {
                           // print("ckb");
-                          sendNotification();
+                          sendNotification(astrologer.fcmToken);
                         },
                         child: const ContactIconsTalkToExpertsScreen(
                             icon: Icons.call_outlined, text: 'Call'),
