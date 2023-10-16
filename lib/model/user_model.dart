@@ -1,4 +1,5 @@
 class UserModel {
+  final String uid;
   final String name;
   final String email;
   final String phoneNumber;
@@ -17,6 +18,7 @@ class UserModel {
     this.timeofBirth,
     this.maritalStatus,
     this.problem,
+    required this.uid,
     required this.name,
     required this.email,
     required this.phoneNumber,
@@ -25,6 +27,7 @@ class UserModel {
 
   toJson() {
     return {
+      'uid': uid,
       'full name': name,
       'email': email,
       'phone number': phoneNumber,
