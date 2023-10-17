@@ -1,4 +1,7 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
+import 'package:sitare/model/astrologer_model.dart';
+import 'package:sitare/screens/chat%20screen/service/chat_service.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:whatsapp_unilink/whatsapp_unilink.dart';
 
@@ -52,3 +55,12 @@ sendNotification() async {
     // Handle network or other errors
   }
 }
+
+ void sendMessage(TextEditingController controller,ChatService chatService,AstrologerModel astrologer) async {
+    if (controller.text.isNotEmpty) {
+      await chatService.sendMessage(
+          astrologer.uid, controller.text);
+
+      controller.clear();
+    }
+  }

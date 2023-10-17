@@ -43,7 +43,7 @@ class OnBoardingPageWidget extends StatelessWidget {
                       onPressed: () {
                         Navigator.of(context).pushAndRemoveUntil(
                             MaterialPageRoute(
-                              builder: (context) =>CreateAccountScreen(),
+                              builder: (context) =>const CreateAccountScreen(),
                             ),
                             (route) => false);
                       },
