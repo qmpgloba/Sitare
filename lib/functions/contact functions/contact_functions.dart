@@ -15,7 +15,7 @@ launchWhatsAppUri(String phoneNumber) async {
   await launchUrl(Uri.parse(link.toString()));
 }
 
-sendNotification() async {
+sendNotification(String? fcmToken) async {
   // Define the FCM endpoint and headers
   const String fcmUrl = "https://fcm.googleapis.com/fcm/send";
   final Map<String, String> headers = {
@@ -26,10 +26,9 @@ sendNotification() async {
 
   // Define the request body
   final Map<String, dynamic> body = {
-    "to":
-        "eHeRr2o0QwKsIi3ErOLrAU:APA91bFAnvdYbnr_2SeRmLpSeIvaD1j5Kk5-Q7gixQBEa4hyMgn4zPwTsj9dk8Z2GQsnsGVbks4tS_AEdK7rAvzgmT9SHSbAYikqTg4r_0AKhkYDhsV8Zb31KikzbRRkIZtnBrYIvJkY",
+    "to": fcmToken,
     "notification": {
-      "body": "User Want to contact",
+      "body": "${userData!['full name']} wants to contact",
       "OrganizationId": "2",
       "content_available": true,
       "priority": "high",
@@ -47,12 +46,16 @@ sendNotification() async {
     );
 
     if (response.statusCode == 200) {
-      // Notification sent successfully
+
+
+      print("Notification sent successfully");
     } else {
-      // Handle errors
+      print("Failed to send notification. Status code: ${response.statusCode}");
+      print("Response data: ${response.data}");
     }
   } catch (e) {
-    // Handle network or other errors
+    print("Error: $e");
+
   }
 }
 

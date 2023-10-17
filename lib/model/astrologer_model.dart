@@ -31,6 +31,7 @@ class AstrologerModel {
   final String fcmToken;
   final String uid;
 
+
   AstrologerModel(
       {required this.fullName,
       required this.emailAddress,
@@ -61,8 +62,10 @@ class AstrologerModel {
       required this.foreignCountries,
       required this.biggestChallenge,
       required this.currentWorkingStatus,
+
       required this.fcmToken,
       required this.uid});
+
 
   toJson() {
     return {
@@ -97,6 +100,7 @@ class AstrologerModel {
       "current working status": currentWorkingStatus,
       "fcmToken": fcmToken,
       "uid": uid,
+
     };
   }
 
@@ -134,5 +138,6 @@ class AstrologerModel {
       fcmToken: json['fcmToken'],
       uid: json['uid'],
     );
+
   }
 }
