@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:sitare/functions/auth%20function/auth_function.dart';
 import 'package:sitare/model/astrologer_model.dart';
 
 

@@ -14,7 +14,7 @@ launchWhatsAppUri(String phoneNumber) async {
 
 sendNotification() async {
   // Define the FCM endpoint and headers
-  final String fcmUrl = "https://fcm.googleapis.com/fcm/send";
+  const String fcmUrl = "https://fcm.googleapis.com/fcm/send";
   final Map<String, String> headers = {
     "Content-Type": "application/json",
     "Authorization":
@@ -45,14 +45,10 @@ sendNotification() async {
 
     if (response.statusCode == 200) {
       // Notification sent successfully
-      print("Notification sent successfully");
     } else {
       // Handle errors
-      print("Failed to send notification. Status code: ${response.statusCode}");
-      print("Response data: ${response.data}");
     }
   } catch (e) {
     // Handle network or other errors
-    print("Error: $e");
   }
 }

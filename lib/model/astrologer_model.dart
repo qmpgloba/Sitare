@@ -28,6 +28,8 @@ class AstrologerModel {
   final int foreignCountries;
   final String biggestChallenge;
   final String currentWorkingStatus;
+  final String fcmToken;
+  final String uid;
 
   AstrologerModel(
       {required this.fullName,
@@ -58,7 +60,9 @@ class AstrologerModel {
       required this.learnAboutAstrology,
       required this.foreignCountries,
       required this.biggestChallenge,
-      required this.currentWorkingStatus});
+      required this.currentWorkingStatus,
+      required this.fcmToken,
+      required this.uid});
 
   toJson() {
     return {
@@ -90,7 +94,9 @@ class AstrologerModel {
       "did anyone refer sitare": anyoneReferSitare,
       "Number of foreign countries": foreignCountries,
       "biggest challenge": biggestChallenge,
-      "current working status": currentWorkingStatus
+      "current working status": currentWorkingStatus,
+      "fcmToken": fcmToken,
+      "uid": uid,
     };
   }
 
@@ -125,6 +131,8 @@ class AstrologerModel {
       foreignCountries: json['Number of foreign countries'],
       biggestChallenge: json['biggest challenge'],
       currentWorkingStatus: json['current working status'],
+      fcmToken: json['fcmToken'],
+      uid: json['uid'],
     );
   }
 }

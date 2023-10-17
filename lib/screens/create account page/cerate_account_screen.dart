@@ -1,3 +1,5 @@
+
+
 // ignore_for_file: use_build_context_synchronously, duplicate_ignore
 
 import 'package:firebase_auth/firebase_auth.dart';
@@ -9,7 +11,6 @@ import 'package:sitare/constants/ui_constants.dart';
 import 'package:sitare/functions/user_functions.dart';
 import 'package:sitare/model/user_model.dart';
 import 'package:sitare/screens/enter%20details%20screen/enter_details_screen.dart';
-import 'package:sitare/screens/home%20screen/home_screen.dart';
 import 'package:sitare/screens/welcome%20page/functions/functions.dart';
 import 'package:sitare/screens/welcome%20page/welcome_screen.dart';
 import 'package:sitare/screens/welcome%20page/widgets/mobile_number_textfeild_widget.dart';
@@ -28,7 +29,7 @@ final TextEditingController phoneNumberTextController = TextEditingController();
 
 // ignore: must_be_immutable
 class CreateAccountScreen extends StatefulWidget {
-  CreateAccountScreen({super.key});
+  const CreateAccountScreen({super.key});
 
   @override
   State<CreateAccountScreen> createState() => _CreateAccountScreenState();
@@ -126,6 +127,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                                     problem: '',
                                     timeofBirth: '');
                             bool signedUp = await createUser(user);
+                            // ignore: duplicate_ignore
                             if (signedUp) {
                               // ignore: use_build_context_synchronously
                               Navigator.of(context).pushAndRemoveUntil(
