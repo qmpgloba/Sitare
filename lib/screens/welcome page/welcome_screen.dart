@@ -121,7 +121,7 @@ class WelcomeScreen extends StatelessWidget {
                    InkWell(
                     onTap: () {
                       Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => CreateAccountScreen(),
+                        builder: (context) => const CreateAccountScreen(),
                       ));
                     },
                     child: const AutoSizeTextWidget(

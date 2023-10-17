@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sitare/constants/app_constants.dart';
 import 'package:sitare/constants/ui_constants.dart';
+import 'package:sitare/functions/auth%20function/auth_function.dart';
 import 'package:sitare/functions/user_functions.dart';
 import 'package:sitare/screens/create%20account%20page/cerate_account_screen.dart';
 import 'package:sitare/screens/home%20screen/home_screen.dart';
@@ -15,7 +16,7 @@ class EnterDetailsScreen extends StatefulWidget {
     required this.phoneNumber,
   });
   final String phoneNumber;
-  
+
   @override
   State<EnterDetailsScreen> createState() => _EnterDetailsScreenState();
 }
@@ -45,7 +46,6 @@ class _EnterDetailsScreenState extends State<EnterDetailsScreen> {
   String? phoneNumber;
   String? email;
 
-  
   Future<void> _showDatePicker() async {
     final DateTime? pickedDate = await showDatePicker(
       context: context,
@@ -350,6 +350,7 @@ class _EnterDetailsScreenState extends State<EnterDetailsScreen> {
                     tobDone) {
                   _key.currentState!.save();
                   UserModel user = UserModel(
+                      uid: currentUser!.uid,
                       name: nameController.text,
                       email: emailController.text,
                       phoneNumber: "+91${phoneNumberTextController.text}",
@@ -360,8 +361,8 @@ class _EnterDetailsScreenState extends State<EnterDetailsScreen> {
                       maritalStatus: martialController.text,
                       problem: problemController.text,
                       partnerDetails: optionalField);
-                  bool submitSuccess =
-                      await updateUser(user, "+91${phoneNumberTextController.text}");
+                  bool submitSuccess = await updateUser(
+                      user, "+91${phoneNumberTextController.text}");
                   if (submitSuccess) {
                     // ignore: use_build_context_synchronously
                     Navigator.of(context).pushReplacement(MaterialPageRoute(
@@ -545,6 +546,4 @@ class _EnterDetailsScreenState extends State<EnterDetailsScreen> {
       ],
     );
   }
-  
 }
-
