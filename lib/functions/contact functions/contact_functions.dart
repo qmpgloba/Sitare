@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:sitare/model/astrologer_model.dart';
 import 'package:sitare/screens/chat%20screen/service/chat_service.dart';
+import 'package:sitare/screens/home%20screen/home_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:whatsapp_unilink/whatsapp_unilink.dart';
 
@@ -48,13 +49,10 @@ sendNotification(String? fcmToken) async {
     if (response.statusCode == 200) {
 
 
-      print("Notification sent successfully");
     } else {
-      print("Failed to send notification. Status code: ${response.statusCode}");
-      print("Response data: ${response.data}");
     }
+  // ignore: empty_catches
   } catch (e) {
-    print("Error: $e");
 
   }
 }
