@@ -95,33 +95,35 @@ class _ChatScreenState extends State<ChatScreen> {
           children: [
             Expanded(
               child: Container(
-                color: Colors.grey.withOpacity(0.4),
+                // color: Colors.grey.withOpacity(0.4),
                 child: _buildMessageList(size),
               ),
             ),
             Column(
               children: [
+                const Divider(),
                 ValueListenableBuilder(
                   valueListenable: rebuildNumber,
                   builder: (context, value, child) {
                     if (suggestions.isNotEmpty) {
                       return SizedBox(
-                        // width: size.width,
                         height: 30,
-                        // height: 50,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            ListView.builder(
-                              shrinkWrap: true,
-                              scrollDirection: Axis.horizontal,
-                              itemCount: suggestions.length,
-                              itemBuilder: (context, index) {
-                                return SuggestionTile(
-                                    suggestions: suggestions, index: index);
-                              },
-                            ),
-                          ],
+                        child: ListView.separated(
+                          shrinkWrap: true,
+                          scrollDirection: Axis.horizontal,
+                          itemCount: suggestions.length,
+                          separatorBuilder: (BuildContext context, int index) {
+                            return SizedBox(
+                                width: size.width /
+                                    16); // Adjust the width as per your requirement
+                          },
+                          itemBuilder: (context, index) {
+                            return SuggestionTile(
+                              suggestions: suggestions,
+                              index: index,
+                              astrologer: widget.astrologer,
+                            );
+                          },
                         ),
                       );
                     } else {
@@ -194,24 +196,36 @@ class SuggestionTile extends StatefulWidget {
     super.key,
     required this.suggestions,
     required this.index,
+    required this.astrologer,
   });
 
   final List<String> suggestions;
   final int index;
+  final AstrologerModel astrologer;
 
   @override
   State<SuggestionTile> createState() => _SuggestionTileState();
 }
 
 class _SuggestionTileState extends State<SuggestionTile> {
+  final ChatService _chatService = ChatService();
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-          color: greyColor, borderRadius: BorderRadius.circular(20)),
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Text(widget.suggestions[widget.index]),
+    return GestureDetector(
+      onTap: () {
+        print(widget.suggestions[widget.index]);
+        _chatService.sendMessage(
+            widget.astrologer.uid, (widget.suggestions[widget.index]));
+      },
+      child: Container(
+        decoration: BoxDecoration(
+            color: greyColor.withOpacity(0.5),
+            borderRadius: BorderRadius.circular(20)),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text(widget.suggestions[widget.index]),
+        ),
       ),
     );
   }
