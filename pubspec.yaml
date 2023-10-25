@@ -55,6 +55,7 @@ dependencies:
   url_launcher: ^6.1.14
   dio: ^5.3.3
   flutter_dotenv: ^5.1.0
+  google_mlkit_smart_reply: ^0.8.0
 
 
 dev_dependencies:

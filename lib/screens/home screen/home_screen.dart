@@ -67,6 +67,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+
     // print('FirebaseAuth.instance.currentUser!.phoneNumber');
     String? number = FirebaseAuth.instance.currentUser == null
         ? ("+91${phoneNumberTextController.text}")

@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_mlkit_smart_reply/google_mlkit_smart_reply.dart';
 import 'package:sitare/constants/ui_constants.dart';
 import 'package:sitare/model/astrologer_model.dart';
 import 'package:sitare/screens/chat%20screen/service/chat_service.dart';
@@ -20,6 +21,48 @@ class _ChatScreenState extends State<ChatScreen> {
   final TextEditingController _messageController = TextEditingController();
   final ChatService _chatService = ChatService();
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  final smartReply = SmartReply();
+  String? lastMessageFromOtherUser;
+  final ValueNotifier<int> rebuildNumber = ValueNotifier<int>(0);
+  List<String> suggestions = [];
+  @override
+  void dispose() {
+    smartReply.close();
+    super.dispose();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _chatService
+        .getMessages(widget.astrologer.uid, _firebaseAuth.currentUser!.uid)
+        .listen((snapshot) {
+      for (var doc in snapshot.docs) {
+        Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
+        if (data['senderId'] != _firebaseAuth.currentUser!.uid) {
+          addMessage(data['message']);
+        }
+      }
+    });
+  }
+
+  void addMessage(String message) {
+    lastMessageFromOtherUser = message;
+    smartReply.addMessageToConversationFromRemoteUser(
+        message, DateTime.now().millisecondsSinceEpoch, widget.astrologer.uid);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      generateReplies();
+    });
+  }
+
+  void generateReplies() async {
+    final response = await smartReply.suggestReplies();
+
+    suggestions.clear();
+
+    suggestions.addAll(response.suggestions);
+    rebuildNumber.value++;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -56,10 +99,42 @@ class _ChatScreenState extends State<ChatScreen> {
                 child: _buildMessageList(size),
               ),
             ),
-            ChatInputWidget(
-                messageController: _messageController,
-                chatService: _chatService,
-                astrologer: widget.astrologer)
+            Column(
+              children: [
+                ValueListenableBuilder(
+                  valueListenable: rebuildNumber,
+                  builder: (context, value, child) {
+                    if (suggestions.isNotEmpty) {
+                      return SizedBox(
+                        // width: size.width,
+                        height: 30,
+                        // height: 50,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            ListView.builder(
+                              shrinkWrap: true,
+                              scrollDirection: Axis.horizontal,
+                              itemCount: suggestions.length,
+                              itemBuilder: (context, index) {
+                                return SuggestionTile(
+                                    suggestions: suggestions, index: index);
+                              },
+                            ),
+                          ],
+                        ),
+                      );
+                    } else {
+                      return Container(); // Or any other widget to show when suggestions are empty
+                    }
+                  },
+                ),
+                ChatInputWidget(
+                    messageController: _messageController,
+                    chatService: _chatService,
+                    astrologer: widget.astrologer),
+              ],
+            )
           ],
         ),
       ),
@@ -88,6 +163,7 @@ class _ChatScreenState extends State<ChatScreen> {
 
   Widget _buildMessageItem(DocumentSnapshot document, Size size) {
     Map<String, dynamic> data = document.data() as Map<String, dynamic>;
+
     var alignment = (data['senderId'] == _firebaseAuth.currentUser!.uid)
         ? Alignment.centerRight
         : Alignment.centerLeft;
@@ -98,7 +174,9 @@ class _ChatScreenState extends State<ChatScreen> {
         padding: const EdgeInsets.all(10),
         child: Container(
           decoration: BoxDecoration(
-            color:(data['senderId'] == _firebaseAuth.currentUser!.uid)? Colors.blue:greyColor,
+            color: (data['senderId'] == _firebaseAuth.currentUser!.uid)
+                ? Colors.blue
+                : greyColor,
             borderRadius: BorderRadius.circular(20),
           ),
           child: Padding(
@@ -106,6 +184,34 @@ class _ChatScreenState extends State<ChatScreen> {
             child: Text(data['message']),
           ),
         ),
+      ),
+    );
+  }
+}
+
+class SuggestionTile extends StatefulWidget {
+  const SuggestionTile({
+    super.key,
+    required this.suggestions,
+    required this.index,
+  });
+
+  final List<String> suggestions;
+  final int index;
+
+  @override
+  State<SuggestionTile> createState() => _SuggestionTileState();
+}
+
+class _SuggestionTileState extends State<SuggestionTile> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+          color: greyColor, borderRadius: BorderRadius.circular(20)),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Text(widget.suggestions[widget.index]),
       ),
     );
   }
