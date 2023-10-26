@@ -1,5 +1,3 @@
-
-
 // ignore_for_file: use_build_context_synchronously, duplicate_ignore
 
 import 'package:firebase_auth/firebase_auth.dart';
@@ -24,8 +22,8 @@ import 'widgets/textfeild_widget.dart';
 final TextEditingController emailTextController = TextEditingController();
 final TextEditingController nameTextController = TextEditingController();
 final TextEditingController phoneNumberTextController = TextEditingController();
- OtpFieldController otpController = OtpFieldController();
-  String otp = '';
+OtpFieldController otpController = OtpFieldController();
+String otp = '';
 
 // ignore: must_be_immutable
 class CreateAccountScreen extends StatefulWidget {
@@ -38,7 +36,7 @@ class CreateAccountScreen extends StatefulWidget {
 class _CreateAccountScreenState extends State<CreateAccountScreen> {
   String countyCode = '91';
 
-  bool _isVisibleOTP =false;
+  bool _isVisibleOTP = false;
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
@@ -89,94 +87,109 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                     height: size.width * .07,
                   ),
                   MobileNumberTextFeildWidget(
-                     controller: phoneNumberTextController,
+                    controller: phoneNumberTextController,
                     onCountryChanged: (country) {
                       countyCode = country.dialCode;
                     },
                   ),
-               
                   SizedBox(
                     height: size.width * .05,
                   ),
                   Visibility(
                     visible: _isVisibleOTP,
                     child: OTPTextField(
-                                  length: 6,
-                                  width: size.width,
-                                  fieldWidth: size.width / 8,
-                                  style: const TextStyle(fontSize: 14),
-                                  textFieldAlignment: MainAxisAlignment.spaceEvenly,
-                                  fieldStyle: FieldStyle.underline,
-                                  controller: otpController,
-                                  onCompleted: (pin) async {
-                    
-                    try {
-                      await verifyOTP(pin).then((value) async{
-                         if (_formKey.currentState!.validate()) {
-                            UserModel user = UserModel(
-                              uid: '',
-                                name: nameTextController.text,
-                                email: emailTextController.text,
-                                phoneNumber:
-                                    "+91${phoneNumberTextController.text}",
-                                    dateofBirth: '',
-                                    gender: '',
-                                    maritalStatus: '',
-                                    partnerDetails: [],
-                                    placeofBirth: '',
-                                    problem: '',
-                                    timeofBirth: '');
-                            bool signedUp = await createUser(user);
-                            // ignore: duplicate_ignore
-                            if (signedUp) {
-                              // ignore: use_build_context_synchronously
-                              Navigator.of(context).pushAndRemoveUntil(
-                                  MaterialPageRoute(
-                                    builder: (context) => EnterDetailsScreen(
-                                      phoneNumber: phoneNumberTextController.text,
-                                     
+                      length: 6,
+                      width: size.width,
+                      fieldWidth: size.width / 8,
+                      style: const TextStyle(fontSize: 14),
+                      textFieldAlignment: MainAxisAlignment.spaceEvenly,
+                      fieldStyle: FieldStyle.underline,
+                      controller: otpController,
+                      onCompleted: (pin) async {
+                        try {
+                          await verifyOTP(pin).then((value) async {
+                            if (_formKey.currentState!.validate()) {
+                              UserModel user = UserModel(
+                                  uid: '',
+                                  name: nameTextController.text,
+                                  email: emailTextController.text.trim(),
+                                  phoneNumber:
+                                      "+91${phoneNumberTextController.text}",
+                                  dateofBirth: '',
+                                  gender: '',
+                                  maritalStatus: '',
+                                  partnerDetails: [],
+                                  placeofBirth: '',
+                                  problem: '',
+                                  timeofBirth: '');
+                              bool isExist = await checkPhoneNumberExistence(
+                                  "+91${phoneNumberTextController.text}");
+                              if (isExist) {
+                                showAlertBox(
+                                    context,
+                                    'Phone number already exist!',
+                                    whiteColor,
+                                    'Close');
+                              }
+                              bool signedUp = await createUser(user);
+                              // ignore: duplicate_ignore
+                              if (signedUp) {
+                                // ignore: use_build_context_synchronously
+                                Navigator.of(context).pushAndRemoveUntil(
+                                    MaterialPageRoute(
+                                      builder: (context) => EnterDetailsScreen(
+                                        phoneNumber:
+                                            phoneNumberTextController.text,
+                                      ),
                                     ),
-                                  ),
-                                  (route) => false);
-                            } else {
-                              showAboutDialog(context: context);
+                                    (route) => false);
+                              } else {
+                                showAboutDialog(context: context);
+                              }
                             }
-                          }
-                        // Navigator.of(context).push(MaterialPageRoute(
-                        //   builder: (context) =>  EnterDetailsScreen(phoneNumber: phoneNumberTextController.text),
-                        // ));
-                      });
-                    // ignore: unused_catch_clause
-                    } on FirebaseAuthException catch (e) {
-                      // ignore: use_build_context_synchronously
-                      showAlertBox(context, 'Invalid OTP', whiteColor, 'Close');
-                    }
-                    
-                                  },
-                                  otpFieldStyle: OtpFieldStyle(
-                    enabledBorderColor: FONT_COLOR,
-                    focusBorderColor: Colors.black,
-                                  ),
-                                ),
+                            // Navigator.of(context).push(MaterialPageRoute(
+                            //   builder: (context) =>  EnterDetailsScreen(phoneNumber: phoneNumberTextController.text),
+                            // ));
+                          });
+                          // ignore: unused_catch_clause
+                        } on FirebaseAuthException catch (e) {
+                          // ignore: use_build_context_synchronously
+                          showAlertBox(
+                              context, 'Invalid OTP', whiteColor, 'Close');
+                        }
+                      },
+                      otpFieldStyle: OtpFieldStyle(
+                        enabledBorderColor: FONT_COLOR,
+                        focusBorderColor: Colors.black,
+                      ),
+                    ),
                   ),
-              SizedBox(
+                  SizedBox(
                     height: size.width * .05,
                   ),
                   SizedBox(
                     width: double.maxFinite,
                     child: ElevatedButton(
                       onPressed: () async {
-                       
-                         if (phoneNumberTextController.text.isEmpty) {
+                        if (phoneNumberTextController.text.isEmpty) {
                           showAlertBox(context, 'Please enter Mobile number',
                               whiteColor, 'Close');
                         } else {
-                          if (_formKey.currentState!.validate()) {
+                          if(_formKey.currentState!.validate()){
+                            if (phoneNumberTextController.text.length==10) {
                             var phoneNumber =
                                 '+$countyCode${phoneNumberTextController.text}';
-                            // bool mobileNumberExists =
-                            //     await checkPhoneNumberExistence(phoneNumber);
-                       
+                            bool mobileNumberExists =
+                                await checkPhoneNumberExistence(phoneNumber);
+                            //  bool isExist = await checkPhoneNumberExistence(
+                            //       "+91${phoneNumberTextController.text}");
+                            if (mobileNumberExists) {
+                              showAlertBox(
+                                  context,
+                                  'Mobile number already exist',
+                                  whiteColor,
+                                  'Close');
+                            } else {
                               var result =
                                   await phoneAuthentication(phoneNumber);
                               if (result == null) {
@@ -186,23 +199,21 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                                 // Navigator.of(context).push(MaterialPageRoute(
                                 //   builder: (context) => OTPScreen(),
                                 // ));
-                                 setState(() {
-                          _isVisibleOTP =true;
-                        });
+                                setState(() {
+                                  _isVisibleOTP = true;
+                                });
                               } else {
                                 // ignore: use_build_context_synchronously
                                 showAlertBox(
                                     context, result, whiteColor, 'close');
                               }
-                            } else {
-                              // ignore: use_build_context_synchronously
-                              showAlertBox(
-                                  context,
-                                  'Enter a valid mobile number',
-                                  whiteColor,
-                                  'Retry');
                             }
-                       
+                          } else {
+                            // ignore: use_build_context_synchronously
+                            showAlertBox(context, 'Enter a valid mobile number',
+                                whiteColor, 'Retry');
+                          }
+                          }
                         }
                         // if (_formKey.currentState!.validate()) {
                         //   UserModel user = UserModel(
@@ -224,7 +235,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                         //         MaterialPageRoute(
                         //           builder: (context) => EnterDetailsScreen(
                         //             phoneNumber: phoneNumberTextController.text,
-                                   
+
                         //           ),
                         //         ),
                         //         (route) => false);
@@ -232,7 +243,6 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                         //     showAboutDialog(context: context);
                         //   }
                         // }
-                      
                       },
                       style: ButtonStyle(
                         shape: MaterialStateProperty.all<OutlinedBorder>(
@@ -286,5 +296,3 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
     );
   }
 }
-
-

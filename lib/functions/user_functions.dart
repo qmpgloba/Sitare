@@ -16,6 +16,29 @@ Future<DocumentSnapshot<Map<String, dynamic>>?> getUserDataByPhoneNumber(
   }
 }
 
+// Future<bool> checkPhoneNumberExistence(String mobileNumber) async {
+//   final phoneNumber = mobileNumber;
+
+//   try {
+//     final querySnapshot = await FirebaseFirestore.instance
+//         .collection('users')
+//         .where('phone number', isEqualTo: phoneNumber)
+//         .get();
+
+//     if (querySnapshot.docs.isNotEmpty) {
+//       // Phone number exists in Firestore
+//       return true;
+//     } else {
+//       // Phone number does not exist in Firestore
+//       return false;
+//     }
+//     // ignore: unused_catch_clause
+//   } on FirebaseException catch (e) {
+//     return false;
+//   }
+// }
+
+
 createUser(UserModel user) async {
   final db = FirebaseFirestore.instance;
 
