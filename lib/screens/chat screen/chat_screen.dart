@@ -109,7 +109,7 @@ class _ChatScreenState extends State<ChatScreen> {
                   builder: (context, value, child) {
                     if (suggestions.isNotEmpty) {
                       return SizedBox(
-                        height: 30,
+                        height: size.width*.1,
                         child: ListView.separated(
                           shrinkWrap: true,
                           scrollDirection: Axis.horizontal,

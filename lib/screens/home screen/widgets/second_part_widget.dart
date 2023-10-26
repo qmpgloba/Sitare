@@ -64,7 +64,7 @@ class SecondPartWidget extends StatelessWidget {
                     ),
                   ],
                   options: CarouselOptions(
-                    height: size.width * .45,
+                    height: size.width * .5,
                     enlargeCenterPage: true,
                     autoPlay: true,
                     // aspectRatio: 4 / 3,

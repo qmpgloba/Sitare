@@ -27,8 +27,8 @@ class ProfileViewCarouselHomeWidget extends StatelessWidget {
               children: [
                 const AutoSizeText(
                   'TAROT READING',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w900),
-                  maxFontSize: 20,
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w900),
+                  maxFontSize: 18,
                   maxLines: 1,
                 ),
                 const AutoSizeText(
