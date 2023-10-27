@@ -1,5 +1,9 @@
-import 'package:dio/dio.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';  
 import 'package:flutter/material.dart';
+import 'package:sitare/functions/auth%20function/auth_function.dart';
 import 'package:sitare/model/astrologer_model.dart';
 import 'package:sitare/screens/chat%20screen/service/chat_service.dart';
 import 'package:sitare/screens/home%20screen/home_screen.dart';
@@ -17,6 +21,7 @@ launchWhatsAppUri(String phoneNumber) async {
 }
 
 sendNotification(String? fcmToken) async {
+  print(fcmToken);
   // Define the FCM endpoint and headers
   const String fcmUrl = "https://fcm.googleapis.com/fcm/send";
   final Map<String, String> headers = {
@@ -28,32 +33,35 @@ sendNotification(String? fcmToken) async {
   // Define the request body
   final Map<String, dynamic> body = {
     "to": fcmToken,
+     "data": {
+      "click_action": "FLUTTER_NOTIFICATION_CLICK",
+      "id": "1",
+      "status": "done",
+      "uid": FirebaseAuth.instance.currentUser!.uid,
+    },
     "notification": {
+     
       "body": "${userData!['full name']} wants to contact",
       "OrganizationId": "2",
       "content_available": true,
       "priority": "high",
       "subtitle": "Elementary School",
-      "title": "Astro"
+      "title": "Astro",
+      
     }
   };
 
-  try {
-    final dio = Dio();
-    final response = await dio.post(
-      fcmUrl,
-      data: body,
-      options: Options(headers: headers),
-    );
-
+ try {
+    final response = await http.post(Uri.parse(fcmUrl),
+        headers: headers, body: jsonEncode(body));
+        print(response.body);
     if (response.statusCode == 200) {
-
-
+      print("Notification sent successfully");
     } else {
+      print("Failed to send notification. Error: ${response.reasonPhrase}");
     }
-  // ignore: empty_catches
   } catch (e) {
-
+    print("Failed to send notification. Error: $e");
   }
 }
 
