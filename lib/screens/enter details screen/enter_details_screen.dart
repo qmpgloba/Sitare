@@ -1,4 +1,4 @@
-// ignore_for_file: use_build_context_synchronously
+// ignore_for_file: use_build_context_synchronously, duplicate_ignore
 
 import 'package:flutter/material.dart';
 import 'package:sitare/constants/app_constants.dart';
@@ -349,6 +349,7 @@ class _EnterDetailsScreenState extends State<EnterDetailsScreen> {
                     _gender != null &&
                     mobileNumberController.text.isNotEmpty &&
                     dobDone &&
+                    // ignore: duplicate_ignore
                     tobDone) {
                   _key.currentState!.save();
                   UserModel user = UserModel(
@@ -367,6 +368,7 @@ class _EnterDetailsScreenState extends State<EnterDetailsScreen> {
                       partnerDetails: optionalField);
                   bool submitSuccess = await updateUser(
                       user, "+91${phoneNumberTextController.text}");
+                  // ignore: duplicate_ignore, duplicate_ignore
                   if (submitSuccess) {
                     // ignore: use_build_context_synchronously
                     Navigator.of(context).pushReplacement(MaterialPageRoute(
