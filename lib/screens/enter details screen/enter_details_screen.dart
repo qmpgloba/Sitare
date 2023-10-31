@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:sitare/constants/app_constants.dart';
 import 'package:sitare/constants/ui_constants.dart';
@@ -405,7 +407,22 @@ class _EnterDetailsScreenState extends State<EnterDetailsScreen> {
             ),
             Center(
               child: InkWell(
-                onTap: () {
+                onTap: () async{
+                   UserModel user = UserModel(
+
+                      uid: currentUser!.uid,
+                      name: nameController.text,
+                      email: emailController.text,
+                      phoneNumber: "+91${phoneNumberTextController.text}",
+                      userProfileImage: profileImage,
+                      gender: '',
+                      dateofBirth: '',
+                      placeofBirth: '',
+                      timeofBirth: '',
+                      maritalStatus:'',
+                      problem: '',
+                      partnerDetails: optionalField);
+                  await updateUser(user, '+91${phoneNumberTextController.text}');
                   Navigator.of(context).pushAndRemoveUntil(
                       MaterialPageRoute(
                         builder: (context) => const HomeScreen(),

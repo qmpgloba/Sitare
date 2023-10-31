@@ -32,7 +32,28 @@ final List<String> sortbyOptions = [
   'Ratings: High to Low',
   'Ratings: Low to High',
 ];
-final List<String> experienceOptions = ['1', '2', '3', '4', '5'];
+final List<String> experienceOptions = [
+  '1',
+  '2',
+  '3',
+  '4',
+  '5',
+  '6',
+  '7',
+  '8',
+  '9',
+  '10',
+  '11',
+  '12',
+  '13',
+  '14',
+  '15',
+  '16',
+  '17',
+  '18',
+  '19',
+  '20'
+];
 final List<String> skillsOptions = [
   'Vedic',
   "Nadi",
@@ -65,7 +86,6 @@ final List<String> genderOptions = [
   'Female',
 ];
 
-
 List selectedOptions = [
   'Vedic',
   "Nadi",
@@ -95,7 +115,22 @@ List selectedOptions = [
   '2',
   '3',
   '4',
-  '5'
+  '5',
+  '6',
+  '7',
+  '8',
+  '9',
+  '10',
+  '11',
+  '12',
+  '13',
+  '14',
+  '15',
+  '16',
+  '17',
+  '18',
+  '19',
+  '20'
 ];
 
 List selectedSkills = [
@@ -117,7 +152,28 @@ List selectedSkills = [
   'Loshu Grid',
   "Psychologist",
 ];
-List<String> selectedExperience = ['1', '2', '3', '4', '5'];
+List<String> selectedExperience = [
+  '1',
+  '2',
+  '3',
+  '4',
+  '5',
+  '6',
+  '7',
+  '8',
+  '9',
+  '10',
+  '11',
+  '12',
+  '13',
+  '14',
+  '15',
+  '16',
+  '17',
+  '18',
+  '19',
+  '20'
+];
 List selectedLanguages = [
   'English',
   "Hindi",
@@ -129,4 +185,5 @@ List selectedGenders = [
   "Male",
   "Female",
 ];
-const profileImage = 'https://w7.pngwing.com/pngs/304/275/png-transparent-user-profile-computer-icons-profile-miscellaneous-logo-monochrome-thumbnail.png';
+const profileImage =
+    'https://w7.pngwing.com/pngs/304/275/png-transparent-user-profile-computer-icons-profile-miscellaneous-logo-monochrome-thumbnail.png';

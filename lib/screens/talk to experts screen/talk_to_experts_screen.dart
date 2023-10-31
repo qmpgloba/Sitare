@@ -273,7 +273,7 @@ class _TalkToExpertsScreenState extends State<TalkToExpertsScreen> {
                     Container(
                       color: Colors.white,
                       height: size.height * .55,
-                      width: size.width * 0.7,
+                      width: size.width * 0.65,
                       child: ListView.builder(
                         shrinkWrap: true,
                         itemCount: getSelectedOptions().length,
