@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:otp_text_field/otp_field.dart';
 import 'package:otp_text_field/otp_field_style.dart';
 import 'package:otp_text_field/style.dart';
+import 'package:sitare/constants/app_constants.dart';
 import 'package:sitare/constants/ui_constants.dart';
 import 'package:sitare/functions/user_functions.dart';
 import 'package:sitare/model/user_model.dart';
@@ -115,6 +116,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                                   email: emailTextController.text.trim(),
                                   phoneNumber:
                                       "+91${phoneNumberTextController.text}",
+                                      userProfileImage: profileImage,
                                   dateofBirth: '',
                                   gender: '',
                                   maritalStatus: '',

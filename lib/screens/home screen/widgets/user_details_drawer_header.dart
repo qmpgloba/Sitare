@@ -9,13 +9,15 @@ class UserDetailsDrawerHeader extends StatelessWidget {
     required this.size,
     required this.fullName,
     required this.email,
-    required this.phoneNumber,
+    required this.phoneNumber,  this.profileImageUrl,
+
   });
 
   final Size size;
   final String fullName;
   final String email;
   final String phoneNumber;
+  final String? profileImageUrl;
 
   @override
   Widget build(BuildContext context) {
@@ -26,9 +28,9 @@ class UserDetailsDrawerHeader extends StatelessWidget {
       children: [
         Stack(
           children: [
-            const CircleAvatar(
+             CircleAvatar(
               radius: 30,
-              backgroundColor: redColor,
+              backgroundImage:(profileImageUrl != '')? NetworkImage(profileImageUrl!): const AssetImage('assets/images/profile_image.png') as ImageProvider,
             ),
             Positioned(
                 // height: 25,

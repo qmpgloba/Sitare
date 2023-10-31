@@ -350,10 +350,12 @@ class _EnterDetailsScreenState extends State<EnterDetailsScreen> {
                     tobDone) {
                   _key.currentState!.save();
                   UserModel user = UserModel(
+
                       uid: currentUser!.uid,
                       name: nameController.text,
                       email: emailController.text,
                       phoneNumber: "+91${phoneNumberTextController.text}",
+                      userProfileImage: profileImage,
                       gender: genderController.text,
                       dateofBirth: dobController.text,
                       placeofBirth: pobController.text,

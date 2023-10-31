@@ -1,14 +1,18 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:sitare/constants/ui_constants.dart';
+import 'package:sitare/model/astrologer_model.dart';
+import 'package:sitare/screens/chat%20screen/service/chat_service.dart';
+import 'package:sitare/screens/talk%20to%20experts%20screen/widgets/talk_to_experts_profile_details_widget.dart';
 import 'package:sitare/screens/wallet%20recharge%20screen/wallet_recharge_screen.dart';
 
-import 'widgets/order_history_profile_widget.dart';
 
 // ignore: must_be_immutable
 class OrderHistoryScreen extends StatelessWidget {
   OrderHistoryScreen({super.key});
   num walletAmmount = 200;
+     final ChatService _chatService = ChatService();
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.sizeOf(context);
@@ -70,10 +74,25 @@ class OrderHistoryScreen extends StatelessWidget {
                 ),
               )),
         ),
-        body: ListView.separated(
-            itemBuilder: (context, index) => OrderHistoryProfileTile(size: size),
-            separatorBuilder: (context, index) => const Divider(),
-            itemCount: 3));
+        body: SafeArea(child: FutureBuilder(future: _chatService.fetchOtherParticipants(), builder: (context, snapshot) {
+      if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          } else if (snapshot.hasError) {
+            return Center(child: Text('Error: ${snapshot.error}'));
+          } else {
+            if (snapshot.hasData) {
+              List<AstrologerModel> astrologers = snapshot.data!;
+              return ListView.builder(
+                      // scrollDirection: Axis.horizontal,
+                      itemCount: astrologers.length,
+                      itemBuilder: (context, index) =>
+                          TalkToExpertsProfileDetailsWidget(
+                              size: size,
+                              astrologer: astrologers[index]));
+            } else {
+              return const Center(child: Text('No data available'));
+            }
+      }})),);
   }
 }
 

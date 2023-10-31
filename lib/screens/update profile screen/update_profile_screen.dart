@@ -1,8 +1,12 @@
+import 'dart:io';
+
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
+import 'package:sitare/constants/app_constants.dart';
 import 'package:sitare/constants/ui_constants.dart';
 import 'package:sitare/functions/auth%20function/auth_function.dart';
 import 'package:sitare/functions/user_functions.dart';
@@ -33,7 +37,8 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
 
   TextEditingController dateInput = TextEditingController();
   TextEditingController timeInput = TextEditingController();
-
+  String? imagePath;
+  String? imageUrl;
   String? genderDropDownValue;
   String? martialDropDownValue;
   TimeOfDay timeOfDay = TimeOfDay.now();
@@ -54,6 +59,18 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
     super.initState();
 
     controllersIntialization();
+  }
+
+  Future<void> imagePick() async {
+    final imagePicked =
+        await ImagePicker().pickImage(source: ImageSource.gallery);
+    if (imagePicked != null) {
+      setState(() {
+        imagePath = imagePicked.path;
+      });
+
+      imageUrl = await addProfileImge(imagePicked);
+    }
   }
 
   @override
@@ -92,6 +109,30 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                   child: SingleChildScrollView(
                     child: Column(
                       children: [
+                        Stack(
+                          children: [
+                            CircleAvatar(
+                              radius: 55,
+                              backgroundImage: imagePath == ''
+                                  ? const AssetImage(
+                                          'assets/images/profile_image.png')
+                                      as ImageProvider
+                                  : FileImage(File(imagePath!)),
+                            ),
+                            Positioned(
+                                bottom: 0,
+                                right: 0,
+                                child: InkWell(
+                                  onTap: () {
+                                    imagePick();
+                                  },
+                                  child: const Icon(
+                                    Icons.add_a_photo,
+                                    size: 30,
+                                  ),
+                                ))
+                          ],
+                        ),
                         UpdateProfileTextFeildWidgets(
                             size: size,
                             controller: nameTextController,
@@ -303,6 +344,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                                 name: nameTextController.text,
                                 email: emailTextController.text,
                                 phoneNumber: number ?? "",
+                                userProfileImage: imageUrl ??= profileImage,
                                 gender: genderDropDownValue ?? "Male",
                                 dateofBirth: dateInput.text,
                                 placeofBirth: placeOfBirthTextController.text,
@@ -367,14 +409,12 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
     problemTextController = TextEditingController(
       text: userData!['problem'],
     );
+    imagePath = userData!['profile image'] ??= profileImage;
     dateInput = TextEditingController(
       text: userData!['dateofBirth'],
     );
     timeInput = TextEditingController(
       text: userData!['timeofBirth'],
     );
-
   }
 }
-
-

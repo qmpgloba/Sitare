@@ -31,7 +31,8 @@ class HomeScreenDrawerWidget extends StatelessWidget {
                 size: size,
                 fullName: userData!['full name'],
                 email: userData!['email'],
-                phoneNumber: userData!['phone number']),
+                phoneNumber: userData!['phone number'],
+                profileImageUrl: userData!['profile image']),
           ),
           const ListItemsDrawer(
               icon: Icons.home_outlined, text: 'Home'),

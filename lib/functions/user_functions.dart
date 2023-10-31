@@ -1,4 +1,9 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:sitare/constants/app_constants.dart';
 import 'package:sitare/model/user_model.dart';
 
 Future<DocumentSnapshot<Map<String, dynamic>>?> getUserDataByPhoneNumber(
@@ -37,6 +42,24 @@ Future<DocumentSnapshot<Map<String, dynamic>>?> getUserDataByPhoneNumber(
 //     return false;
 //   }
 // }
+
+
+Future<String> addProfileImge(XFile imagePicked) async {
+  Reference referenceRoot = FirebaseStorage.instance.ref();
+  Reference referenceDirImages = referenceRoot.child('user_profile_images');
+
+  String uniqueFileName = DateTime.now().millisecondsSinceEpoch.toString();
+
+  Reference referenceImageToUpload = referenceDirImages.child(uniqueFileName);
+
+  try {
+    await referenceImageToUpload.putFile(File(imagePicked.path));
+    String imageUrl = await referenceImageToUpload.getDownloadURL();
+    return imageUrl;
+  } catch (e) {
+    return profileImage;
+  }
+}
 
 
 createUser(UserModel user) async {

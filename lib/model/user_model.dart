@@ -2,6 +2,7 @@ class UserModel {
   final String uid;
   final String name;
   final String email;
+  final String userProfileImage;
   final String phoneNumber;
   final String? gender;
   final String? dateofBirth;
@@ -18,6 +19,7 @@ class UserModel {
     this.timeofBirth,
     this.maritalStatus,
     this.problem,
+    required this.userProfileImage,
     required this.uid,
     required this.name,
     required this.email,
@@ -30,6 +32,7 @@ class UserModel {
       'uid': uid,
       'full name': name,
       'email': email,
+      'profile image':userProfileImage,
       'phone number': phoneNumber,
       'gender': gender,
       'dateofBirth': dateofBirth,
