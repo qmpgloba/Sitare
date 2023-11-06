@@ -135,9 +135,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: [
                   Padding(
                     padding: EdgeInsets.only(left: size.width / 15),
-                    child: const Text(
-                      "Hi Guru, Welcome",
-                      style: TextStyle(color: Colors.white),
+                    child:  Text(
+                      "Hi ${userData!['full name']}, Welcome",
+                      style: const TextStyle(color: Colors.white),
                     ),
                   ),
                   const SizedBox(height: 10),
