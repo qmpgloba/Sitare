@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:intl/intl.dart';
 import 'package:sitare/model/availability_slots_model.dart';
 
 Future<List<AvailabilityModel>> getAvailableSlots(String astrologerId) async {
@@ -25,11 +26,20 @@ Future<List<AvailabilityModel>> getAvailableSlots(String astrologerId) async {
           .doc(userUid)
           .collection('available slots')
           .get();
+
+           final now = DateTime.now();
+      final formatter = DateFormat('yyyy-MM-dd');
       subcollectionRef.docs.forEach((slot) {
         Map<String, dynamic> data = slot.data() as Map<String, dynamic>;
         print(data);
         AvailabilityModel date = AvailabilityModel.fromJson(data);
-        availableSlots.add(date);
+        DateTime dateFromFirestore = date.date;
+        String formattedDate = formatter.format(dateFromFirestore);
+        String todayDate = formatter.format(now);
+
+        if (dateFromFirestore.isAfter(now) || formattedDate == todayDate) {
+          availableSlots.add(date);
+        }
       });
 
       // await subcollectionRef.add(availableSlots.toJson());
