@@ -20,7 +20,7 @@ class NextAvailabilityScreen extends StatefulWidget {
 class _NextAvailabilityScreenState extends State<NextAvailabilityScreen> {
   var time = ['8:30', '9:30', '10:30', '12:30', '3:00', '4:00', '5:00'];
 
-  bool selected = false;
+  int? selected;
   List slots = [];
   List availableSlots = [];
   List selectedSlots = [];
@@ -32,15 +32,13 @@ class _NextAvailabilityScreenState extends State<NextAvailabilityScreen> {
         future: getAvailableSlots(widget.astrologer.uid),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           } else if (snapshot.hasError) {
             return Center(child: Text('Error: ${snapshot.error}'));
           } else {
             slots = snapshot.data!;
         
             // availableSlots = slots['available slots'];
-            print(slots.length);
-            print(slots[0].date);
 
             return DefaultTabController(
               length: slots.length,
@@ -81,7 +79,6 @@ class _NextAvailabilityScreenState extends State<NextAvailabilityScreen> {
                           // ],
                           tabs: slots.map((date) {
                             
-                            print(date.date);
                             return TabWidget(dateTime: date.date);
                           }).toList(),
                         ),
@@ -92,7 +89,6 @@ class _NextAvailabilityScreenState extends State<NextAvailabilityScreen> {
                         // controller: _tabController,
                         physics: const BouncingScrollPhysics(),
                         children: slots.map((date) {
-                          print(date.availableSlots);
                           List availableSlotsForDate = List.from(date
                               .availableSlots); // Create a new list for each date
                           availableSlotsForDate.sort();

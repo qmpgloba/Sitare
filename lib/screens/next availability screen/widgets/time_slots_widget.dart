@@ -1,10 +1,9 @@
 
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:sitare/constants/ui_constants.dart';
 
 class TimeSlotsWidget extends StatefulWidget {
-  const TimeSlotsWidget({
+   TimeSlotsWidget({
     super.key,
   
     required this.dateTime, required this.timeSlots,required this.selected,
@@ -14,7 +13,7 @@ class TimeSlotsWidget extends StatefulWidget {
   // final List selected;
   final DateTime dateTime;
   final List timeSlots;
-  final bool selected;
+   int? selected;
 
   @override
   State<TimeSlotsWidget> createState() => _TimeSlotsWidgetState();
@@ -41,6 +40,7 @@ class _TimeSlotsWidgetState extends State<TimeSlotsWidget> {
               //   widget.selected.add(widget.timeSlots[index]);
               //   widget.selectedIndex.add(index);
               // }
+              widget.selected = index;
               setState(() {});
             },
             child: Padding(
@@ -50,7 +50,7 @@ class _TimeSlotsWidgetState extends State<TimeSlotsWidget> {
                 height: 5,
 
                 decoration: BoxDecoration(
-                  color: widget.selected
+                  color: widget.selected == index
                       ? blackColor
                       : whiteColor,
                   border: Border.all(),
@@ -62,7 +62,7 @@ class _TimeSlotsWidgetState extends State<TimeSlotsWidget> {
                     style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
-                        color: widget.selected
+                        color: widget.selected == index
                             ? whiteColor
                             : Colors.black),
                   ),
