@@ -36,25 +36,20 @@ Future<List<AstrologerModel>> fetchFilteredAstrologersFromFirestore() async {
           astrologersQuery.where('gender', whereIn: selectedGenders);
     }
 
-    
-
     astrologersQuery = astrologersQuery.where('languages',
         arrayContainsAny: selectedLanguages);
-        QuerySnapshot astrologers = await astrologersQuery.get();
+    QuerySnapshot astrologers = await astrologersQuery.get();
 
-
-  
-
-    
     for (var astrologerDoc in astrologers.docs) {
       Map<String, dynamic> data = astrologerDoc.data() as Map<String, dynamic>;
 
       AstrologerModel astrologer = AstrologerModel.fromJson(data);
-     if (selectedSkills.any((skill) => astrologer.skills.contains(skill))) {
-     if (selectedExperience.isNotEmpty && selectedExperience.contains(astrologer.experienceYears)) {
+      if (selectedSkills.any((skill) => astrologer.skills.contains(skill))) {
+        if (selectedExperience.isNotEmpty &&
+            selectedExperience.contains(astrologer.experienceYears)) {
           astrologersList.add(astrologer);
         }
-  }
+      }
     }
   } catch (e) {
     // Handle errors here
