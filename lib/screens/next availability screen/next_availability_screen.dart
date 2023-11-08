@@ -17,13 +17,20 @@ class NextAvailabilityScreen extends StatefulWidget {
   State<NextAvailabilityScreen> createState() => _NextAvailabilityScreenState();
 }
 
-class _NextAvailabilityScreenState extends State<NextAvailabilityScreen> {
+class _NextAvailabilityScreenState extends State<NextAvailabilityScreen>
+    with TickerProviderStateMixin {
   var time = ['8:30', '9:30', '10:30', '12:30', '3:00', '4:00', '5:00'];
-
+  late TabController _tabController;
   int? selected;
   List slots = [];
   List availableSlots = [];
   List selectedSlots = [];
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _tabController = TabController(length: 0, vsync: this);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +44,7 @@ class _NextAvailabilityScreenState extends State<NextAvailabilityScreen> {
             return Center(child: Text('Error: ${snapshot.error}'));
           } else {
             slots = snapshot.data!;
-        
+            _tabController = TabController(length: slots.length, vsync: this);
             // availableSlots = slots['available slots'];
 
             return DefaultTabController(
@@ -56,50 +63,61 @@ class _NextAvailabilityScreenState extends State<NextAvailabilityScreen> {
                   children: [
                     ProfileWidgetNextAvailabilityScreen(
                         size: size, astrologer: widget.astrologer),
-                    Container(
-                      height: size.width / 5,
-                      color: const Color.fromARGB(255, 3, 11, 59),
-                      width: size.width,
-                      child: Padding(
-                        padding: EdgeInsets.all(size.width * .03),
-                        child: TabBar(
-                          dividerColor: Colors.transparent,
-                          isScrollable: true,
-                          physics: const BouncingScrollPhysics(),
-                          labelColor: Colors.black,
-                          unselectedLabelColor: Colors.cyan,
-                          indicatorSize: TabBarIndicatorSize.tab,
-                          indicatorPadding:
-                              const EdgeInsets.fromLTRB(10, 2, 10, 2),
-                          indicator: BoxDecoration(
-                              borderRadius: BorderRadius.circular(5),
-                              color: whiteColor),
-                          // tabs: [
-                          //   Text(slots[1].date.toString())
-                          // ],
-                          tabs: slots.map((date) {
-                            
-                            return TabWidget(dateTime: date.date);
-                          }).toList(),
-                        ),
-                      ),
-                    ),
+                    slots.isEmpty
+                        ? SizedBox()
+                        : Container(
+                            height: size.width / 5,
+                            color: const Color.fromARGB(255, 3, 11, 59),
+                            width: size.width,
+                            child: Padding(
+                              padding: EdgeInsets.all(size.width * .03),
+                              child: TabBar(
+                                controller: _tabController,
+                                dividerColor: Colors.transparent,
+                                isScrollable: true,
+                                physics: const BouncingScrollPhysics(),
+                                labelColor: Colors.black,
+                                unselectedLabelColor: Colors.cyan,
+                                indicatorSize: TabBarIndicatorSize.tab,
+                                indicatorPadding:
+                                    const EdgeInsets.fromLTRB(10, 2, 10, 2),
+                                indicator: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(5),
+                                    color: whiteColor),
+                                // tabs: [
+                                //   Text(slots[1].date.toString())
+                                // ],
+                                tabs: slots.map((date) {
+                                  return TabWidget(dateTime: date.date);
+                                }).toList(),
+                              ),
+                            ),
+                          ),
                     Expanded(
-                      child: TabBarView(
-                        // controller: _tabController,
-                        physics: const BouncingScrollPhysics(),
-                        children: slots.map((date) {
-                          List availableSlotsForDate = List.from(date
-                              .availableSlots); // Create a new list for each date
-                          availableSlotsForDate.sort();
-                          // availableSlots = date.availbleSlots;
-                          return TimeSlotsWidget(
-                            timeSlots: availableSlotsForDate,
-                            dateTime: date.date,
-                            selected: selected,
-                          );
-                        }).toList(),
-                      ),
+                      child: slots.isEmpty
+                          ? Center(
+                              child: Text('Astrologer unavailable'),
+                            )
+                          : TabBarView(
+                              controller: _tabController,
+                              physics: const BouncingScrollPhysics(),
+                              children: slots.map((date) {
+                                List availableSlotsForDate = List.from(date
+                                    .availableSlots); // Create a new list for each date
+                                availableSlotsForDate.sort();
+                                return TimeSlotsWidget(
+                                  timeSlots: availableSlotsForDate,
+                                  dateTime: date.date,
+                                  selected: selected,
+                                  onSelectionChanged: (value) {
+                                    print(value);
+                                    setState(() {
+                                      selected = value;
+                                    });
+                                  },
+                                );
+                              }).toList(),
+                            ),
                       // child: TabBarView(
                       //   physics: const BouncingScrollPhysics(),
                       //   children: [
@@ -153,7 +171,9 @@ class _NextAvailabilityScreenState extends State<NextAvailabilityScreen> {
                       // ),
                     ),
                     GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        print(selected);
+                      },
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Container(
