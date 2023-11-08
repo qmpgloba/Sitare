@@ -4,16 +4,14 @@ import 'package:sitare/model/availability_slots_model.dart';
 
 Future<List<AvailabilityModel>> getAvailableSlots(String astrologerId) async {
   List<AvailabilityModel> availableSlots = [];
-// String number = "+91$phoneNumber";
+
   try {
     final userColection = await FirebaseFirestore.instance
         .collection('Astrologerdetails')
         .where('uid', isEqualTo: astrologerId)
         .get();
-    // final querySnapShot =
-    //     await userColection.where('uid', isEqualTo: astrologerId).limit(1).get();
+
     if (userColection.docs.isNotEmpty) {
-      // Phone number exists in Firestore, store the subcollection
       final userDoc = userColection.docs.first;
       final userUid = userDoc.id;
       final subcollectionRef = await FirebaseFirestore.instance
@@ -22,7 +20,7 @@ Future<List<AvailabilityModel>> getAvailableSlots(String astrologerId) async {
           .collection('available slots')
           .get();
 
-           final now = DateTime.now();
+      final now = DateTime.now();
       final formatter = DateFormat('yyyy-MM-dd');
       for (var slot in subcollectionRef.docs) {
         Map<String, dynamic> data = slot.data();
@@ -35,15 +33,46 @@ Future<List<AvailabilityModel>> getAvailableSlots(String astrologerId) async {
           availableSlots.add(date);
         }
       }
+    } else {
+      throw Exception('uid does not exist');
+    }
+    // ignore: empty_catches
+  } catch (e) {}
+  availableSlots.sort((a, b) => a.date.compareTo(b.date));
+  return availableSlots;
+}
 
-      // await subcollectionRef.add(availableSlots.toJson());
+Future<void> updateAvailableSlotsInFireBase(
+    String uid, DateTime date, AvailabilityModel availableSlots) async {
+  try {
+    final querySnapshot = await FirebaseFirestore.instance
+        .collection('Astrologerdetails')
+        .where('uid', isEqualTo: uid)
+        .get();
+
+    if (querySnapshot.docs.isNotEmpty) {
+      // Phone number exists in Firestore, update the subcollection
+      final userDoc = querySnapshot.docs.first;
+      final userUid = userDoc.id;
+      final subcollectionRef = FirebaseFirestore.instance
+          .collection('Astrologerdetails')
+          .doc(userUid)
+          .collection('available slots');
+
+      // Retrieve the document based on the provided date
+      final query = await subcollectionRef.where('date', isEqualTo: date).get();
+      if (query.docs.isNotEmpty) {
+        final docId = query.docs.first.id;
+        await subcollectionRef.doc(docId).update(availableSlots.toJson());
+        print('done');
+      } else {
+        throw Exception('Document not found for the given date');
+      }
     } else {
       // Phone number does not exist in Firestore
       throw Exception('uid does not exist');
     }
-  // ignore: empty_catches
-  } catch (e) {
+  } on FirebaseException catch (e) {
+    throw Exception('Error accessing Firestore: $e');
   }
-  availableSlots.sort((a, b) => a.date.compareTo(b.date));
-  return availableSlots;
 }

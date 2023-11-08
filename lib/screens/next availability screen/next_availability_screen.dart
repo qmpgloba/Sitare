@@ -25,6 +25,7 @@ class _NextAvailabilityScreenState extends State<NextAvailabilityScreen>
   List slots = [];
   List availableSlots = [];
   List selectedSlots = [];
+  int currentIndex = 0;
   @override
   void initState() {
     // TODO: implement initState
@@ -111,68 +112,35 @@ class _NextAvailabilityScreenState extends State<NextAvailabilityScreen>
                                   selected: selected,
                                   onSelectionChanged: (value) {
                                     print(value);
-                                    setState(() {
-                                      selected = value;
-                                    });
+                                    // setState(() {
+                                    currentIndex = _tabController.index;
+                                    selected = value;
+                                    // });
                                   },
                                 );
                               }).toList(),
                             ),
-                      // child: TabBarView(
-                      //   physics: const BouncingScrollPhysics(),
-                      //   children: [
-                      //     SizedBox(
-                      //       child: GridView.builder(
-                      //         gridDelegate:
-                      //             const SliverGridDelegateWithFixedCrossAxisCount(
-                      //                 crossAxisCount: 4,
-                      //                 mainAxisSpacing: 10,
-                      //                 crossAxisSpacing: 10),
-                      //         itemCount: time.length,
-                      //         itemBuilder: (context, index) {
-                      //           return GestureDetector(
-                      //             onTap: () {
-                      //               selected = index;
-                      //               setState(() {});
-                      //             },
-                      //             child: Padding(
-                      //               padding: const EdgeInsets.fromLTRB(5, 15, 5, 15),
-                      //               child: Container(
-                      //                 // width: 30,
-                      //                 height: 5,
-
-                      //                 decoration: BoxDecoration(
-                      //                   color: index == selected
-                      //                       ? PRIMARY_COLOR
-                      //                       : whiteColor,
-                      //                   border: Border.all(),
-                      //                   borderRadius: BorderRadius.circular(6),
-                      //                 ),
-                      //                 child: Center(
-                      //                   child: Text(
-                      //                     time[index],
-                      //                     style: TextStyle(
-                      //                         fontSize: 20,
-                      //                         fontWeight: FontWeight.bold,
-                      //                         color: selected == index
-                      //                             ? whiteColor
-                      //                             : Colors.black),
-                      //                   ),
-                      //                 ),
-                      //               ),
-                      //             ),
-                      //           );
-                      //         },
-                      //       ),
-                      //     ),
-                      //     const Text('data'),
-                      //     // const Text('data'),
-                      //   ],
-                      // ),
                     ),
                     GestureDetector(
-                      onTap: () {
-                        print(selected);
+                      onTap: () async{
+                        slots[_tabController.index].availableSlots.sort();
+                        if (currentIndex == _tabController.index) {
+                          print(slots[_tabController.index].date);
+                          print(slots[_tabController.index]
+                              .availableSlots[selected]);
+                          List booked = slots[_tabController.index].bookedSlots;
+                          booked.add(slots[_tabController.index]
+                              .availableSlots[selected]);
+                          AvailabilityModel bookedSlot = AvailabilityModel(
+                              date: slots[_tabController.index].date,
+                              availableSlots: slots[_tabController.index]
+                              .availableSlots,
+                              bookedSlots: booked);
+                         await updateAvailableSlotsInFireBase(widget.astrologer.uid,
+                              slots[_tabController.index].date, bookedSlot);
+                        } else {}
+                        // print(slots[_tabController.index].date);
+                        // print(slots[_tabController.index].availableSlots[selected]);
                       },
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
