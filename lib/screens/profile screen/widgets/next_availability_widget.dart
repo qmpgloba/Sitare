@@ -20,10 +20,10 @@ class NextAvailabilityWidget extends StatelessWidget {
         Navigator.of(context).push(MaterialPageRoute(builder: (context) =>  NextAvailabilityScreen(astrologer: astrologer),));
       },
       child: SizedBox(
-       width: size.width*.65,
+       width: size.width*.70,
         child: const ListTile(
          leading: Icon(Icons.calendar_month,size: 35,),
-         title: AutoSizeText('NEXT AVAILABILITY',maxLines: 1,minFontSize: 12,maxFontSize: 14,style: TextStyle(fontWeight: FontWeight.bold),),
+         title: Center(child: AutoSizeText('NEXT AVAILABILITY',maxLines: 1,minFontSize: 12,maxFontSize: 14,style: TextStyle(fontWeight: FontWeight.bold),)),
          trailing: Icon(Icons.arrow_forward),
         ),
       ),
