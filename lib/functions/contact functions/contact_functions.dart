@@ -2,9 +2,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';  
 import 'package:flutter/material.dart';
+import 'package:sitare/constants/ui_constants.dart';
 import 'package:sitare/model/astrologer_model.dart';
 import 'package:sitare/screens/chat%20screen/service/chat_service.dart';
 import 'package:sitare/screens/home%20screen/home_screen.dart';
+import 'package:sitare/screens/widgets/show_toast.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:whatsapp_unilink/whatsapp_unilink.dart';
 
@@ -52,10 +54,13 @@ sendNotification(String? fcmToken) async {
     final response = await http.post(Uri.parse(fcmUrl),
         headers: headers, body: jsonEncode(body));
     if (response.statusCode == 200) {
+      showToast("Call Request sent succesfully", greyColor);
     } else {
+      print('khbfdkd');
     }
   // ignore: empty_catches
   } catch (e) {
+    print('khbfdkd ${e.toString()}');
   }
 }
 

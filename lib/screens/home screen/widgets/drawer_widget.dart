@@ -1,4 +1,3 @@
-
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -34,19 +33,16 @@ class HomeScreenDrawerWidget extends StatelessWidget {
                 phoneNumber: userData!['phone number'],
                 profileImageUrl: userData!['profile image']),
           ),
-          const ListItemsDrawer(
-              icon: Icons.home_outlined, text: 'Home'),
+          const ListItemsDrawer(icon: Icons.home_outlined, text: 'Home'),
           const Divider(),
           GestureDetector(
             onTap: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) =>
-                          const WalletRechargeScreen(),
-                    ));
-                  },
+              Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => const WalletRechargeScreen(),
+              ));
+            },
             child: ListTile(
-              leading:
-                  const Icon(Icons.account_balance_wallet_outlined),
+              leading: const Icon(Icons.account_balance_wallet_outlined),
               title: const AutoSizeText(
                 'Wallet',
                 maxLines: 1,
@@ -64,8 +60,7 @@ class HomeScreenDrawerWidget extends StatelessWidget {
                         color: redColor,
                         borderRadius: BorderRadius.circular(5)),
                     child: const Padding(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: 5, vertical: 2),
+                      padding: EdgeInsets.symmetric(horizontal: 5, vertical: 2),
                       child: AutoSizeText(
                         'RECHARGE',
                         maxLines: 1,
@@ -92,21 +87,19 @@ class HomeScreenDrawerWidget extends StatelessWidget {
               dynamic conversationObject = {
                 'appId': '92f796d009e254c06686a249bd1b465b',
               };
-              KommunicateFlutterPlugin.buildConversation(
-                      conversationObject)
+              KommunicateFlutterPlugin.buildConversation(conversationObject)
                   .then((clientConversationId) {})
                   .catchError((error) {});
             },
             child: const ListItemsDrawer(
-                icon: Icons.wechat_outlined,
-                text: 'Customer Support'),
+                icon: Icons.wechat_outlined, text: 'Customer Support'),
           ),
           const Divider(),
           const ListItemsDrawer(
               icon: Icons.settings_outlined, text: 'Settings'),
           const Divider(),
-          const ListItemsDrawer(
-              icon: Icons.share_outlined, text: 'Share'),
+          const ListItemsDrawer(icon: Icons.share_outlined, text: 'Share'),
+          const Divider(),
           GestureDetector(
               onTap: () async {
                 await FirebaseAuth.instance.signOut().then((value) {
@@ -118,8 +111,7 @@ class HomeScreenDrawerWidget extends StatelessWidget {
                       (route) => false);
                 });
               },
-              child: const ListItemsDrawer(
-                  icon: Icons.logout, text: 'Logout')),
+              child: const ListItemsDrawer(icon: Icons.logout, text: 'Logout')),
           const Spacer(),
           Padding(
             padding: EdgeInsets.all(size.width / 16),

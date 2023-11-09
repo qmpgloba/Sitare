@@ -1,7 +1,9 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:sitare/constants/ui_constants.dart';
+import 'package:sitare/functions/contact%20functions/contact_functions.dart';
 import 'package:sitare/model/astrologer_model.dart';
+import 'package:sitare/screens/chat%20screen/chat_screen.dart';
 import 'package:sitare/screens/profile%20screen/widgets/astroleger_profile_details_widget.dart';
 import 'package:sitare/screens/profile%20screen/widgets/contact_icons_widget.dart';
 
@@ -9,9 +11,9 @@ import 'widgets/next_availability_widget.dart';
 
 // ignore: must_be_immutable
 class ProfileScreen extends StatelessWidget {
-   ProfileScreen({super.key, required this.astrologer});
+  ProfileScreen({super.key, required this.astrologer});
 
-   final AstrologerModel astrologer;
+  final AstrologerModel astrologer;
 
   num walletBalnce = 0;
 
@@ -52,7 +54,6 @@ class ProfileScreen extends StatelessWidget {
                 ))
           ],
         ),
-        
         body: Padding(
           padding: EdgeInsets.all(size.width / 16),
           child: Column(
@@ -60,7 +61,7 @@ class ProfileScreen extends StatelessWidget {
               Container(
                 width: size.width,
                 height: size.width * .5,
-                decoration:  BoxDecoration(
+                decoration: BoxDecoration(
                     image: DecorationImage(
                         image: NetworkImage(
                           astrologer.profilePic,
@@ -98,7 +99,7 @@ class ProfileScreen extends StatelessWidget {
               Expanded(
                 child: Padding(
                   padding: EdgeInsets.all(size.width / 16),
-                  child:  TabBarView(
+                  child: TabBarView(
                     physics: const BouncingScrollPhysics(),
                     children: [
                       SingleChildScrollView(
@@ -125,7 +126,7 @@ class ProfileScreen extends StatelessWidget {
                           height: double.maxFinite,
                           width: size.width * .55,
                           decoration: BoxDecoration(border: Border.all()),
-                          child:  Center(
+                          child: Center(
                               child: AutoSizeText(
                             'TALK TO ${astrologer.fullName.toUpperCase()} NOW',
                             maxLines: 1,
@@ -141,21 +142,50 @@ class ProfileScreen extends StatelessWidget {
                                 borderRadius: BorderRadius.only(
                                     topRight: Radius.circular(5),
                                     bottomRight: Radius.circular(5))),
-                            child: const Center(
+                            child: Center(
                               child: Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceEvenly,
                                 // crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                  ContactIconWidgetWithText(
-                                      icon: Icons.chat_outlined,
-                                      text: 'Chat'),
-                                  ContactIconWidgetWithText(
-                                      icon: Icons.call_outlined,
-                                      text: 'Call'),
-                                  ContactIconWidgetWithText(
-                                      icon: Icons.video_call_outlined,
-                                      text: 'Video')
+                                  GestureDetector(
+                                    onTap: () {
+                                      Navigator.of(context)
+                                          .push(MaterialPageRoute(
+                                        builder: (context) =>
+                                            ChatScreen(astrologer: astrologer),
+                                      ));
+                                    },
+                                    child: const ContactIconWidgetWithText(
+                                        icon: Icons.chat_outlined,
+                                        text: 'Chat'),
+                                  ),
+                                  GestureDetector(
+                                    onTap: () {
+                                      // print("ckb");
+                                      sendNotification(astrologer.fcmToken);
+                                    },
+                                    child: const ContactIconWidgetWithText(
+                                        icon: Icons.call_outlined,
+                                        text: 'Call'),
+                                  ),
+                                  GestureDetector(
+                                      onTap: () {
+                                        launchWhatsAppUri(
+                                            astrologer.phoneNumber);
+                                      },
+                                      child: const ContactIconWidgetWithText(
+                                          icon: Icons.video_call_outlined,
+                                          text: 'Video')),
+                                  // ContactIconWidgetWithText(
+                                  //     icon: Icons.chat_outlined,
+                                  //     text: 'Chat'),
+                                  // ContactIconWidgetWithText(
+                                  //     icon: Icons.call_outlined,
+                                  //     text: 'Call'),
+                                  // ContactIconWidgetWithText(
+                                  //     icon: Icons.video_call_outlined,
+                                  //     text: 'Video')
                                 ],
                               ),
                             ),
