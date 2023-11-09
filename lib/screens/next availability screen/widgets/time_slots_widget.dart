@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sitare/constants/ui_constants.dart';
 
+// ignore: must_be_immutable
 class TimeSlotsWidget extends StatefulWidget {
   TimeSlotsWidget({
     super.key,

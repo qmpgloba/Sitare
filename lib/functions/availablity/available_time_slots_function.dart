@@ -64,7 +64,6 @@ Future<void> updateAvailableSlotsInFireBase(
       if (query.docs.isNotEmpty) {
         final docId = query.docs.first.id;
         await subcollectionRef.doc(docId).update(availableSlots.toJson());
-        print('done');
       } else {
         throw Exception('Document not found for the given date');
       }

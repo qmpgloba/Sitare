@@ -28,7 +28,6 @@ class _NextAvailabilityScreenState extends State<NextAvailabilityScreen>
   int currentIndex = 0;
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _tabController = TabController(length: 0, vsync: this);
   }
@@ -65,7 +64,7 @@ class _NextAvailabilityScreenState extends State<NextAvailabilityScreen>
                     ProfileWidgetNextAvailabilityScreen(
                         size: size, astrologer: widget.astrologer),
                     slots.isEmpty
-                        ? SizedBox()
+                        ? const SizedBox()
                         : Container(
                             height: size.width / 5,
                             color: const Color.fromARGB(255, 3, 11, 59),
@@ -96,7 +95,7 @@ class _NextAvailabilityScreenState extends State<NextAvailabilityScreen>
                           ),
                     Expanded(
                       child: slots.isEmpty
-                          ? Center(
+                          ? const Center(
                               child: Text('Astrologer unavailable'),
                             )
                           : TabBarView(
@@ -111,7 +110,6 @@ class _NextAvailabilityScreenState extends State<NextAvailabilityScreen>
                                   dateTime: date.date,
                                   selected: selected,
                                   onSelectionChanged: (value) {
-                                    print(value);
                                     // setState(() {
                                     currentIndex = _tabController.index;
                                     selected = value;
@@ -125,9 +123,6 @@ class _NextAvailabilityScreenState extends State<NextAvailabilityScreen>
                       onTap: () async{
                         slots[_tabController.index].availableSlots.sort();
                         if (currentIndex == _tabController.index) {
-                          print(slots[_tabController.index].date);
-                          print(slots[_tabController.index]
-                              .availableSlots[selected]);
                           List booked = slots[_tabController.index].bookedSlots;
                           booked.add(slots[_tabController.index]
                               .availableSlots[selected]);
