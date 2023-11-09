@@ -105,8 +105,12 @@ class _NextAvailabilityScreenState extends State<NextAvailabilityScreen>
                                 List availableSlotsForDate = List.from(date
                                     .availableSlots); // Create a new list for each date
                                 availableSlotsForDate.sort();
+                                 List bookedSlotsForDate = List.from(date
+                                    .bookedSlots);
+                                    bookedSlotsForDate.sort();
                                 return TimeSlotsWidget(
                                   timeSlots: availableSlotsForDate,
+                                  bookedSlots: bookedSlotsForDate,
                                   dateTime: date.date,
                                   selected: selected,
                                   onSelectionChanged: (value) {

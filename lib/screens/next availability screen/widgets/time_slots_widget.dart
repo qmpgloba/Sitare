@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sitare/constants/ui_constants.dart';
+import 'package:sitare/screens/widgets/show_toast.dart';
 
 // ignore: must_be_immutable
 class TimeSlotsWidget extends StatefulWidget {
@@ -9,12 +10,14 @@ class TimeSlotsWidget extends StatefulWidget {
     required this.timeSlots,
     required this.selected,
     required this.onSelectionChanged,
+    required this.bookedSlots,
   });
 
   // final List selectedIndex;
   // final List selected;
   final DateTime dateTime;
   final List timeSlots;
+  final List bookedSlots;
   int? selected;
   final void Function(int?) onSelectionChanged;
 
@@ -23,17 +26,20 @@ class TimeSlotsWidget extends StatefulWidget {
 }
 
 class _TimeSlotsWidgetState extends State<TimeSlotsWidget> {
+  Color colorSlot = whiteColor;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       child: GridView.builder(
-        gridDelegate:
-            const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 4,
-                mainAxisSpacing: 10,
-                crossAxisSpacing: 10),
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 4, mainAxisSpacing: 10, crossAxisSpacing: 10),
         itemCount: widget.timeSlots.length,
         itemBuilder: (context, index) {
+          if (widget.bookedSlots.contains(widget.timeSlots[index])) {
+            colorSlot = greyColor;
+          }else{
+            colorSlot = whiteColor;
+          }
           return GestureDetector(
             onTap: () {
               // if (widget.selectedIndex.contains(index)) {
@@ -43,9 +49,18 @@ class _TimeSlotsWidgetState extends State<TimeSlotsWidget> {
               //   widget.selected.add(widget.timeSlots[index]);
               //   widget.selectedIndex.add(index);
               // }
-              widget.onSelectionChanged(index);
+              if(widget.bookedSlots.contains(widget.timeSlots[index])){
+                print('Already boooked');
+                showToast('Already boooked', blackColor);
+
+
+              }else{
+                print('available');
+                 widget.onSelectionChanged(index);
               widget.selected = index;
               setState(() {});
+              }
+             
             },
             child: Padding(
               padding: const EdgeInsets.fromLTRB(5, 15, 5, 15),
@@ -54,7 +69,7 @@ class _TimeSlotsWidgetState extends State<TimeSlotsWidget> {
                 height: 5,
 
                 decoration: BoxDecoration(
-                  color: widget.selected == index ? blackColor : whiteColor,
+                  color: widget.selected == index ? blackColor : colorSlot,
                   border: Border.all(),
                   borderRadius: BorderRadius.circular(6),
                 ),
