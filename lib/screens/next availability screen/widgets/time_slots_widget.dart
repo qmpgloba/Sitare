@@ -50,12 +50,10 @@ class _TimeSlotsWidgetState extends State<TimeSlotsWidget> {
               //   widget.selectedIndex.add(index);
               // }
               if(widget.bookedSlots.contains(widget.timeSlots[index])){
-                print('Already boooked');
                 showToast('Already boooked', blackColor);
 
 
               }else{
-                print('available');
                  widget.onSelectionChanged(index);
               widget.selected = index;
               setState(() {});

@@ -56,11 +56,9 @@ sendNotification(String? fcmToken) async {
     if (response.statusCode == 200) {
       showToast("Call Request sent succesfully", greyColor);
     } else {
-      print('khbfdkd');
     }
   // ignore: empty_catches
   } catch (e) {
-    print('khbfdkd ${e.toString()}');
   }
 }
 
