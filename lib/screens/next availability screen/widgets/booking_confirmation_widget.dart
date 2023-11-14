@@ -1,6 +1,7 @@
+
 import 'package:flutter/material.dart';
 
-showAlertBox(
+bookingConfirmationAlterBox(
     BuildContext context, String text, Color color, String buttonText) {
   showDialog(
       context: context,
@@ -16,6 +17,7 @@ showAlertBox(
               TextButton(
                   onPressed: () {
                     Navigator.of(context).pop();
+                    
                   },
                   child: Text(
                     buttonText,

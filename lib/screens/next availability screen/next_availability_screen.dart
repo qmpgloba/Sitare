@@ -2,10 +2,13 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:sitare/constants/ui_constants.dart';
 import 'package:sitare/functions/availablity/available_time_slots_function.dart';
+import 'package:sitare/screens/next%20availability%20screen/widgets/booking_confirmation_widget.dart';
 import 'package:sitare/screens/next%20availability%20screen/widgets/tab_widget.dart';
 import 'package:sitare/screens/next%20availability%20screen/widgets/time_slots_widget.dart';
 import 'package:sitare/model/astrologer_model.dart';
 import 'package:sitare/model/availability_slots_model.dart';
+import 'package:sitare/screens/widgets/show_dialog_widget.dart';
+import 'package:sitare/screens/widgets/show_toast.dart';
 
 import 'widgets/profile_details_widget.dart';
 
@@ -105,9 +108,9 @@ class _NextAvailabilityScreenState extends State<NextAvailabilityScreen>
                                 List availableSlotsForDate = List.from(date
                                     .availableSlots); // Create a new list for each date
                                 availableSlotsForDate.sort();
-                                 List bookedSlotsForDate = List.from(date
-                                    .bookedSlots);
-                                    bookedSlotsForDate.sort();
+                                List bookedSlotsForDate =
+                                    List.from(date.bookedSlots);
+                                bookedSlotsForDate.sort();
                                 return TimeSlotsWidget(
                                   timeSlots: availableSlotsForDate,
                                   bookedSlots: bookedSlotsForDate,
@@ -124,20 +127,31 @@ class _NextAvailabilityScreenState extends State<NextAvailabilityScreen>
                             ),
                     ),
                     GestureDetector(
-                      onTap: () async{
+                      onTap: () async {
                         slots[_tabController.index].availableSlots.sort();
-                        if (currentIndex == _tabController.index) {
+                        if (currentIndex == _tabController.index &&
+                            selected != null) {
                           List booked = slots[_tabController.index].bookedSlots;
                           booked.add(slots[_tabController.index]
                               .availableSlots[selected]);
                           AvailabilityModel bookedSlot = AvailabilityModel(
                               date: slots[_tabController.index].date,
-                              availableSlots: slots[_tabController.index]
-                              .availableSlots,
+                              availableSlots:
+                                  slots[_tabController.index].availableSlots,
                               bookedSlots: booked);
-                         await updateAvailableSlotsInFireBase(widget.astrologer.uid,
-                              slots[_tabController.index].date, bookedSlot);
-                        } else {}
+                          await updateAvailableSlotsInFireBase(
+                                  widget.astrologer.uid,
+                                  slots[_tabController.index].date,
+                                  bookedSlot)
+                              .then((value) {
+                            showToast('Slot Booked Successfully', greenColor);
+                            Navigator.of(context).pop();
+                          });
+                        } else {
+                          showAlertBox(context, 'Please select time slot',
+                              whiteColor, 'ok');
+                          print('nul');
+                        }
                         // print(slots[_tabController.index].date);
                         // print(slots[_tabController.index].availableSlots[selected]);
                       },
