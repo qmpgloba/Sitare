@@ -2,7 +2,6 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:sitare/constants/ui_constants.dart';
 import 'package:sitare/functions/availablity/available_time_slots_function.dart';
-import 'package:sitare/screens/next%20availability%20screen/widgets/booking_confirmation_widget.dart';
 import 'package:sitare/screens/next%20availability%20screen/widgets/tab_widget.dart';
 import 'package:sitare/screens/next%20availability%20screen/widgets/time_slots_widget.dart';
 import 'package:sitare/model/astrologer_model.dart';
@@ -150,7 +149,6 @@ class _NextAvailabilityScreenState extends State<NextAvailabilityScreen>
                         } else {
                           showAlertBox(context, 'Please select time slot',
                               whiteColor, 'ok');
-                          print('nul');
                         }
                         // print(slots[_tabController.index].date);
                         // print(slots[_tabController.index].availableSlots[selected]);
