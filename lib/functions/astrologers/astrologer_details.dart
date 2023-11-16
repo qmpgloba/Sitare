@@ -19,7 +19,7 @@ FirebaseFirestore firestore = FirebaseFirestore.instance;
 //       astrologersList.add(astrologer);
 //     }
 //   } catch (e) {
-//     // Handle errors here
+
 //   }
 
 //   return astrologersList;
