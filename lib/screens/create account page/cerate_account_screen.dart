@@ -116,7 +116,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                                   email: emailTextController.text.trim(),
                                   phoneNumber:
                                       "+91${phoneNumberTextController.text}",
-                                      userProfileImage: profileImage,
+                                  userProfileImage: profileImage,
                                   dateofBirth: '',
                                   gender: '',
                                   maritalStatus: '',
@@ -177,44 +177,47 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                           showAlertBox(context, 'Please enter Mobile number',
                               whiteColor, 'Close');
                         } else {
-                          if(_formKey.currentState!.validate()){
-                            if (phoneNumberTextController.text.length==10) {
-                            var phoneNumber =
-                                '+$countyCode${phoneNumberTextController.text}';
-                            bool mobileNumberExists =
-                                await checkPhoneNumberExistence(phoneNumber);
-                            //  bool isExist = await checkPhoneNumberExistence(
-                            //       "+91${phoneNumberTextController.text}");
-                            if (mobileNumberExists) {
+                          if (_formKey.currentState!.validate()) {
+                            if (phoneNumberTextController.text.length == 10) {
+                              var phoneNumber =
+                                  '+$countyCode${phoneNumberTextController.text}';
+                              bool mobileNumberExists =
+                                  await checkPhoneNumberExistence(phoneNumber);
+                              //  bool isExist = await checkPhoneNumberExistence(
+                              //       "+91${phoneNumberTextController.text}");
+                              if (mobileNumberExists) {
+                                showAlertBox(
+                                    context,
+                                    'Mobile number already exist',
+                                    whiteColor,
+                                    'Close');
+                              } else {
+                                var result =
+                                    await phoneAuthentication(phoneNumber);
+                                if (result == null) {
+                                  // showSnackbar(
+                                  //     context, 'OTP sent Succesfully', greenColor);
+                                  // ignore: use_build_context_synchronously
+                                  // Navigator.of(context).push(MaterialPageRoute(
+                                  //   builder: (context) => OTPScreen(),
+                                  // ));
+                                  setState(() {
+                                    _isVisibleOTP = true;
+                                  });
+                                } else {
+                                  // ignore: use_build_context_synchronously
+                                  showAlertBox(
+                                      context, result, whiteColor, 'close');
+                                }
+                              }
+                            } else {
+                              // ignore: use_build_context_synchronously
                               showAlertBox(
                                   context,
-                                  'Mobile number already exist',
+                                  'Enter a valid mobile number',
                                   whiteColor,
-                                  'Close');
-                            } else {
-                              var result =
-                                  await phoneAuthentication(phoneNumber);
-                              if (result == null) {
-                                // showSnackbar(
-                                //     context, 'OTP sent Succesfully', greenColor);
-                                // ignore: use_build_context_synchronously
-                                // Navigator.of(context).push(MaterialPageRoute(
-                                //   builder: (context) => OTPScreen(),
-                                // ));
-                                setState(() {
-                                  _isVisibleOTP = true;
-                                });
-                              } else {
-                                // ignore: use_build_context_synchronously
-                                showAlertBox(
-                                    context, result, whiteColor, 'close');
-                              }
+                                  'Retry');
                             }
-                          } else {
-                            // ignore: use_build_context_synchronously
-                            showAlertBox(context, 'Enter a valid mobile number',
-                                whiteColor, 'Retry');
-                          }
                           }
                         }
                         // if (_formKey.currentState!.validate()) {

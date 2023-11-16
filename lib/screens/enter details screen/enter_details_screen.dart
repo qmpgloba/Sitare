@@ -6,11 +6,11 @@ import 'package:sitare/constants/ui_constants.dart';
 import 'package:sitare/functions/auth%20function/auth_function.dart';
 import 'package:sitare/functions/user_functions.dart';
 import 'package:sitare/screens/create%20account%20page/cerate_account_screen.dart';
+import 'package:sitare/screens/enter%20details%20screen/widgets/drop_down.dart';
 import 'package:sitare/screens/home%20screen/home_screen.dart';
-import 'package:sitare/screens/welcome%20page/widgets/mobile_number_textfeild_widget.dart';
-import 'package:sitare/widget/custom_textfield.dart';
-
+import 'package:sitare/screens/enter%20details%20screen/widgets/custom_textfield.dart';
 import '../../model/user_model.dart';
+import '../welcome page/widgets/mobile_number_textfeild_widget.dart';
 
 class EnterDetailsScreen extends StatefulWidget {
   const EnterDetailsScreen({
@@ -42,9 +42,9 @@ class _EnterDetailsScreenState extends State<EnterDetailsScreen> {
   bool timeChanged = false;
   List<String> optionalField = [];
   final _key = GlobalKey<FormState>();
-  String? _gender;
-  String? _martialStatus;
   String? name;
+  String? gender;
+  String? _martialStatus;
   String? phoneNumber;
   String? email;
 
@@ -112,18 +112,20 @@ class _EnterDetailsScreenState extends State<EnterDetailsScreen> {
                   const Text(
                     'SITARE',
                     style: TextStyle(
-                        fontSize: 30,
-                        fontWeight: FontWeight.bold,
-                        color: whiteColor),
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold,
+                      color: whiteColor,
+                    ),
                   ),
                   SizedBox(height: size.width * .05),
                   const Center(
                     child: Text(
                       "ENTER DETAILS",
                       style: TextStyle(
-                          color: FONT_COLOR,
-                          fontSize: 18,
-                          fontWeight: FontWeight.w700),
+                        color: FONT_COLOR,
+                        fontSize: 18,
+                        fontWeight: FontWeight.w700,
+                      ),
                     ),
                   ),
                   CustomTextField(
@@ -171,15 +173,17 @@ class _EnterDetailsScreenState extends State<EnterDetailsScreen> {
                       });
                     },
                   ),
-                  _genderDropDown(
-                    label: "Gender",
-                    onChanged: (v) {
-                      setState(() {
-                        _gender = v ?? "";
-                        genderController.text = v ?? "";
-                      });
-                    },
-                  ),
+                  DropDown(
+                      context: context,
+                      label: 'Gender',
+                      onChanged: (v) {
+                        setState(() {
+                          gender = v ?? "";
+                          genderController.text = v ?? "";
+                        });
+                      },
+                      dropDownCategory: gender,
+                      dropDownValue: GENDERS),
                   const SizedBox(height: 20),
                   InkWell(
                     onTap: () {
@@ -187,9 +191,10 @@ class _EnterDetailsScreenState extends State<EnterDetailsScreen> {
                     },
                     child: Container(
                       decoration: const BoxDecoration(
-                          border: Border(
-                        bottom: BorderSide(color: whiteColor, width: 0.4),
-                      )),
+                        border: Border(
+                          bottom: BorderSide(color: whiteColor, width: 0.4),
+                        ),
+                      ),
                       child: Row(
                         children: [
                           Text(
@@ -225,9 +230,10 @@ class _EnterDetailsScreenState extends State<EnterDetailsScreen> {
                     },
                     child: Container(
                       decoration: const BoxDecoration(
-                          border: Border(
-                              bottom:
-                                  BorderSide(color: whiteColor, width: 0.4))),
+                        border: Border(
+                          bottom: BorderSide(color: whiteColor, width: 0.4),
+                        ),
+                      ),
                       child: Row(
                         children: [
                           Text(
@@ -245,7 +251,8 @@ class _EnterDetailsScreenState extends State<EnterDetailsScreen> {
                   const SizedBox(
                     height: 5,
                   ),
-                  _martialDropDown(
+                  DropDown(
+                    context: context,
                     label: "Martial Status",
                     onChanged: (v) {
                       setState(() {
@@ -253,6 +260,8 @@ class _EnterDetailsScreenState extends State<EnterDetailsScreen> {
                         martialController.text = v ?? "";
                       });
                     },
+                    dropDownCategory: _martialStatus,
+                    dropDownValue: martialStatus,
                   ),
                   CustomTextField(
                     size: size,
@@ -283,288 +292,181 @@ class _EnterDetailsScreenState extends State<EnterDetailsScreen> {
                           color: FONT_COLOR,
                         ),
                         decoration: InputDecoration(
-                            contentPadding: const EdgeInsets.symmetric(
-                                horizontal: 20.0, vertical: 10.0),
-                            hintText: "Partner Details (Optional)",
-                            hintStyle: const TextStyle(
-                              color: FONT_COLOR,
+                          contentPadding: const EdgeInsets.symmetric(
+                              horizontal: 20.0, vertical: 10.0),
+                          hintText: "Partner Details (Optional)",
+                          hintStyle: const TextStyle(
+                            color: FONT_COLOR,
+                          ),
+                          enabledBorder: const OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: whiteColor,
                             ),
-                            enabledBorder: const OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: whiteColor,
-                              ),
-                            ),
-                            suffixIcon: index == 0
-                                ? InkWell(
-                                    onTap: () {
-                                      setState(() {
-                                        ++length;
-                                      });
-                                    },
-                                    child: const Icon(
-                                      Icons.add,
-                                      color: FONT_COLOR,
-                                    ),
-                                  )
-                                : InkWell(
-                                    onTap: () {
-                                      setState(() {
-                                        --length;
-                                      });
-                                    },
-                                    child: const Icon(
-                                      Icons.remove,
-                                      color: FONT_COLOR,
-                                    ),
-                                  )),
+                          ),
+                          suffixIcon: index == 0
+                              ? InkWell(
+                                  onTap: () {
+                                    setState(() {
+                                      ++length;
+                                    });
+                                  },
+                                  child: const Icon(
+                                    Icons.add,
+                                    color: FONT_COLOR,
+                                  ),
+                                )
+                              : InkWell(
+                                  onTap: () {
+                                    setState(() {
+                                      --length;
+                                    });
+                                  },
+                                  child: const Icon(
+                                    Icons.remove,
+                                    color: FONT_COLOR,
+                                  ),
+                                ),
+                        ),
                         onChanged: (v) {
                           optionalField[index] = v;
                         },
                       );
                     },
                   ),
-                  const SizedBox(height: 15),
-                  const SizedBox(height: 15),
+                  const SizedBox(height: 30),
                 ],
               ),
             ),
           ),
         ),
       ),
-      bottomNavigationBar: Padding(
-        padding: EdgeInsets.only(
-            left: size.width * 0.08,
-            right: size.width * 0.08,
-            top: size.height * 0.02,
-            bottom: size.height * 0.02),
-        child: Wrap(
-          // mainAxisAlignment: MainAxisAlignment.end,
-          alignment: WrapAlignment.center,
-          // crossAxisAlignment: WrapCrossAlignment.center,
-          children: [
-            InkWell(
-              onTap: () async {
-                _key.currentState!.validate();
-                if (_key.currentState!.validate() &&
-                    _gender != null &&
-                    mobileNumberController.text.isNotEmpty &&
-                    dobDone &&
-                    // ignore: duplicate_ignore
-                    tobDone) {
-                  _key.currentState!.save();
-                  UserModel user = UserModel(
+      bottomNavigationBar: onSubmit(size, context),
+    );
+  }
 
-                      uid: currentUser!.uid,
-                      name: nameController.text,
-                      email: emailController.text,
-                      phoneNumber: "+91${phoneNumberTextController.text}",
-                      userProfileImage: profileImage,
-                      gender: genderController.text,
-                      dateofBirth: dobController.text,
-                      placeofBirth: pobController.text,
-                      timeofBirth: tobController.text,
-                      maritalStatus: martialController.text,
-                      problem: problemController.text,
-                      partnerDetails: optionalField);
-                  bool submitSuccess = await updateUser(
-                      user, "+91${phoneNumberTextController.text}");
-                  // ignore: duplicate_ignore, duplicate_ignore
-                  if (submitSuccess) {
-                    // ignore: use_build_context_synchronously
-                    Navigator.of(context).pushReplacement(MaterialPageRoute(
-                      builder: (context) => const HomeScreen(),
-                    ));
-                  } else {
-                    // showAboutDialog(context: context)
-                  }
+  onSubmit(Size size, BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.only(
+          left: size.width * 0.08,
+          right: size.width * 0.08,
+          top: size.height * 0.02,
+          bottom: size.height * 0.02),
+      child: Wrap(
+        alignment: WrapAlignment.center,
+        children: [
+          InkWell(
+            onTap: () async {
+              _key.currentState!.validate();
+              if (_key.currentState!.validate() &&
+                  gender != null &&
+                  mobileNumberController.text.isNotEmpty &&
+                  dobDone &&
+                  // ignore: duplicate_ignore
+                  tobDone) {
+                _key.currentState!.save();
+                UserModel user = UserModel(
+                  uid: currentUser!.uid,
+                  name: nameController.text,
+                  email: emailController.text,
+                  phoneNumber: "+91${phoneNumberTextController.text}",
+                  userProfileImage: profileImage,
+                  gender: genderController.text,
+                  dateofBirth: dobController.text,
+                  placeofBirth: pobController.text,
+                  timeofBirth: tobController.text,
+                  maritalStatus: martialController.text,
+                  problem: problemController.text,
+                  partnerDetails: optionalField,
+                );
+                bool submitSuccess = await updateUser(
+                    user, "+91${phoneNumberTextController.text}");
+                // ignore: duplicate_ignore, duplicate_ignore
+                if (submitSuccess) {
+                  // ignore: use_build_context_synchronously
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(
+                    builder: (context) => const HomeScreen(),
+                  ));
                 } else {
-                  showDialog(
-                    context: context,
-                    builder: (context) {
-                      return AlertDialog(
-                        title: const Text('Validation Error'),
-                        content: const Text(
-                            'Please fill out all required fields correctly.'),
-                        actions: [
-                          TextButton(
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
-                            child: const Text('OK'),
-                          ),
-                        ],
-                      );
-                    },
-                  );
+                  // showAboutDialog(context: context)
                 }
+              } else {
+                showDialog(
+                  context: context,
+                  builder: (context) {
+                    return AlertDialog(
+                      title: const Text('Validation Error'),
+                      content: const Text(
+                          'Please fill out all required fields correctly.'),
+                      actions: [
+                        TextButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          child: const Text('OK'),
+                        ),
+                      ],
+                    );
+                  },
+                );
+              }
+            },
+            child: const Text(
+              "SUBMIT",
+              style: TextStyle(color: FONT_COLOR, fontWeight: FontWeight.w500),
+            ),
+          ),
+          const SizedBox(
+            height: 30,
+          ),
+          Center(
+            child: InkWell(
+              onTap: () async {
+                addUserDetails();
               },
-              child: const Text(
-                "SUBMIT",
-                style:
-                    TextStyle(color: FONT_COLOR, fontWeight: FontWeight.w500),
-              ),
-            ),
-            const SizedBox(
-              height: 30,
-            ),
-            Center(
-              child: InkWell(
-                onTap: () async{
-                   UserModel user = UserModel(
-
-                      uid: currentUser!.uid,
-                      name: nameController.text,
-                      email: emailController.text,
-                      phoneNumber: "+91${phoneNumberTextController.text}",
-                      userProfileImage: profileImage,
-                      gender: '',
-                      dateofBirth: '',
-                      placeofBirth: '',
-                      timeofBirth: '',
-                      maritalStatus:'',
-                      problem: '',
-                      partnerDetails: optionalField);
-                  await updateUser(user, '+91${phoneNumberTextController.text}');
-                  Navigator.of(context).pushAndRemoveUntil(
-                      MaterialPageRoute(
-                        builder: (context) => const HomeScreen(),
-                      ),
-                      (route) => false);
-                },
-                child: const Row(
-                  children: [
-                    Text(
-                      "SKIP FOR NOW",
-                      style: TextStyle(
-                          fontSize: 14,
-                          color: FONT_COLOR,
-                          fontWeight: FontWeight.w500),
-                    ),
-                    Icon(
-                      Icons.arrow_forward,
+              child: const Row(
+                children: [
+                  Text(
+                    "SKIP FOR NOW",
+                    style: TextStyle(
+                      fontSize: 14,
                       color: FONT_COLOR,
-                      size: 20,
-                    )
-                  ],
-                ),
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                  Icon(
+                    Icons.arrow_forward,
+                    color: FONT_COLOR,
+                    size: 20,
+                  )
+                ],
               ),
             ),
-            // Spacer(),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
 
-  Column _genderDropDown(
-      {required String label, required Function(String?) onChanged}) {
-    Size size = MediaQuery.sizeOf(context);
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const SizedBox(
-          height: 8,
-        ),
-        Row(
-          children: [
-            Expanded(
-              child: Container(
-                decoration: BoxDecoration(
-                  color: PRIMARY_COLOR,
-                  borderRadius: BorderRadius.circular(5),
-                  // border: Border.all(
-                  //   color: FONT_COLOR,
-                  // ),
-                ),
-                height: size.height * 0.06,
-                child: DropdownButton<String>(
-                  dropdownColor: PRIMARY_COLOR,
-                  value: _gender,
-                  // underline: const SizedBox(),
-                  hint: Text(
-                    label,
-                    style: const TextStyle(
-                      // fontSize: 14,
-                      fontWeight: FontWeight.w500,
-                      color: FONT_COLOR,
-                    ),
-                  ),
-                  items: GENDERS.map((String value) {
-                    return DropdownMenuItem<String>(
-                      value: value,
-                      child: Padding(
-                        padding: EdgeInsets.only(left: size.width * 0.02),
-                        child: Text(
-                          value,
-                          style: const TextStyle(color: FONT_COLOR),
-                        ),
-                      ),
-                    );
-                  }).toList(),
-                  onChanged: onChanged,
-                  isExpanded: true,
-                ),
-              ),
-            ),
-          ],
-        ),
-      ],
-    );
-  }
-
-  Column _martialDropDown(
-      {required String label, required Function(String?) onChanged}) {
-    Size size = MediaQuery.sizeOf(context);
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const SizedBox(
-          height: 8,
-        ),
-        Row(
-          children: [
-            Expanded(
-              child: Container(
-                decoration: BoxDecoration(
-                  color: PRIMARY_COLOR,
-                  borderRadius: BorderRadius.circular(5),
-                  // border: Border.all(
-                  //   color: FONT_COLOR,
-                  // ),
-                ),
-                height: size.height * 0.06,
-                child: DropdownButton<String>(
-                  dropdownColor: PRIMARY_COLOR,
-                  value: _martialStatus,
-                  // underline: const SizedBox(),
-                  hint: Text(
-                    label,
-                    style: const TextStyle(
-                      // fontSize: 14,
-                      fontWeight: FontWeight.w500,
-                      color: FONT_COLOR,
-                    ),
-                  ),
-                  items: martialStatus.map((String value) {
-                    return DropdownMenuItem<String>(
-                      value: value,
-                      child: Padding(
-                        padding: EdgeInsets.only(left: size.width * 0.02),
-                        child: Text(
-                          value,
-                          style: const TextStyle(color: FONT_COLOR),
-                        ),
-                      ),
-                    );
-                  }).toList(),
-                  onChanged: onChanged,
-                  isExpanded: true,
-                ),
-              ),
-            ),
-          ],
-        ),
-      ],
+  addUserDetails() async {
+    UserModel user = UserModel(
+        uid: currentUser!.uid,
+        name: nameController.text,
+        email: emailController.text,
+        phoneNumber: "+91${phoneNumberTextController.text}",
+        userProfileImage: profileImage,
+        gender: '',
+        dateofBirth: '',
+        placeofBirth: '',
+        timeofBirth: '',
+        maritalStatus: '',
+        problem: '',
+        partnerDetails: optionalField);
+    await updateUser(user, '+91${phoneNumberTextController.text}');
+    Navigator.of(context).pushAndRemoveUntil(
+      MaterialPageRoute(
+        builder: (context) => const HomeScreen(),
+      ),
+      (route) => false,
     );
   }
 }
