@@ -1,10 +1,11 @@
 // ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:sitare/screens/wallet%20recharge%20screen/amount_container_widget.dart';
-import '../widget s/triangle_widget.dart';
+import 'package:sitare/screens/wallet%20recharge%20screen/widget%20s/triangle_widget.dart';
 
-class AmountGrid extends StatefulWidget {
-  AmountGrid({
+class AmountGridWidget extends StatefulWidget {
+  AmountGridWidget({
     super.key,
     required this.size,
     required this.amountList,
@@ -15,13 +16,13 @@ class AmountGrid extends StatefulWidget {
   final Size size;
   final List<String> amountList;
   int selectedFilterIndex;
-  final TextEditingController amountController;
+  TextEditingController amountController;
 
   @override
-  State<AmountGrid> createState() => _AmountGridState();
+  State<AmountGridWidget> createState() => _AmountGridWidgetState();
 }
 
-class _AmountGridState extends State<AmountGrid> {
+class _AmountGridWidgetState extends State<AmountGridWidget> {
   @override
   Widget build(BuildContext context) {
     return Expanded(
