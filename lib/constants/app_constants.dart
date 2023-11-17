@@ -187,3 +187,14 @@ List selectedGenders = [
 ];
 const profileImage =
     'https://w7.pngwing.com/pngs/304/275/png-transparent-user-profile-computer-icons-profile-miscellaneous-logo-monochrome-thumbnail.png';
+final List<String> amountList = [
+  "100",
+  "200",
+  "300",
+  "500",
+  "1000",
+  "2000",
+  "4000",
+  "8000",
+  "10000"
+];
