@@ -1,11 +1,11 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:sitare/widget/contact_icon_home_widget.dart';
 
-import '../constants/ui_constants.dart';
+import '../../../constants/ui_constants.dart';
+import 'contact_icon_home_widget.dart';
 
-class GetDetailedReportHomeScreenWidget extends StatelessWidget {
-  const GetDetailedReportHomeScreenWidget({
+class ConnectWithExpertsHomeScreenWidget extends StatelessWidget {
+  const ConnectWithExpertsHomeScreenWidget({
     super.key,
     required this.size,
   });
@@ -24,19 +24,19 @@ class GetDetailedReportHomeScreenWidget extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              ContactIconHomeScreen(icon: Icons.insert_drive_file_outlined),
+              ContactIconHomeScreen(icon: Icons.chat_outlined),
+              ContactIconHomeScreen(icon: Icons.call_outlined),
+              ContactIconHomeScreen(icon: Icons.video_call_outlined),
             ],
           ),
           SizedBox(
             height: 10,
           ),
-          AutoSizeText(
-            'GET DETAILED REPORT',
-            maxFontSize: 12,
-            maxLines: 1,
-            minFontSize: 8,
-            style: TextStyle(color: whiteColor),
-          )
+          AutoSizeText('CONNECT WITH EXPERTS',
+              maxFontSize: 12,
+              maxLines: 1,
+              minFontSize: 8,
+              style: TextStyle(color: whiteColor))
         ],
       ),
     );
