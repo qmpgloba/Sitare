@@ -1,15 +1,14 @@
 // ignore_for_file: use_build_context_synchronously, duplicate_ignore
-
 import 'package:flutter/material.dart';
 import 'package:sitare/constants/app_constants.dart';
 import 'package:sitare/constants/ui_constants.dart';
-import 'package:sitare/functions/auth%20function/auth_function.dart';
-import 'package:sitare/functions/user_functions.dart';
+import 'package:sitare/functions/details%20functions/date_time_functions.dart';
+import 'package:sitare/functions/details%20functions/details_functions.dart';
 import 'package:sitare/screens/create%20account%20page/cerate_account_screen.dart';
+import 'package:sitare/screens/enter%20details%20screen/widgets/dob_field.dart';
 import 'package:sitare/screens/enter%20details%20screen/widgets/drop_down.dart';
-import 'package:sitare/screens/home%20screen/home_screen.dart';
+import 'package:sitare/screens/enter%20details%20screen/widgets/partner_details.dart';
 import 'package:sitare/screens/enter%20details%20screen/widgets/custom_textfield.dart';
-import '../../model/user_model.dart';
 import '../welcome page/widgets/mobile_number_textfeild_widget.dart';
 
 class EnterDetailsScreen extends StatefulWidget {
@@ -34,28 +33,16 @@ class _EnterDetailsScreenState extends State<EnterDetailsScreen> {
   TextEditingController tobController = TextEditingController();
   TextEditingController martialController = TextEditingController();
   TextEditingController problemController = TextEditingController();
-
-  TimeOfDay time = TimeOfDay.now();
   String countrycode = "91";
-  bool tobDone = false;
-  bool dobDone = false;
-  bool timeChanged = false;
   List<String> optionalField = [];
   final _key = GlobalKey<FormState>();
   String? name;
-  String? gender;
   String? _martialStatus;
   String? phoneNumber;
   String? email;
 
   Future<void> _showDatePicker() async {
-    final DateTime? pickedDate = await showDatePicker(
-      context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime(1900),
-      lastDate: DateTime.now(),
-    );
-
+    final DateTime? pickedDate = await datePicker(context);
     if (pickedDate != null) {
       setState(() {
         dobController.text =
@@ -66,11 +53,7 @@ class _EnterDetailsScreenState extends State<EnterDetailsScreen> {
   }
 
   Future<void> _showTimePicker() async {
-    final TimeOfDay? pickedTime = await showTimePicker(
-      context: context,
-      initialTime: time,
-    );
-
+    final TimeOfDay? pickedTime = await timePicker(context);
     if (pickedTime != null && pickedTime != time) {
       setState(() {
         time = pickedTime; // Update the time variable
@@ -174,40 +157,23 @@ class _EnterDetailsScreenState extends State<EnterDetailsScreen> {
                     },
                   ),
                   DropDown(
-                      context: context,
-                      label: 'Gender',
-                      onChanged: (v) {
-                        setState(() {
-                          gender = v ?? "";
-                          genderController.text = v ?? "";
-                        });
-                      },
-                      dropDownCategory: gender,
-                      dropDownValue: GENDERS),
+                    context: context,
+                    label: 'Gender',
+                    onChanged: (v) {
+                      setState(() {
+                        gender = v ?? "";
+                        genderController.text = v ?? "";
+                      });
+                    },
+                    dropDownCategory: gender,
+                    dropDownValue: GENDERS,
+                  ),
                   const SizedBox(height: 20),
                   InkWell(
                     onTap: () {
                       _showDatePicker();
                     },
-                    child: Container(
-                      decoration: const BoxDecoration(
-                        border: Border(
-                          bottom: BorderSide(color: whiteColor, width: 0.4),
-                        ),
-                      ),
-                      child: Row(
-                        children: [
-                          Text(
-                            "Date of Birth: ${dobController.text} ",
-                            style: const TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w500,
-                              color: FONT_COLOR,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
+                    child: DobField(dobController: dobController),
                   ),
                   const SizedBox(
                     height: 5,
@@ -274,64 +240,10 @@ class _EnterDetailsScreenState extends State<EnterDetailsScreen> {
                       return null;
                     },
                   ),
-                  ListView.separated(
-                    separatorBuilder: (context, index) {
-                      return const SizedBox(height: 10);
-                    },
-                    physics: const NeverScrollableScrollPhysics(),
-                    padding: EdgeInsets.only(top: size.height * 0.02),
-                    shrinkWrap: true,
-                    itemCount: length,
-                    itemBuilder: (context, index) {
-                      if (optionalField.length <= index) {
-                        optionalField.add('');
-                      }
-
-                      return TextFormField(
-                        style: const TextStyle(
-                          color: FONT_COLOR,
-                        ),
-                        decoration: InputDecoration(
-                          contentPadding: const EdgeInsets.symmetric(
-                              horizontal: 20.0, vertical: 10.0),
-                          hintText: "Partner Details (Optional)",
-                          hintStyle: const TextStyle(
-                            color: FONT_COLOR,
-                          ),
-                          enabledBorder: const OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: whiteColor,
-                            ),
-                          ),
-                          suffixIcon: index == 0
-                              ? InkWell(
-                                  onTap: () {
-                                    setState(() {
-                                      ++length;
-                                    });
-                                  },
-                                  child: const Icon(
-                                    Icons.add,
-                                    color: FONT_COLOR,
-                                  ),
-                                )
-                              : InkWell(
-                                  onTap: () {
-                                    setState(() {
-                                      --length;
-                                    });
-                                  },
-                                  child: const Icon(
-                                    Icons.remove,
-                                    color: FONT_COLOR,
-                                  ),
-                                ),
-                        ),
-                        onChanged: (v) {
-                          optionalField[index] = v;
-                        },
-                      );
-                    },
+                  PartnerDetailsWidget(
+                    size: size,
+                    length: length,
+                    optionalField: optionalField,
                   ),
                   const SizedBox(height: 30),
                 ],
@@ -340,133 +252,19 @@ class _EnterDetailsScreenState extends State<EnterDetailsScreen> {
           ),
         ),
       ),
-      bottomNavigationBar: onSubmit(size, context),
-    );
-  }
-
-  onSubmit(Size size, BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(
-          left: size.width * 0.08,
-          right: size.width * 0.08,
-          top: size.height * 0.02,
-          bottom: size.height * 0.02),
-      child: Wrap(
-        alignment: WrapAlignment.center,
-        children: [
-          InkWell(
-            onTap: () async {
-              _key.currentState!.validate();
-              if (_key.currentState!.validate() &&
-                  gender != null &&
-                  mobileNumberController.text.isNotEmpty &&
-                  dobDone &&
-                  // ignore: duplicate_ignore
-                  tobDone) {
-                _key.currentState!.save();
-                UserModel user = UserModel(
-                  uid: currentUser!.uid,
-                  name: nameController.text,
-                  email: emailController.text,
-                  phoneNumber: "+91${phoneNumberTextController.text}",
-                  userProfileImage: profileImage,
-                  gender: genderController.text,
-                  dateofBirth: dobController.text,
-                  placeofBirth: pobController.text,
-                  timeofBirth: tobController.text,
-                  maritalStatus: martialController.text,
-                  problem: problemController.text,
-                  partnerDetails: optionalField,
-                );
-                bool submitSuccess = await updateUser(
-                    user, "+91${phoneNumberTextController.text}");
-                // ignore: duplicate_ignore, duplicate_ignore
-                if (submitSuccess) {
-                  // ignore: use_build_context_synchronously
-                  Navigator.of(context).pushReplacement(MaterialPageRoute(
-                    builder: (context) => const HomeScreen(),
-                  ));
-                } else {
-                  // showAboutDialog(context: context)
-                }
-              } else {
-                showDialog(
-                  context: context,
-                  builder: (context) {
-                    return AlertDialog(
-                      title: const Text('Validation Error'),
-                      content: const Text(
-                          'Please fill out all required fields correctly.'),
-                      actions: [
-                        TextButton(
-                          onPressed: () {
-                            Navigator.pop(context);
-                          },
-                          child: const Text('OK'),
-                        ),
-                      ],
-                    );
-                  },
-                );
-              }
-            },
-            child: const Text(
-              "SUBMIT",
-              style: TextStyle(color: FONT_COLOR, fontWeight: FontWeight.w500),
-            ),
-          ),
-          const SizedBox(
-            height: 30,
-          ),
-          Center(
-            child: InkWell(
-              onTap: () async {
-                addUserDetails();
-              },
-              child: const Row(
-                children: [
-                  Text(
-                    "SKIP FOR NOW",
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: FONT_COLOR,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                  Icon(
-                    Icons.arrow_forward,
-                    color: FONT_COLOR,
-                    size: 20,
-                  )
-                ],
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  addUserDetails() async {
-    UserModel user = UserModel(
-        uid: currentUser!.uid,
+      bottomNavigationBar: onSubmit(
+        size: size,
+        context: context,
         name: nameController.text,
         email: emailController.text,
-        phoneNumber: "+91${phoneNumberTextController.text}",
-        userProfileImage: profileImage,
-        gender: '',
-        dateofBirth: '',
-        placeofBirth: '',
-        timeofBirth: '',
-        maritalStatus: '',
-        problem: '',
-        partnerDetails: optionalField);
-    await updateUser(user, '+91${phoneNumberTextController.text}');
-    Navigator.of(context).pushAndRemoveUntil(
-      MaterialPageRoute(
-        builder: (context) => const HomeScreen(),
+        mobile: phoneNumberTextController.text,
+        gender: genderController.text,
+        dob: dobController.text,
+        pob: pobController.text,
+        tob: tobController.text,
+        maritalStatus: martialController.text,
+        problem: problemController.text,
       ),
-      (route) => false,
     );
   }
 }
