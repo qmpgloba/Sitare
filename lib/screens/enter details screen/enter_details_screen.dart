@@ -9,6 +9,7 @@ import 'package:sitare/screens/enter%20details%20screen/widgets/dob_field.dart';
 import 'package:sitare/screens/enter%20details%20screen/widgets/drop_down.dart';
 import 'package:sitare/screens/enter%20details%20screen/widgets/partner_details.dart';
 import 'package:sitare/screens/enter%20details%20screen/widgets/custom_textfield.dart';
+import 'package:sitare/screens/enter%20details%20screen/widgets/tob_widget.dart';
 import '../welcome page/widgets/mobile_number_textfeild_widget.dart';
 
 class EnterDetailsScreen extends StatefulWidget {
@@ -117,9 +118,9 @@ class _EnterDetailsScreenState extends State<EnterDetailsScreen> {
                     controller: nameController,
                     // ignore: body_might_complete_normally_nullable
                     onChanged: (value) {
-                      setState(() {
-                        name = value ?? "";
-                      });
+                      // setState(() {
+                      //   name = value ?? "";
+                      // });
                     },
                     hintname: "Name",
                     validator: (value) {
@@ -151,19 +152,19 @@ class _EnterDetailsScreenState extends State<EnterDetailsScreen> {
                     controller: mobileNumberController,
                     readOnly: false,
                     onCountryChanged: (v) {
-                      setState(() {
-                        countrycode = v.dialCode;
-                      });
+                      // setState(() {
+                      //   countrycode = v.dialCode;
+                      // });
                     },
                   ),
                   DropDown(
                     context: context,
                     label: 'Gender',
                     onChanged: (v) {
-                      setState(() {
-                        gender = v ?? "";
-                        genderController.text = v ?? "";
-                      });
+                      // setState(() {
+                      //   gender = v ?? "";
+                      //   genderController.text = v ?? "";
+                      // });
                     },
                     dropDownCategory: gender,
                     dropDownValue: GENDERS,
@@ -194,25 +195,7 @@ class _EnterDetailsScreenState extends State<EnterDetailsScreen> {
                     onTap: () {
                       _showTimePicker();
                     },
-                    child: Container(
-                      decoration: const BoxDecoration(
-                        border: Border(
-                          bottom: BorderSide(color: whiteColor, width: 0.4),
-                        ),
-                      ),
-                      child: Row(
-                        children: [
-                          Text(
-                            "Time of Birth: ${tobController.text}",
-                            style: const TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w500,
-                              color: FONT_COLOR,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
+                    child: TobWidget(tobController: tobController),
                   ),
                   const SizedBox(
                     height: 5,
@@ -221,10 +204,10 @@ class _EnterDetailsScreenState extends State<EnterDetailsScreen> {
                     context: context,
                     label: "Martial Status",
                     onChanged: (v) {
-                      setState(() {
-                        _martialStatus = v ?? "";
-                        martialController.text = v ?? "";
-                      });
+                      // setState(() {
+                      //   _martialStatus = v ?? "";
+                      //   martialController.text = v ?? "";
+                      // });
                     },
                     dropDownCategory: _martialStatus,
                     dropDownValue: martialStatus,
