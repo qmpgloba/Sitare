@@ -46,7 +46,7 @@ class _WalletRechargeScreenState extends State<WalletRechargeScreen> {
             Padding(
               padding: EdgeInsets.only(top: size.width / 15),
               child: Text(
-                "Available balance: Rs: $balance",
+                "Avgit ailable balance: Rs: $balance",
                 style:
                     const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
