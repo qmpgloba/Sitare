@@ -100,7 +100,7 @@ class _DetailsWidgetState extends State<DetailsWidget> {
         ),
         CustomTextField(
           size: widget.size,
-          // readOnly: true,
+          readOnly: true,
           controller: widget.nameController,
           onChanged: (value) {
             setState(() {
@@ -109,27 +109,12 @@ class _DetailsWidgetState extends State<DetailsWidget> {
             return null;
           },
           hintname: "Name",
-          validator: (value) {
-            if (value!.isEmpty) {
-              return 'Please enter your name';
-            }
-            return null;
-          },
         ),
         CustomTextField(
           size: widget.size,
-          // readOnly: true,
+          readOnly: true,
           controller: widget.emailController,
           hintname: "Email",
-          validator: (value) {
-            if (value == null || value.isEmpty) {
-              return 'Email is required';
-            }
-            if (!value.contains('@')) {
-              return 'Invalid email format';
-            }
-            return null;
-          },
         ),
         const SizedBox(
           height: 5,
@@ -169,12 +154,7 @@ class _DetailsWidgetState extends State<DetailsWidget> {
           size: widget.size,
           controller: widget.pobController,
           hintname: "Place of Birth",
-          validator: (value) {
-            if (value!.isEmpty) {
-              return 'Please enter your Place of Birth';
-            }
-            return null;
-          },
+          message: 'Place of birth is required',
         ),
         const SizedBox(height: 25),
         InkWell(
@@ -202,12 +182,7 @@ class _DetailsWidgetState extends State<DetailsWidget> {
           size: widget.size,
           controller: widget.problemController,
           hintname: "Problem",
-          validator: (value) {
-            if (value!.isEmpty) {
-              return 'Please enter your Problem';
-            }
-            return null;
-          },
+          message: 'Please enter your Problem',
         ),
         PartnerDetailsWidget(
           size: widget.size,
