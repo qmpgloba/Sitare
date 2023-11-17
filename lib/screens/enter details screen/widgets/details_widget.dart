@@ -52,28 +52,26 @@ class _DetailsWidgetState extends State<DetailsWidget> {
   String? _martialStatus;
   String? phoneNumber;
   String? email;
-  bool? dobDone;
-  bool? tobDone;
-
-  Future<void> _showDatePicker(
-    String dob,
-  ) async {
+  bool tobDone = false;
+  bool dobDone = false;
+  bool timeChanged = false;
+  Future<void> _showDatePicker() async {
     final DateTime? pickedDate = await datePicker(context);
     if (pickedDate != null) {
       setState(() {
-        dob =
+        widget.dobController.text =
             "${pickedDate.day.toString().padLeft(2, '0')}/${pickedDate.month.toString().padLeft(2, '0')}/${pickedDate.year}";
         dobDone = true;
       });
     }
   }
 
-  Future<void> _showTimePicker(String tob) async {
+  Future<void> _showTimePicker() async {
     final TimeOfDay? pickedTime = await timePicker(context);
     if (pickedTime != null && pickedTime != time) {
       setState(() {
         time = pickedTime; // Update the time variable
-        tob = time.format(context);
+        widget.tobController.text = time.format(context);
         tobDone = true;
       });
     }
@@ -104,7 +102,7 @@ class _DetailsWidgetState extends State<DetailsWidget> {
         ),
         CustomTextField(
           size: widget.size,
-          readOnly: true,
+          // readOnly: true,
           controller: widget.nameController,
           onChanged: (value) {
             setState(() {
@@ -122,7 +120,7 @@ class _DetailsWidgetState extends State<DetailsWidget> {
         ),
         CustomTextField(
           size: widget.size,
-          readOnly: true,
+          // readOnly: true,
           controller: widget.emailController,
           hintname: "Email",
           validator: (value) {
@@ -162,7 +160,7 @@ class _DetailsWidgetState extends State<DetailsWidget> {
         const SizedBox(height: 20),
         InkWell(
           onTap: () {
-            _showDatePicker(widget.dobController.text);
+            _showDatePicker();
           },
           child: DobField(dobController: widget.dobController),
         ),
@@ -183,7 +181,7 @@ class _DetailsWidgetState extends State<DetailsWidget> {
         const SizedBox(height: 25),
         InkWell(
           onTap: () {
-            _showTimePicker(widget.tobController.text);
+            _showTimePicker();
           },
           child: TobWidget(tobController: widget.tobController),
         ),
@@ -215,8 +213,8 @@ class _DetailsWidgetState extends State<DetailsWidget> {
         ),
         PartnerDetailsWidget(
           size: widget.size,
-          length: widget.length,
           optionalField: widget.optionalField,
+          length: widget.length,
         ),
         const SizedBox(height: 30),
       ],

@@ -2,16 +2,17 @@
 
 import 'package:flutter/material.dart';
 import 'package:sitare/constants/ui_constants.dart';
+import 'package:sitare/functions/details%20functions/details_functions.dart';
 
 class PartnerDetailsWidget extends StatefulWidget {
-  const PartnerDetailsWidget({
+  PartnerDetailsWidget({
     super.key,
     required this.size,
-    required this.length,
     required this.optionalField,
+    required this.length,
   });
-  final int length;
   final Size size;
+  late int length;
   final List<String> optionalField;
 
   @override
@@ -19,7 +20,6 @@ class PartnerDetailsWidget extends StatefulWidget {
 }
 
 class _PartnerDetailsWidgetState extends State<PartnerDetailsWidget> {
-  int length = 1;
   @override
   Widget build(BuildContext context) {
     return ListView.separated(
@@ -55,7 +55,7 @@ class _PartnerDetailsWidgetState extends State<PartnerDetailsWidget> {
                 ? InkWell(
                     onTap: () {
                       setState(() {
-                        ++length;
+                        ++widget.length;
                       });
                     },
                     child: const Icon(
@@ -66,7 +66,7 @@ class _PartnerDetailsWidgetState extends State<PartnerDetailsWidget> {
                 : InkWell(
                     onTap: () {
                       setState(() {
-                        --length;
+                        --widget.length;
                       });
                     },
                     child: const Icon(

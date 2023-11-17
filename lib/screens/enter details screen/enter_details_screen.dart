@@ -27,6 +27,8 @@ class _EnterDetailsScreenState extends State<EnterDetailsScreen> {
   TextEditingController martialController = TextEditingController();
   TextEditingController problemController = TextEditingController();
   final _key = GlobalKey<FormState>();
+  String? name;
+  String? phoneNumber;
   String? email;
 
   @override
