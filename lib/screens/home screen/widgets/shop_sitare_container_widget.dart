@@ -1,7 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
-import '../constants/ui_constants.dart';
+import '../../../constants/ui_constants.dart';
 
 class ShopSitareContainerWidget extends StatelessWidget {
   const ShopSitareContainerWidget({

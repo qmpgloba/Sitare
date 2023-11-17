@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
-
-import '../constants/ui_constants.dart';
+import '../../../constants/ui_constants.dart';
 
 class LiveTextWidgetCarousel extends StatelessWidget {
   const LiveTextWidgetCarousel({
