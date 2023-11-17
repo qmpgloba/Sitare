@@ -21,7 +21,6 @@ class DetailsWidget extends StatefulWidget {
     required this.pobController,
     required this.tobController,
     required this.problemController,
-    required this.length,
     required this.optionalField,
     required this.genderController,
     required this.martialController,
@@ -38,7 +37,6 @@ class DetailsWidget extends StatefulWidget {
   final TextEditingController genderController;
   final TextEditingController martialController;
 
-  final int length;
   final List<String> optionalField;
 
   @override
@@ -214,7 +212,6 @@ class _DetailsWidgetState extends State<DetailsWidget> {
         PartnerDetailsWidget(
           size: widget.size,
           optionalField: widget.optionalField,
-          length: widget.length,
         ),
         const SizedBox(height: 30),
       ],

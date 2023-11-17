@@ -67,7 +67,6 @@ class _EnterDetailsScreenState extends State<EnterDetailsScreen> {
                 pobController: pobController,
                 tobController: tobController,
                 problemController: problemController,
-                length: length,
                 optionalField: optionalField,
                 genderController: genderController,
                 martialController: martialController,

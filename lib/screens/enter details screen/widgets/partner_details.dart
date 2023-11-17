@@ -1,18 +1,15 @@
 // ignore_for_file: must_be_immutable
-
 import 'package:flutter/material.dart';
 import 'package:sitare/constants/ui_constants.dart';
-import 'package:sitare/functions/details%20functions/details_functions.dart';
 
 class PartnerDetailsWidget extends StatefulWidget {
-  PartnerDetailsWidget({
+  const PartnerDetailsWidget({
     super.key,
     required this.size,
     required this.optionalField,
-    required this.length,
   });
   final Size size;
-  late int length;
+
   final List<String> optionalField;
 
   @override
@@ -20,6 +17,7 @@ class PartnerDetailsWidget extends StatefulWidget {
 }
 
 class _PartnerDetailsWidgetState extends State<PartnerDetailsWidget> {
+  int length = 1;
   @override
   Widget build(BuildContext context) {
     return ListView.separated(
@@ -29,7 +27,7 @@ class _PartnerDetailsWidgetState extends State<PartnerDetailsWidget> {
       physics: const NeverScrollableScrollPhysics(),
       padding: EdgeInsets.only(top: widget.size.height * 0.02),
       shrinkWrap: true,
-      itemCount: widget.length,
+      itemCount: length,
       itemBuilder: (context, index) {
         if (widget.optionalField.length <= index) {
           widget.optionalField.add('');
@@ -55,7 +53,7 @@ class _PartnerDetailsWidgetState extends State<PartnerDetailsWidget> {
                 ? InkWell(
                     onTap: () {
                       setState(() {
-                        ++widget.length;
+                        ++length;
                       });
                     },
                     child: const Icon(
@@ -66,7 +64,7 @@ class _PartnerDetailsWidgetState extends State<PartnerDetailsWidget> {
                 : InkWell(
                     onTap: () {
                       setState(() {
-                        --widget.length;
+                        --length;
                       });
                     },
                     child: const Icon(
