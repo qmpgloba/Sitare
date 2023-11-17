@@ -45,7 +45,7 @@ Future<List<AvailabilityModel>> getAvailableSlots(String astrologerId) async {
 }
 
 Future<void> updateAvailableSlotsInFireBase(
-    String uid, DateTime date, AvailabilityModel availableSlots) async {
+    String uid, DateTime date, AvailabilityModel availableSlots,String astrologerId) async {
   try {
     final querySnapshot = await FirebaseFirestore.instance
         .collection('Astrologerdetails')
@@ -72,7 +72,9 @@ Future<void> updateAvailableSlotsInFireBase(
           .collection('available slots').doc(docId).collection('booked details');
         BookingDetailsModel slotBooked = BookingDetailsModel(
             userUid: currentUser!.uid,
-            slotBooked: availableSlots.bookedSlots.first);
+          astrologerId: astrologerId,
+            slotBooked: availableSlots.bookedSlots.first,
+          );
          await subcollectionRef2.add(slotBooked.toJson());
       } else {
         throw Exception('Document not found for the given date');
