@@ -44,8 +44,10 @@ Future<List<AvailabilityModel>> getAvailableSlots(String astrologerId) async {
   return availableSlots;
 }
 
-Future<void> updateAvailableSlotsInFireBase(
-    String uid, DateTime date, AvailabilityModel availableSlots,String astrologerId) async {
+Future<void> updateAvailableSlotsInFireBase(String uid, DateTime date,
+    AvailabilityModel availableSlots, String astrologerId) async {
+      print(date);
+      print(availableSlots.date);
   try {
     final querySnapshot = await FirebaseFirestore.instance
         .collection('Astrologerdetails')
@@ -53,7 +55,7 @@ Future<void> updateAvailableSlotsInFireBase(
         .get();
 
     if (querySnapshot.docs.isNotEmpty) {
-      // Phone number exists in Firestore, update the subcollection
+    
       final userDoc = querySnapshot.docs.first;
       final userUid = userDoc.id;
       final subcollectionRef = FirebaseFirestore.instance
@@ -61,26 +63,28 @@ Future<void> updateAvailableSlotsInFireBase(
           .doc(userUid)
           .collection('available slots');
 
-      // Retrieve the document based on the provided date
+      
       final query = await subcollectionRef.where('date', isEqualTo: date).get();
       if (query.docs.isNotEmpty) {
         final docId = query.docs.first.id;
         await subcollectionRef.doc(docId).update(availableSlots.toJson());
-         final subcollectionRef2 = FirebaseFirestore.instance
-          .collection('Astrologerdetails')
-          .doc(userUid)
-          .collection('available slots').doc(docId).collection('booked details');
+        final subcollectionRef2 = FirebaseFirestore.instance
+            .collection('Astrologerdetails')
+            .doc(userUid)
+            .collection('available slots')
+            .doc(docId)
+            .collection('booked details');
         BookingDetailsModel slotBooked = BookingDetailsModel(
-            userUid: currentUser!.uid,
+          userUid: currentUser!.uid,
           astrologerId: astrologerId,
-            slotBooked: availableSlots.bookedSlots.first,
-          );
-         await subcollectionRef2.add(slotBooked.toJson());
+          slotBooked: availableSlots.bookedSlots.first,
+        );
+        await subcollectionRef2.add(slotBooked.toJson());
       } else {
         throw Exception('Document not found for the given date');
       }
     } else {
-      // Phone number does not exist in Firestore
+     
       throw Exception('uid does not exist');
     }
   } on FirebaseException catch (e) {
