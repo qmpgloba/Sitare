@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sitare/constants/ui_constants.dart';
-import 'package:sitare/widget/amount_container_widget.dart';
-import 'package:sitare/widget/triangle_widget.dart';
+import 'package:sitare/screens/wallet%20recharge%20screen/widget/amount_grid.dart';
 
 class WalletRechargeScreen extends StatefulWidget {
   const WalletRechargeScreen({super.key});
@@ -32,11 +31,12 @@ class _WalletRechargeScreenState extends State<WalletRechargeScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-          title: const Text(
-            "Wallet Recharge",
-            style: TextStyle(color: Colors.white),
-          ),
-          backgroundColor: PRIMARY_COLOR),
+        title: const Text(
+          "Wallet Recharge",
+          style: TextStyle(color: Colors.white),
+        ),
+        backgroundColor: PRIMARY_COLOR,
+      ),
       body: Padding(
         padding: EdgeInsets.all(size.width / 16),
         child: Column(
@@ -88,38 +88,11 @@ class _WalletRechargeScreenState extends State<WalletRechargeScreen> {
             const SizedBox(
               height: 20,
             ),
-            Expanded(
-              child: GridView.builder(
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 3,
-                  crossAxisSpacing: size.width * 0.05,
-                  mainAxisSpacing: size.width * 0.05,
-                  childAspectRatio: 2,
-                ),
-                itemCount: amountList.length,
-                itemBuilder: (BuildContext context, int index) {
-                  bool isSelected = selectedFilterIndex == index;
-                  return Stack(
-                    children: [
-                      AmountContainer(
-                        amount: amountList[index],
-                        onTap: () {
-                          setState(() {
-                            amountController.text = amountList[index];
-                            selectedFilterIndex = index;
-                          });
-                        },
-                      ),
-                      if (isSelected)
-                        const Positioned(
-                            child: TriangleWidget(
-                          size: 25,
-                          color: Colors.red,
-                        )),
-                    ],
-                  );
-                },
-              ),
+            AmountGrid(
+              amountController: amountController,
+              size: size,
+              amountList: amountList,
+              selectedFilterIndex: selectedFilterIndex,
             )
           ],
         ),
