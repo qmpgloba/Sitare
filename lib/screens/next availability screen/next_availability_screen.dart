@@ -141,7 +141,7 @@ class _NextAvailabilityScreenState extends State<NextAvailabilityScreen>
                           await updateAvailableSlotsInFireBase(
                                   widget.astrologer.uid,
                                   slots[_tabController.index].date,
-                                  bookedSlot)
+                                  bookedSlot,widget.astrologer.uid)
                               .then((value) {
                             showToast('Slot Booked Successfully', greenColor);
                             Navigator.of(context).pop();

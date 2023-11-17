@@ -99,11 +99,22 @@ class SecondPartWidget extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     IconContainerWidget(
+
+                      size: size,
+                      icon: Icons.menu_book_rounded,
+                      label: 'KNOWLEDGE BASE',
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        
+                      },
+                      child: IconContainerWidget(
                         size: size,
-                        icon: Icons.menu_book_rounded,
-                        label: 'KNOWLEDGE BASE'),
-                    IconContainerWidget(
-                        size: size, icon: Icons.update, label: 'YOUR ORDERS'),
+                        icon: Icons.update,
+                        label: 'MY BOOKINGS',
+                      ),
+                    ),
+
                   ],
                 ),
                 const SizedBox(

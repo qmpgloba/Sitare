@@ -73,7 +73,7 @@ class UserDetailsDrawerHeader extends StatelessWidget {
               ),
               AutoSizeText(
                 email,
-                maxLines: 1,
+                maxLines: 2,
                 maxFontSize: 14,
               ),
               AutoSizeText(
