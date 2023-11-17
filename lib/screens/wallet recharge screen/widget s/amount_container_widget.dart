@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
-import '../constants/ui_constants.dart';
+import '../../../constants/ui_constants.dart';
 
 class AmountContainer extends StatefulWidget {
-  const AmountContainer(
-      {super.key,
-      required this.amount,
-      required this.onTap,
-     // required this.color
-      });
+  const AmountContainer({
+    super.key,
+    required this.amount,
+    required this.onTap,
+    // required this.color
+  });
   final String amount;
   final VoidCallback onTap;
   //final Color color;

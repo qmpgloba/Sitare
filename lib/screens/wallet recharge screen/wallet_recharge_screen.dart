@@ -1,10 +1,7 @@
-
 import 'package:flutter/material.dart';
 import 'package:sitare/constants/ui_constants.dart';
-import 'package:sitare/widget/amount_container_widget.dart';
-import 'package:sitare/widget/triangle_widget.dart';
-
-
+import 'package:sitare/screens/wallet%20recharge%20screen/widget%20s/amount_container_widget.dart';
+import 'package:sitare/screens/wallet%20recharge%20screen/widget%20s/triangle_widget.dart';
 
 class WalletRechargeScreen extends StatefulWidget {
   const WalletRechargeScreen({super.key});
@@ -50,7 +47,8 @@ class _WalletRechargeScreenState extends State<WalletRechargeScreen> {
               padding: EdgeInsets.only(top: size.width / 15),
               child: Text(
                 "Available balance: Rs: $balance",
-                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                style:
+                    const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
             ),
             const SizedBox(height: 8.0),
@@ -114,10 +112,11 @@ class _WalletRechargeScreenState extends State<WalletRechargeScreen> {
                       ),
                       if (isSelected)
                         const Positioned(
-                            child: TriangleWidget(
-                          size: 25,
-                          color: Colors.red,
-                        )),
+                          child: TriangleWidget(
+                            size: 25,
+                            color: Colors.red,
+                          ),
+                        ),
                     ],
                   );
                 },
