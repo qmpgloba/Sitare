@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:sitare/constants/app_constants.dart';
 import 'package:sitare/constants/ui_constants.dart';
+
 import 'package:sitare/screens/wallet%20recharge%20screen/widget%20s/amount_container_widget.dart';
 import 'package:sitare/screens/wallet%20recharge%20screen/widget%20s/triangle_widget.dart';
+
 
 class WalletRechargeScreen extends StatefulWidget {
   const WalletRechargeScreen({super.key});
@@ -13,17 +16,6 @@ class WalletRechargeScreen extends StatefulWidget {
 class _WalletRechargeScreenState extends State<WalletRechargeScreen> {
   double balance = 4.0;
   int selectedFilterIndex = 0;
-  final List<String> amountList = [
-    "100",
-    "200",
-    "300",
-    "500",
-    "1000",
-    "2000",
-    "4000",
-    "8000",
-    "10000"
-  ];
 
   TextEditingController amountController = TextEditingController();
   @override
@@ -32,11 +24,12 @@ class _WalletRechargeScreenState extends State<WalletRechargeScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-          title: const Text(
-            "Wallet Recharge",
-            style: TextStyle(color: Colors.white),
-          ),
-          backgroundColor: PRIMARY_COLOR),
+        title: const Text(
+          "Wallet Recharge",
+          style: TextStyle(color: Colors.white),
+        ),
+        backgroundColor: PRIMARY_COLOR,
+      ),
       body: Padding(
         padding: EdgeInsets.all(size.width / 16),
         child: Column(
@@ -46,9 +39,13 @@ class _WalletRechargeScreenState extends State<WalletRechargeScreen> {
             Padding(
               padding: EdgeInsets.only(top: size.width / 15),
               child: Text(
-                "Avgit ailable balance: Rs: $balance",
-                style:
-                    const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+
+                "Available balance: Rs: $balance",
+                style: const TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
+
               ),
             ),
             const SizedBox(height: 8.0),
@@ -88,6 +85,7 @@ class _WalletRechargeScreenState extends State<WalletRechargeScreen> {
             const SizedBox(
               height: 20,
             ),
+
             Expanded(
               child: GridView.builder(
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -121,6 +119,7 @@ class _WalletRechargeScreenState extends State<WalletRechargeScreen> {
                   );
                 },
               ),
+
             )
           ],
         ),
