@@ -66,14 +66,16 @@ Future<void> updateAvailableSlotsInFireBase(
       if (query.docs.isNotEmpty) {
         final docId = query.docs.first.id;
         await subcollectionRef.doc(docId).update(availableSlots.toJson());
-         final subcollectionRef2 = FirebaseFirestore.instance
-          .collection('Astrologerdetails')
-          .doc(userUid)
-          .collection('available slots').doc(docId).collection('booked details');
+        final subcollectionRef2 = FirebaseFirestore.instance
+            .collection('Astrologerdetails')
+            .doc(userUid)
+            .collection('available slots')
+            .doc(docId)
+            .collection('booked details');
         BookingDetailsModel slotBooked = BookingDetailsModel(
             userUid: currentUser!.uid,
             slotBooked: availableSlots.bookedSlots.first);
-         await subcollectionRef2.add(slotBooked.toJson());
+        await subcollectionRef2.add(slotBooked.toJson());
       } else {
         throw Exception('Document not found for the given date');
       }

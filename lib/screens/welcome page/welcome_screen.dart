@@ -117,8 +117,10 @@ class WelcomeScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const SizedBox(height: 40,),
-                   InkWell(
+                  const SizedBox(
+                    height: 40,
+                  ),
+                  InkWell(
                     onTap: () {
                       Navigator.of(context).push(MaterialPageRoute(
                         builder: (context) => const CreateAccountScreen(),
