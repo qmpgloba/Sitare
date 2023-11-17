@@ -14,7 +14,7 @@ import 'package:sitare/model/user_model.dart';
 import 'package:sitare/screens/home%20screen/home_screen.dart';
 import 'package:sitare/screens/profile%20screen/widgets/update_profile_textfeild_widget.dart';
 import 'package:sitare/screens/update%20profile%20screen/widgets/update_button_widget.dart';
-import 'package:sitare/widget/logger_widget.dart';
+import 'package:sitare/screens/update%20profile%20screen/widgets/logger_widget.dart';
 
 import '../create account page/cerate_account_screen.dart';
 

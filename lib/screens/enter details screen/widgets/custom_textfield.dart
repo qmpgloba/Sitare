@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../constants/ui_constants.dart';
+import '../../../constants/ui_constants.dart';
 
 class CustomTextField extends StatelessWidget {
   const CustomTextField({
@@ -8,10 +8,10 @@ class CustomTextField extends StatelessWidget {
     this.controller,
     required this.hintname,
     this.obscureText = false,
-    this.validator,
     this.intialValue,
     this.onChanged,
     this.readOnly = false,
+    this.message,
   }) : super(key: key);
 
   final Size size;
@@ -20,7 +20,7 @@ class CustomTextField extends StatelessWidget {
   final bool obscureText;
   final bool readOnly;
   final String? intialValue;
-  final String? Function(String?)? validator;
+  final String? message;
   final String? Function(String?)? onChanged;
 
   @override
@@ -34,17 +34,18 @@ class CustomTextField extends StatelessWidget {
         color: FONT_COLOR,
       ),
       decoration: InputDecoration(
-        border: const UnderlineInputBorder(
-            // borderSide: BorderSide(
-
-            //   color: whiteColor,)
-            ),
+        border: const UnderlineInputBorder(),
         hintText: hintname,
         hintStyle: const TextStyle(
           color: FONT_COLOR,
         ),
       ),
-      validator: validator,
+      validator: (value) {
+        if (value!.isEmpty) {
+          return message;
+        }
+        return null;
+      },
       initialValue: intialValue,
     );
   }

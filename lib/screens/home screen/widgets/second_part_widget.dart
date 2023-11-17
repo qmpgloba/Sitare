@@ -2,13 +2,13 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:sitare/constants/ui_constants.dart';
 import 'package:sitare/screens/talk%20to%20experts%20screen/talk_to_experts_screen.dart';
-import 'package:sitare/widget/buynow_homescreen_widget.dart';
-import 'package:sitare/widget/connect_with_experts_widget.dart';
-import 'package:sitare/widget/get_detail_report_widget.dart';
-import 'package:sitare/widget/icon_widget.dart';
-import 'package:sitare/widget/live_text_widget_carousel.dart';
-import 'package:sitare/widget/profile_widget_carousel.dart';
-import 'package:sitare/widget/shop_sitare_container_widget.dart';
+import 'package:sitare/screens/home%20screen/widgets/buynow_homescreen_widget.dart';
+import 'package:sitare/screens/home%20screen/widgets/connect_with_experts_widget.dart';
+import 'package:sitare/screens/home%20screen/widgets/get_detail_report_widget.dart';
+import 'package:sitare/screens/home%20screen/widgets/icon_widget.dart';
+import 'package:sitare/screens/home%20screen/widgets/live_text_widget_carousel.dart';
+import 'package:sitare/screens/home%20screen/widgets/profile_widget_carousel.dart';
+import 'package:sitare/screens/home%20screen/widgets/shop_sitare_container_widget.dart';
 
 class SecondPartWidget extends StatelessWidget {
   const SecondPartWidget({
@@ -99,6 +99,7 @@ class SecondPartWidget extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     IconContainerWidget(
+
                       size: size,
                       icon: Icons.menu_book_rounded,
                       label: 'KNOWLEDGE BASE',
@@ -113,6 +114,7 @@ class SecondPartWidget extends StatelessWidget {
                         label: 'MY BOOKINGS',
                       ),
                     ),
+
                   ],
                 ),
                 const SizedBox(

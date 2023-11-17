@@ -1,7 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:sitare/screens/auth%20wrapper/auth_wrapper.dart';
-
 import 'constants/ui_constants.dart';
 
 void main() async {
@@ -16,13 +15,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-          scaffoldBackgroundColor: PRIMARY_COLOR,
-          fontFamily: 'Muli',
-          useMaterial3: true,
-        ),
-        home: AuthWrapper());
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        scaffoldBackgroundColor: PRIMARY_COLOR,
+        fontFamily: 'Muli',
+        useMaterial3: true,
+      ),
+      home: AuthWrapper(),
+    );
   }
 }

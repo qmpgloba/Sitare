@@ -75,10 +75,13 @@ Future<void> updateAvailableSlotsInFireBase(String uid, DateTime date,
             .doc(docId)
             .collection('booked details');
         BookingDetailsModel slotBooked = BookingDetailsModel(
+
           userUid: currentUser!.uid,
           astrologerId: astrologerId,
           slotBooked: availableSlots.bookedSlots.first,
         );
+
+
         await subcollectionRef2.add(slotBooked.toJson());
       } else {
         throw Exception('Document not found for the given date');
