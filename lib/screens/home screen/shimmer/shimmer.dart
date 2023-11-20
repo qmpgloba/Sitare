@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:sitare/constants/ui_constants.dart';
 import 'package:sitare/screens/home%20screen/shimmer/horizontal_slider.dart';
 import 'package:sitare/screens/home%20screen/shimmer/second_part_shimmer.dart';
@@ -55,10 +56,14 @@ class _HomeScreenShimmerEffectState extends State<HomeScreenShimmerEffect> {
         children: [
           Padding(
             padding: EdgeInsets.only(left: size.width / 15),
-            child: const Text(
-              'hiiii',
-              // "Hi ${userData!['full name']}, Welcome",
-              style: TextStyle(color: Colors.white),
+            child: Shimmer.fromColors(
+              baseColor: Colors.white60,
+              highlightColor: Colors.white38,
+              child: Container(
+                color: Colors.white12,
+                width: 100,
+                height: 20,
+              ),
             ),
           ),
           const SizedBox(height: 10),
