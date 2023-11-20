@@ -51,8 +51,9 @@ class SecondPartWidget extends StatelessWidget {
                             ),
                           ),
                           const Align(
-                              alignment: Alignment.topCenter,
-                              child: LiveTextWidgetCarousel())
+                            alignment: Alignment.topCenter,
+                            child: LiveTextWidgetCarousel(),
+                          )
                         ],
                       ),
                     ),
@@ -99,22 +100,18 @@ class SecondPartWidget extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     IconContainerWidget(
-
                       size: size,
                       icon: Icons.menu_book_rounded,
                       label: 'KNOWLEDGE BASE',
                     ),
                     GestureDetector(
-                      onTap: () {
-                        
-                      },
+                      onTap: () {},
                       child: IconContainerWidget(
                         size: size,
                         icon: Icons.update,
                         label: 'MY BOOKINGS',
                       ),
                     ),
-
                   ],
                 ),
                 const SizedBox(
