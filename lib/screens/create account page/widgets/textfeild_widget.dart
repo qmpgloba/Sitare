@@ -4,23 +4,19 @@ import 'package:sitare/functions/auth%20function/auth_function.dart';
 
 // ignore: must_be_immutable
 class TextfeildWidget extends StatelessWidget {
-   TextfeildWidget({
-    super.key,
-    required this.nameTextController,
-    required this.text,
-    required this.keyboardType,
-    required this.obscureText,
-     this.password
-     
-  });
+  TextfeildWidget(
+      {super.key,
+      required this.nameTextController,
+      required this.text,
+      required this.keyboardType,
+      required this.obscureText,
+      this.password});
 
   final TextEditingController nameTextController;
   final String text;
   final TextInputType keyboardType;
   final bool obscureText;
   TextEditingController? password;
-  
-  
 
   @override
   Widget build(BuildContext context) {
@@ -34,19 +30,14 @@ class TextfeildWidget extends StatelessWidget {
         hintStyle: const TextStyle(color: FONT_COLOR),
       ),
       validator: (value) {
-        if(text == 'Email'){
+        if (text == 'Email') {
           return validateEmail(value);
-        }else if(text == 'Password'){
-          return validatePassword(value);
-        }else if(text == 'Confirm Password'){
-          return validateConfirmPassword(value, password?.text.trim());
-        }else{
+        } else if (text == 'Name') {
+          return validateName(value);
+        } else {
           return null;
         }
       },
     );
   }
-
 }
-
-

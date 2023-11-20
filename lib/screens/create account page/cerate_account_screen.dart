@@ -72,7 +72,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                     keyboardType: TextInputType.text,
                     text: 'Name',
                     obscureText: false,
-                    // validate: validatePassword,
+                    // validate: validateName(value),
                   ),
                   SizedBox(
                     height: size.width * .07,
@@ -142,6 +142,8 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                                       builder: (context) => EnterDetailsScreen(
                                         phoneNumber:
                                             phoneNumberTextController.text,
+                                        name: nameTextController.text,
+                                        email: emailTextController.text,
                                       ),
                                     ),
                                     (route) => false);
@@ -178,6 +180,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                               whiteColor, 'Close');
                         } else {
                           if (_formKey.currentState!.validate()) {
+                            if (nameTextController.text.isEmpty) {}
                             if (phoneNumberTextController.text.length == 10) {
                               var phoneNumber =
                                   '+$countyCode${phoneNumberTextController.text}';
@@ -287,10 +290,11 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                       ));
                     },
                     child: const AutoSizeTextWidget(
-                        text: 'Already registered. Sign in with OTP',
-                        maxLines: 1,
-                        fontSize: 16,
-                        fontColor: FONT_COLOR),
+                      text: 'Already registered. Sign in with OTP',
+                      maxLines: 1,
+                      fontSize: 16,
+                      fontColor: FONT_COLOR,
+                    ),
                   )
                 ],
               ),

@@ -1,5 +1,6 @@
 // ignore_for_file: use_build_context_synchronously, duplicate_ignore
 import 'package:flutter/material.dart';
+import 'package:sitare/functions/auth%20function/auth_function.dart';
 import 'package:sitare/functions/details%20functions/details_functions.dart';
 import 'package:sitare/screens/create%20account%20page/cerate_account_screen.dart';
 import 'package:sitare/screens/enter%20details%20screen/widgets/details_widget.dart';
@@ -8,18 +9,19 @@ class EnterDetailsScreen extends StatefulWidget {
   const EnterDetailsScreen({
     super.key,
     required this.phoneNumber,
+    required this.name,
+    required this.email,
   });
   final String phoneNumber;
-
+  final String name;
+  final String email;
   @override
   State<EnterDetailsScreen> createState() => _EnterDetailsScreenState();
 }
 
 class _EnterDetailsScreenState extends State<EnterDetailsScreen> {
   int length = 1;
-  late TextEditingController nameController;
-  late TextEditingController emailController;
-  late TextEditingController mobileNumberController;
+
   TextEditingController genderController = TextEditingController();
   TextEditingController dobController = TextEditingController();
   TextEditingController pobController = TextEditingController();
@@ -27,24 +29,23 @@ class _EnterDetailsScreenState extends State<EnterDetailsScreen> {
   TextEditingController martialController = TextEditingController();
   TextEditingController problemController = TextEditingController();
   final _key = GlobalKey<FormState>();
-  String? name;
-  String? phoneNumber;
-  String? email;
-
-  @override
-  void initState() {
-    setState(() {
-      nameController = TextEditingController(text: nameTextController.text);
-      mobileNumberController = TextEditingController(text: widget.phoneNumber);
-      emailController = TextEditingController(text: emailTextController.text);
-      email = emailTextController.text;
-    });
-    super.initState();
-  }
+  // String? name;
+  // String? phoneNumber;
+  // String? email;
 
   @override
   Widget build(BuildContext context) {
+    print(currentUser!.uid);
     Size size = MediaQuery.sizeOf(context);
+    // if (currentUser != null) {
+    //   setState(() {
+    //     name = currentUser!.displayName;
+    //     email = currentUser!.email;
+    //   });
+    // }
+    // nameController = TextEditingController(text: name ?? '');
+    // mobileNumberController = TextEditingController(text: widget.phoneNumber);
+    // emailController = TextEditingController(text: email ?? '');
     return Scaffold(
       body: SingleChildScrollView(
         child: Form(
@@ -59,10 +60,11 @@ class _EnterDetailsScreenState extends State<EnterDetailsScreen> {
                 bottom: size.height * 0.01,
               ),
               child: DetailsWidget(
-                size: size,
-                nameController: nameController,
-                emailController: emailController,
-                mobileNumberController: mobileNumberController,
+                size: size, name: widget.name, email: widget.email,
+                mobileNumber: widget.phoneNumber,
+                // nameController: widget.name,
+                // emailController: widget.email,
+                // mobileNumberController: widget.phoneNumber,
                 dobController: dobController,
                 pobController: pobController,
                 tobController: tobController,
@@ -76,10 +78,11 @@ class _EnterDetailsScreenState extends State<EnterDetailsScreen> {
         ),
       ),
       bottomNavigationBar: onSubmit(
+        key: _key,
         size: size,
         context: context,
-        name: nameController.text,
-        email: emailController.text,
+        name: widget.name,
+        email: widget.email,
         mobile: phoneNumberTextController.text,
         gender: genderController.text,
         dob: dobController.text,

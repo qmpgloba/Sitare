@@ -8,26 +8,24 @@ import 'package:sitare/functions/user_functions.dart';
 import 'package:sitare/model/user_model.dart';
 import 'package:sitare/screens/home%20screen/home_screen.dart';
 
-bool tobDone = false;
-bool dobDone = false;
 bool timeChanged = false;
 List<String> optionalField = [];
-final _key = GlobalKey<FormState>();
+// final _key = GlobalKey<FormState>();
 String? gender;
 
-onSubmit({
-  required Size size,
-  required BuildContext context,
-  required String name,
-  required String email,
-  required String mobile,
-  required String gender,
-  required String dob,
-  required String pob,
-  required String tob,
-  required String maritalStatus,
-  required String problem,
-}) {
+onSubmit(
+    {required Size size,
+    required BuildContext context,
+    required String name,
+    required String email,
+    required String mobile,
+    required String gender,
+    required String dob,
+    required String pob,
+    required String tob,
+    required String maritalStatus,
+    required String problem,
+    required GlobalKey<FormState> key}) {
   return Padding(
     padding: EdgeInsets.only(
         left: size.width * 0.08,
@@ -39,13 +37,13 @@ onSubmit({
       children: [
         InkWell(
           onTap: () async {
-            _key.currentState!.validate();
-            if (_key.currentState!.validate() &&
-                mobile.isNotEmpty &&
-                dobDone &&
-                // ignore: duplicate_ignore
-                tobDone) {
-              _key.currentState!.save();
+            key.currentState?.validate();
+
+            if (key.currentState != null &&
+                key.currentState!.validate() &&
+                dob.isNotEmpty &&
+                tob.isNotEmpty) {
+              key.currentState!.save();
               UserModel user = UserModel(
                 uid: currentUser!.uid,
                 name: name,
@@ -60,22 +58,23 @@ onSubmit({
                 problem: problem,
                 partnerDetails: optionalField,
               );
-              bool submitSuccess = await updateUser(user, "+91$mobile");
-              if (submitSuccess) {
-                Navigator.of(context).pushReplacement(MaterialPageRoute(
-                  builder: (context) => const HomeScreen(),
-                ));
-              } else {
-                // showAboutDialog(context: context)
-              }
+              // bool submitSuccess = await updateUser(user, "+91$mobile");
+              // if (submitSuccess) {
+              Navigator.of(context).pushReplacement(MaterialPageRoute(
+                builder: (context) => const HomeScreen(),
+              ));
+              // }
+              // } else {
+              //   print('Error');
+              // }
             } else {
               showDialog(
                 context: context,
                 builder: (context) {
                   return AlertDialog(
                     title: const Text('Validation Error'),
-                    content: const Text(
-                        'Please fill out all required fields correctly.'),
+                    content:
+                        const Text('Please fill out all required fields .'),
                     actions: [
                       TextButton(
                         onPressed: () {
