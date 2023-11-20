@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:sitare/constants/ui_constants.dart';
-import 'package:sitare/screens/home%20screen/shimmer/horizontal_slider.dart';
-import 'package:sitare/screens/home%20screen/shimmer/second_part_shimmer.dart';
+import 'package:sitare/screens/home%20screen/widgets/shimmer/horizontal_slider.dart';
+import 'package:sitare/screens/home%20screen/widgets/shimmer/second_part_shimmer.dart';
 
 class HomeScreenShimmerEffect extends StatefulWidget {
   const HomeScreenShimmerEffect({super.key});

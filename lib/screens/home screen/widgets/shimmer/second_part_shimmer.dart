@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
-import 'package:sitare/screens/home%20screen/shimmer/connect_deatil_widget.dart';
-import 'package:sitare/screens/home%20screen/shimmer/icon_container_shimmer.dart';
-import 'package:sitare/screens/home%20screen/shimmer/profilewidget_carousal.dart';
+import 'package:sitare/screens/home%20screen/widgets/shimmer/connect_deatil_widget.dart';
+import 'package:sitare/screens/home%20screen/widgets/shimmer/icon_container_shimmer.dart';
+import 'package:sitare/screens/home%20screen/widgets/shimmer/profilewidget_carousal.dart';
 
 class SecondPartShimmer extends StatelessWidget {
   const SecondPartShimmer({

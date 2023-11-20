@@ -8,7 +8,7 @@ import 'package:sitare/functions/user_functions.dart';
 import 'package:sitare/screens/create%20account%20page/cerate_account_screen.dart';
 import 'package:sitare/screens/home%20screen/widgets/drawer_widget.dart';
 import 'package:sitare/screens/home%20screen/widgets/second_part_widget.dart';
-import 'package:sitare/screens/home%20screen/shimmer/shimmer.dart';
+import 'package:sitare/screens/home%20screen/widgets/shimmer/shimmer.dart';
 import 'package:sitare/screens/home%20screen/widgets/sliding_part_widget.dart';
 import 'package:sitare/screens/wallet%20recharge%20screen/wallet_recharge_screen.dart';
 
