@@ -8,7 +8,6 @@ import 'package:sitare/functions/user_functions.dart';
 import 'package:sitare/screens/create%20account%20page/cerate_account_screen.dart';
 import 'package:sitare/screens/home%20screen/widgets/drawer_widget.dart';
 import 'package:sitare/screens/home%20screen/widgets/second_part_widget.dart';
-import 'package:sitare/screens/home%20screen/widgets/shimmer/shimmer.dart';
 import 'package:sitare/screens/home%20screen/widgets/sliding_part_widget.dart';
 import 'package:sitare/screens/wallet%20recharge%20screen/wallet_recharge_screen.dart';
 
@@ -76,7 +75,6 @@ class _HomeScreenState extends State<HomeScreen> {
     print("${number}HomeScreen");
     Size size = MediaQuery.sizeOf(context);
     return FutureBuilder<DocumentSnapshot?>(
-
       future: getUserDataByPhoneNumber(number!),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
@@ -101,7 +99,6 @@ class _HomeScreenState extends State<HomeScreen> {
                     padding: MaterialStateProperty.all(EdgeInsets.zero),
                     backgroundColor: MaterialStateProperty.all(PRIMARY_COLOR),
                     elevation: MaterialStateProperty.all(0),
-
                   ),
                   onPressed: () {
                     Navigator.of(context).push(MaterialPageRoute(
@@ -112,11 +109,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     Icons.account_balance_wallet_outlined,
                     color: greyColor,
                   ),
-
                   label: const Text(
                     '₹0',
                     style: TextStyle(fontSize: 18, color: greyColor),
-
                   ),
                 ),
                 IconButton(
