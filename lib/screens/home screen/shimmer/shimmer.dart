@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:shimmer/shimmer.dart';
 import 'package:sitare/constants/ui_constants.dart';
-import 'package:sitare/screens/home%20screen/shimmer/connect_deatil_widget.dart';
 import 'package:sitare/screens/home%20screen/shimmer/horizontal_slider.dart';
-import 'profilewidget_carousal.dart';
+import 'package:sitare/screens/home%20screen/shimmer/second_part_shimmer.dart';
 
 class HomeScreenShimmerEffect extends StatefulWidget {
   const HomeScreenShimmerEffect({super.key});
@@ -66,40 +64,7 @@ class _HomeScreenShimmerEffectState extends State<HomeScreenShimmerEffect> {
           const SizedBox(height: 10),
           HorizontalSliderShimmer(size: size),
           const SizedBox(height: 10),
-          Expanded(
-            child: Container(
-              decoration: const BoxDecoration(
-                  color: Color.fromARGB(255, 8, 19, 104),
-                  borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(40),
-                      topRight: Radius.circular(40))),
-              child: Padding(
-                padding: EdgeInsets.symmetric(
-                    horizontal: size.width / 16, vertical: 10),
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      CarouselSliderWidget(size: size),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          ConnectAndDetailWidget(size: size),
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      // BuyNowHomeScreenWidget(size: size),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          )
+          SecondPartShimmer(size: size)
         ],
       ),
     );
