@@ -8,6 +8,7 @@ import 'package:sitare/functions/user_functions.dart';
 import 'package:sitare/screens/create%20account%20page/cerate_account_screen.dart';
 import 'package:sitare/screens/home%20screen/widgets/drawer_widget.dart';
 import 'package:sitare/screens/home%20screen/widgets/second_part_widget.dart';
+import 'package:sitare/screens/home%20screen/widgets/shimmer/shimmer.dart';
 import 'package:sitare/screens/home%20screen/widgets/sliding_part_widget.dart';
 import 'package:sitare/screens/wallet%20recharge%20screen/wallet_recharge_screen.dart';
 
@@ -67,7 +68,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-
     // print('FirebaseAuth.instance.currentUser!.phoneNumber');
     String? number = FirebaseAuth.instance.currentUser == null
         ? ("+91${phoneNumberTextController.text}")
@@ -76,11 +76,10 @@ class _HomeScreenState extends State<HomeScreen> {
     print("${number}HomeScreen");
     Size size = MediaQuery.sizeOf(context);
     return FutureBuilder<DocumentSnapshot?>(
-        future:
-            getUserDataByPhoneNumber(number!),
+        future: getUserDataByPhoneNumber(number!),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
+            return const Center(child: HomeScreenShimmerEffect());
           } else if (snapshot.hasError) {
             return Text('Error: ${snapshot.error}');
           } else if (snapshot.hasData && snapshot.data != null) {
@@ -103,12 +102,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       elevation: MaterialStateProperty.all(0),
                     ),
                     onPressed: () {
-                      
-                              Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) =>
-                                    const WalletRechargeScreen(),
-                              ));
-                            
+                      Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => const WalletRechargeScreen(),
+                      ));
                     },
                     icon: const Icon(
                       Icons.account_balance_wallet_outlined,
@@ -135,7 +131,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: [
                   Padding(
                     padding: EdgeInsets.only(left: size.width / 15),
-                    child:  Text(
+                    child: Text(
                       "Hi ${userData!['full name']}, Welcome",
                       style: const TextStyle(color: Colors.white),
                     ),
