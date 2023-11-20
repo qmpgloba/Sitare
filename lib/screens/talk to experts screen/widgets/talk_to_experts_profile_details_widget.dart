@@ -89,10 +89,15 @@ class TalkToExpertsProfileDetailsWidget extends StatelessWidget {
                     children: [
                       GestureDetector(
                         onTap: () {
-                          Navigator.of(context).push(MaterialPageRoute(builder: (context) => ChatScreen(astrologer: astrologer),));
+                          Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) =>
+                                ChatScreen(astrologer: astrologer),
+                          ));
                         },
                         child: const ContactIconsTalkToExpertsScreen(
-                            icon: Icons.chat_outlined, text: 'Chat'),
+                          icon: Icons.chat_outlined,
+                          text: 'Chat',
+                        ),
                       ),
                       const SizedBox(
                         height: 5,
