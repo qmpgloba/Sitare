@@ -58,12 +58,12 @@ onSubmit(
                 problem: problem,
                 partnerDetails: optionalField,
               );
-              // print(user.partnerDetails);
               // bool submitSuccess = await updateUser(user, "+91$mobile");
               // if (submitSuccess) {
               Navigator.of(context).pushReplacement(MaterialPageRoute(
                 builder: (context) => const HomeScreen(),
               ));
+              // }
               // } else {
               //   print('Error');
               // }

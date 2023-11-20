@@ -1,7 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:sitare/screens/auth%20wrapper/auth_wrapper.dart';
-import 'package:sitare/screens/create%20account%20page/cerate_account_screen.dart';
 import 'constants/ui_constants.dart';
 
 void main() async {
@@ -23,7 +22,7 @@ class MyApp extends StatelessWidget {
         fontFamily: 'Muli',
         useMaterial3: true,
       ),
-      home: CreateAccountScreen(),
+      home: AuthWrapper(),
     );
   }
 }

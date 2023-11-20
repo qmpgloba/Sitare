@@ -67,7 +67,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-
     // print('FirebaseAuth.instance.currentUser!.phoneNumber');
     String? number = FirebaseAuth.instance.currentUser == null
         ? ("+91${phoneNumberTextController.text}")
@@ -76,80 +75,77 @@ class _HomeScreenState extends State<HomeScreen> {
     print("${number}HomeScreen");
     Size size = MediaQuery.sizeOf(context);
     return FutureBuilder<DocumentSnapshot?>(
-        future:
-            getUserDataByPhoneNumber(number!),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
-          } else if (snapshot.hasError) {
-            return Text('Error: ${snapshot.error}');
-          } else if (snapshot.hasData && snapshot.data != null) {
-            userData = snapshot.data!.data() as Map<String, dynamic>;
-            //  documentID = snapshot.data!.id;
-            return Scaffold(
-              appBar: AppBar(
-                backgroundColor: PRIMARY_COLOR,
-                iconTheme: const IconThemeData(color: Colors.white),
-                title: const Text(
-                  'SITARE',
-                  style:
-                      TextStyle(fontWeight: FontWeight.bold, color: whiteColor),
+      future: getUserDataByPhoneNumber(number!),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Center(child: CircularProgressIndicator());
+        } else if (snapshot.hasError) {
+          return Text('Error: ${snapshot.error}');
+        } else if (snapshot.hasData && snapshot.data != null) {
+          userData = snapshot.data!.data() as Map<String, dynamic>;
+          //  documentID = snapshot.data!.id;
+          return Scaffold(
+            appBar: AppBar(
+              backgroundColor: PRIMARY_COLOR,
+              iconTheme: const IconThemeData(color: Colors.white),
+              title: const Text(
+                'SITARE',
+                style:
+                    TextStyle(fontWeight: FontWeight.bold, color: whiteColor),
+              ),
+              actions: [
+                ElevatedButton.icon(
+                  style: ButtonStyle(
+                    padding: MaterialStateProperty.all(EdgeInsets.zero),
+                    backgroundColor: MaterialStateProperty.all(PRIMARY_COLOR),
+                    elevation: MaterialStateProperty.all(0),
+                  ),
+                  onPressed: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => const WalletRechargeScreen(),
+                    ));
+                  },
+                  icon: const Icon(
+                    Icons.account_balance_wallet_outlined,
+                    color: greyColor,
+                  ),
+                  label: const Text(
+                    '₹0',
+                    style: TextStyle(fontSize: 18, color: greyColor),
+                  ),
                 ),
-                actions: [
-                  ElevatedButton.icon(
-                    style: ButtonStyle(
-                      padding: MaterialStateProperty.all(EdgeInsets.zero),
-                      backgroundColor: MaterialStateProperty.all(PRIMARY_COLOR),
-                      elevation: MaterialStateProperty.all(0),
-                    ),
-                    onPressed: () {
-                      
-                              Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) =>
-                                    const WalletRechargeScreen(),
-                              ));
-                            
-                    },
-                    icon: const Icon(
-                      Icons.account_balance_wallet_outlined,
-                      color: greyColor,
-                    ),
-                    label: const Text(
-                      '₹0',
-                      style: TextStyle(fontSize: 18, color: greyColor),
-                    ),
+                IconButton(
+                  onPressed: () {},
+                  icon: const Icon(
+                    Icons.notifications_none,
+                    color: greyColor,
                   ),
-                  IconButton(
-                    onPressed: () {},
-                    icon: const Icon(
-                      Icons.notifications_none,
-                      color: greyColor,
-                    ),
+                ),
+              ],
+            ),
+            drawer: HomeScreenDrawerWidget(size: size),
+            body: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(left: size.width / 15),
+                  child: Text(
+                    "Hi ${userData!['full name']}, Welcome",
+                    style: const TextStyle(color: Colors.white),
                   ),
-                ],
-              ),
-              drawer: HomeScreenDrawerWidget(size: size),
-              body: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: EdgeInsets.only(left: size.width / 15),
-                    child:  Text(
-                      "Hi ${userData!['full name']}, Welcome",
-                      style: const TextStyle(color: Colors.white),
-                    ),
-                  ),
-                  const SizedBox(height: 10),
-                  SlidingPartWidget(scrollController: _scrollController),
-                  const SizedBox(height: 10),
-                  SecondPartWidget(size: size),
-                ],
-              ),
-            );
-          } else {
-            return const Text('data');
-          }
-        });
+                ),
+                const SizedBox(height: 10),
+                SlidingPartWidget(scrollController: _scrollController),
+                const SizedBox(height: 10),
+                SecondPartWidget(size: size),
+              ],
+            ),
+          );
+        } else {
+          return const Text('data');
+        }
+      },
+    );
   }
 }
