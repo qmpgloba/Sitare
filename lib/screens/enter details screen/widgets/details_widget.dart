@@ -14,9 +14,9 @@ class DetailsWidget extends StatefulWidget {
   const DetailsWidget({
     super.key,
     required this.size,
-    required this.nameController,
-    required this.emailController,
-    required this.mobileNumberController,
+    this.name,
+    this.email,
+    this.mobileNumber,
     required this.dobController,
     required this.pobController,
     required this.tobController,
@@ -27,9 +27,9 @@ class DetailsWidget extends StatefulWidget {
   });
 
   final Size size;
-  final TextEditingController nameController;
-  final TextEditingController emailController;
-  final TextEditingController mobileNumberController;
+  final String? name;
+  final String? email;
+  final String? mobileNumber;
   final TextEditingController dobController;
   final TextEditingController pobController;
   final TextEditingController tobController;
@@ -76,6 +76,12 @@ class _DetailsWidgetState extends State<DetailsWidget> {
   }
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Column(
       children: [
@@ -101,32 +107,27 @@ class _DetailsWidgetState extends State<DetailsWidget> {
         CustomTextField(
           size: widget.size,
           readOnly: true,
-          controller: widget.nameController,
-          onChanged: (value) {
-            setState(() {
-              name = value ?? "";
-            });
-            return null;
-          },
+          intialValue: widget.name,
           hintname: "Name",
         ),
         CustomTextField(
           size: widget.size,
-          readOnly: true,
-          controller: widget.emailController,
+          readOnly: true, intialValue: widget.email,
+          // controller: widget.emailController,
           hintname: "Email",
         ),
         const SizedBox(
           height: 5,
         ),
         MobileNumberTextFeildWidget(
-          controller: widget.mobileNumberController,
+          // controller: widget.mobileNumberController,
           readOnly: false,
-          onCountryChanged: (v) {
-            setState(() {
-              countrycode = v.dialCode;
-            });
-          },
+          intialValue: '+91${widget.mobileNumber}',
+          // onCountryChanged: (v) {
+          //   setState(() {
+          //     countrycode = v.dialCode;
+          //   });
+          // },
         ),
         DropDown(
           context: context,
