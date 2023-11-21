@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:sitare/screens/auth%20wrapper/auth_wrapper.dart';
+import 'package:sitare/screens/talk%20to%20experts%20screen/widgets/shimmer/shimmer.dart';
 import 'constants/ui_constants.dart';
 
 void main() async {
@@ -22,7 +23,7 @@ class MyApp extends StatelessWidget {
         fontFamily: 'Muli',
         useMaterial3: true,
       ),
-      home: AuthWrapper(),
+      home: TalkToExpertShimmer(),
     );
   }
 }
