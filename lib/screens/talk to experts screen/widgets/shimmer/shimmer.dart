@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:sitare/screens/talk%20to%20experts%20screen/widgets/shimmer/contact_icon_group.dart';
 
 class TalkToExpertShimmer extends StatefulWidget {
   const TalkToExpertShimmer({super.key});
@@ -80,7 +81,8 @@ class _TalkToExpertShimmerState extends State<TalkToExpertShimmer> {
                         const SizedBox(
                           width: 5,
                         ),
-                        Container()
+                        Container(),
+                        ContactIconShimmerGroup(size: size),
                       ],
                     ),
                     const SizedBox(

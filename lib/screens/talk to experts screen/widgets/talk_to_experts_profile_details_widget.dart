@@ -5,7 +5,6 @@ import 'package:sitare/functions/contact%20functions/contact_functions.dart';
 import 'package:sitare/model/astrologer_model.dart';
 import 'package:sitare/screens/chat%20screen/chat_screen.dart';
 import 'package:sitare/screens/profile%20screen/profile_screen.dart';
-
 import '../../../constants/ui_constants.dart';
 import 'contact_icons_widget.dart';
 
@@ -108,7 +107,9 @@ class TalkToExpertsProfileDetailsWidget extends StatelessWidget {
                           sendNotification(astrologer.fcmToken);
                         },
                         child: const ContactIconsTalkToExpertsScreen(
-                            icon: Icons.call_outlined, text: 'Call'),
+                          icon: Icons.call_outlined,
+                          text: 'Call',
+                        ),
                       ),
                       const SizedBox(
                         height: 5,
