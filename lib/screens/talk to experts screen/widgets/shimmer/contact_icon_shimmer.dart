@@ -14,21 +14,21 @@ class ContactIconShimmerWidget extends StatelessWidget {
     return Row(
       children: [
         Shimmer.fromColors(
-          baseColor: Colors.white70,
-          highlightColor: Colors.white38,
+          baseColor: Colors.grey.shade300,
+          highlightColor: Colors.grey.shade200,
           child: CircleAvatar(
             radius: size.width * .03,
-            backgroundColor: Colors.white12,
+            backgroundColor: Colors.grey.shade100,
           ),
         ),
         const SizedBox(
           width: 5,
         ),
         Shimmer.fromColors(
-          baseColor: Colors.white70,
-          highlightColor: Colors.white38,
+          baseColor: Colors.grey.shade300,
+          highlightColor: Colors.grey.shade200,
           child: Container(
-            color: Colors.white12,
+            color: Colors.grey.shade100,
             height: 10,
             width: 50,
           ),

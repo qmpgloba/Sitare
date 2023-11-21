@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:sitare/constants/ui_constants.dart';
 import 'package:sitare/screens/talk%20to%20experts%20screen/widgets/shimmer/contact_icon_group.dart';
 
 class TalkToExpertShimmer extends StatefulWidget {
@@ -16,6 +17,7 @@ class _TalkToExpertShimmerState extends State<TalkToExpertShimmer> {
     Size size = MediaQuery.sizeOf(context);
     return SafeArea(
       child: Scaffold(
+        backgroundColor: whiteColor,
         body: ListView.builder(
           itemBuilder: (context, index) {
             return Padding(
@@ -27,11 +29,11 @@ class _TalkToExpertShimmerState extends State<TalkToExpertShimmer> {
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         Shimmer.fromColors(
-                          baseColor: Colors.white70,
-                          highlightColor: Colors.white38,
+                          baseColor: Colors.grey.shade300,
+                          highlightColor: Colors.grey.shade200,
                           child: CircleAvatar(
                             radius: size.width * .12,
-                            backgroundColor: Colors.white12,
+                            backgroundColor: Colors.grey.shade100,
                           ),
                         ),
                         SizedBox(
@@ -40,8 +42,8 @@ class _TalkToExpertShimmerState extends State<TalkToExpertShimmer> {
                             children: [
                               shimmerBox(),
                               Shimmer.fromColors(
-                                baseColor: Colors.white70,
-                                highlightColor: Colors.white38,
+                                baseColor: Colors.grey.shade300,
+                                highlightColor: Colors.grey.shade200,
                                 child: RatingBar.builder(
                                   initialRating: 5,
                                   minRating: 1,
@@ -50,9 +52,9 @@ class _TalkToExpertShimmerState extends State<TalkToExpertShimmer> {
                                   itemCount: 5,
                                   itemSize: 15,
                                   // itemPadding: EdgeInsets.symmetric(horizontal: 1.0),
-                                  itemBuilder: (context, _) => const Icon(
+                                  itemBuilder: (context, _) => Icon(
                                     Icons.star,
-                                    color: Colors.white12,
+                                    color: Colors.grey.shade100,
                                   ),
                                   onRatingUpdate: (rating) {},
                                 ),
@@ -89,11 +91,11 @@ class _TalkToExpertShimmerState extends State<TalkToExpertShimmer> {
                       height: 14,
                     ),
                     Shimmer.fromColors(
-                      baseColor: Colors.white70,
-                      highlightColor: Colors.white38,
-                      child: const LinearProgressIndicator(
+                      baseColor: Colors.grey.shade300,
+                      highlightColor: Colors.grey.shade200,
+                      child: LinearProgressIndicator(
                         value: .70,
-                        color: Colors.white12,
+                        color: Colors.grey.shade100,
                       ),
                     )
                   ],
@@ -109,10 +111,10 @@ class _TalkToExpertShimmerState extends State<TalkToExpertShimmer> {
 
   Shimmer shimmerBox() {
     return Shimmer.fromColors(
-      baseColor: Colors.white70,
-      highlightColor: Colors.white38,
+      baseColor: Colors.grey.shade300,
+      highlightColor: Colors.grey.shade200,
       child: Container(
-        color: Colors.white12,
+        color: Colors.grey.shade100,
         height: 10,
         width: 100,
       ),
