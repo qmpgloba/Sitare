@@ -5,6 +5,7 @@ import 'package:sitare/constants/ui_constants.dart';
 import 'package:sitare/functions/astrologers/astrologer_details.dart';
 import 'package:sitare/model/astrologer_model.dart';
 import 'package:sitare/screens/talk%20to%20experts%20screen/widgets/filter%20section/filter_section_header_widget.dart';
+import 'package:sitare/screens/talk%20to%20experts%20screen/widgets/shimmer/shimmer.dart';
 import 'package:sitare/screens/wallet%20recharge%20screen/wallet_recharge_screen.dart';
 
 import 'widgets/filter section/filter_footer_widget.dart';
@@ -109,9 +110,10 @@ class _TalkToExpertsScreenState extends State<TalkToExpertsScreen> {
                             'RECHARGE',
                             maxLines: 1,
                             style: TextStyle(
-                                fontSize: 14,
-                                color: whiteColor,
-                                fontWeight: FontWeight.bold),
+                              fontSize: 14,
+                              color: whiteColor,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
                       ),
@@ -180,9 +182,7 @@ class _TalkToExpertsScreenState extends State<TalkToExpertsScreen> {
         future: fetchFilteredAstrologersFromFirestore(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
+            return const TalkToExpertShimmer();
           } else if (snapshot.hasError) {
             return Center(
               child: Text(snapshot.error.toString()),
