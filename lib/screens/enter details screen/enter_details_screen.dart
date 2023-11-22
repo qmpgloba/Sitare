@@ -1,9 +1,14 @@
 // ignore_for_file: use_build_context_synchronously, duplicate_ignore
 import 'package:flutter/material.dart';
+import 'package:sitare/constants/app_constants.dart';
+import 'package:sitare/constants/ui_constants.dart';
 import 'package:sitare/functions/auth%20function/auth_function.dart';
 import 'package:sitare/functions/details%20functions/details_functions.dart';
+import 'package:sitare/functions/user_functions.dart';
+import 'package:sitare/model/user_model.dart';
 import 'package:sitare/screens/create%20account%20page/cerate_account_screen.dart';
 import 'package:sitare/screens/enter%20details%20screen/widgets/details_widget.dart';
+import 'package:sitare/screens/home%20screen/home_screen.dart';
 
 class EnterDetailsScreen extends StatefulWidget {
   const EnterDetailsScreen({
@@ -29,67 +34,186 @@ class _EnterDetailsScreenState extends State<EnterDetailsScreen> {
   TextEditingController martialController = TextEditingController();
   TextEditingController problemController = TextEditingController();
   final _key = GlobalKey<FormState>();
-  // String? name;
-  // String? phoneNumber;
-  // String? email;
 
   @override
   Widget build(BuildContext context) {
     print(currentUser!.uid);
     Size size = MediaQuery.sizeOf(context);
-    // if (currentUser != null) {
-    //   setState(() {
-    //     name = currentUser!.displayName;
-    //     email = currentUser!.email;
-    //   });
-    // }
-    // nameController = TextEditingController(text: name ?? '');
-    // mobileNumberController = TextEditingController(text: widget.phoneNumber);
-    // emailController = TextEditingController(text: email ?? '');
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Form(
-          key: _key,
-          autovalidateMode: AutovalidateMode.onUserInteraction,
-          child: SafeArea(
-            child: Padding(
-              padding: EdgeInsets.only(
-                left: size.width * 0.08,
-                right: size.width * 0.08,
-                top: size.height * 0.02,
-                bottom: size.height * 0.01,
-              ),
-              child: DetailsWidget(
-                size: size, name: widget.name, email: widget.email,
-                mobileNumber: widget.phoneNumber,
-                // nameController: widget.name,
-                // emailController: widget.email,
-                // mobileNumberController: widget.phoneNumber,
-                dobController: dobController,
-                pobController: pobController,
-                tobController: tobController,
-                problemController: problemController,
-                optionalField: optionalField,
-                genderController: genderController,
-                martialController: martialController,
+        body: SingleChildScrollView(
+          child: Form(
+            key: _key,
+            autovalidateMode: AutovalidateMode.onUserInteraction,
+            child: SafeArea(
+              child: Padding(
+                padding: EdgeInsets.only(
+                  left: size.width * 0.08,
+                  right: size.width * 0.08,
+                  top: size.height * 0.02,
+                  bottom: size.height * 0.01,
+                ),
+                child: DetailsWidget(
+                  size: size,
+                  name: widget.name,
+                  email: widget.email,
+                  mobileNumber: widget.phoneNumber,
+                  dobController: dobController,
+                  pobController: pobController,
+                  tobController: tobController,
+                  problemController: problemController,
+                  optionalField: optionalField,
+                  genderController: genderController,
+                  martialController: martialController,
+                ),
               ),
             ),
           ),
         ),
+        bottomNavigationBar: onSubmit(size, context));
+  }
+
+  addUserDetails(
+      {required BuildContext context,
+      required String name,
+      required String mobile,
+      required String email}) async {
+    UserModel user = UserModel(
+        uid: currentUser!.uid,
+        name: name,
+        email: email,
+        phoneNumber: "+91$mobile",
+        userProfileImage: profileImage,
+        gender: '',
+        dateofBirth: '',
+        placeofBirth: '',
+        timeofBirth: '',
+        maritalStatus: '',
+        problem: '',
+        partnerDetails: optionalField);
+    await updateUser(user, '+91$mobile');
+    Navigator.of(context).pushAndRemoveUntil(
+      MaterialPageRoute(
+        builder: (context) => const HomeScreen(),
       ),
-      bottomNavigationBar: onSubmit(
-        key: _key,
-        size: size,
-        context: context,
-        name: widget.name,
-        email: widget.email,
-        mobile: phoneNumberTextController.text,
-        gender: genderController.text,
-        dob: dobController.text,
-        pob: pobController.text,
-        tob: tobController.text,
-        maritalStatus: martialController.text,
-        problem: problemController.text,
+      (route) => false,
+    );
+  }
+
+  onSubmit(Size size, BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.only(
+        left: size.width * 0.08,
+        right: size.width * 0.08,
+        top: size.height * 0.02,
+        bottom: size.height * 0.02,
+      ),
+      child: Wrap(
+        alignment: WrapAlignment.center,
+        children: [
+          InkWell(
+            onTap: () async {
+              print(_key.currentState != null);
+              print('valid=${_key.currentState!.validate()}');
+              print('dob${dobController.text.isNotEmpty}');
+              print('tob=${tobController.text.isNotEmpty}');
+              print('Gender=${genderController.text.isNotEmpty}');
+              print('pob=${pobController.text.isNotEmpty}');
+              print('maried=${martialStatus.isNotEmpty}');
+              print('prblm=${problemController.text.isNotEmpty}');
+              _key.currentState?.validate();
+
+              if (_key.currentState != null &&
+                  _key.currentState!.validate() &&
+                  problemController.text.isNotEmpty &&
+                  martialController.text.isNotEmpty &&
+                  pobController.text.isNotEmpty &&
+                  genderController.text.isNotEmpty &&
+                  dobController.text.isNotEmpty &&
+                  tobController.text.isNotEmpty) {
+                _key.currentState!.save();
+                UserModel user = UserModel(
+                  uid: currentUser!.uid,
+                  name: widget.name,
+                  email: widget.email,
+                  phoneNumber: "+91${widget.phoneNumber}",
+                  userProfileImage: profileImage,
+                  gender: genderController.text,
+                  dateofBirth: dobController.text,
+                  placeofBirth: pobController.text,
+                  timeofBirth: tobController.text,
+                  maritalStatus: martialController.text,
+                  problem: problemController.text,
+                  partnerDetails: optionalField,
+                );
+                bool submitSuccess = await updateUser(
+                    user, "+91${phoneNumberTextController.text}");
+                if (submitSuccess) {
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(
+                    builder: (context) => const HomeScreen(),
+                  ));
+                }
+                // } else {
+                //   print('Error');
+                // }
+              } else {
+                showDialog(
+                  context: context,
+                  builder: (context) {
+                    return AlertDialog(
+                      title: const Text('Validation Error'),
+                      content:
+                          const Text('Please fill out all required fields .'),
+                      actions: [
+                        TextButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          child: const Text('OK'),
+                        ),
+                      ],
+                    );
+                  },
+                );
+              }
+            },
+            child: const Text(
+              "SUBMIT",
+              style: TextStyle(color: FONT_COLOR, fontWeight: FontWeight.w500),
+            ),
+          ),
+          const SizedBox(
+            height: 30,
+          ),
+          Center(
+            child: InkWell(
+              onTap: () async {
+                addUserDetails(
+                  context: context,
+                  name: widget.name,
+                  mobile: widget.phoneNumber,
+                  email: widget.email,
+                );
+              },
+              child: const Row(
+                children: [
+                  Text(
+                    "SKIP FOR NOW",
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: FONT_COLOR,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                  Icon(
+                    Icons.arrow_forward,
+                    color: FONT_COLOR,
+                    size: 20,
+                  )
+                ],
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

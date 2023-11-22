@@ -216,10 +216,11 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                             } else {
                               // ignore: use_build_context_synchronously
                               showAlertBox(
-                                  context,
-                                  'Enter a valid mobile number',
-                                  whiteColor,
-                                  'Retry');
+                                context,
+                                'Enter a valid mobile number',
+                                whiteColor,
+                                'Retry',
+                              );
                             }
                           }
                         }

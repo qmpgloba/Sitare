@@ -50,8 +50,7 @@ class _DetailsWidgetState extends State<DetailsWidget> {
   String? _martialStatus;
   String? phoneNumber;
   String? email;
-  bool tobDone = false;
-  bool dobDone = false;
+
   bool timeChanged = false;
   Future<void> _showDatePicker() async {
     final DateTime? pickedDate = await datePicker(context);
@@ -59,7 +58,6 @@ class _DetailsWidgetState extends State<DetailsWidget> {
       setState(() {
         widget.dobController.text =
             "${pickedDate.day.toString().padLeft(2, '0')}/${pickedDate.month.toString().padLeft(2, '0')}/${pickedDate.year}";
-        dobDone = true;
       });
     }
   }
@@ -70,15 +68,8 @@ class _DetailsWidgetState extends State<DetailsWidget> {
       setState(() {
         time = pickedTime; // Update the time variable
         widget.tobController.text = time.format(context);
-        tobDone = true;
       });
     }
-  }
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
   }
 
   @override
@@ -145,6 +136,7 @@ class _DetailsWidgetState extends State<DetailsWidget> {
         InkWell(
           onTap: () {
             _showDatePicker();
+            setState(() {});
           },
           child: DobField(dobController: widget.dobController),
         ),
@@ -161,6 +153,7 @@ class _DetailsWidgetState extends State<DetailsWidget> {
         InkWell(
           onTap: () {
             _showTimePicker();
+            setState(() {});
           },
           child: TobWidget(tobController: widget.tobController),
         ),
