@@ -28,19 +28,29 @@ onSubmit(
     required GlobalKey<FormState> key}) {
   return Padding(
     padding: EdgeInsets.only(
-        left: size.width * 0.08,
-        right: size.width * 0.08,
-        top: size.height * 0.02,
-        bottom: size.height * 0.02),
+      left: size.width * 0.08,
+      right: size.width * 0.08,
+      top: size.height * 0.02,
+      bottom: size.height * 0.02,
+    ),
     child: Wrap(
       alignment: WrapAlignment.center,
       children: [
         InkWell(
           onTap: () async {
+            print(key.currentState != null);
+            print('valid=${key.currentState!.validate()}');
+            print('dob${dob.isNotEmpty}');
+            print('tob=${tob.isNotEmpty}');
+            print('Gender=${gender.isNotEmpty}');
+            print('pob=${pob.isNotEmpty}');
+            print('maried=${martialStatus.isNotEmpty}');
+            print('prblm=${problem.isNotEmpty}');
             key.currentState?.validate();
 
             if (key.currentState != null &&
                 key.currentState!.validate() &&
+                gender.isNotEmpty &&
                 dob.isNotEmpty &&
                 tob.isNotEmpty) {
               key.currentState!.save();
@@ -58,12 +68,12 @@ onSubmit(
                 problem: problem,
                 partnerDetails: optionalField,
               );
-              // bool submitSuccess = await updateUser(user, "+91$mobile");
-              // if (submitSuccess) {
-              Navigator.of(context).pushReplacement(MaterialPageRoute(
-                builder: (context) => const HomeScreen(),
-              ));
-              // }
+              bool submitSuccess = await updateUser(user, "+91$mobile");
+              if (submitSuccess) {
+                Navigator.of(context).pushReplacement(MaterialPageRoute(
+                  builder: (context) => const HomeScreen(),
+                ));
+              }
               // } else {
               //   print('Error');
               // }
