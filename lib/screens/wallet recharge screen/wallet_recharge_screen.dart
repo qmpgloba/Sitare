@@ -157,19 +157,16 @@ class _WalletRechargeScreenState extends State<WalletRechargeScreen> {
     if (user != null) {
       FirebaseFirestore.instance.collection('payments').add({
         'uid': user.uid,
-        'name': userData!['full name'],
-        'email': user.email,
-        'phone number': user.phoneNumber,
         'amount': amountController.text,
         'transaction id': response.paymentId,
         'time': FieldValue.serverTimestamp()
       });
-      showSnackbar(context, 'Payment Succssfull', blackColor);
+      showSnackbar(context, 'Payment Succssfull', greenColor);
     }
   }
 
   void _handlePaymentError(PaymentFailureResponse response) {
-    showAlertBox(context, 'Transaction Failed', blackColor, 'ok');
+    showAlertBox(context, 'Transaction Failed', whiteColor, 'ok');
     print('Error');
   }
 
@@ -177,7 +174,7 @@ class _WalletRechargeScreenState extends State<WalletRechargeScreen> {
     showAlertBox(
       context,
       'Transaction Failed due to involvement of external wallet',
-      blackColor,
+      whiteColor,
       'ok',
     );
 
