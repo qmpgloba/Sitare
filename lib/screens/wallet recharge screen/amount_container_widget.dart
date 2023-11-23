@@ -31,11 +31,12 @@ class _AmountContainerState extends State<AmountContainer> {
             ),
             color: BOX_COLOR),
         child: Center(
-            child: Text(
-          "₹${widget.amount}",
-          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-          textAlign: TextAlign.center,
-        )),
+          child: Text(
+            "₹${widget.amount}",
+            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+            textAlign: TextAlign.center,
+          ),
+        ),
       ),
     );
   }
