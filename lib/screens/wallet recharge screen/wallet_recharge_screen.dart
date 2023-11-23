@@ -1,10 +1,15 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
 import 'package:sitare/constants/app_constants.dart';
 import 'package:sitare/constants/ui_constants.dart';
+import 'package:sitare/screens/home%20screen/home_screen.dart';
 
 import 'package:sitare/screens/wallet%20recharge%20screen/widget%20s/amount_container_widget.dart';
 import 'package:sitare/screens/wallet%20recharge%20screen/widget%20s/triangle_widget.dart';
+import 'package:sitare/screens/widgets/show_dialog_widget.dart';
+import 'package:sitare/screens/widgets/snackbar.dart';
 
 class WalletRechargeScreen extends StatefulWidget {
   const WalletRechargeScreen({super.key});
@@ -80,15 +85,21 @@ class _WalletRechargeScreenState extends State<WalletRechargeScreen> {
                       ),
                     ),
                   ),
-                  Container(
-                    color: redColor,
-                    height: 60,
-                    width: size.width * 0.35,
-                    child: const Center(
-                      child: Text(
-                        "Recharge",
-                        style: TextStyle(color: whiteColor, fontSize: 19),
-                        textAlign: TextAlign.center,
+                  GestureDetector(
+                    onTap: () {
+                      print(amountController.text);
+                      onTapRecharge(amount: amountController.text);
+                    },
+                    child: Container(
+                      color: redColor,
+                      height: 60,
+                      width: size.width * 0.35,
+                      child: const Center(
+                        child: Text(
+                          "Recharge",
+                          style: TextStyle(color: whiteColor, fontSize: 19),
+                          textAlign: TextAlign.center,
+                        ),
                       ),
                     ),
                   ),
@@ -139,14 +150,49 @@ class _WalletRechargeScreenState extends State<WalletRechargeScreen> {
   }
 
   void _handlePaymentSuccess(PaymentSuccessResponse response) {
+    User? user = FirebaseAuth.instance.currentUser;
     print('Succes=${response.paymentId}');
+    if (user != null) {
+      FirebaseFirestore.instance.collection('payments').add({
+        'uid': user.uid,
+        'name': userData!['full name'],
+        'email': user.email,
+        'phone number': user.phoneNumber,
+        'amount': 'amount',
+        'transaction id': response.paymentId,
+        'time': FieldValue.serverTimestamp()
+      });
+      showSnackbar(context, 'Payment Succssfull', blackColor);
+    }
   }
 
   void _handlePaymentError(PaymentFailureResponse response) {
+    showAlertBox(context, 'Transaction Failed', blackColor, 'ok');
     print('Error');
   }
 
   void _handleExternalWallet(ExternalWalletResponse response) {
+    showAlertBox(
+        context,
+        'Transaction Failed due to involvement of external wallet',
+        blackColor,
+        'ok');
+
     print('External');
+  }
+
+  onTapRecharge({required String amount}) {
+    var options = {
+      'key': 'rzp_test_SG8DKDs1zi5E3l',
+      'amount': amount * 1, //in the smallest currency sub-unit.
+      'name': 'Qmp Global',
+      // Generate order_id using Orders API
+      'timeout': 180, // in seconds
+      'prefill': {
+        'contact': '1234567890',
+        'email': 'hi@gmail.com',
+      }
+    };
+    _razorpay.open(options);
   }
 }
