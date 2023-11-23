@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:razorpay_flutter/razorpay_flutter.dart';
 import 'package:sitare/constants/app_constants.dart';
 import 'package:sitare/constants/ui_constants.dart';
 
 import 'package:sitare/screens/wallet%20recharge%20screen/widget%20s/amount_container_widget.dart';
 import 'package:sitare/screens/wallet%20recharge%20screen/widget%20s/triangle_widget.dart';
-
 
 class WalletRechargeScreen extends StatefulWidget {
   const WalletRechargeScreen({super.key});
@@ -16,8 +16,23 @@ class WalletRechargeScreen extends StatefulWidget {
 class _WalletRechargeScreenState extends State<WalletRechargeScreen> {
   double balance = 4.0;
   int selectedFilterIndex = 0;
+  final _razorpay = Razorpay();
 
   TextEditingController amountController = TextEditingController();
+  @override
+  void initState() {
+    _razorpay.on(Razorpay.EVENT_PAYMENT_SUCCESS, _handlePaymentSuccess);
+    _razorpay.on(Razorpay.EVENT_PAYMENT_ERROR, _handlePaymentError);
+    _razorpay.on(Razorpay.EVENT_EXTERNAL_WALLET, _handleExternalWallet);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _razorpay.clear();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.sizeOf(context);
@@ -39,13 +54,11 @@ class _WalletRechargeScreenState extends State<WalletRechargeScreen> {
             Padding(
               padding: EdgeInsets.only(top: size.width / 15),
               child: Text(
-
                 "Available balance: Rs: $balance",
                 style: const TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
                 ),
-
               ),
             ),
             const SizedBox(height: 8.0),
@@ -85,7 +98,6 @@ class _WalletRechargeScreenState extends State<WalletRechargeScreen> {
             const SizedBox(
               height: 20,
             ),
-
             Expanded(
               child: GridView.builder(
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -119,11 +131,22 @@ class _WalletRechargeScreenState extends State<WalletRechargeScreen> {
                   );
                 },
               ),
-
             )
           ],
         ),
       ),
     );
+  }
+
+  void _handlePaymentSuccess(PaymentSuccessResponse response) {
+    print('Succes=${response.paymentId}');
+  }
+
+  void _handlePaymentError(PaymentFailureResponse response) {
+    print('Error');
+  }
+
+  void _handleExternalWallet(ExternalWalletResponse response) {
+    print('External');
   }
 }
