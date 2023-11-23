@@ -85,11 +85,14 @@ class OrderHistoryScreen extends StatelessWidget {
                   if (snapshot.hasData) {
                     List<AstrologerModel> astrologers = snapshot.data!;
                     return ListView.builder(
-                        // scrollDirection: Axis.horizontal,
-                        itemCount: astrologers.length,
-                        itemBuilder: (context, index) =>
-                            TalkToExpertsProfileDetailsWidget(
-                                size: size, astrologer: astrologers[index]));
+                      // scrollDirection: Axis.horizontal,
+                      itemCount: astrologers.length,
+                      itemBuilder: (context, index) =>
+                          TalkToExpertsProfileDetailsWidget(
+                        size: size,
+                        astrologer: astrologers[index],
+                      ),
+                    );
                   } else {
                     return const Center(child: Text('No data available'));
                   }
