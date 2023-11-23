@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -39,6 +41,7 @@ class _WalletRechargeScreenState extends State<WalletRechargeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var updatedBalance = updateBalance(amountController.text);
     Size size = MediaQuery.sizeOf(context);
     return Scaffold(
       backgroundColor: Colors.white,
@@ -58,7 +61,7 @@ class _WalletRechargeScreenState extends State<WalletRechargeScreen> {
             Padding(
               padding: EdgeInsets.only(top: size.width / 15),
               child: Text(
-                "Available balance: Rs: $balance",
+                "Available balance: Rs: $updatedBalance",
                 style: const TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
@@ -191,13 +194,29 @@ class _WalletRechargeScreenState extends State<WalletRechargeScreen> {
         // Generate order_id using Orders API
         'timeout': 180, // in seconds
         'prefill': {
-          'contact': '1234567890',
+          'contact': '9747119764',
           'email': 'hi@gmail.com',
         }
       };
       _razorpay.open(options);
+      setState(() {
+        balance = updateBalance(amount);
+      });
     } on Exception catch (e) {
       print('Error on parsing amount:$e');
     }
+  }
+
+  updateBalance(String amount) {
+    double updatedBalance = balance;
+
+    try {
+      double enteredAmount = double.parse(amountController.text);
+      updatedBalance += enteredAmount;
+    } catch (e) {
+      print('Error parsing amount: $e');
+      // Handle the error, you might want to show a message to the user
+    }
+    return updatedBalance;
   }
 }
