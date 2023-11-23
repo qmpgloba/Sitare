@@ -1,10 +1,13 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:sitare/screens/auth%20wrapper/auth_wrapper.dart';
 import 'constants/ui_constants.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await PackageInfo.fromPlatform();
+
   await Firebase.initializeApp();
   runApp(const MyApp());
 }

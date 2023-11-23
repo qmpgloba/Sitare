@@ -149,7 +149,9 @@ class _WalletRechargeScreenState extends State<WalletRechargeScreen> {
     );
   }
 
-  void _handlePaymentSuccess(PaymentSuccessResponse response) {
+  void _handlePaymentSuccess(
+    PaymentSuccessResponse response,
+  ) {
     User? user = FirebaseAuth.instance.currentUser;
     print('Succes=${response.paymentId}');
     if (user != null) {
@@ -158,7 +160,7 @@ class _WalletRechargeScreenState extends State<WalletRechargeScreen> {
         'name': userData!['full name'],
         'email': user.email,
         'phone number': user.phoneNumber,
-        'amount': 'amount',
+        'amount': amountController.text,
         'transaction id': response.paymentId,
         'time': FieldValue.serverTimestamp()
       });
@@ -173,26 +175,33 @@ class _WalletRechargeScreenState extends State<WalletRechargeScreen> {
 
   void _handleExternalWallet(ExternalWalletResponse response) {
     showAlertBox(
-        context,
-        'Transaction Failed due to involvement of external wallet',
-        blackColor,
-        'ok');
+      context,
+      'Transaction Failed due to involvement of external wallet',
+      blackColor,
+      'ok',
+    );
 
     print('External');
   }
 
   onTapRecharge({required String amount}) {
-    var options = {
-      'key': 'rzp_test_SG8DKDs1zi5E3l',
-      'amount': amount * 1, //in the smallest currency sub-unit.
-      'name': 'Qmp Global',
-      // Generate order_id using Orders API
-      'timeout': 180, // in seconds
-      'prefill': {
-        'contact': '1234567890',
-        'email': 'hi@gmail.com',
-      }
-    };
-    _razorpay.open(options);
+    try {
+      int parsedAmount = (double.parse(amount) * 100).toInt();
+
+      var options = {
+        'key': 'rzp_test_SG8DKDs1zi5E3l',
+        'amount': parsedAmount, //in the smallest currency sub-unit.
+        'name': 'Qmp Global',
+        // Generate order_id using Orders API
+        'timeout': 180, // in seconds
+        'prefill': {
+          'contact': '1234567890',
+          'email': 'hi@gmail.com',
+        }
+      };
+      _razorpay.open(options);
+    } on Exception catch (e) {
+      print('Error on parsing amount:$e');
+    }
   }
 }
