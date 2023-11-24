@@ -43,7 +43,6 @@ Future<DocumentSnapshot<Map<String, dynamic>>?> getUserDataByPhoneNumber(
 //   }
 // }
 
-
 Future<String> addProfileImge(XFile imagePicked) async {
   Reference referenceRoot = FirebaseStorage.instance.ref();
   Reference referenceDirImages = referenceRoot.child('user_profile_images');
@@ -61,7 +60,6 @@ Future<String> addProfileImge(XFile imagePicked) async {
   }
 }
 
-
 createUser(UserModel user) async {
   final db = FirebaseFirestore.instance;
 
@@ -76,14 +74,14 @@ createUser(UserModel user) async {
   }
 }
 
-
-
 updateUser(UserModel user, String phoneNumber) async {
   final db = FirebaseFirestore.instance;
 
   try {
-    QuerySnapshot querySnapshot =
-        await db.collection('users').where('phone number', isEqualTo: phoneNumber).get();
+    QuerySnapshot querySnapshot = await db
+        .collection('users')
+        .where('phone number', isEqualTo: phoneNumber)
+        .get();
 
     if (querySnapshot.docs.isNotEmpty) {
       DocumentSnapshot documentSnapshot = querySnapshot.docs.first;
@@ -96,4 +94,3 @@ updateUser(UserModel user, String phoneNumber) async {
     return false;
   }
 }
-
