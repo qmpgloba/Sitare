@@ -21,6 +21,18 @@ Future<DocumentSnapshot<Map<String, dynamic>>?> getUserDataByPhoneNumber(
   }
 }
 
+
+Future<Map<String, dynamic>?> getUserDataByuid(String uid) async {
+  final userCollection = FirebaseFirestore.instance.collection('users');
+  final querySnapshot = await userCollection.where('uid', isEqualTo: uid).limit(1).get();
+  
+  if (querySnapshot.docs.isNotEmpty) {
+    return querySnapshot.docs.first.data();
+  } else {
+    return null;
+  }
+}
+
 // Future<bool> checkPhoneNumberExistence(String mobileNumber) async {
 //   final phoneNumber = mobileNumber;
 

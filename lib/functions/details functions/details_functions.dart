@@ -5,6 +5,7 @@ import 'package:sitare/constants/app_constants.dart';
 import 'package:sitare/constants/ui_constants.dart';
 import 'package:sitare/functions/auth%20function/auth_function.dart';
 import 'package:sitare/functions/user_functions.dart';
+import 'package:sitare/main.dart';
 import 'package:sitare/model/user_model.dart';
 import 'package:sitare/screens/home%20screen/home_screen.dart';
 
@@ -55,6 +56,7 @@ onSubmit(
                 tob.isNotEmpty) {
               key.currentState!.save();
               UserModel user = UserModel(
+                fcmToken: fCMToken??'error',
                 uid: currentUser!.uid,
                 name: name,
                 email: email,
@@ -142,6 +144,7 @@ addUserDetails(
     required String mobile,
     required String email}) async {
   UserModel user = UserModel(
+    fcmToken: fCMToken ?? 'error',
       uid: currentUser!.uid,
       name: name,
       email: email,
