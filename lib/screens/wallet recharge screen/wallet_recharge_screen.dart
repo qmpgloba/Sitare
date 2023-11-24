@@ -1,5 +1,4 @@
 // ignore_for_file: avoid_print
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -193,13 +192,16 @@ class _WalletRechargeScreenState extends State<WalletRechargeScreen> {
         // Generate order_id using Orders API
         'timeout': 180, // in seconds
         'prefill': {
-          'contact': '9747119764',
+          'contact': '1234567890',
           'email': 'hi@gmail.com',
         }
       };
       _razorpay.open(options);
       setState(() {
         balance = updateBalance(amount);
+        FirebaseFirestore.instance.collection('users').add({
+          'wallet': balance,
+        });
       });
     } on Exception catch (e) {
       print('Error on parsing amount:$e');
@@ -217,5 +219,16 @@ class _WalletRechargeScreenState extends State<WalletRechargeScreen> {
       // Handle the error, you might want to show a message to the user
     }
     return updatedBalance;
+  }
+
+  updateWallet(String documentId, double amount) async {
+    DocumentReference documentReference =
+        FirebaseFirestore.instance.collection('users').doc(documentId);
+    try {
+      await documentReference.update({'wallet': amount});
+      print('wallet updated');
+    } catch (e) {
+      print('error updating wallet:$e');
+    }
   }
 }
