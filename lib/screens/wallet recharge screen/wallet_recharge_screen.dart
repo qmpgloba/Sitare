@@ -39,7 +39,6 @@ class _WalletRechargeScreenState extends State<WalletRechargeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    var updatedBalance = updateBalance(amountController.text);
     Size size = MediaQuery.sizeOf(context);
     return Scaffold(
       backgroundColor: Colors.white,
@@ -59,7 +58,7 @@ class _WalletRechargeScreenState extends State<WalletRechargeScreen> {
             Padding(
               padding: EdgeInsets.only(top: size.width / 15),
               child: Text(
-                "Available balance: Rs: $updatedBalance",
+                "Available balance: Rs: ${updateBalance(amountController.text)}",
                 style: const TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
@@ -161,13 +160,14 @@ class _WalletRechargeScreenState extends State<WalletRechargeScreen> {
         'transaction id': response.paymentId,
         'time': FieldValue.serverTimestamp()
       });
+      updateWallet(user.uid, updateBalance(amountController.text));
       showSnackbar(context, 'Payment Succssfull', greenColor);
     }
   }
 
   void _handlePaymentError(PaymentFailureResponse response) {
     showAlertBox(context, 'Transaction Failed', whiteColor, 'ok');
-    print('Error');
+    print('Failed');
   }
 
   void _handleExternalWallet(ExternalWalletResponse response) {
@@ -177,7 +177,6 @@ class _WalletRechargeScreenState extends State<WalletRechargeScreen> {
       whiteColor,
       'ok',
     );
-
     print('External');
   }
 
@@ -199,9 +198,6 @@ class _WalletRechargeScreenState extends State<WalletRechargeScreen> {
       _razorpay.open(options);
       setState(() {
         balance = updateBalance(amount);
-        FirebaseFirestore.instance.collection('users').add({
-          'wallet': balance,
-        });
       });
     } on Exception catch (e) {
       print('Error on parsing amount:$e');
