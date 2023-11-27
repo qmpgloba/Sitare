@@ -163,7 +163,7 @@ class ProfileScreen extends StatelessWidget {
                                   GestureDetector(
                                     onTap: () {
                                       // print("ckb");
-                                      sendNotification(astrologer.fcmToken);
+                                      sendCallNotification(astrologer.fcmToken);
                                     },
                                     child: const ContactIconWidgetWithText(
                                         icon: Icons.call_outlined,
