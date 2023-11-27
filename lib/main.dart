@@ -17,19 +17,12 @@ const AndroidNotificationChannel channel = AndroidNotificationChannel(
     importance: Importance.high,
     playSound: true);
 
-// Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
-//   await Firebase.initializeApp();
-//   RemoteNotification? notification = message.notification;
-//   AndroidNotification? android = message.notification?.android;
-//   if (notification != null && android != null) {
-//     saveNotificationToFirestore(notification, message.data);
-//   }
-// }
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  FirebaseNotification().initNotification();
+ await FirebaseNotification().initNotification();
    tzdata.initializeTimeZones();
   tz.setLocalLocation(tz.getLocation('Asia/Kolkata'));
   scheduleCronJob();

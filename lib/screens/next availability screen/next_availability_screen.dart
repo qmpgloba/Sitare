@@ -1,7 +1,9 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:sitare/constants/ui_constants.dart';
+import 'package:sitare/functions/auth%20function/auth_function.dart';
 import 'package:sitare/functions/availablity/available_time_slots_function.dart';
+import 'package:sitare/screens/home%20screen/home_screen.dart';
 import 'package:sitare/screens/next%20availability%20screen/widgets/tab_widget.dart';
 import 'package:sitare/screens/next%20availability%20screen/widgets/time_slots_widget.dart';
 import 'package:sitare/model/astrologer_model.dart';
@@ -139,9 +141,10 @@ class _NextAvailabilityScreenState extends State<NextAvailabilityScreen>
                                   slots[_tabController.index].availableSlots,
                               bookedSlots: booked);
                           await updateAvailableSlotsInFireBase(
-                                  widget.astrologer.uid,
+                                 userData!['uid'],
                                   slots[_tabController.index].date,
-                                  bookedSlot,widget.astrologer.uid)
+                                  bookedSlot,widget.astrologer.uid,slots[_tabController.index]
+                              .availableSlots[selected])
                               .then((value) {
                             showToast('Slot Booked Successfully', greenColor);
                             Navigator.of(context).pop();
