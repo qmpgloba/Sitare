@@ -8,8 +8,6 @@ import 'package:sitare/functions/auth%20function/auth_function.dart';
 import 'package:sitare/functions/user_functions.dart';
 import 'package:sitare/main.dart';
 import 'package:sitare/model/user_model.dart';
-import 'package:timezone/data/latest_all.dart' as tzdata;
-import 'package:timezone/timezone.dart' as tz;
 
 class FirebaseNotification {
   final _firebaseMessaging = FirebaseMessaging.instance;
@@ -27,7 +25,6 @@ class FirebaseNotification {
   Future<void> initNotification() async {
     await _firebaseMessaging.requestPermission();
     fCMToken = await _firebaseMessaging.getToken();
-    print('token: $fCMToken');
 
     if (currentUser != null) {
       String currentFcmToken = await fetchFcmToken(currentUser!.uid) as String;
@@ -96,7 +93,6 @@ class FirebaseNotification {
 
 void saveNotificationToFirestore(
     RemoteNotification notification, Map<String, dynamic> data) {
-  print('notification');
   final firestore = FirebaseFirestore.instance;
 
   try {
@@ -113,8 +109,8 @@ void saveNotificationToFirestore(
         .add(notificationData)
         .then((_) {})
         .catchError((error) {});
+  // ignore: empty_catches
   } catch (e) {
-    print(e.toString());
   }
 }
 

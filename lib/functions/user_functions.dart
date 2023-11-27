@@ -5,8 +5,6 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:sitare/constants/app_constants.dart';
-import 'package:sitare/functions/auth%20function/auth_function.dart';
-import 'package:sitare/functions/firebase%20notification/firebase_notification.dart';
 import 'package:sitare/main.dart';
 import 'package:sitare/model/user_model.dart';
 

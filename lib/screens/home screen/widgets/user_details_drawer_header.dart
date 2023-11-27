@@ -22,7 +22,7 @@ class UserDetailsDrawerHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DrawerHeader(
-        child: Container(
+        child: SizedBox(
           width: size.width*.75,
           child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,

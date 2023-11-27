@@ -3,7 +3,6 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:sitare/constants/ui_constants.dart';
-import 'package:sitare/functions/auth%20function/auth_function.dart';
 import 'package:sitare/model/astrologer_model.dart';
 import 'package:sitare/screens/chat%20screen/service/chat_service.dart';
 import 'package:sitare/screens/home%20screen/home_screen.dart';
@@ -99,7 +98,6 @@ sendBookingNotification()async{
     final response = await http.post(Uri.parse(fcmUrl),
         headers: headers, body: jsonEncode(body));
     if (response.statusCode == 200) {
-      print('notification sent');
       // showToast("Call Request sent succesfully", greyColor);
     } else {}
     // ignore: empty_catches

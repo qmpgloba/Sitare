@@ -46,8 +46,6 @@ Future<List<AvailabilityModel>> getAvailableSlots(String astrologerId) async {
 
 Future<void> updateAvailableSlotsInFireBase(String uid, DateTime date,
     AvailabilityModel availableSlots, String astrologerId) async {
-      print(date);
-      print(availableSlots.date);
   try {
     final querySnapshot = await FirebaseFirestore.instance
         .collection('Astrologerdetails')
