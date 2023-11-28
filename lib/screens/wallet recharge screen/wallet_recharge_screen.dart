@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
 import 'package:sitare/constants/app_constants.dart';
 import 'package:sitare/constants/ui_constants.dart';
-import 'package:sitare/functions/auth%20function/auth_function.dart';
 import 'package:sitare/functions/wallet%20function/wallet.dart';
 import 'package:sitare/screens/home%20screen/home_screen.dart';
 import 'package:sitare/screens/wallet%20recharge%20screen/widget%20s/available_balance.dart';
