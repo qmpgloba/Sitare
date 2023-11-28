@@ -180,7 +180,6 @@ class _WalletRechargeScreenState extends State<WalletRechargeScreen> {
       whiteColor,
       'ok',
     );
-    print('External');
   }
 
   onTapRecharge({required String amount}) {
