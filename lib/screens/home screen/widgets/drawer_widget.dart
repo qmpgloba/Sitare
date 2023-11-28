@@ -26,7 +26,6 @@ class HomeScreenDrawerWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(
-            // width: size.width*.7,
             child: UserDetailsDrawerHeader(
                 size: size,
                 fullName: userData!['full name'],
@@ -71,13 +70,14 @@ class HomeScreenDrawerWidget extends StatelessWidget {
           ),
           const Divider(),
           GestureDetector(
-              onTap: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => OrderHistoryScreen(),
-                ));
-              },
-              child: const ListItemsDrawer(
-                  icon: Icons.list, text: 'Order History')),
+            onTap: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => OrderHistoryScreen(),
+              ));
+            },
+            child:
+                const ListItemsDrawer(icon: Icons.list, text: 'Order History'),
+          ),
           const Divider(),
           GestureDetector(
             onTap: () {
@@ -89,26 +89,34 @@ class HomeScreenDrawerWidget extends StatelessWidget {
                   .catchError((error) {});
             },
             child: const ListItemsDrawer(
-                icon: Icons.wechat_outlined, text: 'Customer Support'),
+              icon: Icons.wechat_outlined,
+              text: 'Customer Support',
+            ),
           ),
           const Divider(),
           const ListItemsDrawer(
-              icon: Icons.settings_outlined, text: 'Settings'),
+            icon: Icons.settings_outlined,
+            text: 'Settings',
+          ),
           const Divider(),
-          const ListItemsDrawer(icon: Icons.share_outlined, text: 'Share'),
+          const ListItemsDrawer(
+            icon: Icons.share_outlined,
+            text: 'Share',
+          ),
           const Divider(),
           GestureDetector(
-              onTap: () async {
-                await FirebaseAuth.instance.signOut().then((value) {
-                  Navigator.pushAndRemoveUntil(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => WelcomeScreen(),
-                      ),
-                      (route) => false);
-                });
-              },
-              child: const ListItemsDrawer(icon: Icons.logout, text: 'Logout')),
+            onTap: () async {
+              await FirebaseAuth.instance.signOut().then((value) {
+                Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => WelcomeScreen(),
+                    ),
+                    (route) => false);
+              });
+            },
+            child: const ListItemsDrawer(icon: Icons.logout, text: 'Logout'),
+          ),
           const Spacer(),
           Padding(
             padding: EdgeInsets.all(size.width / 16),
