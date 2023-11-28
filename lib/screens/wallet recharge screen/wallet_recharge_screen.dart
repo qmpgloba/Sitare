@@ -8,6 +8,7 @@ import 'package:sitare/constants/ui_constants.dart';
 import 'package:sitare/functions/auth%20function/auth_function.dart';
 import 'package:sitare/functions/wallet%20function/wallet.dart';
 import 'package:sitare/screens/home%20screen/home_screen.dart';
+import 'package:sitare/screens/wallet%20recharge%20screen/widget%20s/available_balance.dart';
 import 'package:sitare/screens/wallet%20recharge%20screen/widget/amount_grid.dart';
 import 'package:sitare/screens/widgets/show_dialog_widget.dart';
 import 'package:sitare/screens/widgets/snackbar.dart';
@@ -59,36 +60,7 @@ class _WalletRechargeScreenState extends State<WalletRechargeScreen> {
           children: [
             Padding(
               padding: EdgeInsets.only(top: size.width / 15),
-              child: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
-                stream: FirebaseFirestore.instance
-                    .collection('users')
-                    .where('uid', isEqualTo: currentUser!.uid)
-                    .snapshots(),
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    return const Text('Loading balance..');
-                  } else if (snapshot.hasError) {
-                    return const Text('Error loading balance');
-                  } else {
-                    var documents = snapshot.data!.docs;
-                    if (documents.isNotEmpty) {
-                      var firstDocument = documents.first;
-                      dynamic walletValue = firstDocument['wallet'];
-                      return Text(
-                        'Available balance: Rs: $walletValue',
-                        style: const TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      );
-                    } else {
-                      return const Text(
-                        'Document does not exist or does not have a "wallet" field',
-                      );
-                    }
-                  }
-                },
-              ),
+              child: const AvailableBalance(),
             ),
             const SizedBox(height: 8.0),
             Container(
