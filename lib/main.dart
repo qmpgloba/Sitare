@@ -7,13 +7,13 @@ import 'constants/ui_constants.dart';
 import 'package:timezone/data/latest_all.dart' as tzdata;
 import 'package:timezone/timezone.dart' as tz;
 
-final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+ final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
     FlutterLocalNotificationsPlugin();
 
 const AndroidNotificationChannel channel = AndroidNotificationChannel(
-    'High Important channel' //id,
-        'High Important Notification', //title
-    "This channel is used for important notification.", //description
+    'High Important channel'
+        'High Important Notification', 
+    "This channel is used for important notification.",
     importance: Importance.high,
     playSound: true);
 
@@ -36,7 +36,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(fCMToken);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
@@ -45,7 +44,19 @@ class MyApp extends StatelessWidget {
         fontFamily: 'Muli',
         useMaterial3: true,
       ),
-      home: AuthWrapper(),
+      home: FutureBuilder(
+        future: fetchBookedSlotsAndNotify(DateTime.now()),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(
+                child: CircularProgressIndicator()); // Show a loading indicator
+          } else if (snapshot.hasError) {
+            return Text('Error: ${snapshot.error}');
+          } else {
+            return  AuthWrapper();
+          }
+        },
+      ),
     );
   }
 }

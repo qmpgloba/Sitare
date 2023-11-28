@@ -98,8 +98,12 @@ sendBookingNotification()async{
     final response = await http.post(Uri.parse(fcmUrl),
         headers: headers, body: jsonEncode(body));
     if (response.statusCode == 200) {
+      print('sucess');
+      print(userData!['fcmToken']);
       // showToast("Call Request sent succesfully", greyColor);
-    } else {}
+    } else {
+      print(response.statusCode);
+    }
     // ignore: empty_catches
   } catch (e) {}
 

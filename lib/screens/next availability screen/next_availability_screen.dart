@@ -1,7 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:sitare/constants/ui_constants.dart';
-import 'package:sitare/functions/auth%20function/auth_function.dart';
 import 'package:sitare/functions/availablity/available_time_slots_function.dart';
 import 'package:sitare/screens/home%20screen/home_screen.dart';
 import 'package:sitare/screens/next%20availability%20screen/widgets/tab_widget.dart';

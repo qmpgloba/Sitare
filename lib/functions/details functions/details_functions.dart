@@ -39,14 +39,6 @@ onSubmit(
       children: [
         InkWell(
           onTap: () async {
-            print(key.currentState != null);
-            print('valid=${key.currentState!.validate()}');
-            print('dob${dob.isNotEmpty}');
-            print('tob=${tob.isNotEmpty}');
-            print('Gender=${gender.isNotEmpty}');
-            print('pob=${pob.isNotEmpty}');
-            print('maried=${martialStatus.isNotEmpty}');
-            print('prblm=${problem.isNotEmpty}');
             key.currentState?.validate();
 
             if (key.currentState != null &&

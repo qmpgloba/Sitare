@@ -38,7 +38,6 @@ class _EnterDetailsScreenState extends State<EnterDetailsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    print(currentUser!.uid);
     Size size = MediaQuery.sizeOf(context);
     return Scaffold(
         body: SingleChildScrollView(
@@ -114,14 +113,6 @@ class _EnterDetailsScreenState extends State<EnterDetailsScreen> {
         children: [
           InkWell(
             onTap: () async {
-              print(_key.currentState != null);
-              print('valid=${_key.currentState!.validate()}');
-              print('dob${dobController.text.isNotEmpty}');
-              print('tob=${tobController.text.isNotEmpty}');
-              print('Gender=${genderController.text.isNotEmpty}');
-              print('pob=${pobController.text.isNotEmpty}');
-              print('maried=${martialStatus.isNotEmpty}');
-              print('prblm=${problemController.text.isNotEmpty}');
               _key.currentState?.validate();
 
               if (_key.currentState != null &&

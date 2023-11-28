@@ -75,14 +75,12 @@ Future<void> updateAvailableSlotsInFireBase(
             .doc(docId)
             .collection('booked details');
         BookingDetailsModel slotBooked = BookingDetailsModel(
-          userUid: currentUser!.uid,
-          astrologerId: astrologerId,
-          slotBooked: availableSlots.bookedSlots.first,
-        );
+            userUid: currentUser!.uid,
+            astrologerId: astrologerId,
+            slotBooked: availableSlots.bookedSlots.first,
+            date: date);
 
         await subcollectionRef2.add(slotBooked.toJson());
-        print('object');
-        print(userId);
         final userSnapShot = await FirebaseFirestore.instance
             .collection('users')
             .where('uid', isEqualTo: userId)
@@ -91,19 +89,17 @@ Future<void> updateAvailableSlotsInFireBase(
         if (userSnapShot.docs.isNotEmpty) {
           final userDoc = userSnapShot.docs.first;
           final docId = userDoc.id;
+          BookingDetailsModel userBookedSlot = BookingDetailsModel(
+              userUid: currentUser!.uid,
+              astrologerId: astrologerId,
+              slotBooked: slotTime,
+              date: date);
           await FirebaseFirestore.instance
               .collection('users')
               .doc(docId)
               .collection('bookedSlot')
-              .add({
-            'booked date': date,
-            'booked time': slotTime,
-            'astrologer id': astrologerId
-          });
-          print('added');
-        } else {
-          print('not found');
-        }
+              .add(userBookedSlot.toJson());
+        } else {}
       } else {
         throw Exception('Document not found for the given date');
       }
