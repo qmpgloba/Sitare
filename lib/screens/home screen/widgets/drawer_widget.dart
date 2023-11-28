@@ -9,6 +9,7 @@ import 'package:sitare/screens/home%20screen/widgets/user_details_drawer_header.
 import 'package:sitare/screens/order%20history%20screen/order_history_screen.dart';
 import 'package:sitare/screens/wallet%20recharge%20screen/wallet_recharge_screen.dart';
 import 'package:sitare/screens/welcome%20page/welcome_screen.dart';
+import 'package:sitare/screens/widgets/wallet_amount.dart';
 
 class HomeScreenDrawerWidget extends StatelessWidget {
   const HomeScreenDrawerWidget({
@@ -50,11 +51,7 @@ class HomeScreenDrawerWidget extends StatelessWidget {
               trailing: Wrap(
                 spacing: 5,
                 children: [
-                  const AutoSizeText(
-                    '₹200.00',
-                    maxLines: 1,
-                    style: TextStyle(fontSize: 16),
-                  ),
+                  const WalletAmount(),
                   Container(
                     decoration: BoxDecoration(
                         color: redColor,
