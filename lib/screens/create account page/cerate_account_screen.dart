@@ -124,6 +124,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                                   placeofBirth: '',
                                   problem: '',
                                   timeofBirth: '',
+                                  wallet: '',
                                 );
                                 bool isExist = await checkPhoneNumberExistence(
                                     "+91${phoneNumberTextController.text}");

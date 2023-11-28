@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -15,7 +14,6 @@ import 'package:sitare/screens/home%20screen/home_screen.dart';
 import 'package:sitare/screens/profile%20screen/widgets/update_profile_textfeild_widget.dart';
 import 'package:sitare/screens/update%20profile%20screen/widgets/update_button_widget.dart';
 import 'package:sitare/screens/update%20profile%20screen/widgets/logger_widget.dart';
-
 import '../create account page/cerate_account_screen.dart';
 
 class UpdateProfileScreen extends StatefulWidget {
@@ -115,30 +113,32 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                               radius: 55,
                               backgroundImage: imagePath == ''
                                   ? const AssetImage(
-                                          'assets/images/profile_image.png')
-                                      as ImageProvider
+                                      'assets/images/profile_image.png',
+                                    ) as ImageProvider
                                   : FileImage(File(imagePath!)),
                             ),
                             Positioned(
-                                bottom: 0,
-                                right: 0,
-                                child: InkWell(
-                                  onTap: () {
-                                    imagePick();
-                                  },
-                                  child: const Icon(
-                                    Icons.add_a_photo,
-                                    size: 30,
-                                  ),
-                                ))
+                              bottom: 0,
+                              right: 0,
+                              child: InkWell(
+                                onTap: () {
+                                  imagePick();
+                                },
+                                child: const Icon(
+                                  Icons.add_a_photo,
+                                  size: 30,
+                                ),
+                              ),
+                            )
                           ],
                         ),
                         UpdateProfileTextFeildWidgets(
-                            size: size,
-                            controller: nameTextController,
-                            hintText: 'Full Name',
-                            feildName: 'Name',
-                            keyboardType: TextInputType.name),
+                          size: size,
+                          controller: nameTextController,
+                          hintText: 'Full Name',
+                          feildName: 'Name',
+                          keyboardType: TextInputType.name,
+                        ),
                         const SizedBox(
                           height: 10,
                         ),
@@ -153,11 +153,12 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                         Row(
                           children: [
                             SizedBox(
-                                width: size.width * .25,
-                                child: const Text(
-                                  'Gender',
-                                  style: TextStyle(color: blackColor),
-                                )),
+                              width: size.width * .25,
+                              child: const Text(
+                                'Gender',
+                                style: TextStyle(color: blackColor),
+                              ),
+                            ),
                             const SizedBox(
                               width: 10,
                             ),
@@ -196,13 +197,14 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               SizedBox(
-                                  width: size.width * .25,
-                                  child: const AutoSizeText(
-                                    'Date of Birth',
-                                    maxLines: 1,
-                                    maxFontSize: 14,
-                                    style: TextStyle(color: blackColor),
-                                  )),
+                                width: size.width * .25,
+                                child: const AutoSizeText(
+                                  'Date of Birth',
+                                  maxLines: 1,
+                                  maxFontSize: 14,
+                                  style: TextStyle(color: blackColor),
+                                ),
+                              ),
                               const SizedBox(
                                 width: 10,
                               ),
@@ -255,13 +257,14 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               SizedBox(
-                                  width: size.width * .25,
-                                  child: const AutoSizeText(
-                                    'Time of Birth',
-                                    maxLines: 1,
-                                    maxFontSize: 14,
-                                    style: TextStyle(color: blackColor),
-                                  )),
+                                width: size.width * .25,
+                                child: const AutoSizeText(
+                                  'Time of Birth',
+                                  maxLines: 1,
+                                  maxFontSize: 14,
+                                  style: TextStyle(color: blackColor),
+                                ),
+                              ),
                               const SizedBox(
                                 width: 10,
                               ),
@@ -270,8 +273,9 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                                 height: 35,
                                 child: TextFormField(
                                   decoration: const InputDecoration(
-                                      hintText: 'Time of Birth',
-                                      hintStyle: TextStyle(color: greyColor)),
+                                    hintText: 'Time of Birth',
+                                    hintStyle: TextStyle(color: greyColor),
+                                  ),
                                   controller: timeInput,
                                   readOnly: true,
                                   onTap: () async {
@@ -306,7 +310,8 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                                   maxFontSize: 14,
                                 ),
                                 decoration: const InputDecoration(
-                                    border: UnderlineInputBorder()),
+                                  border: UnderlineInputBorder(),
+                                ),
                                 // value: 'Male',
                                 items: martialStatus
                                     .map(
@@ -327,11 +332,12 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                           height: 12,
                         ),
                         UpdateProfileTextFeildWidgets(
-                            size: size,
-                            controller: problemTextController,
-                            hintText: 'Problem',
-                            feildName: 'Problem',
-                            keyboardType: TextInputType.text),
+                          size: size,
+                          controller: problemTextController,
+                          hintText: 'Problem',
+                          feildName: 'Problem',
+                          keyboardType: TextInputType.text,
+                        ),
                         const SizedBox(
                           height: 10,
                         ),
@@ -351,6 +357,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                                 timeofBirth: timeInput.text,
                                 maritalStatus: martialDropDownValue ?? "Single",
                                 problem: problemTextController.text,
+                                wallet: '',
                               );
                               bool updateSuccess =
                                   await updateUser(user, number ?? "");

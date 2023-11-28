@@ -55,19 +55,19 @@ onSubmit(
                 tob.isNotEmpty) {
               key.currentState!.save();
               UserModel user = UserModel(
-                uid: currentUser!.uid,
-                name: name,
-                email: email,
-                phoneNumber: "+91$mobile",
-                userProfileImage: profileImage,
-                gender: gender,
-                dateofBirth: dob,
-                placeofBirth: pob,
-                timeofBirth: tob,
-                maritalStatus: maritalStatus,
-                problem: problem,
-                partnerDetails: optionalField,
-              );
+                  uid: currentUser!.uid,
+                  name: name,
+                  email: email,
+                  phoneNumber: "+91$mobile",
+                  userProfileImage: profileImage,
+                  gender: gender,
+                  dateofBirth: dob,
+                  placeofBirth: pob,
+                  timeofBirth: tob,
+                  maritalStatus: maritalStatus,
+                  problem: problem,
+                  partnerDetails: optionalField,
+                  wallet: '');
               bool submitSuccess = await updateUser(user, "+91$mobile");
               if (submitSuccess) {
                 Navigator.of(context).pushReplacement(MaterialPageRoute(
@@ -153,7 +153,8 @@ addUserDetails(
       timeofBirth: '',
       maritalStatus: '',
       problem: '',
-      partnerDetails: optionalField);
+      partnerDetails: optionalField,
+      wallet: '');
   await updateUser(user, '+91$mobile');
   Navigator.of(context).pushAndRemoveUntil(
     MaterialPageRoute(

@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:http/http.dart' as http;
-import 'dart:convert';  
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:sitare/constants/ui_constants.dart';
 import 'package:sitare/model/astrologer_model.dart';
@@ -32,41 +32,41 @@ sendNotification(String? fcmToken) async {
   // Define the request body
   final Map<String, dynamic> body = {
     "to": fcmToken,
-     "data": {
+    "data": {
       "click_action": "FLUTTER_NOTIFICATION_CLICK",
       "id": "1",
       "status": "done",
       "uid": FirebaseAuth.instance.currentUser!.uid,
     },
     "notification": {
-     
       "body": "${userData!['full name']} wants to contact",
       "OrganizationId": "2",
       "content_available": true,
       "priority": "high",
       "subtitle": "Elementary School",
       "title": "Astro",
-      
     }
   };
 
- try {
+  try {
     final response = await http.post(Uri.parse(fcmUrl),
         headers: headers, body: jsonEncode(body));
     if (response.statusCode == 200) {
       showToast("Call Request sent succesfully", greyColor);
     } else {
+      print('call failed');
     }
-  // ignore: empty_catches
+    // ignore: empty_catches
   } catch (e) {
+    print('error');
   }
 }
 
- void sendMessage(TextEditingController controller,ChatService chatService,AstrologerModel astrologer) async {
-    if (controller.text.isNotEmpty) {
-      await chatService.sendMessage(
-          astrologer.uid, controller.text);
+void sendMessage(TextEditingController controller, ChatService chatService,
+    AstrologerModel astrologer) async {
+  if (controller.text.isNotEmpty) {
+    await chatService.sendMessage(astrologer.uid, controller.text);
 
-      controller.clear();
-    }
+    controller.clear();
   }
+}
