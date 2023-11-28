@@ -5,6 +5,7 @@ import 'package:sitare/constants/app_constants.dart';
 import 'package:sitare/constants/ui_constants.dart';
 import 'package:sitare/functions/auth%20function/auth_function.dart';
 import 'package:sitare/functions/user_functions.dart';
+import 'package:sitare/main.dart';
 import 'package:sitare/model/user_model.dart';
 import 'package:sitare/screens/home%20screen/home_screen.dart';
 
@@ -38,14 +39,6 @@ onSubmit(
       children: [
         InkWell(
           onTap: () async {
-            print(key.currentState != null);
-            print('valid=${key.currentState!.validate()}');
-            print('dob${dob.isNotEmpty}');
-            print('tob=${tob.isNotEmpty}');
-            print('Gender=${gender.isNotEmpty}');
-            print('pob=${pob.isNotEmpty}');
-            print('maried=${martialStatus.isNotEmpty}');
-            print('prblm=${problem.isNotEmpty}');
             key.currentState?.validate();
 
             if (key.currentState != null &&
@@ -55,6 +48,8 @@ onSubmit(
                 tob.isNotEmpty) {
               key.currentState!.save();
               UserModel user = UserModel(
+                                fcmToken: fCMToken??'error',
+
                   uid: currentUser!.uid,
                   name: name,
                   email: email,
@@ -68,6 +63,7 @@ onSubmit(
                   problem: problem,
                   partnerDetails: optionalField,
                   wallet: '');
+
               bool submitSuccess = await updateUser(user, "+91$mobile");
               if (submitSuccess) {
                 Navigator.of(context).pushReplacement(MaterialPageRoute(
@@ -142,6 +138,7 @@ addUserDetails(
     required String mobile,
     required String email}) async {
   UserModel user = UserModel(
+    fcmToken: fCMToken ?? 'error',
       uid: currentUser!.uid,
       name: name,
       email: email,

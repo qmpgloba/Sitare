@@ -1,4 +1,5 @@
 class UserModel {
+  final String fcmToken;
   final String uid;
   final String name;
   final String email;
@@ -22,6 +23,7 @@ class UserModel {
     this.problem,
     this.wallet,
     required this.userProfileImage,
+    required  this.fcmToken,
     required this.uid,
     required this.name,
     required this.email,
@@ -31,6 +33,7 @@ class UserModel {
 
   toJson() {
     return {
+      'fcmToken': fcmToken,
       'uid': uid,
       'full name': name,
       'email': email,

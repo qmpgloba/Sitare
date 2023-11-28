@@ -15,12 +15,11 @@ launchWhatsAppUri(String phoneNumber) async {
     phoneNumber: phoneNumber,
     // text: "Hey! I'm inquiring about the apartment listing",
   );
-  // Convert the WhatsAppUnilink instance to a Uri.
-  // The "launch" method is part of "url_launcher".
+
   await launchUrl(Uri.parse(link.toString()));
 }
 
-sendNotification(String? fcmToken) async {
+sendCallNotification(String? fcmToken) async {
   // Define the FCM endpoint and headers
   const String fcmUrl = "https://fcm.googleapis.com/fcm/send";
   final Map<String, String> headers = {
@@ -53,13 +52,10 @@ sendNotification(String? fcmToken) async {
         headers: headers, body: jsonEncode(body));
     if (response.statusCode == 200) {
       showToast("Call Request sent succesfully", greyColor);
-    } else {
-      print('call failed');
-    }
+
+    } else {}
     // ignore: empty_catches
-  } catch (e) {
-    print('error');
-  }
+  } catch (e) {}
 }
 
 void sendMessage(TextEditingController controller, ChatService chatService,
@@ -69,4 +65,44 @@ void sendMessage(TextEditingController controller, ChatService chatService,
 
     controller.clear();
   }
+}
+
+
+sendBookingNotification()async{
+
+   const String fcmUrl = "https://fcm.googleapis.com/fcm/send";
+  final Map<String, String> headers = {
+    "Content-Type": "application/json",
+    "Authorization":
+        "key=AAAA_dyVjd4:APA91bFIRolqLYn5iC55-L5tBl8D_FyA5RDeM4lr0ithT5DnWFsqJLGjXnbCfd3s9S1qYf64ZFxufndObzWVcGvvnIETJeMmduGPiWtK7Ps7v3vefxgYGvfH5aCHcukwqLnxEuUtP8uy"
+  };
+
+  final Map<String, dynamic> body = {
+    "to": userData!['fcmToken'],
+    "data": {
+      "click_action": "FLUTTER_NOTIFICATION_CLICK",
+      "id": "1",
+      "status": "done",
+      // "uid": FirebaseAuth.instance.currentUser!.uid,
+    },
+    "notification": {
+      "body": "Slot Booked Successfully!",
+      "OrganizationId": "2",
+      "content_available": true,
+      "priority": "high",
+      "subtitle": "Elementary School",
+      "title": "Sitare",
+    }
+  };
+
+   try {
+    final response = await http.post(Uri.parse(fcmUrl),
+        headers: headers, body: jsonEncode(body));
+    if (response.statusCode == 200) {
+      // showToast("Call Request sent succesfully", greyColor);
+    } else {
+    }
+    // ignore: empty_catches
+  } catch (e) {}
+
 }

@@ -8,6 +8,7 @@ import 'package:otp_text_field/style.dart';
 import 'package:sitare/constants/app_constants.dart';
 import 'package:sitare/constants/ui_constants.dart';
 import 'package:sitare/functions/user_functions.dart';
+import 'package:sitare/main.dart';
 import 'package:sitare/model/user_model.dart';
 import 'package:sitare/screens/enter%20details%20screen/enter_details_screen.dart';
 import 'package:sitare/screens/welcome%20page/functions/functions.dart';
@@ -59,58 +60,59 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                       style: TextStyle(
                         fontSize: 30,
                         fontWeight: FontWeight.bold,
-                        color: whiteColor,
-                      ),
-                    ),
-                    SizedBox(height: size.width * .05),
-                    const TitleText(title: 'CREATE ACCOUNT'),
-                    SizedBox(
-                      height: size.width * .18,
-                    ),
-                    TextfeildWidget(
-                      nameTextController: nameTextController,
-                      keyboardType: TextInputType.text,
-                      text: 'Name',
-                      obscureText: false,
-                      // validate: validateName(value),
-                    ),
-                    SizedBox(
-                      height: size.width * .07,
-                    ),
-                    TextfeildWidget(
-                      nameTextController: emailTextController,
-                      keyboardType: TextInputType.name,
-                      text: 'Email',
-                      obscureText: false,
-                      // validate: validateEmail,
-                    ),
-                    SizedBox(
-                      height: size.width * .07,
-                    ),
-                    MobileNumberTextFeildWidget(
-                      controller: phoneNumberTextController,
-                      onCountryChanged: (country) {
-                        countyCode = country.dialCode;
-                      },
-                    ),
-                    SizedBox(
-                      height: size.width * .05,
-                    ),
-                    Visibility(
-                      visible: _isVisibleOTP,
-                      child: OTPTextField(
-                        length: 6,
-                        width: size.width,
-                        fieldWidth: size.width / 8,
-                        style: const TextStyle(fontSize: 14),
-                        textFieldAlignment: MainAxisAlignment.spaceEvenly,
-                        fieldStyle: FieldStyle.underline,
-                        controller: otpController,
-                        onCompleted: (pin) async {
-                          try {
-                            await verifyOTP(pin).then((value) async {
-                              if (_formKey.currentState!.validate()) {
-                                UserModel user = UserModel(
+
+                        color: whiteColor),
+                  ),
+                  SizedBox(height: size.width * .05),
+                  const TitleText(title: 'CREATE ACCOUNT'),
+                  SizedBox(
+                    height: size.width * .18,
+                  ),
+                  TextfeildWidget(
+                    nameTextController: nameTextController,
+                    keyboardType: TextInputType.text,
+                    text: 'Name',
+                    obscureText: false,
+                    // validate: validateName(value),
+                  ),
+                  SizedBox(
+                    height: size.width * .07,
+                  ),
+                  TextfeildWidget(
+                    nameTextController: emailTextController,
+                    keyboardType: TextInputType.name,
+                    text: 'Email',
+                    obscureText: false,
+                    // validate: validateEmail,
+                  ),
+                  SizedBox(
+                    height: size.width * .07,
+                  ),
+                  MobileNumberTextFeildWidget(
+                    controller: phoneNumberTextController,
+                    onCountryChanged: (country) {
+                      countyCode = country.dialCode;
+                    },
+                  ),
+                  SizedBox(
+                    height: size.width * .05,
+                  ),
+                  Visibility(
+                    visible: _isVisibleOTP,
+                    child: OTPTextField(
+                      length: 6,
+                      width: size.width,
+                      fieldWidth: size.width / 8,
+                      style: const TextStyle(fontSize: 14),
+                      textFieldAlignment: MainAxisAlignment.spaceEvenly,
+                      fieldStyle: FieldStyle.underline,
+                      controller: otpController,
+                      onCompleted: (pin) async {
+                        try {
+                          await verifyOTP(pin).then((value) async {
+                            if (_formKey.currentState!.validate()) {
+                              UserModel user = UserModel(
+                                fcmToken: fCMToken ?? 'error',
                                   uid: '',
                                   name: nameTextController.text,
                                   email: emailTextController.text.trim(),

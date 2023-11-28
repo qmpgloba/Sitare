@@ -12,6 +12,9 @@ import 'package:sitare/screens/wallet%20recharge%20screen/widget/amount_grid.dar
 import 'package:sitare/screens/widgets/show_dialog_widget.dart';
 import 'package:sitare/screens/widgets/snackbar.dart';
 
+import 'package:sitare/screens/wallet%20recharge%20screen/widget%20s/amount_container_widget.dart';
+import 'package:sitare/screens/wallet%20recharge%20screen/widget%20s/triangle_widget.dart';
+
 class WalletRechargeScreen extends StatefulWidget {
   const WalletRechargeScreen({super.key});
 
@@ -23,6 +26,16 @@ class _WalletRechargeScreenState extends State<WalletRechargeScreen> {
   double? balance;
   int selectedFilterIndex = 0;
   final _razorpay = Razorpay();
+  // final _razorpay = Razorpay();
+
+  
+  @override
+  void initState() {
+    _razorpay.on(Razorpay.EVENT_PAYMENT_SUCCESS, _handlePaymentSuccess);
+    _razorpay.on(Razorpay.EVENT_PAYMENT_ERROR, _handlePaymentError);
+    _razorpay.on(Razorpay.EVENT_EXTERNAL_WALLET, _handleExternalWallet);
+    super.initState();
+  }
 
   TextEditingController amountController = TextEditingController();
   @override
@@ -58,6 +71,7 @@ class _WalletRechargeScreenState extends State<WalletRechargeScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const AvailableBalance(),
+
             const SizedBox(height: 8.0),
             Container(
               padding: EdgeInsets.only(left: size.width * 0.04),
@@ -170,4 +184,5 @@ class _WalletRechargeScreenState extends State<WalletRechargeScreen> {
       print('Error on parsing amount:$e');
     }
   }
+
 }
