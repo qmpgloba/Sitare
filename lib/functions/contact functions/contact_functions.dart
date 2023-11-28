@@ -52,6 +52,7 @@ sendCallNotification(String? fcmToken) async {
         headers: headers, body: jsonEncode(body));
     if (response.statusCode == 200) {
       showToast("Call Request sent succesfully", greyColor);
+
     } else {}
     // ignore: empty_catches
   } catch (e) {}

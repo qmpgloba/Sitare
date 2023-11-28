@@ -1,5 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:package_info_plus/package_info_plus.dart';
+
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:sitare/functions/firebase%20notification/firebase_notification.dart';
 import 'package:sitare/screens/auth%20wrapper/auth_wrapper.dart';
@@ -21,6 +23,8 @@ const AndroidNotificationChannel channel = AndroidNotificationChannel(
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await PackageInfo.fromPlatform();
+
   await Firebase.initializeApp();
  await FirebaseNotification().initNotification();
    tzdata.initializeTimeZones();

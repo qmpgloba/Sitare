@@ -11,6 +11,7 @@ class UserModel {
   final String? timeofBirth;
   final String? maritalStatus;
   final String? problem;
+  final String? wallet;
   final List<String?>? partnerDetails;
 
   UserModel({
@@ -20,6 +21,7 @@ class UserModel {
     this.timeofBirth,
     this.maritalStatus,
     this.problem,
+    this.wallet,
     required this.userProfileImage,
     required  this.fcmToken,
     required this.uid,
@@ -35,7 +37,7 @@ class UserModel {
       'uid': uid,
       'full name': name,
       'email': email,
-      'profile image':userProfileImage,
+      'profile image': userProfileImage,
       'phone number': phoneNumber,
       'gender': gender,
       'dateofBirth': dateofBirth,
@@ -44,6 +46,7 @@ class UserModel {
       'maritalStatus': maritalStatus,
       'problem': problem,
       'PartnerDetails': partnerDetails,
+      'wallet': wallet,
     };
   }
 }

@@ -78,19 +78,23 @@ class _EnterDetailsScreenState extends State<EnterDetailsScreen> {
       required String mobile,
       required String email}) async {
     UserModel user = UserModel(
+      
       fcmToken: fCMToken ?? 'error',
-        uid: currentUser!.uid,
-        name: name,
-        email: email,
-        phoneNumber: "+91$mobile",
-        userProfileImage: profileImage,
-        gender: '',
-        dateofBirth: '',
-        placeofBirth: '',
-        timeofBirth: '',
-        maritalStatus: '',
-        problem: '',
-        partnerDetails: optionalField);
+      uid: currentUser!.uid,
+      name: name,
+      email: email,
+      phoneNumber: "+91$mobile",
+      userProfileImage: profileImage,
+      gender: '',
+      dateofBirth: '',
+      placeofBirth: '',
+      timeofBirth: '',
+      maritalStatus: '',
+      problem: '',
+      partnerDetails: optionalField,
+      wallet: '',
+    );
+
     await updateUser(user, '+91$mobile');
     Navigator.of(context).pushAndRemoveUntil(
       MaterialPageRoute(
@@ -138,6 +142,7 @@ class _EnterDetailsScreenState extends State<EnterDetailsScreen> {
                   maritalStatus: martialController.text,
                   problem: problemController.text,
                   partnerDetails: optionalField,
+                  wallet: '',
                 );
                 bool submitSuccess = await updateUser(
                     user, "+91${phoneNumberTextController.text}");
