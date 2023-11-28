@@ -8,6 +8,7 @@ import 'package:otp_text_field/style.dart';
 import 'package:sitare/constants/app_constants.dart';
 import 'package:sitare/constants/ui_constants.dart';
 import 'package:sitare/functions/user_functions.dart';
+import 'package:sitare/main.dart';
 import 'package:sitare/model/user_model.dart';
 import 'package:sitare/screens/enter%20details%20screen/enter_details_screen.dart';
 import 'package:sitare/screens/welcome%20page/functions/functions.dart';
@@ -111,6 +112,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                           await verifyOTP(pin).then((value) async {
                             if (_formKey.currentState!.validate()) {
                               UserModel user = UserModel(
+                                fcmToken: fCMToken ?? 'error',
                                   uid: '',
                                   name: nameTextController.text,
                                   email: emailTextController.text.trim(),

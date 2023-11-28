@@ -5,6 +5,7 @@ import 'package:sitare/constants/ui_constants.dart';
 import 'package:sitare/functions/auth%20function/auth_function.dart';
 import 'package:sitare/functions/details%20functions/details_functions.dart';
 import 'package:sitare/functions/user_functions.dart';
+import 'package:sitare/main.dart';
 import 'package:sitare/model/user_model.dart';
 import 'package:sitare/screens/create%20account%20page/cerate_account_screen.dart';
 import 'package:sitare/screens/enter%20details%20screen/widgets/details_widget.dart';
@@ -37,7 +38,6 @@ class _EnterDetailsScreenState extends State<EnterDetailsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    print(currentUser!.uid);
     Size size = MediaQuery.sizeOf(context);
     return Scaffold(
         body: SingleChildScrollView(
@@ -78,6 +78,7 @@ class _EnterDetailsScreenState extends State<EnterDetailsScreen> {
       required String mobile,
       required String email}) async {
     UserModel user = UserModel(
+      fcmToken: fCMToken ?? 'error',
         uid: currentUser!.uid,
         name: name,
         email: email,
@@ -112,14 +113,6 @@ class _EnterDetailsScreenState extends State<EnterDetailsScreen> {
         children: [
           InkWell(
             onTap: () async {
-              print(_key.currentState != null);
-              print('valid=${_key.currentState!.validate()}');
-              print('dob${dobController.text.isNotEmpty}');
-              print('tob=${tobController.text.isNotEmpty}');
-              print('Gender=${genderController.text.isNotEmpty}');
-              print('pob=${pobController.text.isNotEmpty}');
-              print('maried=${martialStatus.isNotEmpty}');
-              print('prblm=${problemController.text.isNotEmpty}');
               _key.currentState?.validate();
 
               if (_key.currentState != null &&
@@ -132,6 +125,7 @@ class _EnterDetailsScreenState extends State<EnterDetailsScreen> {
                   tobController.text.isNotEmpty) {
                 _key.currentState!.save();
                 UserModel user = UserModel(
+                  fcmToken: fCMToken?? 'error',
                   uid: currentUser!.uid,
                   name: widget.name,
                   email: widget.email,

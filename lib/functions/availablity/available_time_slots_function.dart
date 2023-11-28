@@ -44,18 +44,19 @@ Future<List<AvailabilityModel>> getAvailableSlots(String astrologerId) async {
   return availableSlots;
 }
 
-Future<void> updateAvailableSlotsInFireBase(String uid, DateTime date,
-    AvailabilityModel availableSlots, String astrologerId) async {
-      print(date);
-      print(availableSlots.date);
+Future<void> updateAvailableSlotsInFireBase(
+    String userId,
+    DateTime date,
+    AvailabilityModel availableSlots,
+    String astrologerId,
+    String slotTime) async {
   try {
     final querySnapshot = await FirebaseFirestore.instance
         .collection('Astrologerdetails')
-        .where('uid', isEqualTo: uid)
+        .where('uid', isEqualTo: astrologerId)
         .get();
 
     if (querySnapshot.docs.isNotEmpty) {
-    
       final userDoc = querySnapshot.docs.first;
       final userUid = userDoc.id;
       final subcollectionRef = FirebaseFirestore.instance
@@ -63,7 +64,6 @@ Future<void> updateAvailableSlotsInFireBase(String uid, DateTime date,
           .doc(userUid)
           .collection('available slots');
 
-      
       final query = await subcollectionRef.where('date', isEqualTo: date).get();
       if (query.docs.isNotEmpty) {
         final docId = query.docs.first.id;
@@ -75,19 +75,35 @@ Future<void> updateAvailableSlotsInFireBase(String uid, DateTime date,
             .doc(docId)
             .collection('booked details');
         BookingDetailsModel slotBooked = BookingDetailsModel(
-
-          userUid: currentUser!.uid,
-          astrologerId: astrologerId,
-          slotBooked: availableSlots.bookedSlots.first,
-        );
-
+            userUid: currentUser!.uid,
+            astrologerId: astrologerId,
+            slotBooked: availableSlots.bookedSlots.first,
+            date: date);
 
         await subcollectionRef2.add(slotBooked.toJson());
+        final userSnapShot = await FirebaseFirestore.instance
+            .collection('users')
+            .where('uid', isEqualTo: userId)
+            .get();
+
+        if (userSnapShot.docs.isNotEmpty) {
+          final userDoc = userSnapShot.docs.first;
+          final docId = userDoc.id;
+          BookingDetailsModel userBookedSlot = BookingDetailsModel(
+              userUid: currentUser!.uid,
+              astrologerId: astrologerId,
+              slotBooked: slotTime,
+              date: date);
+          await FirebaseFirestore.instance
+              .collection('users')
+              .doc(docId)
+              .collection('bookedSlot')
+              .add(userBookedSlot.toJson());
+        } else {}
       } else {
         throw Exception('Document not found for the given date');
       }
     } else {
-     
       throw Exception('uid does not exist');
     }
   } on FirebaseException catch (e) {

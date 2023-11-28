@@ -1,9 +1,11 @@
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:sitare/constants/app_constants.dart';
+import 'package:sitare/main.dart';
 import 'package:sitare/model/user_model.dart';
 
 Future<DocumentSnapshot<Map<String, dynamic>>?> getUserDataByPhoneNumber(
@@ -16,6 +18,18 @@ Future<DocumentSnapshot<Map<String, dynamic>>?> getUserDataByPhoneNumber(
       .get();
   if (querySnapShot.docs.isNotEmpty) {
     return querySnapShot.docs.first;
+  } else {
+    return null;
+  }
+}
+
+Future<Map<String, dynamic>?> getUserDataByuid(String uid) async {
+  final userCollection = FirebaseFirestore.instance.collection('users');
+  final querySnapshot =
+      await userCollection.where('uid', isEqualTo: uid).limit(1).get();
+
+  if (querySnapshot.docs.isNotEmpty) {
+    return querySnapshot.docs.first.data();
   } else {
     return null;
   }
@@ -43,7 +57,6 @@ Future<DocumentSnapshot<Map<String, dynamic>>?> getUserDataByPhoneNumber(
 //   }
 // }
 
-
 Future<String> addProfileImge(XFile imagePicked) async {
   Reference referenceRoot = FirebaseStorage.instance.ref();
   Reference referenceDirImages = referenceRoot.child('user_profile_images');
@@ -61,7 +74,6 @@ Future<String> addProfileImge(XFile imagePicked) async {
   }
 }
 
-
 createUser(UserModel user) async {
   final db = FirebaseFirestore.instance;
 
@@ -76,14 +88,15 @@ createUser(UserModel user) async {
   }
 }
 
-
-
 updateUser(UserModel user, String phoneNumber) async {
   final db = FirebaseFirestore.instance;
+  fCMToken = await FirebaseMessaging.instance.getToken();
 
   try {
-    QuerySnapshot querySnapshot =
-        await db.collection('users').where('phone number', isEqualTo: phoneNumber).get();
+    QuerySnapshot querySnapshot = await db
+        .collection('users')
+        .where('phone number', isEqualTo: phoneNumber)
+        .get();
 
     if (querySnapshot.docs.isNotEmpty) {
       DocumentSnapshot documentSnapshot = querySnapshot.docs.first;
@@ -96,4 +109,3 @@ updateUser(UserModel user, String phoneNumber) async {
     return false;
   }
 }
-
