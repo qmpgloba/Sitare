@@ -1,3 +1,5 @@
+// ignore_for_file: empty_catches, duplicate_ignore
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cron/cron.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -9,7 +11,6 @@ import 'package:sitare/functions/user_functions.dart';
 import 'package:sitare/main.dart';
 import 'package:sitare/model/booking_model.dart';
 import 'package:sitare/model/user_model.dart';
-import 'package:timezone/data/latest_all.dart' as tzdata;
 import 'package:timezone/timezone.dart' as tz;
 
 class FirebaseNotification {
@@ -77,7 +78,6 @@ class FirebaseNotification {
         }
       });
     } catch (e) {
-      print(e.toString());
     }
   }
 
@@ -104,6 +104,7 @@ void saveNotificationToFirestore(
     RemoteNotification notification, Map<String, dynamic> data) {
   final firestore = FirebaseFirestore.instance;
 
+  // ignore: duplicate_ignore, duplicate_ignore
   try {
     final notificationData = {
       'title': notification.title,
@@ -134,17 +135,14 @@ void scheduleCronJob() {
 }
 
 Future<void> fetchBookedSlotsAndNotify(DateTime selectedDate) async {
-  print('fetchslots');
   try {
     List<BookingDetailsModel> availableSlots =
         await getBookedSlots(currentUser!.uid, selectedDate);
-    print("heyy ${availableSlots.length}");
 
 
     if (availableSlots.isNotEmpty) {
       DateTime now = tz.TZDateTime.now(tz.local);
       for (var slot in availableSlots) {
-        print(slot.slotBooked);
         List<String> timeComponents = slot.slotBooked.split(':');
         int hours = int.parse(timeComponents[0]);
         int minutes = int.parse(timeComponents[1]);
@@ -154,19 +152,15 @@ Future<void> fetchBookedSlotsAndNotify(DateTime selectedDate) async {
 
         DateTime notificationTime =
             slotTime.subtract(const Duration(minutes: 10));
-        print(notificationTime);
-        print(now.isAfter(notificationTime) && now.isBefore(slotTime));
         if (now.isAfter(notificationTime) && now.isBefore(slotTime)) {
           Duration difference = slotTime.difference(now);
           int differenceInMinutes = difference.inMinutes;
-          print(differenceInMinutes);
           await sendNotification('Reminder',
               'Your appointment is in ${differenceInMinutes + 1} minutes!');
         }
       }
     }
   } catch (e) {
-    print('Error fetching available slots: $e');
   }
 }
 
@@ -207,8 +201,6 @@ Future<List<BookingDetailsModel>> getBookedSlots(
           .doc(docid)
           .collection('bookedSlot')
           .get();
-      print(subcollectionRef.docs.length);
-      print('hai');
 
       final formatter = DateFormat('yyyy-MM-dd');
       for (var slot in subcollectionRef.docs) {
@@ -226,10 +218,8 @@ Future<List<BookingDetailsModel>> getBookedSlots(
       throw Exception('uid does not exist');
     }
   } catch (e) {
-    print('Error fetching available slots for date: $e');
     // Handle the error appropriately
   }
   // availableSlots.sort((a, b) => a.date.compareTo(b.date));
-  print(availableSlots);
   return availableSlots;
 }
