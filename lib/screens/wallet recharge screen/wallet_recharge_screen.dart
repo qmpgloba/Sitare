@@ -57,10 +57,7 @@ class _WalletRechargeScreenState extends State<WalletRechargeScreen> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Padding(
-              padding: EdgeInsets.only(top: size.width / 15),
-              child: const AvailableBalance(),
-            ),
+            const AvailableBalance(),
             const SizedBox(height: 8.0),
             Container(
               padding: EdgeInsets.only(left: size.width * 0.04),
