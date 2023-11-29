@@ -111,11 +111,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     Icons.account_balance_wallet_outlined,
                     color: greyColor,
                   ),
-                  // label: const WalletAmount(),
-                  label: const Text(
-                    '₹0',
-                    style: TextStyle(fontSize: 18, color: greyColor),
-                  ),
+                  label: const WalletAmount(color: greyColor, fontSize: 18),
                 ),
                 IconButton(
                   onPressed: () {

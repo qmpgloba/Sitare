@@ -24,7 +24,7 @@ class WalletAmount extends StatelessWidget {
             var firstDocument = documents.first;
             dynamic walletValue = firstDocument['wallet'];
             return Text(
-              '$walletValue',
+              '₹$walletValue',
               style: TextStyle(fontSize: fontSize, color: color),
             );
           } else {
