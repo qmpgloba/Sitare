@@ -78,7 +78,6 @@ class _EnterDetailsScreenState extends State<EnterDetailsScreen> {
       required String mobile,
       required String email}) async {
     UserModel user = UserModel(
-      
       fcmToken: fCMToken ?? 'error',
       uid: currentUser!.uid,
       name: name,
@@ -92,7 +91,7 @@ class _EnterDetailsScreenState extends State<EnterDetailsScreen> {
       maritalStatus: '',
       problem: '',
       partnerDetails: optionalField,
-      wallet: '',
+      wallet: '0.0',
     );
 
     await updateUser(user, '+91$mobile');
@@ -129,7 +128,7 @@ class _EnterDetailsScreenState extends State<EnterDetailsScreen> {
                   tobController.text.isNotEmpty) {
                 _key.currentState!.save();
                 UserModel user = UserModel(
-                  fcmToken: fCMToken?? 'error',
+                  fcmToken: fCMToken ?? 'error',
                   uid: currentUser!.uid,
                   name: widget.name,
                   email: widget.email,
@@ -142,7 +141,7 @@ class _EnterDetailsScreenState extends State<EnterDetailsScreen> {
                   maritalStatus: martialController.text,
                   problem: problemController.text,
                   partnerDetails: optionalField,
-                  wallet: '',
+                  wallet: '0.0',
                 );
                 bool submitSuccess = await updateUser(
                     user, "+91${phoneNumberTextController.text}");

@@ -48,20 +48,21 @@ onSubmit(
                 tob.isNotEmpty) {
               key.currentState!.save();
               UserModel user = UserModel(
-                  fcmToken: fCMToken ?? 'error',
-                  uid: currentUser!.uid,
-                  name: name,
-                  email: email,
-                  phoneNumber: "+91$mobile",
-                  userProfileImage: profileImage,
-                  gender: gender,
-                  dateofBirth: dob,
-                  placeofBirth: pob,
-                  timeofBirth: tob,
-                  maritalStatus: maritalStatus,
-                  problem: problem,
-                  partnerDetails: optionalField,
-                  wallet: '0.0');
+                fcmToken: fCMToken ?? 'error',
+                uid: currentUser!.uid,
+                name: name,
+                email: email,
+                phoneNumber: "+91$mobile",
+                userProfileImage: profileImage,
+                gender: gender,
+                dateofBirth: dob,
+                placeofBirth: pob,
+                timeofBirth: tob,
+                maritalStatus: maritalStatus,
+                problem: problem,
+                partnerDetails: optionalField,
+                wallet: '0.0',
+              );
 
               bool submitSuccess = await updateUser(user, "+91$mobile");
               if (submitSuccess) {
@@ -137,20 +138,21 @@ addUserDetails(
     required String mobile,
     required String email}) async {
   UserModel user = UserModel(
-      fcmToken: fCMToken ?? 'error',
-      uid: currentUser!.uid,
-      name: name,
-      email: email,
-      phoneNumber: "+91$mobile",
-      userProfileImage: profileImage,
-      gender: '',
-      dateofBirth: '',
-      placeofBirth: '',
-      timeofBirth: '',
-      maritalStatus: '',
-      problem: '',
-      partnerDetails: optionalField,
-      wallet: '0.0');
+    fcmToken: fCMToken ?? 'error',
+    uid: currentUser!.uid,
+    name: name,
+    email: email,
+    phoneNumber: "+91$mobile",
+    userProfileImage: profileImage,
+    gender: '',
+    dateofBirth: '',
+    placeofBirth: '',
+    timeofBirth: '',
+    maritalStatus: '',
+    problem: '',
+    partnerDetails: optionalField,
+    wallet: '0.0',
+  );
   await updateUser(user, '+91$mobile');
   Navigator.of(context).pushAndRemoveUntil(
     MaterialPageRoute(

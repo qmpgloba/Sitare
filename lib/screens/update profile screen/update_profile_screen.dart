@@ -347,7 +347,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                             logger.i(number);
                             if (_formKey.currentState!.validate()) {
                               UserModel user = UserModel(
-                                fcmToken: fCMToken??'error',
+                                fcmToken: fCMToken ?? 'error',
                                 uid: currentUser!.uid,
                                 name: nameTextController.text,
                                 email: emailTextController.text,
@@ -359,7 +359,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                                 timeofBirth: timeInput.text,
                                 maritalStatus: martialDropDownValue ?? "Single",
                                 problem: problemTextController.text,
-                                wallet: '',
+                                wallet: '0.0',
                               );
                               bool updateSuccess =
                                   await updateUser(user, number ?? "");

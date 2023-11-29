@@ -58,61 +58,60 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                     const Text(
                       'SITARE',
                       style: TextStyle(
-                        fontSize: 30,
-                        fontWeight: FontWeight.bold,
-
-                        color: whiteColor),
-                  ),
-                  SizedBox(height: size.width * .05),
-                  const TitleText(title: 'CREATE ACCOUNT'),
-                  SizedBox(
-                    height: size.width * .18,
-                  ),
-                  TextfeildWidget(
-                    nameTextController: nameTextController,
-                    keyboardType: TextInputType.text,
-                    text: 'Name',
-                    obscureText: false,
-                    // validate: validateName(value),
-                  ),
-                  SizedBox(
-                    height: size.width * .07,
-                  ),
-                  TextfeildWidget(
-                    nameTextController: emailTextController,
-                    keyboardType: TextInputType.name,
-                    text: 'Email',
-                    obscureText: false,
-                    // validate: validateEmail,
-                  ),
-                  SizedBox(
-                    height: size.width * .07,
-                  ),
-                  MobileNumberTextFeildWidget(
-                    controller: phoneNumberTextController,
-                    onCountryChanged: (country) {
-                      countyCode = country.dialCode;
-                    },
-                  ),
-                  SizedBox(
-                    height: size.width * .05,
-                  ),
-                  Visibility(
-                    visible: _isVisibleOTP,
-                    child: OTPTextField(
-                      length: 6,
-                      width: size.width,
-                      fieldWidth: size.width / 8,
-                      style: const TextStyle(fontSize: 14),
-                      textFieldAlignment: MainAxisAlignment.spaceEvenly,
-                      fieldStyle: FieldStyle.underline,
-                      controller: otpController,
-                      onCompleted: (pin) async {
-                        try {
-                          await verifyOTP(pin).then((value) async {
-                            if (_formKey.currentState!.validate()) {
-                              UserModel user = UserModel(
-                                fcmToken: fCMToken ?? 'error',
+                          fontSize: 30,
+                          fontWeight: FontWeight.bold,
+                          color: whiteColor),
+                    ),
+                    SizedBox(height: size.width * .05),
+                    const TitleText(title: 'CREATE ACCOUNT'),
+                    SizedBox(
+                      height: size.width * .18,
+                    ),
+                    TextfeildWidget(
+                      nameTextController: nameTextController,
+                      keyboardType: TextInputType.text,
+                      text: 'Name',
+                      obscureText: false,
+                      // validate: validateName(value),
+                    ),
+                    SizedBox(
+                      height: size.width * .07,
+                    ),
+                    TextfeildWidget(
+                      nameTextController: emailTextController,
+                      keyboardType: TextInputType.name,
+                      text: 'Email',
+                      obscureText: false,
+                      // validate: validateEmail,
+                    ),
+                    SizedBox(
+                      height: size.width * .07,
+                    ),
+                    MobileNumberTextFeildWidget(
+                      controller: phoneNumberTextController,
+                      onCountryChanged: (country) {
+                        countyCode = country.dialCode;
+                      },
+                    ),
+                    SizedBox(
+                      height: size.width * .05,
+                    ),
+                    Visibility(
+                      visible: _isVisibleOTP,
+                      child: OTPTextField(
+                        length: 6,
+                        width: size.width,
+                        fieldWidth: size.width / 8,
+                        style: const TextStyle(fontSize: 14),
+                        textFieldAlignment: MainAxisAlignment.spaceEvenly,
+                        fieldStyle: FieldStyle.underline,
+                        controller: otpController,
+                        onCompleted: (pin) async {
+                          try {
+                            await verifyOTP(pin).then((value) async {
+                              if (_formKey.currentState!.validate()) {
+                                UserModel user = UserModel(
+                                  fcmToken: fCMToken ?? 'error',
                                   uid: '',
                                   name: nameTextController.text,
                                   email: emailTextController.text.trim(),
@@ -126,7 +125,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                                   placeofBirth: '',
                                   problem: '',
                                   timeofBirth: '',
-                                  wallet: '',
+                                  wallet: '0.0',
                                 );
                                 bool isExist = await checkPhoneNumberExistence(
                                     "+91${phoneNumberTextController.text}");
