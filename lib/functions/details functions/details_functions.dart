@@ -48,8 +48,7 @@ onSubmit(
                 tob.isNotEmpty) {
               key.currentState!.save();
               UserModel user = UserModel(
-                                fcmToken: fCMToken??'error',
-
+                  fcmToken: fCMToken ?? 'error',
                   uid: currentUser!.uid,
                   name: name,
                   email: email,
@@ -62,7 +61,7 @@ onSubmit(
                   maritalStatus: maritalStatus,
                   problem: problem,
                   partnerDetails: optionalField,
-                  wallet: '');
+                  wallet: '0.0');
 
               bool submitSuccess = await updateUser(user, "+91$mobile");
               if (submitSuccess) {
@@ -138,7 +137,7 @@ addUserDetails(
     required String mobile,
     required String email}) async {
   UserModel user = UserModel(
-    fcmToken: fCMToken ?? 'error',
+      fcmToken: fCMToken ?? 'error',
       uid: currentUser!.uid,
       name: name,
       email: email,
@@ -151,7 +150,7 @@ addUserDetails(
       maritalStatus: '',
       problem: '',
       partnerDetails: optionalField,
-      wallet: '');
+      wallet: '0.0');
   await updateUser(user, '+91$mobile');
   Navigator.of(context).pushAndRemoveUntil(
     MaterialPageRoute(

@@ -37,14 +37,28 @@ class FirebaseNotification {
         if (currentFcmToken != fCMToken) {
           Map<String, dynamic>? userData =
               await getUserDataByuid(currentUser!.uid);
-
           UserModel user = UserModel(
-              userProfileImage: userData!['profile image'],
               fcmToken: fCMToken!,
               uid: currentUser!.uid,
-              name: userData['full name'],
+              name: userData!['full name'],
               email: userData['email'],
-              phoneNumber: userData['phone number']);
+              phoneNumber: userData['phone number'],
+              userProfileImage: userData['profile image'],
+              gender: userData['gender'],
+              dateofBirth: userData['dateofBirth'],
+              placeofBirth: userData['placeofBirth'],
+              timeofBirth: userData['timeofBirth'],
+              maritalStatus: userData['maritalStatus'],
+              problem: userData['problem'],
+              partnerDetails: userData['partnerDetails'],
+              wallet: userData['wallet']);
+          // UserModel user = UserModel(
+          //     userProfileImage: userData!['profile image'],
+          //     fcmToken: fCMToken!,
+          //     uid: currentUser!.uid,
+          //     name: userData['full name'],
+          //     email: userData['email'],
+          //     phoneNumber: userData['phone number']);
 
           await updateUser(user, userData['phone number']);
         }
@@ -77,8 +91,7 @@ class FirebaseNotification {
               ));
         }
       });
-    } catch (e) {
-    }
+    } catch (e) {}
   }
 
   Future<String?> fetchFcmToken(String userUid) async {
@@ -139,7 +152,6 @@ Future<void> fetchBookedSlotsAndNotify(DateTime selectedDate) async {
     List<BookingDetailsModel> availableSlots =
         await getBookedSlots(currentUser!.uid, selectedDate);
 
-
     if (availableSlots.isNotEmpty) {
       DateTime now = tz.TZDateTime.now(tz.local);
       for (var slot in availableSlots) {
@@ -160,8 +172,7 @@ Future<void> fetchBookedSlotsAndNotify(DateTime selectedDate) async {
         }
       }
     }
-  } catch (e) {
-  }
+  } catch (e) {}
 }
 
 Future<void> sendNotification(String title, String body) async {

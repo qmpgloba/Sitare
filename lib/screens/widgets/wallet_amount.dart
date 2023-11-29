@@ -27,8 +27,6 @@ class WalletAmount extends StatelessWidget {
               '₹$walletValue',
               style: TextStyle(fontSize: fontSize, color: color),
             );
-          } else if (documents.isEmpty) {
-            return const Text('₹0.0');
           } else {
             return const Text(
               'Document does not exist or does not have a "wallet" field',
