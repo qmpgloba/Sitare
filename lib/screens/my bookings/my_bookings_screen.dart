@@ -12,28 +12,28 @@ class MyBoookingsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.sizeOf(context);
-    return FutureBuilder<List<BookingDetailsModel>>(
-      future: getBookedSlots(currentUser!.uid, DateTime.now()),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(child: CircularProgressIndicator());
-        } else if (snapshot.hasError) {
-          return Center(child: Text('Error: ${snapshot.error}'));
-        } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-          return const Center(child: Text('No Data Available'));
-        } else {
-          List<BookingDetailsModel>? list = snapshot.data;
-          return Scaffold(
-            backgroundColor: whiteColor,
-            appBar: AppBar(
-              backgroundColor: PRIMARY_COLOR,
-              title: const Text(
-                'My Bookings',
-                style:
-                    TextStyle(color: whiteColor, fontWeight: FontWeight.bold),
-              ),
-            ),
-            body: ListView.builder(
+    return Scaffold(
+      backgroundColor: whiteColor,
+      appBar: AppBar(
+        backgroundColor: PRIMARY_COLOR,
+        title: const Text(
+          'My Bookings',
+          style: TextStyle(color: whiteColor, fontWeight: FontWeight.bold),
+        ),
+      ),
+      body: FutureBuilder<List<BookingDetailsModel>>(
+        future: getBookedSlots(currentUser!.uid, DateTime.now()),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          } else if (snapshot.hasError) {
+            return Center(child: Text('Error: ${snapshot.error}'));
+          } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+            return const Center(child: Text('No Data Available'));
+          } else {
+            List<BookingDetailsModel>? list = snapshot.data;
+
+            return ListView.builder(
               itemCount: list!.length,
               itemBuilder: (context, index) {
                 return StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
@@ -53,7 +53,6 @@ class MyBoookingsScreen extends StatelessWidget {
                         // return Text('${docs['name']}');
                         return Column(
                           children: [
-                            
                             Padding(
                               padding: EdgeInsets.all(size.width / 25),
                               child: SizedBox(
@@ -90,40 +89,45 @@ class MyBoookingsScreen extends StatelessWidget {
                                                 fontWeight: FontWeight.bold),
                                           ),
                                           AutoSizeText(
-                                              docs['languages'].take(2).join(', '),
+                                              docs['languages']
+                                                  .take(2)
+                                                  .join(', '),
                                               // maxLines: 1,
                                               maxFontSize: 12,
                                               style: const TextStyle(
                                                   fontSize: 10,
                                                   fontWeight: FontWeight.bold)),
-                                                   Text('${DateFormat('dd MMM yyyy')
-                                            .format(list[index].date)} Time: ${list[index].slotBooked}',style: const TextStyle(fontSize: 12,color: greenColor,fontWeight: FontWeight.bold),),
-                                        // Text('Time: ${list[index].slotBooked}',style: TextStyle(fontSize: 12),),
+                                          Text(
+                                            '${DateFormat('dd MMM yyyy').format(list[index].date)} Time: ${list[index].slotBooked}',
+                                            style: const TextStyle(
+                                                fontSize: 12,
+                                                color: greenColor,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                          // Text('Time: ${list[index].slotBooked}',style: TextStyle(fontSize: 12),),
                                         ],
                                       ),
                                     ),
                                     // Spacer(),
                                     // Column(
                                     //   children: [
-                                       
+
                                     //   ],
                                     // )
                                   ],
                                 ),
-                                
                               ),
                             ),
                             const Divider()
                           ],
-                          
                         );
                       }
                     });
               },
-            ),
-          );
-        }
-      },
+            );
+          }
+        },
+      ),
     );
 
     // return Scaffold(
