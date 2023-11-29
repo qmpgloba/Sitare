@@ -3,10 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:sitare/functions/auth%20function/auth_function.dart';
 
 class WalletAmount extends StatelessWidget {
-  const WalletAmount({
-    super.key,
-  });
-
+  const WalletAmount({super.key, required this.color, required this.fontSize});
+  final Color? color;
+  final double? fontSize;
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
@@ -26,9 +25,7 @@ class WalletAmount extends StatelessWidget {
             dynamic walletValue = firstDocument['wallet'];
             return Text(
               '$walletValue',
-              style: const TextStyle(
-                fontSize: 16,
-              ),
+              style: TextStyle(fontSize: fontSize, color: color),
             );
           } else {
             return const Text(
