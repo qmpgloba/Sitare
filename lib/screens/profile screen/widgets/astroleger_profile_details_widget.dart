@@ -141,7 +141,6 @@ class AstrologerProfileDetailsWidget extends StatelessWidget {
                 style: const TextStyle(fontSize: 18),
               ),
               const Divider(
-                // height: 3,
                 color: Colors.white,
               ),
               Expanded(
