@@ -6,6 +6,7 @@ import 'package:sitare/screens/chat%20screen/service/chat_service.dart';
 import 'package:sitare/screens/talk%20to%20experts%20screen/widgets/shimmer/shimmer.dart';
 import 'package:sitare/screens/talk%20to%20experts%20screen/widgets/talk_to_experts_profile_details_widget.dart';
 import 'package:sitare/screens/wallet%20recharge%20screen/wallet_recharge_screen.dart';
+import 'package:sitare/screens/widgets/wallet_amount.dart';
 
 // ignore: must_be_immutable
 class OrderHistoryScreen extends StatelessWidget {
@@ -44,10 +45,7 @@ class OrderHistoryScreen extends StatelessWidget {
                     const SizedBox(
                       width: 5,
                     ),
-                    Text(
-                      '₹$walletAmmount',
-                      style: const TextStyle(color: whiteColor, fontSize: 16),
-                    ),
+                    const WalletAmount(color: whiteColor, fontSize: 16),
                     const SizedBox(
                       width: 10,
                     ),
@@ -74,30 +72,32 @@ class OrderHistoryScreen extends StatelessWidget {
             )),
       ),
       body: SafeArea(
-          child: FutureBuilder(
-              future: _chatService.fetchOtherParticipants(),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const Center(child: TalkToExpertShimmer());
-                } else if (snapshot.hasError) {
-                  return Center(child: Text('Error: ${snapshot.error}'));
-                } else {
-                  if (snapshot.hasData) {
-                    List<AstrologerModel> astrologers = snapshot.data!;
-                    return ListView.builder(
-                      // scrollDirection: Axis.horizontal,
-                      itemCount: astrologers.length,
-                      itemBuilder: (context, index) =>
-                          TalkToExpertsProfileDetailsWidget(
-                        size: size,
-                        astrologer: astrologers[index],
-                      ),
-                    );
-                  } else {
-                    return const Center(child: Text('No data available'));
-                  }
-                }
-              })),
+        child: FutureBuilder(
+          future: _chatService.fetchOtherParticipants(),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(child: TalkToExpertShimmer());
+            } else if (snapshot.hasError) {
+              return Center(child: Text('Error: ${snapshot.error}'));
+            } else {
+              if (snapshot.hasData) {
+                List<AstrologerModel> astrologers = snapshot.data!;
+                return ListView.builder(
+                  // scrollDirection: Axis.horizontal,
+                  itemCount: astrologers.length,
+                  itemBuilder: (context, index) =>
+                      TalkToExpertsProfileDetailsWidget(
+                    size: size,
+                    astrologer: astrologers[index],
+                  ),
+                );
+              } else {
+                return const Center(child: Text('No data available'));
+              }
+            }
+          },
+        ),
+      ),
     );
   }
 }
