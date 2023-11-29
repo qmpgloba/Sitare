@@ -19,9 +19,7 @@ Future<String?> signUpWithEmail({
 }
 
 String? validateEmail(String? value) {
-  if (value!.isEmpty) {
-    return 'Please enter your Email';
-  } else if (value.isEmpty ||
+  if (value!.isNotEmpty &&
       !RegExp(r'^[\w-]+(?:\.[\w-]+)*@(?:[\w-]+\.)+[a-zA-Z]{2,7}$')
           .hasMatch(value)) {
     return 'Enter valid Email';
