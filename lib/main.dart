@@ -9,25 +9,24 @@ import 'constants/ui_constants.dart';
 import 'package:timezone/data/latest_all.dart' as tzdata;
 import 'package:timezone/timezone.dart' as tz;
 
- final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
     FlutterLocalNotificationsPlugin();
 
 const AndroidNotificationChannel channel = AndroidNotificationChannel(
-    'High Important channel'
-        'High Important Notification', 
-    "This channel is used for important notification.",
-    importance: Importance.high,
-    playSound: true);
-
-
+  'High Important channel'
+      'High Important Notification',
+  "This channel is used for important notification.",
+  importance: Importance.high,
+  playSound: true,
+);
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await PackageInfo.fromPlatform();
 
   await Firebase.initializeApp();
- await FirebaseNotification().initNotification();
-   tzdata.initializeTimeZones();
+  await FirebaseNotification().initNotification();
+  tzdata.initializeTimeZones();
   tz.setLocalLocation(tz.getLocation('Asia/Kolkata'));
   scheduleCronJob();
   runApp(const MyApp());
@@ -53,11 +52,12 @@ class MyApp extends StatelessWidget {
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(
-                child: CircularProgressIndicator()); // Show a loading indicator
+              child: CircularProgressIndicator(),
+            );
           } else if (snapshot.hasError) {
             return Text('Error: ${snapshot.error}');
           } else {
-            return  AuthWrapper();
+            return AuthWrapper();
           }
         },
       ),

@@ -9,8 +9,8 @@ class UserDetailsDrawerHeader extends StatelessWidget {
     required this.size,
     required this.fullName,
     required this.email,
-    required this.phoneNumber,  this.profileImageUrl,
-
+    required this.phoneNumber,
+    this.profileImageUrl,
   });
 
   final Size size;
@@ -23,43 +23,49 @@ class UserDetailsDrawerHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return DrawerHeader(
         child: SizedBox(
-          width: size.width*.75,
-          child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
+      width: size.width * .75,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
           Stack(
             children: [
-               CircleAvatar(
+              CircleAvatar(
                 radius: 30,
-                backgroundImage:(profileImageUrl != '')? NetworkImage(profileImageUrl!): const AssetImage('assets/images/profile_image.png') as ImageProvider,
+                backgroundImage: (profileImageUrl != '')
+                    ? NetworkImage(profileImageUrl!)
+                    : const AssetImage(
+                        'assets/images/profile_image.png',
+                      ) as ImageProvider,
               ),
               Positioned(
-                  // height: 25,
-                  // width: 20,
-                  bottom: 0,
-                  right: 0,
-                  child: GestureDetector(
-                    onTap: () {
-                      Navigator.of(context).push(MaterialPageRoute(
+                bottom: 0,
+                right: 0,
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
                         builder: (context) => UpdateProfileScreen(
                           email: email,
                         ),
-                      ));
-                    },
-                    child: Container(
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            color: whiteColor.withOpacity(0.4)),
-                        child: const Icon(
-                          Icons.edit,
-                          size: 30,
-                        )),
-                  )),
+                      ),
+                    );
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        color: whiteColor.withOpacity(0.4)),
+                    child: const Icon(
+                      Icons.edit,
+                      size: 30,
+                    ),
+                  ),
+                ),
+              ),
             ],
           ),
           Container(
-            width: size.width*.47,
+            width: size.width * .47,
             padding: EdgeInsets.all(size.width / 60),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -90,12 +96,11 @@ class UserDetailsDrawerHeader extends StatelessWidget {
             ),
           ),
           IconButton(
-              onPressed: () {
-               
-              },
-              icon: const Icon(Icons.arrow_forward_ios_outlined))
-              ],
-            ),
-        ));
+            onPressed: () {},
+            icon: const Icon(Icons.arrow_forward_ios_outlined),
+          )
+        ],
+      ),
+    ));
   }
 }
