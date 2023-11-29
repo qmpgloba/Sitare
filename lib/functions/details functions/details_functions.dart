@@ -106,7 +106,11 @@ onSubmit(
           child: InkWell(
             onTap: () async {
               addUserDetails(
-                  context: context, name: name, mobile: mobile, email: email);
+                context: context,
+                name: name,
+                mobile: mobile,
+                email: email,
+              );
             },
             child: const Row(
               children: [
