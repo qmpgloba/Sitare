@@ -40,7 +40,6 @@ class AstrologerProfileDetailsWidget extends StatelessWidget {
                 children: [
                   AutoSizeText(
                     name,
-                    // maxLines: 1,
                     maxFontSize: 16,
                     style: const TextStyle(
                       fontWeight: FontWeight.bold,
@@ -58,7 +57,6 @@ class AstrologerProfileDetailsWidget extends StatelessWidget {
                     },
                     child: AutoSizeText(
                       department,
-                      // maxLines: 1,
                       maxFontSize: 14,
                       style: const TextStyle(
                         fontSize: 14,
@@ -68,12 +66,15 @@ class AstrologerProfileDetailsWidget extends StatelessWidget {
                   ),
                   GestureDetector(
                     onTap: () {
-                      showBottomDetails(size, context, 'Languages Known',
-                          astrologer.languages);
+                      showBottomDetails(
+                        size,
+                        context,
+                        'Languages Known',
+                        astrologer.languages,
+                      );
                     },
                     child: AutoSizeText(
                       languages,
-                      // maxLines: 1,
                       maxFontSize: 14,
                       style: const TextStyle(
                         fontSize: 14,
@@ -97,7 +98,6 @@ class AstrologerProfileDetailsWidget extends StatelessWidget {
                     allowHalfRating: true,
                     itemCount: 5,
                     itemSize: 15,
-                    // itemPadding: EdgeInsets.symmetric(horizontal: 1.0),
                     itemBuilder: (context, _) => const Icon(
                       Icons.star,
                       color: Colors.amber,
