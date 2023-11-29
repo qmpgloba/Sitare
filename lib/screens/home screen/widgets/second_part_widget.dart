@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:sitare/constants/ui_constants.dart';
+import 'package:sitare/screens/my%20bookings/my_bookings_screen.dart';
 import 'package:sitare/screens/talk%20to%20experts%20screen/talk_to_experts_screen.dart';
 import 'package:sitare/screens/home%20screen/widgets/buynow_homescreen_widget.dart';
 import 'package:sitare/screens/home%20screen/widgets/connect_with_experts_widget.dart';
@@ -105,7 +106,11 @@ class SecondPartWidget extends StatelessWidget {
                       label: 'KNOWLEDGE BASE',
                     ),
                     GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => const MyBoookingsScreen(),
+                        ));
+                      },
                       child: IconContainerWidget(
                         size: size,
                         icon: Icons.update,
