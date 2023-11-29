@@ -12,6 +12,7 @@ import 'package:sitare/screens/home%20screen/widgets/second_part_widget.dart';
 import 'package:sitare/screens/home%20screen/widgets/shimmer/shimmer.dart';
 import 'package:sitare/screens/home%20screen/widgets/sliding_part_widget.dart';
 import 'package:sitare/screens/wallet%20recharge%20screen/wallet_recharge_screen.dart';
+import 'package:sitare/screens/widgets/wallet_amount.dart';
 
 Map<String, dynamic>? userData;
 
@@ -110,10 +111,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     Icons.account_balance_wallet_outlined,
                     color: greyColor,
                   ),
-                  label: const Text(
-                    '₹0',
-                    style: TextStyle(fontSize: 18, color: greyColor),
-                  ),
+                  label: const WalletAmount(color: greyColor, fontSize: 18),
                 ),
                 IconButton(
                   onPressed: () {

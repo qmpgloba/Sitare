@@ -51,7 +51,10 @@ class HomeScreenDrawerWidget extends StatelessWidget {
               trailing: Wrap(
                 spacing: 5,
                 children: [
-                  const WalletAmount(),
+                  const WalletAmount(
+                    color: blackColor,
+                    fontSize: 18,
+                  ),
                   Container(
                     decoration: BoxDecoration(
                         color: redColor,
