@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:intl/intl.dart';
 import 'package:sitare/model/booking_model.dart';
 
-Future<List<BookingDetailsModel>> getBookedSlots(
+Future<List<BookingDetailsModel>> getBookingDetails(
     String currentUserId, DateTime selectedDate) async {
   List<BookingDetailsModel> availableSlots = [];
 

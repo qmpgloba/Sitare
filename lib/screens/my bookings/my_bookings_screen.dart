@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:sitare/constants/ui_constants.dart';
 import 'package:sitare/functions/auth%20function/auth_function.dart';
-import 'package:sitare/functions/firebase%20notification/firebase_notification.dart';
+import 'package:sitare/functions/availablity/my_bookings_function.dart';
 import 'package:sitare/model/booking_model.dart';
 
 class MyBoookingsScreen extends StatelessWidget {
@@ -23,7 +23,7 @@ class MyBoookingsScreen extends StatelessWidget {
         ),
       ),
       body: FutureBuilder<List<BookingDetailsModel>>(
-        future: getBookedSlots(currentUser!.uid, DateTime.now()),
+        future: getBookingDetails(currentUser!.uid, DateTime.now()),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
