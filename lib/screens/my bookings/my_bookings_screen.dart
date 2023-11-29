@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:sitare/constants/ui_constants.dart';
 import 'package:sitare/functions/auth%20function/auth_function.dart';
+import 'package:sitare/functions/firebase%20notification/firebase_notification.dart';
 import 'package:sitare/model/booking_model.dart';
 
 class MyBoookingsScreen extends StatelessWidget {
@@ -108,12 +109,6 @@ class MyBoookingsScreen extends StatelessWidget {
                                         ],
                                       ),
                                     ),
-                                    // Spacer(),
-                                    // Column(
-                                    //   children: [
-
-                                    //   ],
-                                    // )
                                   ],
                                 ),
                               ),
@@ -129,145 +124,5 @@ class MyBoookingsScreen extends StatelessWidget {
         },
       ),
     );
-
-    // return Scaffold(
-    //   backgroundColor: whiteColor,
-    //   appBar: AppBar(
-    //     backgroundColor: PRIMARY_COLOR,
-    //     title: const Text('My Bookings',style: TextStyle(fontWeight: FontWeight.bold,color: whiteColor),),
-    //     centerTitle: true,
-    //   ),
-    //   body: SafeArea(child: Column(children: [Text('data')],)),
-    // );
   }
-}
-
-// Future<void> fetchBookedSlotsAndNotify(DateTime selectedDate) async {
-//   try {
-//     List<BookingDetailsModel> availableSlots =
-//         await getBookedSlots(currentUser!.uid, selectedDate);
-
-//     if (availableSlots.isNotEmpty) {
-//       DateTime now = tz.TZDateTime.now(tz.local);
-//       for (var slot in availableSlots) {
-//         List<String> timeComponents = slot.slotBooked.split(':');
-//         int hours = int.parse(timeComponents[0]);
-//         int minutes = int.parse(timeComponents[1]);
-
-//         DateTime slotTime = DateTime(selectedDate.year, selectedDate.month,
-//             selectedDate.day, hours, minutes);
-
-//         DateTime notificationTime =
-//             slotTime.subtract(const Duration(minutes: 10));
-//         if (now.isAfter(notificationTime) && now.isBefore(slotTime)) {
-//           Duration difference = slotTime.difference(now);
-//           int differenceInMinutes = difference.inMinutes;
-//           // await sendNotification('Reminder',
-//           //     'Your appointment is in ${differenceInMinutes + 1} minutes!');
-//         }
-//       }
-//     }
-//   } catch (e) {
-//   }
-// }
-
-// Future<List<BookingDetailsModel>> getBookedSlots(
-//     String currentUserId, DateTime selectedDate) async {
-//   List<BookingDetailsModel> availableSlots = [];
-
-//   try {
-//     final userCollection = await FirebaseFirestore.instance
-//         .collection('users')
-//         .where('uid', isEqualTo: currentUserId)
-//         .get();
-
-//     if (userCollection.docs.isNotEmpty) {
-//       final userDoc = userCollection.docs.first;
-//       final docid = userDoc.id;
-//       final subcollectionRef = await FirebaseFirestore.instance
-//           .collection('users')
-//           .doc(docid)
-//           .collection('bookedSlot')
-//           .get();
-
-//       final formatter = DateFormat('yyyy-MM-dd');
-//       for (var slot in subcollectionRef.docs) {
-//         Map<String, dynamic> data = slot.data();
-//         BookingDetailsModel date = BookingDetailsModel.fromJson(data);
-//         DateTime dateFromFirestore = date.date;
-//         String formattedDate = formatter.format(dateFromFirestore);
-//         String selectedDateString = formatter.format(selectedDate);
-
-//         if (formattedDate == selectedDateString) {
-//           availableSlots.add(date);
-//         }
-//       }
-//     } else {
-//       throw Exception('uid does not exist');
-//     }
-//   } catch (e) {
-//     // Handle the error appropriately
-//   }
-//   // availableSlots.sort((a, b) => a.date.compareTo(b.date));
-//   availableSlots.toSet();
-//   return availableSlots;
-// }
-
-Future<List<BookingDetailsModel>> getBookedSlots(
-    String currentUserId, DateTime selectedDate) async {
-  List<BookingDetailsModel> availableSlots = [];
-
-  try {
-    final userCollection = await FirebaseFirestore.instance
-        .collection('users')
-        .where('uid', isEqualTo: currentUserId)
-        .get();
-
-    if (userCollection.docs.isNotEmpty) {
-      final userDoc = userCollection.docs.first;
-      final docid = userDoc.id;
-      final subcollectionRef = await FirebaseFirestore.instance
-          .collection('users')
-          .doc(docid)
-          .collection('bookedSlot')
-          .get();
-
-      final currentTime = DateTime.now();
-      final formatter = DateFormat('yyyy-MM-dd');
-      for (var slot in subcollectionRef.docs) {
-        Map<String, dynamic> data = slot.data();
-        BookingDetailsModel date = BookingDetailsModel.fromJson(data);
-        DateTime dateFromFirestore = date.date;
-        String formattedDate = formatter.format(dateFromFirestore);
-        String selectedDateString = formatter.format(selectedDate);
-
-        if (formattedDate == selectedDateString) {
-          availableSlots.add(date);
-          // availableSlots.sort((a, b) => a.slotBooked.compareTo(b.slotBooked));
-        }
-      }
-
-      for (var slot in subcollectionRef.docs) {
-        Map<String, dynamic> data = slot.data();
-        BookingDetailsModel date = BookingDetailsModel.fromJson(data);
-        DateTime dateFromFirestore = date.date;
-
-        // Check if the slot's date and time is in the future
-        if (dateFromFirestore.isAfter(currentTime)) {
-          availableSlots.add(date);
-        }
-      }
-    } else {
-      throw Exception('uid does not exist');
-    }
-  } catch (e) {
-    // Handle the error appropriately
-  }
-
-  // Sort the available slots by date/time
-  availableSlots.sort((a, b) => a.slotBooked.compareTo(b.slotBooked));
-
-  availableSlots.sort((a, b) => a.date.compareTo(b.date));
-
-  return availableSlots;
 }
