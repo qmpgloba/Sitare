@@ -29,7 +29,7 @@ class MyBoookingsScreen extends StatelessWidget {
           } else if (snapshot.hasError) {
             return Center(child: Text('Error: ${snapshot.error}'));
           } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-            return const Center(child: Text('No Data Available'));
+            return const Center(child: Text('You dont have any bookings'));
           } else {
             List<BookingDetailsModel>? list = snapshot.data;
 
