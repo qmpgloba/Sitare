@@ -172,8 +172,8 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                                   'Gender',
                                 ),
                                 decoration: const InputDecoration(
-                                    border: UnderlineInputBorder()),
-                                // value: 'Male',
+                                  border: UnderlineInputBorder(),
+                                ),
                                 items: genders
                                     .map(
                                       (String items) => DropdownMenuItem(
@@ -247,11 +247,12 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                           height: 10,
                         ),
                         UpdateProfileTextFeildWidgets(
-                            size: size,
-                            controller: placeOfBirthTextController,
-                            hintText: 'Place of Birth',
-                            feildName: 'Place of Birth',
-                            keyboardType: TextInputType.name),
+                          size: size,
+                          controller: placeOfBirthTextController,
+                          hintText: 'Place of Birth',
+                          feildName: 'Place of Birth',
+                          keyboardType: TextInputType.name,
+                        ),
                         Padding(
                           padding: const EdgeInsets.symmetric(vertical: 8),
                           child: Row(
