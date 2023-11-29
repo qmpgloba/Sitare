@@ -9,6 +9,7 @@ import 'package:sitare/screens/home%20screen/widgets/user_details_drawer_header.
 import 'package:sitare/screens/order%20history%20screen/order_history_screen.dart';
 import 'package:sitare/screens/wallet%20recharge%20screen/wallet_recharge_screen.dart';
 import 'package:sitare/screens/welcome%20page/welcome_screen.dart';
+import 'package:sitare/screens/widgets/wallet_amount.dart';
 
 class HomeScreenDrawerWidget extends StatelessWidget {
   const HomeScreenDrawerWidget({
@@ -25,13 +26,13 @@ class HomeScreenDrawerWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(
-            // width: size.width*.7,
             child: UserDetailsDrawerHeader(
-                size: size,
-                fullName: userData!['full name'],
-                email: userData!['email'],
-                phoneNumber: userData!['phone number'],
-                profileImageUrl: userData!['profile image']),
+              size: size,
+              fullName: userData!['full name'],
+              email: userData!['email'],
+              phoneNumber: userData!['phone number'],
+              profileImageUrl: userData!['profile image'],
+            ),
           ),
           const ListItemsDrawer(icon: Icons.home_outlined, text: 'Home'),
           const Divider(),
@@ -50,11 +51,7 @@ class HomeScreenDrawerWidget extends StatelessWidget {
               trailing: Wrap(
                 spacing: 5,
                 children: [
-                  const AutoSizeText(
-                    '₹200.00',
-                    maxLines: 1,
-                    style: TextStyle(fontSize: 16),
-                  ),
+                  const WalletAmount(),
                   Container(
                     decoration: BoxDecoration(
                         color: redColor,
@@ -74,13 +71,14 @@ class HomeScreenDrawerWidget extends StatelessWidget {
           ),
           const Divider(),
           GestureDetector(
-              onTap: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => OrderHistoryScreen(),
-                ));
-              },
-              child: const ListItemsDrawer(
-                  icon: Icons.list, text: 'Order History')),
+            onTap: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => OrderHistoryScreen(),
+              ));
+            },
+            child:
+                const ListItemsDrawer(icon: Icons.list, text: 'Order History'),
+          ),
           const Divider(),
           GestureDetector(
             onTap: () {
@@ -92,26 +90,34 @@ class HomeScreenDrawerWidget extends StatelessWidget {
                   .catchError((error) {});
             },
             child: const ListItemsDrawer(
-                icon: Icons.wechat_outlined, text: 'Customer Support'),
+              icon: Icons.wechat_outlined,
+              text: 'Customer Support',
+            ),
           ),
           const Divider(),
           const ListItemsDrawer(
-              icon: Icons.settings_outlined, text: 'Settings'),
+            icon: Icons.settings_outlined,
+            text: 'Settings',
+          ),
           const Divider(),
-          const ListItemsDrawer(icon: Icons.share_outlined, text: 'Share'),
+          const ListItemsDrawer(
+            icon: Icons.share_outlined,
+            text: 'Share',
+          ),
           const Divider(),
           GestureDetector(
-              onTap: () async {
-                await FirebaseAuth.instance.signOut().then((value) {
-                  Navigator.pushAndRemoveUntil(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => WelcomeScreen(),
-                      ),
-                      (route) => false);
-                });
-              },
-              child: const ListItemsDrawer(icon: Icons.logout, text: 'Logout')),
+            onTap: () async {
+              await FirebaseAuth.instance.signOut().then((value) {
+                Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => WelcomeScreen(),
+                    ),
+                    (route) => false);
+              });
+            },
+            child: const ListItemsDrawer(icon: Icons.logout, text: 'Logout'),
+          ),
           const Spacer(),
           Padding(
             padding: EdgeInsets.all(size.width / 16),

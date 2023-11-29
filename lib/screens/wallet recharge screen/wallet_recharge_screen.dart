@@ -13,7 +13,7 @@ import 'package:sitare/screens/widgets/show_dialog_widget.dart';
 import 'package:sitare/screens/widgets/snackbar.dart';
 
 class WalletRechargeScreen extends StatefulWidget {
-  const WalletRechargeScreen({super.key});
+  const WalletRechargeScreen({Key? key}) : super(key: key);
 
   @override
   State<WalletRechargeScreen> createState() => _WalletRechargeScreenState();
@@ -23,11 +23,13 @@ class _WalletRechargeScreenState extends State<WalletRechargeScreen> {
   double? balance;
   int selectedFilterIndex = 0;
   final _razorpay = Razorpay();
-  // final _razorpay = Razorpay();
-
   TextEditingController amountController = TextEditingController();
+  bool _isMounted = false;
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
   @override
   void initState() {
+    _isMounted = true;
     _razorpay.on(Razorpay.EVENT_PAYMENT_SUCCESS, _handlePaymentSuccess);
     _razorpay.on(Razorpay.EVENT_PAYMENT_ERROR, _handlePaymentError);
     _razorpay.on(Razorpay.EVENT_EXTERNAL_WALLET, _handleExternalWallet);
@@ -36,6 +38,7 @@ class _WalletRechargeScreenState extends State<WalletRechargeScreen> {
 
   @override
   void dispose() {
+    _isMounted = false;
     _razorpay.clear();
     super.dispose();
   }
@@ -44,6 +47,7 @@ class _WalletRechargeScreenState extends State<WalletRechargeScreen> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.sizeOf(context);
     return Scaffold(
+      key: _scaffoldKey,
       backgroundColor: Colors.white,
       appBar: AppBar(
         title: const Text(
@@ -132,23 +136,29 @@ class _WalletRechargeScreenState extends State<WalletRechargeScreen> {
         'transaction id': response.paymentId,
         'time': FieldValue.serverTimestamp(),
       });
+
       amountController.clear();
-      showSnackbar(context, 'Payment Successful', greenColor);
+      if (_isMounted) {
+        showSnackbar(context, 'Payment Successful', greenColor);
+      }
     }
   }
 
   void _handlePaymentError(PaymentFailureResponse response) {
-    showAlertBox(context, 'Transaction Failed', whiteColor, 'ok');
-    print('Failed');
+    if (_isMounted) {
+      showAlertBox(context, 'Transaction Failed', whiteColor, 'ok');
+    }
   }
 
   void _handleExternalWallet(ExternalWalletResponse response) {
-    showAlertBox(
-      context,
-      'Transaction Failed due to involvement of external wallet',
-      whiteColor,
-      'ok',
-    );
+    if (_isMounted) {
+      showAlertBox(
+        context,
+        'Transaction Failed due to involvement of an external wallet',
+        whiteColor,
+        'ok',
+      );
+    }
   }
 
   onTapRecharge({required String amount}) {
@@ -166,9 +176,8 @@ class _WalletRechargeScreenState extends State<WalletRechargeScreen> {
         }
       };
       _razorpay.open(options);
-      setState(() {});
     } on Exception catch (e) {
-      print('Error on parsing amount:$e');
+      print('Error on parsing amount: $e');
     }
   }
 }
