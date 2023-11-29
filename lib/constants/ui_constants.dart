@@ -11,3 +11,6 @@ const greenColor = Colors.green;
 const blackColor = Colors.black;
 // ignore: constant_identifier_names
 const BOX_COLOR = Color(0xffe1ddf6);
+var backgroundColor = Colors.grey.shade100;
+var highlightColor = Colors.grey.shade200;
+var baseColor = Colors.grey.shade300;
