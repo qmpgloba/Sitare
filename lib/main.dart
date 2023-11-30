@@ -5,6 +5,7 @@ import 'package:package_info_plus/package_info_plus.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:sitare/functions/firebase%20notification/firebase_notification.dart';
 import 'package:sitare/screens/auth%20wrapper/auth_wrapper.dart';
+import 'package:sitare/screens/next%20availability%20screen/widgets/shimmer/shimmer.dart';
 import 'constants/ui_constants.dart';
 import 'package:timezone/data/latest_all.dart' as tzdata;
 import 'package:timezone/timezone.dart' as tz;
