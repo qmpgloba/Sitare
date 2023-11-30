@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:sitare/constants/ui_constants.dart';
+import 'package:sitare/screens/next%20availability%20screen/widgets/shimmer/time_slot.dart';
 
 class NextAvailabilityShimmer extends StatelessWidget {
   const NextAvailabilityShimmer({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final ScrollController scrollController = ScrollController();
+
     Size size = MediaQuery.sizeOf(context);
     return Scaffold(
       backgroundColor: whiteColor,
@@ -50,7 +53,7 @@ class NextAvailabilityShimmer extends StatelessWidget {
                   height(),
                   Container(
                     color: backgroundColor,
-                  )
+                  ),
                 ],
               ),
               height(),
@@ -59,7 +62,21 @@ class NextAvailabilityShimmer extends StatelessWidget {
                 width: size.width,
                 height: size.height * 0.1,
               ),
-              height()
+              height(),
+              TimeSlotShimmer(scrollController: scrollController),
+              Expanded(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Container(
+                      color: backgroundColor,
+                      height: 30,
+                      width: size.width * 0.8,
+                    ),
+                    height()
+                  ],
+                ),
+              )
             ],
           ),
         ),

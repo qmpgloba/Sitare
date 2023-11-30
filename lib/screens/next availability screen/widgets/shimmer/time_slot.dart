@@ -14,7 +14,7 @@ class TimeSlotShimmer extends StatelessWidget {
       baseColor: baseColor,
       highlightColor: highlightColor,
       child: Padding(
-        padding: const EdgeInsets.fromLTRB(5, 15, 5, 15),
+        padding: const EdgeInsets.fromLTRB(10, 15, 10, 15),
         child: GridView.builder(
           shrinkWrap: true,
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
