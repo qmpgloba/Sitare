@@ -22,7 +22,6 @@ class NextAvailabilityShimmer extends StatelessWidget {
             fontWeight: FontWeight.bold,
           ),
         ),
-        centerTitle: true,
       ),
       body: SafeArea(
         child: Shimmer.fromColors(
@@ -33,13 +32,11 @@ class NextAvailabilityShimmer extends StatelessWidget {
               height(),
               Row(
                 children: [
-                  const SizedBox(
-                    width: 10,
-                  ),
+                  width(),
                   CircleAvatar(
                     radius: size.width * .09,
                   ),
-                  height(),
+                  width(),
                   SizedBox(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -81,6 +78,12 @@ class NextAvailabilityShimmer extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+
+  SizedBox width() {
+    return const SizedBox(
+      width: 10,
     );
   }
 
