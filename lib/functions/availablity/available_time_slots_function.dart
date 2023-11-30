@@ -77,7 +77,7 @@ Future<void> updateAvailableSlotsInFireBase(
         BookingDetailsModel slotBooked = BookingDetailsModel(
             userUid: currentUser!.uid,
             astrologerId: astrologerId,
-            slotBooked: availableSlots.bookedSlots.first,
+            slotBooked: slotTime,
             date: date);
 
         await subcollectionRef2.add(slotBooked.toJson());
