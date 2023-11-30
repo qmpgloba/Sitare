@@ -58,7 +58,7 @@ class MyApp extends StatelessWidget {
           } else if (snapshot.hasError) {
             return Text('Error: ${snapshot.error}');
           } else {
-            return NextAvailabilityShimmer();
+            return AuthWrapper();
           }
         },
       ),

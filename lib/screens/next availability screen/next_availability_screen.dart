@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:sitare/constants/ui_constants.dart';
 import 'package:sitare/functions/availablity/available_time_slots_function.dart';
 import 'package:sitare/screens/home%20screen/home_screen.dart';
+import 'package:sitare/screens/next%20availability%20screen/widgets/shimmer/shimmer.dart';
 import 'package:sitare/screens/next%20availability%20screen/widgets/tab_widget.dart';
 import 'package:sitare/screens/next%20availability%20screen/widgets/time_slots_widget.dart';
 import 'package:sitare/model/astrologer_model.dart';
@@ -42,7 +43,7 @@ class _NextAvailabilityScreenState extends State<NextAvailabilityScreen>
       future: getAvailableSlots(widget.astrologer.uid),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(child: CircularProgressIndicator());
+          return const Center(child: NextAvailabilityShimmer());
         } else if (snapshot.hasError) {
           return Center(child: Text('Error: ${snapshot.error}'));
         } else {
