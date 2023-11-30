@@ -6,6 +6,7 @@ import 'package:sitare/model/astrologer_model.dart';
 import 'package:sitare/screens/chat%20screen/chat_screen.dart';
 import 'package:sitare/screens/profile%20screen/widgets/astroleger_profile_details_widget.dart';
 import 'package:sitare/screens/profile%20screen/widgets/contact_icons_widget.dart';
+import 'package:sitare/screens/widgets/wallet_amount.dart';
 import 'widgets/next_availability_widget.dart';
 
 // ignore: must_be_immutable
@@ -42,10 +43,7 @@ class ProfileScreen extends StatelessWidget {
                 Icons.account_balance_wallet_outlined,
                 color: greyColor,
               ),
-              label: Text(
-                '₹$walletBalnce',
-                style: const TextStyle(fontSize: 18, color: greyColor),
-              ),
+              label: const WalletAmount(color: greyColor, fontSize: 18),
             ),
             IconButton(
               onPressed: () {},
