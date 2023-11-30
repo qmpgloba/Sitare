@@ -1,0 +1,86 @@
+import 'package:flutter/material.dart';
+import 'package:shimmer/shimmer.dart';
+import 'package:sitare/constants/ui_constants.dart';
+
+class NextAvailabilityShimmer extends StatelessWidget {
+  const NextAvailabilityShimmer({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    Size size = MediaQuery.sizeOf(context);
+    return Scaffold(
+      backgroundColor: whiteColor,
+      appBar: AppBar(
+        backgroundColor: PRIMARY_COLOR,
+        title: const Text(
+          'Next Availability',
+          style: TextStyle(
+            color: whiteColor,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        centerTitle: true,
+      ),
+      body: SafeArea(
+        child: Shimmer.fromColors(
+          baseColor: baseColor,
+          highlightColor: highlightColor,
+          child: Column(
+            children: [
+              height(),
+              Row(
+                children: [
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  CircleAvatar(
+                    radius: size.width * .09,
+                  ),
+                  height(),
+                  SizedBox(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        shimmerContainer(size),
+                        shimmerContainer(size),
+                        shimmerContainer(size),
+                      ],
+                    ),
+                  ),
+                  height(),
+                  Container(
+                    color: backgroundColor,
+                  )
+                ],
+              ),
+              height(),
+              Container(
+                color: backgroundColor,
+                width: size.width,
+                height: size.height * 0.1,
+              ),
+              height()
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  SizedBox height() {
+    return const SizedBox(
+      height: 10,
+    );
+  }
+
+  shimmerContainer(Size size) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 5),
+      child: Container(
+        width: size.width * 0.25,
+        height: 10,
+        color: backgroundColor,
+      ),
+    );
+  }
+}
