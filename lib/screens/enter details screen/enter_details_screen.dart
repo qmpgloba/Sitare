@@ -16,11 +16,11 @@ class EnterDetailsScreen extends StatefulWidget {
     super.key,
     required this.phoneNumber,
     required this.name,
-    required this.email,
+    this.email,
   });
   final String phoneNumber;
   final String name;
-  final String email;
+  final String? email;
   @override
   State<EnterDetailsScreen> createState() => _EnterDetailsScreenState();
 }
