@@ -22,8 +22,7 @@ import 'package:sitare/screens/update%20profile%20screen/widgets/logger_widget.d
 import '../create account page/cerate_account_screen.dart';
 
 class UpdateProfileScreen extends StatefulWidget {
-
-   UpdateProfileScreen({super.key,  this.email,this.astrologer});
+  UpdateProfileScreen({super.key, this.email, this.astrologer});
 
   final String? email;
   AstrologerModel? astrologer;
@@ -376,15 +375,17 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                                     .pushReplacement(MaterialPageRoute(
                                   builder: (context) => const HomeScreen(),
                                 ));
-                              } else if (updateSuccess && widget.astrologer != null){
+                              } else if (updateSuccess &&
+                                  widget.astrologer != null) {
+                               userData =
+                                    await getUserDataByuid(currentUser!.uid);
                                 Navigator.of(context)
                                     .pushReplacement(MaterialPageRoute(
-                                  builder: (context) => ChatScreen(astrologer: widget.astrologer!),
+                                  builder: (context) => ChatScreen(
+                                      astrologer: widget.astrologer!),
                                 ));
                                 // showAboutDialog(context: context)
-                              }else{
-                                
-                              }
+                              } else {}
                             }
                           },
                           child: const UpdateButtonWidget(),
