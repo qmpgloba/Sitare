@@ -15,7 +15,6 @@ class DetailsWidget extends StatefulWidget {
     super.key,
     required this.size,
     this.name,
-    this.email,
     this.mobileNumber,
     required this.dobController,
     required this.pobController,
@@ -24,12 +23,14 @@ class DetailsWidget extends StatefulWidget {
     required this.optionalField,
     required this.genderController,
     required this.martialController,
+    required this.emailController,
   });
 
   final Size size;
   final String? name;
-  final String? email;
+
   final String? mobileNumber;
+  final TextEditingController emailController;
   final TextEditingController dobController;
   final TextEditingController pobController;
   final TextEditingController tobController;
@@ -103,8 +104,7 @@ class _DetailsWidgetState extends State<DetailsWidget> {
         ),
         CustomTextField(
           size: widget.size,
-          readOnly: true, intialValue: widget.email,
-          // controller: widget.emailController,
+          controller: widget.emailController,
           hintname: "Email",
         ),
         const SizedBox(
