@@ -2,7 +2,7 @@ class UserModel {
   final String fcmToken;
   final String uid;
   final String name;
-  final String email;
+  final String? email;
   final String userProfileImage;
   final String phoneNumber;
   final String? gender;
@@ -23,10 +23,10 @@ class UserModel {
     this.problem,
     this.wallet,
     required this.userProfileImage,
-    required  this.fcmToken,
+    required this.fcmToken,
     required this.uid,
     required this.name,
-    required this.email,
+    this.email,
     required this.phoneNumber,
     this.partnerDetails,
   });

@@ -20,7 +20,9 @@ import 'package:sitare/screens/update%20profile%20screen/widgets/logger_widget.d
 import '../create account page/cerate_account_screen.dart';
 
 class UpdateProfileScreen extends StatefulWidget {
-   UpdateProfileScreen({super.key, required this.email,this.astrologer});
+
+   UpdateProfileScreen({super.key,  this.email,this.astrologer});
+
   final String? email;
   AstrologerModel? astrologer;
 

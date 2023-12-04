@@ -8,14 +8,14 @@ class UserDetailsDrawerHeader extends StatelessWidget {
     super.key,
     required this.size,
     required this.fullName,
-    required this.email,
+    this.email,
     required this.phoneNumber,
     this.profileImageUrl,
   });
 
   final Size size;
   final String fullName;
-  final String email;
+  final String? email;
   final String phoneNumber;
   final String? profileImageUrl;
 
@@ -82,7 +82,7 @@ class UserDetailsDrawerHeader extends StatelessWidget {
                   ),
                   Flexible(
                     child: AutoSizeText(
-                      email,
+                      email!,
                       maxLines: 2,
                       maxFontSize: 13,
                     ),
