@@ -203,9 +203,10 @@ class _TalkToExpertsScreenState extends State<TalkToExpertsScreen> {
                 ? const Center(
                     child: Text('No Astrologers Found'),
                   )
-                : ListView.builder(
+                : ListView.separated(
                     // scrollDirection: Axis.horizontal,
                     itemCount: filteredAstrologers.length,
+                    separatorBuilder: (context, index) => const Divider(),
                     itemBuilder: (context, index) =>
                         TalkToExpertsProfileDetailsWidget(
                       size: size,

@@ -77,7 +77,7 @@ class ProfileScreen extends StatelessWidget {
                 languages: "${astrologer.languages.take(2).join(',')}...",
                 rating: 5,
                 yearsOfExperience: astrologer.experienceYears.toString(),
-                rupees: 95,
+                rupees: astrologer.rpm,
                 astrologer: astrologer,
               ),
               const Column(

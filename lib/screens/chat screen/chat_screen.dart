@@ -3,8 +3,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_mlkit_smart_reply/google_mlkit_smart_reply.dart';
 import 'package:sitare/constants/ui_constants.dart';
+import 'package:sitare/functions/auth%20function/auth_function.dart';
 import 'package:sitare/model/astrologer_model.dart';
 import 'package:sitare/screens/chat%20screen/service/chat_service.dart';
+import 'package:sitare/screens/home%20screen/home_screen.dart';
 import 'widgets/chat_input_widget.dart';
 
 class ChatScreen extends StatefulWidget {
@@ -96,6 +98,7 @@ class _ChatScreenState extends State<ChatScreen> {
           children: [
             Expanded(
               child: Container(
+            
                 // color: Colors.grey.withOpacity(0.4),
                 child: _buildMessageList(size),
               ),
@@ -155,13 +158,19 @@ class _ChatScreenState extends State<ChatScreen> {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(child: Text('Loading...'));
         }
+        if (snapshot.data!.docs.isEmpty) {
+         _sendInitialMessageAndReply(size);
+
+        }
         WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
           _scrollController.jumpTo(_scrollController.position.maxScrollExtent);
         });
         return ListView(
           controller: _scrollController,
           children: snapshot.data!.docs
-              .map((document) => _buildMessageItem(document, size))
+              .map((document) => SizedBox(
+                width: size.width*.7,
+                child: _buildMessageItem(document, size)))
               .toList(),
         );
       },
@@ -177,24 +186,52 @@ class _ChatScreenState extends State<ChatScreen> {
 
     return Container(
       alignment: alignment,
+      
       child: Padding(
         padding: const EdgeInsets.all(10),
-        child: Container(
-          decoration: BoxDecoration(
-            color: (data['senderId'] == _firebaseAuth.currentUser!.uid)
-                ? Colors.blue
-                : greyColor,
-            borderRadius: BorderRadius.circular(20),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.all(10),
-            child: Text(data['message']),
+        child: ConstrainedBox(
+          constraints: BoxConstraints(maxWidth: size.width*.7),
+          child: Container(
+            
+             
+            decoration: BoxDecoration(
+              color: (data['senderId'] == _firebaseAuth.currentUser!.uid)
+                  ? Colors.blue
+                  : greyColor,
+              borderRadius: BorderRadius.circular(20),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(10),
+              child: Text(data['message']),
+            ),
           ),
         ),
       ),
     );
   }
+
+  
+Future<void> _sendInitialMessageAndReply(Size size) async {
+  await _chatService.sendMessage(
+    widget.astrologer.uid,
+    '''Hi, ${widget.astrologer.fullName},
+    Below are my details:
+    Name: ${userData!['full name']}
+    Gender: ${userData!['gender']}
+    DOB: ${userData!['dateofBirth']}
+    TOB: ${userData!['timeofBirth']}
+    POB: ${userData!['placeofBirth']}
+    ''',
+  );
+
+  await _chatService.automatedReplyMessage(
+    currentUser!.uid,
+    'Welcome to Sitare. Consultant will take a minute to analyze your details. You may ask your question in the meanwhile.',
+    widget.astrologer.uid,
+  );
 }
+}
+
 
 class SuggestionTile extends StatefulWidget {
   const SuggestionTile({

@@ -22,7 +22,7 @@ class AstrologerProfileDetailsWidget extends StatelessWidget {
   final String languages;
   final double rating;
   final String yearsOfExperience;
-  final int rupees;
+  final String rupees;
   final AstrologerModel astrologer;
 
   @override

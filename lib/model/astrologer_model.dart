@@ -30,6 +30,7 @@ class AstrologerModel {
   final String currentWorkingStatus;
   final String fcmToken;
   final String uid;
+  final String rpm;
 
 
   AstrologerModel(
@@ -64,7 +65,10 @@ class AstrologerModel {
       required this.currentWorkingStatus,
 
       required this.fcmToken,
-      required this.uid});
+      required this.uid,
+      required this.rpm
+      
+      });
 
 
   toJson() {
@@ -100,6 +104,8 @@ class AstrologerModel {
       "current working status": currentWorkingStatus,
       "fcmToken": fcmToken,
       "uid": uid,
+      "rpm":rpm
+
 
     };
   }
@@ -137,6 +143,7 @@ class AstrologerModel {
       currentWorkingStatus: json['current working status'],
       fcmToken: json['fcmToken'],
       uid: json['uid'],
+      rpm: json['rpm'],
     );
 
   }
