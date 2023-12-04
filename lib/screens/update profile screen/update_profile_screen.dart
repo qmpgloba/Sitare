@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable, use_build_context_synchronously
+
 import 'dart:io';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -150,7 +152,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                         ),
                         UpdateProfileTextFeildWidgets(
                           size: size,
-                          readOnly: true,
+                          readOnly: false,
                           controller: emailTextController,
                           hintText: 'Email',
                           feildName: 'Email',
@@ -370,7 +372,6 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                               bool updateSuccess =
                                   await updateUser(user, number ?? "");
                               if (updateSuccess && widget.astrologer == null) {
-                                // ignore: use_build_context_synchronously
                                 Navigator.of(context)
                                     .pushReplacement(MaterialPageRoute(
                                   builder: (context) => const HomeScreen(),
