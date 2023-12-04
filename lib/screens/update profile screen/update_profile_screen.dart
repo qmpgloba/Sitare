@@ -10,7 +10,9 @@ import 'package:sitare/constants/ui_constants.dart';
 import 'package:sitare/functions/auth%20function/auth_function.dart';
 import 'package:sitare/functions/user_functions.dart';
 import 'package:sitare/main.dart';
+import 'package:sitare/model/astrologer_model.dart';
 import 'package:sitare/model/user_model.dart';
+import 'package:sitare/screens/chat%20screen/chat_screen.dart';
 import 'package:sitare/screens/home%20screen/home_screen.dart';
 import 'package:sitare/screens/profile%20screen/widgets/update_profile_textfeild_widget.dart';
 import 'package:sitare/screens/update%20profile%20screen/widgets/update_button_widget.dart';
@@ -18,8 +20,11 @@ import 'package:sitare/screens/update%20profile%20screen/widgets/logger_widget.d
 import '../create account page/cerate_account_screen.dart';
 
 class UpdateProfileScreen extends StatefulWidget {
-  const UpdateProfileScreen({super.key, this.email});
+
+   UpdateProfileScreen({super.key,  this.email,this.astrologer});
+
   final String? email;
+  AstrologerModel? astrologer;
 
   @override
   State<UpdateProfileScreen> createState() => _UpdateProfileScreenState();
@@ -364,14 +369,20 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                               );
                               bool updateSuccess =
                                   await updateUser(user, number ?? "");
-                              if (updateSuccess) {
+                              if (updateSuccess && widget.astrologer == null) {
                                 // ignore: use_build_context_synchronously
                                 Navigator.of(context)
                                     .pushReplacement(MaterialPageRoute(
                                   builder: (context) => const HomeScreen(),
                                 ));
-                              } else {
+                              } else if (updateSuccess && widget.astrologer != null){
+                                Navigator.of(context)
+                                    .pushReplacement(MaterialPageRoute(
+                                  builder: (context) => ChatScreen(astrologer: widget.astrologer!),
+                                ));
                                 // showAboutDialog(context: context)
+                              }else{
+                                
                               }
                             }
                           },
