@@ -37,6 +37,8 @@ class _ChatScreenState extends State<ChatScreen> {
   @override
   void initState() {
     super.initState();
+  
+    // userData = getUserDataByuid(currentUser!.uid) as Map<String, dynamic>?;
     _chatService
         .getMessages(widget.astrologer.uid, _firebaseAuth.currentUser!.uid)
         .listen((snapshot) {
@@ -215,12 +217,12 @@ Future<void> _sendInitialMessageAndReply(Size size) async {
   await _chatService.sendMessage(
     widget.astrologer.uid,
     '''Hi, ${widget.astrologer.fullName},
-    Below are my details:
-    Name: ${userData!['full name']}
-    Gender: ${userData!['gender']}
-    DOB: ${userData!['dateofBirth']}
-    TOB: ${userData!['timeofBirth']}
-    POB: ${userData!['placeofBirth']}
+  Below are my details:
+  Name: ${userData!['full name']}
+  Gender: ${userData!['gender']}
+  DOB: ${userData!['dateofBirth']}
+  TOB: ${userData!['timeofBirth']}
+  POB: ${userData!['placeofBirth']}
     ''',
   );
 
