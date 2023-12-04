@@ -7,7 +7,6 @@ import 'package:sitare/screens/chat%20screen/chat_screen.dart';
 import 'package:sitare/screens/home%20screen/home_screen.dart';
 import 'package:sitare/screens/profile%20screen/profile_screen.dart';
 import 'package:sitare/screens/update%20profile%20screen/update_profile_screen.dart';
-import '../../../constants/ui_constants.dart';
 import 'contact_icons_widget.dart';
 
 class TalkToExpertsProfileDetailsWidget extends StatelessWidget {
@@ -135,13 +134,13 @@ class TalkToExpertsProfileDetailsWidget extends StatelessWidget {
                   ),
                 ],
               ),
-              const SizedBox(
-                height: 10,
-              ),
-              const LinearProgressIndicator(
-                value: .70,
-                color: greenColor,
-              )
+              // const SizedBox(
+              //   height: 10,
+              // ),
+              // const LinearProgressIndicator(
+              //   value: .70,
+              //   color: greenColor,
+              // )
             ],
           ),
         ),
