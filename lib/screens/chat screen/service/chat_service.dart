@@ -44,6 +44,44 @@ class ChatService extends ChangeNotifier {
     }
   }
 
+  
+  Future<void> automatedReplyMessage(String receiverId, String message,String senderId) async {
+    // final String currentUserId = _auth.currentUser!.uid;
+    // final String currentUserPhoneNumber = _auth.currentUser!.phoneNumber!;
+    final Timestamp timestamp = Timestamp.now();
+    List<String> ids = [senderId, receiverId];
+    ids.sort();
+    String chatRoomId = ids.join("_");
+    MessageModel newMessage = MessageModel(
+        senderId: senderId,
+        chatId: chatRoomId,
+        receiverId: receiverId,
+        message: message,
+        timestamp: timestamp);
+
+    await _firestore
+        .collection('chat_rooms')
+        .doc(chatRoomId)
+        .collection('messages')
+        .add(newMessage.toJson());
+
+    Map<String, dynamic> participants = {
+      'participants': ids,
+      // other data related to the chat room can be added here
+    };
+
+    DocumentReference chatRoomRef =
+        FirebaseFirestore.instance.collection('chat_rooms').doc(chatRoomId);
+    DocumentSnapshot chatRoomSnapshot = await chatRoomRef.get();
+
+    if (chatRoomSnapshot.exists) {
+      await chatRoomRef.update(participants);
+    } else {
+      await chatRoomRef.set(participants);
+    }
+  }
+
+
   Stream<QuerySnapshot> getMessages(String userId, String otherUserId) {
     List<String> ids = [userId, otherUserId];
     ids.sort();
