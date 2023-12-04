@@ -61,7 +61,7 @@ class UserDetailsDrawerHeader extends StatelessWidget {
               ],
             ),
             Container(
-              width: size.width * .47,
+              // width: size.width * .47,
               padding: EdgeInsets.all(size.width / 60),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
