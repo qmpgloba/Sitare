@@ -57,7 +57,6 @@ class UpdateProfileTextFeildWidgets extends StatelessWidget {
                 } else {
                   return value!.isEmpty ? 'Please fill the feild' : null;
                 }
-                // return null;
               },
             ),
           )
