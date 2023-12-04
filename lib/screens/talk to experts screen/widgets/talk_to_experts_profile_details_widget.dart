@@ -4,7 +4,9 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:sitare/functions/contact%20functions/contact_functions.dart';
 import 'package:sitare/model/astrologer_model.dart';
 import 'package:sitare/screens/chat%20screen/chat_screen.dart';
+import 'package:sitare/screens/home%20screen/home_screen.dart';
 import 'package:sitare/screens/profile%20screen/profile_screen.dart';
+import 'package:sitare/screens/update%20profile%20screen/update_profile_screen.dart';
 import '../../../constants/ui_constants.dart';
 import 'contact_icons_widget.dart';
 
@@ -88,10 +90,18 @@ class TalkToExpertsProfileDetailsWidget extends StatelessWidget {
                     children: [
                       GestureDetector(
                         onTap: () {
-                          Navigator.of(context).push(MaterialPageRoute(
+                        if(userData!['dateofBirth']  == ''){
+                            Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) =>
+                                UpdateProfileScreen(email: userData!['email'],astrologer: astrologer),
+                          ));
+
+                        }else{
+                            Navigator.of(context).push(MaterialPageRoute(
                             builder: (context) =>
                                 ChatScreen(astrologer: astrologer),
                           ));
+                        }
                         },
                         child: const ContactIconsTalkToExpertsScreen(
                           icon: Icons.chat_outlined,
