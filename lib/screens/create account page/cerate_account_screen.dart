@@ -20,7 +20,6 @@ import 'package:sitare/screens/widgets/title_text_widget.dart';
 import 'widgets/agreement_text_widget.dart';
 import 'widgets/textfeild_widget.dart';
 
-final TextEditingController emailTextController = TextEditingController();
 final TextEditingController nameTextController = TextEditingController();
 final TextEditingController phoneNumberTextController = TextEditingController();
 OtpFieldController otpController = OtpFieldController();
@@ -77,16 +76,6 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                     SizedBox(
                       height: size.width * .07,
                     ),
-                    TextfeildWidget(
-                      nameTextController: emailTextController,
-                      keyboardType: TextInputType.name,
-                      text: 'Email',
-                      obscureText: false,
-                      // validate: validateEmail,
-                    ),
-                    SizedBox(
-                      height: size.width * .07,
-                    ),
                     MobileNumberTextFeildWidget(
                       controller: phoneNumberTextController,
                       onCountryChanged: (country) {
@@ -114,7 +103,6 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                                   fcmToken: fCMToken ?? 'error',
                                   uid: '',
                                   name: nameTextController.text,
-                                  email: emailTextController.text.trim(),
                                   phoneNumber:
                                       "+91${phoneNumberTextController.text}",
                                   userProfileImage: profileImage,
@@ -147,7 +135,6 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                                         phoneNumber:
                                             phoneNumberTextController.text,
                                         name: nameTextController.text,
-                                        email: emailTextController.text,
                                       ),
                                     ),
                                     (route) => false,
