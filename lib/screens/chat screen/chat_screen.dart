@@ -5,7 +5,6 @@ import 'package:google_mlkit_smart_reply/google_mlkit_smart_reply.dart';
 import 'package:sitare/constants/ui_constants.dart';
 import 'package:sitare/model/astrologer_model.dart';
 import 'package:sitare/screens/chat%20screen/service/chat_service.dart';
-
 import 'widgets/chat_input_widget.dart';
 
 class ChatScreen extends StatefulWidget {
@@ -109,7 +108,7 @@ class _ChatScreenState extends State<ChatScreen> {
                   builder: (context, value, child) {
                     if (suggestions.isNotEmpty) {
                       return SizedBox(
-                        height: size.width*.1,
+                        height: size.width * .1,
                         child: ListView.separated(
                           shrinkWrap: true,
                           scrollDirection: Axis.horizontal,
@@ -157,8 +156,8 @@ class _ChatScreenState extends State<ChatScreen> {
           return const Center(child: Text('Loading...'));
         }
         WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-        _scrollController.jumpTo(_scrollController.position.maxScrollExtent);
-      });
+          _scrollController.jumpTo(_scrollController.position.maxScrollExtent);
+        });
         return ListView(
           controller: _scrollController,
           children: snapshot.data!.docs
