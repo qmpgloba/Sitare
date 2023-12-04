@@ -18,7 +18,7 @@ import 'package:sitare/screens/update%20profile%20screen/widgets/logger_widget.d
 import '../create account page/cerate_account_screen.dart';
 
 class UpdateProfileScreen extends StatefulWidget {
-  const UpdateProfileScreen({super.key, required this.email});
+  const UpdateProfileScreen({super.key, this.email});
   final String? email;
 
   @override

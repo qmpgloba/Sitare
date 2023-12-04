@@ -16,17 +16,18 @@ class EnterDetailsScreen extends StatefulWidget {
     super.key,
     required this.phoneNumber,
     required this.name,
-    required this.email,
+    this.email,
   });
   final String phoneNumber;
   final String name;
-  final String email;
+  final String? email;
   @override
   State<EnterDetailsScreen> createState() => _EnterDetailsScreenState();
 }
 
 class _EnterDetailsScreenState extends State<EnterDetailsScreen> {
   int length = 1;
+  TextEditingController emailController = TextEditingController();
 
   TextEditingController genderController = TextEditingController();
   TextEditingController dobController = TextEditingController();
@@ -40,48 +41,48 @@ class _EnterDetailsScreenState extends State<EnterDetailsScreen> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.sizeOf(context);
     return Scaffold(
-        body: SingleChildScrollView(
-          child: Form(
-            key: _key,
-            autovalidateMode: AutovalidateMode.onUserInteraction,
-            child: SafeArea(
-              child: Padding(
-                padding: EdgeInsets.only(
-                  left: size.width * 0.08,
-                  right: size.width * 0.08,
-                  top: size.height * 0.02,
-                  bottom: size.height * 0.01,
-                ),
-                child: DetailsWidget(
-                  size: size,
-                  name: widget.name,
-                  email: widget.email,
-                  mobileNumber: widget.phoneNumber,
-                  dobController: dobController,
-                  pobController: pobController,
-                  tobController: tobController,
-                  problemController: problemController,
-                  optionalField: optionalField,
-                  genderController: genderController,
-                  martialController: martialController,
-                ),
+      body: SingleChildScrollView(
+        child: Form(
+          key: _key,
+          autovalidateMode: AutovalidateMode.onUserInteraction,
+          child: SafeArea(
+            child: Padding(
+              padding: EdgeInsets.only(
+                left: size.width * 0.08,
+                right: size.width * 0.08,
+                top: size.height * 0.02,
+                bottom: size.height * 0.01,
+              ),
+              child: DetailsWidget(
+                size: size,
+                name: widget.name,
+                emailController: emailController,
+                mobileNumber: widget.phoneNumber,
+                dobController: dobController,
+                pobController: pobController,
+                tobController: tobController,
+                problemController: problemController,
+                optionalField: optionalField,
+                genderController: genderController,
+                martialController: martialController,
               ),
             ),
           ),
         ),
-        bottomNavigationBar: onSubmit(size, context));
+      ),
+      bottomNavigationBar: onSubmit(size, context),
+    );
   }
 
-  addUserDetails(
-      {required BuildContext context,
-      required String name,
-      required String mobile,
-      required String email}) async {
+  addUserDetails({
+    required BuildContext context,
+    required String name,
+    required String mobile,
+  }) async {
     UserModel user = UserModel(
       fcmToken: fCMToken ?? 'error',
       uid: currentUser!.uid,
       name: name,
-      email: email,
       phoneNumber: "+91$mobile",
       userProfileImage: profileImage,
       gender: '',
@@ -189,7 +190,6 @@ class _EnterDetailsScreenState extends State<EnterDetailsScreen> {
                   context: context,
                   name: widget.name,
                   mobile: widget.phoneNumber,
-                  email: widget.email,
                 );
               },
               child: const Row(
