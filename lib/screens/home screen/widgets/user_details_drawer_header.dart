@@ -8,14 +8,12 @@ class UserDetailsDrawerHeader extends StatelessWidget {
     super.key,
     required this.size,
     required this.fullName,
-    this.email,
     required this.phoneNumber,
     this.profileImageUrl,
   });
 
   final Size size;
   final String fullName;
-  final String? email;
   final String phoneNumber;
   final String? profileImageUrl;
 
@@ -45,9 +43,7 @@ class UserDetailsDrawerHeader extends StatelessWidget {
                     onTap: () {
                       Navigator.of(context).push(
                         MaterialPageRoute(
-                          builder: (context) => UpdateProfileScreen(
-                            email: email,
-                          ),
+                          builder: (context) => UpdateProfileScreen(),
                         ),
                       );
                     },
@@ -78,13 +74,6 @@ class UserDetailsDrawerHeader extends StatelessWidget {
                       softWrap: true,
                       style: const TextStyle(color: blackColor, fontSize: 13),
                       // maxFontSize: 14,
-                    ),
-                  ),
-                  Flexible(
-                    child: AutoSizeText(
-                      email!,
-                      maxLines: 2,
-                      maxFontSize: 13,
                     ),
                   ),
                   AutoSizeText(

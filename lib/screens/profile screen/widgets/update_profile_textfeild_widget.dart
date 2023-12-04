@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:sitare/functions/auth%20function/auth_function.dart';
 
 import '../../../constants/ui_constants.dart';
 
@@ -63,17 +64,5 @@ class UpdateProfileTextFeildWidgets extends StatelessWidget {
         ],
       ),
     );
-  }
-}
-
-String? validateEmail(String? value) {
-  if (value!.isEmpty) {
-    return 'Please enter your Email';
-  } else if (value.isEmpty ||
-      !RegExp(r'^[\w-]+(?:\.[\w-]+)*@(?:[\w-]+\.)+[a-zA-Z]{2,7}$')
-          .hasMatch(value)) {
-    return 'Enter valid Email';
-  } else {
-    return null;
   }
 }

@@ -29,7 +29,6 @@ class HomeScreenDrawerWidget extends StatelessWidget {
             child: UserDetailsDrawerHeader(
               size: size,
               fullName: userData!['full name'],
-              email: userData!['email'],
               phoneNumber: userData!['phone number'],
               profileImageUrl: userData!['profile image'],
             ),

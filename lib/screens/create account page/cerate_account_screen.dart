@@ -88,10 +88,13 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                     Visibility(
                       visible: _isVisibleOTP,
                       child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           const Text(
                             'Enter OTP',
-                            style: TextStyle(fontWeight: FontWeight.bold),
+                            style: TextStyle(
+                              color: FONT_COLOR,
+                            ),
                           ),
                           SizedBox(
                             height: size.width * 0.05,
