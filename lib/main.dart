@@ -1,4 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
@@ -22,8 +23,20 @@ const AndroidNotificationChannel channel = AndroidNotificationChannel(
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await PackageInfo.fromPlatform();
-  await Firebase.initializeApp();
   await FirebaseNotification().initNotification();
+  if (kIsWeb) {
+    await Firebase.initializeApp(
+      options: const FirebaseOptions(
+          apiKey: "AIzaSyCyY2g27oNebbND84uPRKvx8MwrfZziKC4",
+          authDomain: "sitare-afebd.firebaseapp.com",
+          projectId: "sitare-afebd",
+          storageBucket: "sitare-afebd.appspot.com",
+          messagingSenderId: "1090327514590",
+          appId: "1:1090327514590:web:51ffb157f87d5cc23d214f"),
+    );
+  } else {
+    await Firebase.initializeApp();
+  }
   tzdata.initializeTimeZones();
   tz.setLocalLocation(tz.getLocation('Asia/Kolkata'));
   scheduleCronJob();
