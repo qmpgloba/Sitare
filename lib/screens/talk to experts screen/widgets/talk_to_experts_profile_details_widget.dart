@@ -89,18 +89,18 @@ class TalkToExpertsProfileDetailsWidget extends StatelessWidget {
                     children: [
                       GestureDetector(
                         onTap: () {
-                        if(userData!['dateofBirth']  == ''){
+                          if (userData!['dateofBirth'] == '') {
                             Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) =>
-                                UpdateProfileScreen(email: userData!['email'],astrologer: astrologer),
-                          ));
-
-                        }else{
+                              builder: (context) => UpdateProfileScreen(
+                                  email: userData!['email'],
+                                  astrologer: astrologer),
+                            ));
+                          } else {
                             Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) =>
-                                ChatScreen(astrologer: astrologer),
-                          ));
-                        }
+                              builder: (context) =>
+                                  ChatScreen(astrologer: astrologer),
+                            ));
+                          }
                         },
                         child: const ContactIconsTalkToExpertsScreen(
                           icon: Icons.chat_outlined,
@@ -128,7 +128,9 @@ class TalkToExpertsProfileDetailsWidget extends StatelessWidget {
                           launchWhatsAppUri(astrologer.phoneNumber);
                         },
                         child: const ContactIconsTalkToExpertsScreen(
-                            icon: Icons.video_call_outlined, text: 'Video'),
+                          icon: Icons.video_call_outlined,
+                          text: 'Video',
+                        ),
                       ),
                     ],
                   ),
