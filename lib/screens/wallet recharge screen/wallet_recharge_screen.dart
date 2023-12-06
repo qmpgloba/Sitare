@@ -131,6 +131,7 @@ class _WalletRechargeScreenState extends State<WalletRechargeScreen> {
       await updateWallet(user.uid, updateAmount);
 
       FirebaseFirestore.instance.collection('payments').add({
+        
         'uid': user.uid,
         'amount': rechargeAmount.toString(),
         'transaction id': response.paymentId,
