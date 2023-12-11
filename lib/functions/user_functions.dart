@@ -66,12 +66,10 @@ Future<String> addProfileImge(XFile imagePicked) async {
   Reference referenceImageToUpload = referenceDirImages.child(uniqueFileName);
 
   try {
-    print('object');
     await referenceImageToUpload.putFile(File(imagePicked.path));
     String imageUrl = await referenceImageToUpload.getDownloadURL();
     return imageUrl;
   } catch (e) {
-    print(profileImage);
     return profileImage;
   }
 }
