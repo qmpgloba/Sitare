@@ -47,7 +47,7 @@ Future<List<AstrologerModel>> fetchFilteredAstrologersFromFirestore() async {
       if (selectedSkills.any((skill) => astrologer.skills.contains(skill))) {
         if (selectedExperience.isNotEmpty &&
             selectedExperience.contains(astrologer.experienceYears)) {
-          astrologersList.add(astrologer);
+          astrologersList.add(astrologer);  
         }
       }
     }

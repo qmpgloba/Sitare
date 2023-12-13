@@ -187,16 +187,21 @@ class _TalkToExpertsScreenState extends State<TalkToExpertsScreen> {
             );
           } else {
             List<AstrologerModel>? astrologers = snapshot.data;
+            List<AstrologerModel> availableAstrologers = [];
+            availableAstrologers = astrologers!
+                .where((astrologer) => astrologer.isOnline == true)
+                .toList();
+
             List<AstrologerModel> filteredAstrologers = [];
 
             if (_searchTextController.text.isNotEmpty) {
-              filteredAstrologers = astrologers!
+              filteredAstrologers = availableAstrologers
                   .where((astrologer) => astrologer.fullName
                       .toLowerCase()
                       .contains(_searchTextController.text.toLowerCase()))
                   .toList();
             } else {
-              filteredAstrologers = astrologers!;
+              filteredAstrologers = availableAstrologers;
             }
 
             return filteredAstrologers.isEmpty
