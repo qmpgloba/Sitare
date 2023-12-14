@@ -16,7 +16,7 @@ const AndroidNotificationChannel channel = AndroidNotificationChannel(
       'High Important Notification',
   "This channel is used for important notification.",
   importance: Importance.high,
-  playSound: true,
+  playSound: true, 
 );
 
 void main() async {
