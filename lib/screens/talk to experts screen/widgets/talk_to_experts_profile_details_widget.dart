@@ -77,7 +77,7 @@ class TalkToExpertsProfileDetailsWidget extends StatelessWidget {
                               fontSize: 14,
                             )),
                         AutoSizeText(
-                          'Exp ${astrologer.experienceYears} years | ₹${astrologer.rpm}/min',
+                          'Exp ${astrologer.experienceYears} years | ${astrologer.rpm == '0.0'? 'Free' : "₹${astrologer.rpm}/min"}',
                           maxLines: 1,
                           maxFontSize: 13,
                         )
