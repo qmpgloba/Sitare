@@ -162,11 +162,12 @@ class _ProductDescriptionScreenState extends State<ProductDescriptionScreen> {
                   ),
                 ),
                 TextButton(
-                    onPressed: () {},
-                    child: const Text(
-                      'CONTINUE SHOPPING (home)',
-                      style: TextStyle(color: blackColor, fontSize: 12),
-                    ))
+                  onPressed: () {},
+                  child: const Text(
+                    'CONTINUE SHOPPING (home)',
+                    style: TextStyle(color: blackColor, fontSize: 12),
+                  ),
+                )
               ],
             ),
           ),
