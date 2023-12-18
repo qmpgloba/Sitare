@@ -1,4 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:cart_stepper/cart_stepper.dart';
 import 'package:flutter/material.dart';
 import 'package:sitare/constants/ui_constants.dart';
 import 'package:sitare/functions/contact%20functions/contact_functions.dart';
@@ -13,10 +14,13 @@ class ShoppingCart extends StatefulWidget {
 }
 
 class _ShoppingCartState extends State<ShoppingCart> {
+  var _counter = 1;
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.sizeOf(context);
     return Scaffold(
+      backgroundColor: whiteColor,
       appBar: AppBar(
         backgroundColor: PRIMARY_COLOR,
         iconTheme: const IconThemeData(color: Colors.white),
@@ -58,20 +62,22 @@ class _ShoppingCartState extends State<ShoppingCart> {
           children: [
             Padding(
               padding: EdgeInsets.only(
+                top: size.width * 0.05,
                 left: size.width * 0.05,
                 right: size.width * 0.05,
                 bottom: size.width * 0.05,
               ),
               child: Card(
-                color: greyColor,
+                color: whiteColor,
                 child: Padding(
                   padding: EdgeInsets.only(
                     left: size.width * 0.05,
+                    right: size.width * 0.05,
                     top: size.width * 0.05,
                     bottom: size.width * 0.05,
                   ),
                   child: SizedBox(
-                    width: size.width * 0.7,
+                    // width: size.width * 0.7,
                     height: size.height * 0.2,
                     child: Row(
                       // crossAxisAlignment: CrossAxisAlignment.start,
@@ -83,8 +89,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
                           height: size.height * 0.25,
                           fit: BoxFit.fill,
                         ),
-                        const SizedBox(
-                          width: 10,
+                        SizedBox(
+                          width: size.width * 0.04,
                         ),
                         Column(
                           // mainAxisAlignment: MainAxisAlignment.center,
@@ -109,40 +115,57 @@ class _ShoppingCartState extends State<ShoppingCart> {
                               width: size.width * 0.3,
                               child: const AutoSizeText(
                                 'Handmade 925 silver bracelet',
-                                maxFontSize: 14, textScaleFactor: 0.75,
+                                maxFontSize: 14, textScaleFactor: 1,
                                 // wrapWords: true,
                                 maxLines: 2,
                                 minFontSize: 10,
                               ),
                             ),
-                            SizedBox(
-                              height: size.height * 0.01,
-                            ),
-                            const Expanded(
+                            Expanded(
                               child: SizedBox(
                                 child: Row(
-                                  // crossAxisAlignment: CrossAxisAlignment.end,
                                   children: [
                                     SizedBox(
-                                      child: Text(
-                                        '2555',
+                                      width: size.width * 0.12,
+                                      child: const AutoSizeText(
+                                        '₹2555',
+                                        maxLines: 1,
+                                        maxFontSize: 12,
+                                        minFontSize: 10,
                                         style: TextStyle(
                                           fontWeight: FontWeight.bold,
                                         ),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: size.width * 0.01,
+                                    ),
+                                    SizedBox(
+                                      child: Row(
+                                        children: [
+                                          SizedBox(
+                                            // width: size.width * 0.1,
+                                            height: size.width * 0.08,
+                                            child: _buildStepper(size),
+                                          ),
+                                          SizedBox(
+                                            width: size.width * 0.1,
+                                            child: IconButton(
+                                              onPressed: () {},
+                                              icon: const Icon(
+                                                Icons.delete_rounded,
+                                                color: greyColor,
+                                                // size: 2,
+                                              ),
+                                            ),
+                                          )
+                                        ],
                                       ),
                                     )
                                   ],
                                 ),
                               ),
                             )
-                            // SizedBox(width: ,
-                            //   child: Text(
-                            //     'Black Fish Evil eye',
-                            //     style: TextStyle(
-                            //       fontWeight: FontWeight.bold,
-                            //     ),
-                            //   ),
-                            // ),
                           ],
                         ),
                       ],
@@ -154,6 +177,28 @@ class _ShoppingCartState extends State<ShoppingCart> {
           ],
         ),
       ),
+    );
+  }
+
+  Widget _buildStepper(Size size) {
+    return CartStepperInt(
+      style: const CartStepperStyle(
+        shape: BoxShape.rectangle,
+        radius: Radius.circular(4),
+        activeBackgroundColor: greyColor,
+        buttonAspectRatio: 1.2,
+        textStyle: TextStyle(
+          fontSize: 10,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+      value: _counter,
+      size: size.width * 0.05,
+      didChangeCount: (count) {
+        setState(() {
+          _counter = count;
+        });
+      },
     );
   }
 }
