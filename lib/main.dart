@@ -17,7 +17,7 @@ const AndroidNotificationChannel channel = AndroidNotificationChannel(
       'High Important Notification',
   "This channel is used for important notification.",
   importance: Importance.high,
-  playSound: true, 
+  playSound: true,
 );
 
 void main() async {
@@ -45,6 +45,9 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: PRIMARY_COLOR,
         fontFamily: 'Muli',
         useMaterial3: true,
+        buttonTheme: const ButtonThemeData(
+          buttonColor: whiteColor,shape: RoundedRectangleBorder( )
+        ),
       ),
       home: FutureBuilder(
         future: fetchBookedSlotsAndNotify(DateTime.now()),
@@ -56,7 +59,7 @@ class MyApp extends StatelessWidget {
           } else if (snapshot.hasError) {
             return Text('Error: ${snapshot.error}');
           } else {
-            return ShoppingCart();
+            return const ShoppingCart();
           }
         },
       ),

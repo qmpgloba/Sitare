@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sitare/constants/ui_constants.dart';
 import 'package:sitare/functions/contact%20functions/contact_functions.dart';
+import 'package:sitare/screens/shopping%20cart/widgets/checkout_bar.dart';
 import 'package:sitare/screens/shopping%20cart/widgets/product_card.dart';
 import 'package:sitare/screens/wallet%20recharge%20screen/wallet_recharge_screen.dart';
 import 'package:sitare/screens/widgets/wallet_amount.dart';
@@ -55,40 +56,33 @@ class _ShoppingCartState extends State<ShoppingCart> {
         ],
       ),
       body: SafeArea(
-        child: Column(
-          children: [
-            Padding(
-              padding: EdgeInsets.only(
-                top: size.width * 0.05,
-                left: size.width * 0.05,
-                right: size.width * 0.05,
-                bottom: size.width * 0.05,
+        child: Padding(
+          padding: EdgeInsets.all(size.width * 0.05),
+          child: Column(
+            children: [
+              Expanded(
+                child: ListView.builder(
+                  itemCount: 2,
+                  shrinkWrap: true,
+                  itemBuilder: (context, index) {
+                    return ProductCard(
+                      size: size,
+                      image:
+                          'https://m.media-amazon.com/images/I/41I+seAwk1L.jpg',
+                      title: 'Black Fish Evil eye',
+                      description: 'Handmade 925 silver bracelet',
+                      price: '2555',
+                    );
+                  },
+                ),
               ),
-              child: ListView(
-                shrinkWrap: true,
-                children: [
-                  ProductCard(
-                    size: size,
-                    image:
-                        'https://m.media-amazon.com/images/I/41I+seAwk1L.jpg',
-                    title: 'Black Fish Evil eye',
-                    description: 'Handmade 925 silver bracelet',
-                    price: '2555',
-                  ),
-                  ProductCard(
-                    size: size,
-                    image:
-                        'https://m.media-amazon.com/images/I/41I+seAwk1L.jpg',
-                    title: 'Black Fish Evil eye',
-                    description: 'Handmade 925 silver bracelet',
-                    price: '2555',
-                  ),
-                ],
-              ),
-            )
-          ],
+              CheckoutBar(size: size)
+            ],
+          ),
         ),
       ),
     );
   }
 }
+
+
