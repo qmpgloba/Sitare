@@ -64,12 +64,26 @@ class _ShoppingCartState extends State<ShoppingCart> {
                 right: size.width * 0.05,
                 bottom: size.width * 0.05,
               ),
-              child: ProductCard(
-                size: size,
-                image: 'https://m.media-amazon.com/images/I/41I+seAwk1L.jpg',
-                title: 'Black Fish Evil eye',
-                description: 'Handmade 925 silver bracelet',
-                price: '2555',
+              child: ListView(
+                shrinkWrap: true,
+                children: [
+                  ProductCard(
+                    size: size,
+                    image:
+                        'https://m.media-amazon.com/images/I/41I+seAwk1L.jpg',
+                    title: 'Black Fish Evil eye',
+                    description: 'Handmade 925 silver bracelet',
+                    price: '2555',
+                  ),
+                  ProductCard(
+                    size: size,
+                    image:
+                        'https://m.media-amazon.com/images/I/41I+seAwk1L.jpg',
+                    title: 'Black Fish Evil eye',
+                    description: 'Handmade 925 silver bracelet',
+                    price: '2555',
+                  ),
+                ],
               ),
             )
           ],
@@ -78,5 +92,3 @@ class _ShoppingCartState extends State<ShoppingCart> {
     );
   }
 }
-
-
