@@ -1,8 +1,8 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:cart_stepper/cart_stepper.dart';
 import 'package:flutter/material.dart';
 import 'package:sitare/constants/ui_constants.dart';
 import 'package:sitare/functions/contact%20functions/contact_functions.dart';
+import 'package:sitare/screens/shopping%20cart/widgets/counter_button.dart';
 import 'package:sitare/screens/wallet%20recharge%20screen/wallet_recharge_screen.dart';
 import 'package:sitare/screens/widgets/wallet_amount.dart';
 
@@ -14,7 +14,6 @@ class ShoppingCart extends StatefulWidget {
 }
 
 class _ShoppingCartState extends State<ShoppingCart> {
-  var _counter = 1;
 
   @override
   Widget build(BuildContext context) {
@@ -146,7 +145,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                           SizedBox(
                                             // width: size.width * 0.1,
                                             height: size.width * 0.08,
-                                            child: _buildStepper(size),
+                                            child: CounterButton( size: size),
                                           ),
                                           SizedBox(
                                             width: size.width * 0.1,
@@ -179,26 +178,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
       ),
     );
   }
-
-  Widget _buildStepper(Size size) {
-    return CartStepperInt(
-      style: const CartStepperStyle(
-        shape: BoxShape.rectangle,
-        radius: Radius.circular(4),
-        activeBackgroundColor: greyColor,
-        buttonAspectRatio: 1.2,
-        textStyle: TextStyle(
-          fontSize: 10,
-          fontWeight: FontWeight.bold,
-        ),
-      ),
-      value: _counter,
-      size: size.width * 0.05,
-      didChangeCount: (count) {
-        setState(() {
-          _counter = count;
-        });
-      },
-    );
-  }
 }
+
+
