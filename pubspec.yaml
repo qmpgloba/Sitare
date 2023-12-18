@@ -66,6 +66,8 @@ dependencies:
   timezone: ^0.9.2
   flutter_timezone: ^1.0.8
   cron: ^0.5.1
+  cart_stepper: ^4.1.2
+
   flutter_carousel_widget: ^2.2.0
 
 
