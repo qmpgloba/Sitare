@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sitare/screens/product%20description%20screen/product_description_screen.dart';
 
 class BuyNowHomeScreenWidget extends StatelessWidget {
   const BuyNowHomeScreenWidget({
@@ -42,18 +43,23 @@ class BuyNowHomeScreenWidget extends StatelessWidget {
                   style: TextStyle(color: Colors.white),
                   textAlign: TextAlign.center,
                 ),
-                Container(
-                  height: 30,
-                  width: 100,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: Colors.green),
-                  child: const Center(
-                      child: Text(
-                    "BUY NOW",
-                    style: TextStyle(color: Colors.white),
-                    textAlign: TextAlign.center,
-                  )),
+                GestureDetector(
+                  onTap: (){
+                    Navigator.of(context).push(MaterialPageRoute(builder: (context) =>const ProductDescriptionScreen()));
+                  },
+                  child: Container(
+                    height: 30,
+                    width: 100,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: Colors.green),
+                    child: const Center(
+                        child: Text(
+                      "BUY NOW",
+                      style: TextStyle(color: Colors.white),
+                      textAlign: TextAlign.center,
+                    )),
+                  ),
                 )
               ],
             ),
