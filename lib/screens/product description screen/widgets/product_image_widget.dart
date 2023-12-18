@@ -3,6 +3,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:sitare/constants/app_constants.dart';
 
+// ignore: must_be_immutable
 class ProductImageWidget extends StatefulWidget {
    ProductImageWidget({
     super.key,

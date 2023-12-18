@@ -45,7 +45,7 @@ class BuyNowHomeScreenWidget extends StatelessWidget {
                 ),
                 GestureDetector(
                   onTap: (){
-                    Navigator.of(context).push(MaterialPageRoute(builder: (context) =>ProductDescriptionScreen()));
+                    Navigator.of(context).push(MaterialPageRoute(builder: (context) =>const ProductDescriptionScreen()));
                   },
                   child: Container(
                     height: 30,

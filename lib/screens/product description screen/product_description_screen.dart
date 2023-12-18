@@ -1,22 +1,15 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:carousel_slider/carousel_options.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:sitare/constants/app_constants.dart';
 import 'package:sitare/constants/ui_constants.dart';
-import 'package:sitare/functions/contact%20functions/contact_functions.dart';
-import 'package:sitare/screens/chat%20screen/chat_screen.dart';
-import 'package:sitare/screens/home%20screen/widgets/profile_widget_carousel.dart';
 import 'package:sitare/screens/product%20description%20screen/widgets/product_details_widget.dart';
 import 'package:sitare/screens/product%20description%20screen/widgets/product_image_widget.dart';
-import 'package:sitare/screens/profile%20screen/widgets/astroleger_profile_details_widget.dart';
-import 'package:sitare/screens/profile%20screen/widgets/contact_icons_widget.dart';
 import 'package:sitare/screens/widgets/wallet_amount.dart';
 
 // ignore: must_be_immutable
 class ProductDescriptionScreen extends StatefulWidget {
-  ProductDescriptionScreen({
+  const ProductDescriptionScreen({
     super.key,
   });
 
@@ -27,7 +20,7 @@ class ProductDescriptionScreen extends StatefulWidget {
 
 class _ProductDescriptionScreenState extends State<ProductDescriptionScreen> {
   num walletBalnce = 0;
-  int _currentIndex = 0;
+  final int _currentIndex = 0;
   final CarouselController _carouselController = CarouselController();
 
   final List<Widget> imageSliders = imageList
@@ -172,7 +165,7 @@ class _ProductDescriptionScreenState extends State<ProductDescriptionScreen> {
                 ),
                 TextButton(onPressed: (){
 
-                }, child: Text('CONTINUE SHOPPING (home)',style: TextStyle(color: blackColor,fontSize: 12),))
+                }, child: const Text('CONTINUE SHOPPING (home)',style: TextStyle(color: blackColor,fontSize: 12),))
               ],
             ),
           ),
