@@ -4,9 +4,9 @@ import 'package:sitare/constants/ui_constants.dart';
 
 class CounterButton extends StatefulWidget {
   const CounterButton({
-    super.key,
+    Key? key,
     required this.size,
-  });
+  }) : super(key: key);
 
   final Size size;
 
@@ -15,7 +15,8 @@ class CounterButton extends StatefulWidget {
 }
 
 class _CounterButtonState extends State<CounterButton> {
- int _counter = 1;
+  int _counter = 1;
+  final int minValue = 1; 
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +35,7 @@ class _CounterButtonState extends State<CounterButton> {
       size: widget.size.width * 0.05,
       didChangeCount: (count) {
         setState(() {
-          _counter = count;
+          _counter = count >= minValue ? count : minValue;
         });
       },
     );

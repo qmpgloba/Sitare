@@ -141,30 +141,25 @@ class _ProductDescriptionScreenState extends State<ProductDescriptionScreen> {
                     ),
                   ),
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    GestureDetector(
-                      onTap: () {},
-                      child: Container(
-                        decoration: BoxDecoration(
-                            border: Border.all(),
-                            borderRadius: BorderRadius.circular(3)),
-                        child: const Padding(
-                          padding:
-                              EdgeInsets.symmetric(horizontal: 10, vertical: 2),
-                          child: AutoSizeText(
-                            'ADD TO CART',
-                            maxLines: 1,
-                            style: TextStyle(
-                              fontSize: 10,
-                              color: blackColor,
-                            ),
-                          ),
+                GestureDetector(
+                  onTap: () {},
+                  child: Container(
+                    decoration: BoxDecoration(
+                        border: Border.all(),
+                        borderRadius: BorderRadius.circular(3)),
+                    child: const Padding(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 10, vertical: 2),
+                      child: AutoSizeText(
+                        'ADD TO CART',
+                        maxLines: 1,
+                        style: TextStyle(
+                          fontSize: 10,
+                          color: blackColor,
                         ),
                       ),
                     ),
-                  ],
+                  ),
                 ),
                 TextButton(
                     onPressed: () {},
