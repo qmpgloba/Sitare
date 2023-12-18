@@ -29,7 +29,7 @@ class ProfileViewCarouselHomeWidget extends StatelessWidget {
               children: [
                  AutoSizeText(
                   astrologer.skills.take(1).join(),
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w900),
+                  style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w900),
                   maxFontSize: 18,
                   maxLines: 1,
                 ),
@@ -43,7 +43,7 @@ class ProfileViewCarouselHomeWidget extends StatelessWidget {
                   astrologer.fullName,
                   // maxLines: 1,
                   maxFontSize: 12,
-                  style: TextStyle(
+                  style: const TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.bold,
                       color: Color.fromARGB(255, 6, 37, 114)),
