@@ -5,6 +5,7 @@ import 'package:sitare/constants/app_constants.dart';
 import 'package:sitare/constants/ui_constants.dart';
 import 'package:sitare/screens/product%20description%20screen/widgets/product_details_widget.dart';
 import 'package:sitare/screens/product%20description%20screen/widgets/product_image_widget.dart';
+import 'package:sitare/screens/shopping%20cart/cart.dart';
 import 'package:sitare/screens/widgets/wallet_amount.dart';
 
 // ignore: must_be_immutable
@@ -25,7 +26,6 @@ class _ProductDescriptionScreenState extends State<ProductDescriptionScreen> {
 
   final List<Widget> imageSliders = imageList
       .map((item) => Container(
-        
           margin: const EdgeInsets.all(10),
           child: Image.network(
             item,
@@ -63,9 +63,14 @@ class _ProductDescriptionScreenState extends State<ProductDescriptionScreen> {
               label: const WalletAmount(color: greyColor, fontSize: 18),
             ),
             IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const ShoppingCart()),
+                );
+              },
               icon: const Icon(
-                Icons.share_outlined,
+                Icons.shopping_cart_outlined,
                 color: greyColor,
               ),
             )
@@ -161,9 +166,12 @@ class _ProductDescriptionScreenState extends State<ProductDescriptionScreen> {
                     ),
                   ],
                 ),
-                TextButton(onPressed: (){
-
-                }, child: const Text('CONTINUE SHOPPING (home)',style: TextStyle(color: blackColor,fontSize: 12),))
+                TextButton(
+                    onPressed: () {},
+                    child: const Text(
+                      'CONTINUE SHOPPING (home)',
+                      style: TextStyle(color: blackColor, fontSize: 12),
+                    ))
               ],
             ),
           ),
