@@ -32,6 +32,7 @@ class _ProductDescriptionScreenState extends State<ProductDescriptionScreen> {
 
   final List<Widget> imageSliders = imageList
       .map((item) => Container(
+        
           margin: const EdgeInsets.all(10),
           child: Image.network(
             item,
@@ -112,18 +113,20 @@ class _ProductDescriptionScreenState extends State<ProductDescriptionScreen> {
                   ],
                 ),
                 SizedBox(
-                  height: 500,
+                  height: size.width * .7,
                   child: Expanded(
                     child: Padding(
                       padding: EdgeInsets.all(size.width / 16),
                       child: const TabBarView(
                         physics: BouncingScrollPhysics(),
                         children: [
-                          SizedBox(
-                            height: 200,
-                            child: Text(
-                              '''Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum''',
-                              textAlign: TextAlign.center,
+                          SingleChildScrollView(
+                            child: SizedBox(
+                              // height: 200,
+                              child: Text(
+                                '''Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum''',
+                                textAlign: TextAlign.center,
+                              ),
                             ),
                           ),
                           Text(
@@ -142,7 +145,34 @@ class _ProductDescriptionScreenState extends State<ProductDescriptionScreen> {
                     ),
                   ),
                 ),
-                
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    GestureDetector(
+                      onTap: () {},
+                      child: Container(
+                        decoration: BoxDecoration(
+                            border: Border.all(),
+                            borderRadius: BorderRadius.circular(3)),
+                        child: const Padding(
+                          padding:
+                              EdgeInsets.symmetric(horizontal: 10, vertical: 2),
+                          child: AutoSizeText(
+                            'ADD TO CART',
+                            maxLines: 1,
+                            style: TextStyle(
+                              fontSize: 10,
+                              color: blackColor,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                TextButton(onPressed: (){
+
+                }, child: Text('CONTINUE SHOPPING (home)',style: TextStyle(color: blackColor,fontSize: 12),))
               ],
             ),
           ),

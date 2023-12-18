@@ -30,6 +30,7 @@ class _ProductImageWidgetState extends State<ProductImageWidget> {
           options: CarouselOptions(
               autoPlay: false,
               enlargeCenterPage: false,
+              viewportFraction: 1,
               aspectRatio: 1,
               onPageChanged: (index, reason) {
                 setState(() {
