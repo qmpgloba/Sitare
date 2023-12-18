@@ -1,14 +1,11 @@
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:sitare/constants/ui_constants.dart';
+import 'package:sitare/screens/home%20screen/widgets/live_astrologers_carousel_widget.dart';
 import 'package:sitare/screens/my%20bookings/my_bookings_screen.dart';
 import 'package:sitare/screens/talk%20to%20experts%20screen/talk_to_experts_screen.dart';
 import 'package:sitare/screens/home%20screen/widgets/buynow_homescreen_widget.dart';
 import 'package:sitare/screens/home%20screen/widgets/connect_with_experts_widget.dart';
 import 'package:sitare/screens/home%20screen/widgets/get_detail_report_widget.dart';
 import 'package:sitare/screens/home%20screen/widgets/icon_widget.dart';
-import 'package:sitare/screens/home%20screen/widgets/live_text_widget_carousel.dart';
-import 'package:sitare/screens/home%20screen/widgets/profile_widget_carousel.dart';
 import 'package:sitare/screens/home%20screen/widgets/shop_sitare_container_widget.dart';
 
 class SecondPartWidget extends StatelessWidget {
@@ -21,6 +18,7 @@ class SecondPartWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return Expanded(
       child: Container(
         decoration: const BoxDecoration(
@@ -33,44 +31,7 @@ class SecondPartWidget extends StatelessWidget {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                CarouselSlider(
-                  items: [
-                    //1st Image of Slider
-                    Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8.0),
-                      ),
-                      child: Stack(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.fromLTRB(0, 30, 0, 15),
-                            child: Container(
-                              decoration: BoxDecoration(
-                                  color: whiteColor,
-                                  borderRadius: BorderRadius.circular(10)),
-                              child: ProfileViewCarouselHomeWidget(size: size),
-                            ),
-                          ),
-                          const Align(
-                            alignment: Alignment.topCenter,
-                            child: LiveTextWidgetCarousel(),
-                          )
-                        ],
-                      ),
-                    ),
-                  ],
-                  options: CarouselOptions(
-                    height: size.width * .5,
-                    enlargeCenterPage: true,
-                    autoPlay: true,
-                    // aspectRatio: 4 / 3,
-                    autoPlayCurve: Curves.fastOutSlowIn,
-                    enableInfiniteScroll: true,
-                    autoPlayAnimationDuration:
-                        const Duration(milliseconds: 800),
-                    viewportFraction: 1,
-                  ),
-                ),
+                LiveAstrologersCarouselWidget(size: size),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
