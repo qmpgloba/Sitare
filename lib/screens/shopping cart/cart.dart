@@ -80,7 +80,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
                         Image.network(
                           'https://m.media-amazon.com/images/I/41I+seAwk1L.jpg',
                           width: size.width * 0.3,
-                          height: size.height * 0.3,
+                          height: size.height * 0.25,
+                          fit: BoxFit.fill,
                         ),
                         const SizedBox(
                           width: 10,
@@ -117,18 +118,22 @@ class _ShoppingCartState extends State<ShoppingCart> {
                             SizedBox(
                               height: size.height * 0.01,
                             ),
-                            const Row(
-                              // crossAxisAlignment: CrossAxisAlignment.end,
-                              children: [
-                                SizedBox(
-                                  child: Text(
-                                    '2555',
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                )
-                              ],
+                            const Expanded(
+                              child: SizedBox(
+                                child: Row(
+                                  // crossAxisAlignment: CrossAxisAlignment.end,
+                                  children: [
+                                    SizedBox(
+                                      child: Text(
+                                        '2555',
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
                             )
                             // SizedBox(width: ,
                             //   child: Text(
