@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:sitare/screens/home%20screen/home_screen.dart';
 import 'package:sitare/screens/onboarding%20page/onboarding_screen.dart';
+import 'package:sitare/screens/shopping%20cart/cart.dart';
 
 class AuthWrapper extends StatelessWidget {
    AuthWrapper({super.key});
@@ -14,7 +15,7 @@ class AuthWrapper extends StatelessWidget {
     // final firebaseUser = context.watch<User?>();
 
     if(user != null){
-      return const HomeScreen();
+      return const ShoppingCart();
     }else{
       return    OnBoardingScreen();
     }
