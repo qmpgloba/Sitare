@@ -2,7 +2,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:sitare/screens/onboarding%20page/onboarding_screen.dart';
-import 'package:sitare/screens/shopping%20cart/cart.dart';
 
 class AuthWrapper extends StatelessWidget {
    AuthWrapper({super.key});
