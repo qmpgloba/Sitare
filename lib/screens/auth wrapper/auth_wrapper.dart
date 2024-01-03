@@ -14,7 +14,7 @@ class AuthWrapper extends StatelessWidget {
     // final firebaseUser = context.watch<User?>();
 
     if(user != null){
-      return const ShoppingCart();
+      return  AuthWrapper();
     }else{
       return    OnBoardingScreen();
     }
